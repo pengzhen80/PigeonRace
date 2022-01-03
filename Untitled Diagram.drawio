@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-03T09:21:46.425Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="89_3qcCWxjg1dMsCR4-H" version="16.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-03T09:23:50.349Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="A8zttCcnxGS-qXaMXbWc" version="16.1.2" type="github">
   <diagram id="amrZpSWuf85oC7Gn9W7X" name="Page-1">
     <mxGraphModel dx="923" dy="375" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -39,6 +39,15 @@
             <mxPoint x="240" y="220" as="sourcePoint" />
             <mxPoint x="280" y="160" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="kFAgW7ydbyZMMfaz00AP-12" value="&lt;font style=&quot;font-size: 14px&quot;&gt;丟失起始點&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="200" y="130" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kFAgW7ydbyZMMfaz00AP-13" value="&lt;font style=&quot;font-size: 14px&quot;&gt;丟失終止點&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="200" y="230" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kFAgW7ydbyZMMfaz00AP-14" value="模擬綫" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="200" y="170" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
