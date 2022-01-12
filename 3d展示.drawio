@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-04T06:58:36.236Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" etag="8_7BhD587sbmv5DZxcw_" version="16.1.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-07T06:19:32.373Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" etag="AL10JUInU5Ycp8XlEZpJ" version="16.1.4" type="github">
   <diagram id="5e5Dk54hfpTxT54ZvgJR" name="Page-1">
     <mxGraphModel dx="1186" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -132,6 +132,15 @@
         </mxCell>
         <mxCell id="ZuTiCQ5FA80Gp5bhVFO8-32" value="LookAt：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="190" y="450" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuTiCQ5FA80Gp5bhVFO8-34" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="770" y="120" width="370" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuTiCQ5FA80Gp5bhVFO8-35" value="pigeon視角的tour&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="840" y="150" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuTiCQ5FA80Gp5bhVFO8-36" value="高海拔視角的route" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="840" y="260" width="230" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
