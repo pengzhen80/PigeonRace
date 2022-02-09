@@ -1,9 +1,15 @@
-<mxfile host="app.diagrams.net" modified="2022-02-09T08:10:32.802Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36" etag="HvcjRd6X728gmui5ApkX" version="16.4.5" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-09T08:17:56.635Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36" etag="n0o93efyG_LhVeUJ2zzA" version="16.4.5" type="github">
   <diagram id="5e5Dk54hfpTxT54ZvgJR" name="Page-1">
     <mxGraphModel dx="2617" dy="584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-27" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="820" y="1400" width="1150" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-31" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="827" y="1510" width="380" height="280" as="geometry" />
+        </mxCell>
         <mxCell id="fZQ2lEONEzAM4XkmZjfn-21" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
           <mxGeometry x="-450" y="1010" width="310" height="280" as="geometry" />
         </mxCell>
@@ -216,6 +222,33 @@
             <mxPoint x="210" y="1220" as="sourcePoint" />
             <mxPoint x="10" y="1160" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-28" value="多軌跡" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="820" y="1420" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-29" value="拆分多個檔案" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="850" y="1590" width="330" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-30" value="更新協議" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="852" y="1670" width="330" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-32" value="server：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1530" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-34" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="1420" width="640" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-35" value="web演示：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="1450" width="258" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-36" value="根據協議拆數據" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="1515" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-37" value="更新api參數" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="1600" width="360" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fZQ2lEONEzAM4XkmZjfn-38" value="新增subline的entity處理" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="1680" width="570" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
