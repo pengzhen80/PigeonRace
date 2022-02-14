@@ -74,5 +74,12 @@ def gpx_reader(path):
     print(len(result))
     return result
 
+def gpx_reader_multiFiles(paths):
+    result = []
+    for path in paths:
+        featrues = gpx_reader(path);
+        result.append(featrues)
+    return result
+
 if __name__ == '__main__':
     featrues = gpx_reader("./gpxfiles/2021-02-0142906.gpx")

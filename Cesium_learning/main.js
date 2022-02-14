@@ -29,16 +29,24 @@ function showData(flightData) {
   // const start = Cesium.JulianDate.fromIso8601(time);
   // const start = Cesium.JulianDate.fromIso8601(time_str);
   // console.log(flightData[flightData.length-1].time);
-  if("2020-03-09T23:10:00Z".constructor === flightData[0].time.constructor)
-  {
+  if ("2020-03-09T23:10:00Z".constructor === flightData[0].time.constructor) {
     console.log("rediculus");
   }
   console.log(typeof flightData[0].time);
-  console.log(typeof(flightData[0].time)); 
-  console.log(flightData[0].time.length);
+  // console.log(typeof(flightData[0].time)); 
+  // console.log(flightData[0].time.length);
   // const start = Cesium.JulianDate.fromIso8601(flightData[0].time);
-  const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
-  const stop = Cesium.JulianDate.fromIso8601(flightData[flightData.length-1].time);
+
+  // const start = Cesium.JulianDate.fromIso8601(flightData[0].time);
+  // const stop = Cesium.JulianDate.fromIso8601(flightData[flightData.length-1].time);
+  var time_GregorianDate = timeToGregorianDate(flightData[0].time);
+  const start = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
+    time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
+    time_GregorianDate.second, 0, false));
+  var time_GregorianDate_stop = timeToGregorianDate(flightData[flightData.length - 1].time);
+  const stop = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_stop.year,
+    time_GregorianDate_stop.month, time_GregorianDate_stop.day, time_GregorianDate_stop.hour, time_GregorianDate_stop.minute,
+    time_GregorianDate_stop.second, 0, false));
   viewer.clock.startTime = start.clone();
   viewer.clock.stopTime = stop.clone();
   viewer.clock.currentTime = start.clone();
@@ -67,12 +75,18 @@ function showData(flightData) {
     // }
 
     // const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds * tmp_time_step, new Cesium.JulianDate());
-    var time_date = new Date(flightData[i].time);
+    // var time_date = new Date(flightData[i].time);
     // const time = Cesium.JulianDate.fromIso8601(flightData[i].time);
-    const time = Cesium.JulianDate.fromDate(time_date);
+    // const time = Cesium.JulianDate.fromDate(time_date);
+
+    var time_GregorianDate = timeToGregorianDate(flightData[i].time);
+    const time = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
+      time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
+      time_GregorianDate.second, 0, false));
+    // console.log(i,Cesium.JulianDate.toDate(time));
     const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.elevation);
     // Store the position along with its timestamp.
-    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    // Here we add the positions all upfront, but thesat run-time ase can be added  samples are received from a server.
     positionProperty.addSample(time, position);
 
     viewer.entities.add({
@@ -84,7 +98,7 @@ function showData(flightData) {
     // STEP 6 CODE (airplane entity)
     async function loadModel() {
       // Load the glTF model from Cesium ion.
-      const airplaneUri = await Cesium.IonResource.fromAssetId(768016);
+      const airplaneUri = await Cesium.IonResource.fromAssetId(780866);
       const airplaneEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
         position: positionProperty,
@@ -94,11 +108,49 @@ function showData(flightData) {
         orientation: new Cesium.VelocityOrientationProperty(positionProperty),
         path: new Cesium.PathGraphics({ width: 3 })
       });
+      // console.log(airplaneEntity.position.getValue());
+      // var camera_position = new Cesium.Cartesian3();
+      // Cesium.Cartesian3.add(airplaneEntity.position,new Cesium.Cartesian3(0.0,0.0,1000.0),camera_position);
 
-      viewer.trackedEntity = airplaneEntity;
+      // const cameraEntity = viewer.entities.add({
+      //   availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
+      //   position: camera_position,
+      //   // Automatically compute the orientation from the position.
+      //   orientation: new Cesium.VelocityOrientationProperty(positionProperty),
+      //   path: new Cesium.PathGraphics({ width: 3 })
+      // });
+      // console.log(cameraEntity.position);
+      // viewer.trackedEntity = cameraEntity;
+
+
+      // viewer.trackedEntity = airplaneEntity;
+
+
+
+      // console.log(viewer.scene.camera.position);
+      // var camera_position = new Cesium.Cartesian3(flightData[0].latitude,flightData[0].longitude,flightData[0].elevation);
+      // Cesium.Cartesian3.add(camera_position,new Cesium.Cartesian3(0,0,1000),camera_position);
+      // viewer.camera.flyTo({
+      //   //add 1000m to elevation
+      //   destination : camera_position,
+      //   orientation : {
+      //       direction : airplaneEntity.position,
+      //       up : new Cesium.Cartesian3(0.12793638617798253, 0.29147314437764565, 0.9479850669701113),
+      //   },
+      // });
     }
-
     loadModel();
+    var camera_position = new Cesium.Cartesian3.fromDegrees(flightData[0].latitude, flightData[0].longitude, flightData[0].elevation+1);
+    // Cesium.Cartesian3.add(camera_position, new Cesium.Cartesian3(0, 0, 100), camera_position);
+    viewer.camera.flyTo({
+      //add 1000m to elevation
+      destination: camera_position,
+      orientation: {
+        heading: Cesium.Math.toRadians(1800.0),
+        pitch: Cesium.Math.toRadians(-35.0),
+        roll: 0.0,
+      },
+    });
   }
 }
 
@@ -168,6 +220,28 @@ function ADDFakeFeatures(feature_start, feature_end, number) {
   return points;
 }
 
+function timeToGregorianDate(time) {
+  //sample : time is "2020-03-09T23:10:00Z"
+  //step1: split time to : year,month,day,hour,minute,second,millisecond,isLeapSecond
+  //step2: store in a dict and return;
+  var result = {};
+  var splitTimeByDateAndTime = time.split('T');
+  //split year,month,day
+  result['year'] = Number(splitTimeByDateAndTime[0].split('-')[0].slice(2));
+  // console.log(splitTimeByDateAndTime[0].split('-')[0].length);
+  // console.log(splitTimeByDateAndTime[0].split('-')[0].slice(2));
+  // console.log(Number(splitTimeByDateAndTime[0].split('-')[0].slice(2)));
+  result['month'] = Number(splitTimeByDateAndTime[0].split('-')[1]);
+  console.log(splitTimeByDateAndTime[0].split('-')[1].length);
+  result['day'] = Number(splitTimeByDateAndTime[0].split('-')[2]);
+  //split hour,minute,second
+  result['hour'] = Number(splitTimeByDateAndTime[1].split(":")[0]);
+  result['minute'] = Number(splitTimeByDateAndTime[1].split(":")[1]);
+  result['second'] = Number(splitTimeByDateAndTime[1].split(":")[2].split('Z')[0]);
+
+  // console.log(result['year'],result['month'],result['day'],result['hour'],result['minute'],result['second']);
+  return result;
+}
 
 
 // class LoadAnimate{
