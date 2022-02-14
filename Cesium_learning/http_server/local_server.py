@@ -110,7 +110,7 @@ PORT = 4443
 
 
 if __name__ == '__main__':
-    with socketserver.TCPServer(("127.0.0.1", PORT), TestHttpHandler) as httpd:
+    with socketserver.TCPServer(("0.0.0.0", PORT), TestHttpHandler) as httpd:
         print("serving at port", PORT)
         # if(httpd.verify_request(request=))
         httpd.serve_forever()
