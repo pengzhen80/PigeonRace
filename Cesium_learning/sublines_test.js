@@ -2,16 +2,26 @@ console.log("import success");
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNzAyMWZhNS02MTk3LTRjYjYtOGMwYi1kOGEzYzg5ZmMxMjgiLCJpZCI6Nzg0MDUsImlhdCI6MTY0MjU3NzYyM30.ir47ZDuE5O8TYRJmEUeUgtHohabYGEUbO7HCJe8qjrI';
 // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
-const viewer = new Cesium.Viewer('cesiumContainer', {
-    terrainProvider: Cesium.createWorldTerrain()
-});
+// const viewer = new Cesium.Viewer('cesiumContainer', {
+//     terrainProvider: Cesium.createWorldTerrain(
+//         // {
+//         //     requestWaterMask : true,
+//         //     requestVertexNormals : true
+//         // }
+//     ),
+// });
+const viewer = new Cesium.Viewer("cesiumContainer");
+const imageryLayer = viewer.imageryLayers.addImageryProvider(
+    new Cesium.IonImageryProvider({ assetId: 3 })
+);
+
 //track entity changes
 function onChanged(collection, added, removed, changed) {
     var msg = 'Added ids';
     for (var i = 0; i < added.length; i++) {
         msg += '\n' + added[i].id;
     }
-    console.log(msg);
+    // console.log(msg);
 }
 viewer.entities.collectionChanged.addEventListener(onChanged);
 
@@ -38,11 +48,47 @@ handler.setInputAction(function (click) {
 // },Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
 // Add Cesium OSM Buildings, a global 3D buildings layer.
-const osmBuildings = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+// const osmBuildings = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+// console.log(osmBuildings.id);
+console.log(viewer.camera.position);
+var entity_loading = viewer.entities.add({
+    position: viewer.camera.position,
+    point: {
+        color: Cesium.Color.RED,    //点位颜色
+        pixelSize: 0                //像素点大小
+    },
+    label : {
+        text : 'Loading',
+        font : '100pt Source Han Sans CN',    //字体样式
+        fillColor:Cesium.Color.WHITE,        //字体颜色
+        // backgroundColor:Cesium.Color.AQUA,    //背景颜色
+        // showBackground:true,                //是否显示背景颜色
+        style: Cesium.LabelStyle.FILL,        //label样式
+        outlineWidth : 2,                    
+        verticalOrigin : Cesium.VerticalOrigin.CENTER,//垂直位置
+        horizontalOrigin :Cesium.HorizontalOrigin.CENTER,//水平位置
+        pixelOffset:new Cesium.Cartesian2(10,0)            //偏移
+    }
+});
+
+function update_loading(line_count,point_count)
+{
+    if(line_count >= 0 && point_count >= 0 )
+    {
+        entity_loading.label.text = "Loading "+line_count.toString()+"." + point_count.toString();
+    }
+}
+
+viewer.zoomTo(entity_loading);//居中到该点
+
 
 // These are all the radar points from this flight.
 var gxpParser = new GpxParser(showData);
 function showData(flightData) {
+    //for loading 
+    var total_point_count = flightData.length;
+    update_loading(total_point_count);
+
     var tmp_flightData = flightData;
     console.log(tmp_flightData[0].length);
     console.log(tmp_flightData[1].length);
@@ -57,6 +103,7 @@ function showData(flightData) {
     {
         sublines[i] = flightData_singleNearPoints(sublines[i]);
     }
+
 
     var time_GregorianDate = timeToGregorianDate(flightData[0].time);
     const start = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
@@ -73,12 +120,16 @@ function showData(flightData) {
     // Speed up the playback speed 50x.
     viewer.clock.multiplier = 100;
     // Start playing the scene.
-    viewer.clock.shouldAnimate = true;
+    // viewer.clock.shouldAnimate = true;
+    viewer.clock.shouldAnimate = false;
 
     // The SampledPositionedProperty stores the position and timestamp for each sample along the radar sample series.
     const positionProperty = new Cesium.SampledPositionProperty();
+    
+    //store entity to track 
+    var entity_collection_toTrack = [];
 
-    // Create a point for each.
+    //main pegion: Create a point for each.
     for (let i = 0; i < flightData.length; i++) {
         // for (let i = 0; i < 2; i++) {
         // console.log(i);
@@ -93,16 +144,15 @@ function showData(flightData) {
         // Store the position along with its timestamp.
         // Here we add the positions all upfront, but thesat run-time ase can be added  samples are received from a server.
         positionProperty.addSample(time, position);
-        console.log("add point", i);
+        // console.log("add point", i);
         viewer.entities.add({
             description: `Location: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`,
             position: position,
             point: { pixelSize: 10, color: Cesium.Color.RED }
         });
 
-        // var entity_collection = [];
         // STEP 6 CODE (airplane entity)
-        async function loadModel() {
+        async function loadModel(callback) {
 
             // Load the glTF model from Cesium ion.
             const airplaneUri = await Cesium.IonResource.fromAssetId(780866);
@@ -110,21 +160,25 @@ function showData(flightData) {
                 availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                 position: positionProperty,
                 // Attach the 3D model instead of the green point.
-                model: { uri: airplaneUri, scale: 1000.0 },
+                model: { uri: airplaneUri, scale: 2000.0 },
                 // Automatically compute the orientation from the position.
                 orientation: new Cesium.VelocityOrientationProperty(positionProperty),
                 path: new Cesium.PathGraphics({ width: 3 }),
-                viewFrom: new Cesium.Cartesian3(2080*2, 1715, 7790*2),
+                viewFrom: new Cesium.Cartesian3(2080*2, 1715, 7790*4),//third is altitude
             });
             console.log("add model", i);
-            // entity_collection.push(airplaneEntity);
-            viewer.trackedEntity = airplaneEntity;
-            // if (i == flightData.length - 1) {
-            //     callback(entity_collection);
-            // }
+            entity_collection_toTrack.push(airplaneEntity);
+            // viewer.trackedEntity = airplaneEntity;
+            if (i == flightData.length - 1) {
+                total_point_count = total_point_count - 1;
+                callback(total_point_count,flightData.length);
+            }
+            else{
+                callback(total_point_count,flightData.length-i);
+            }
         }
-        loadModel();
-        // loadModel(camera_moveAfterThreeSeconds);
+        // loadModel();
+        loadModel(update_loading);
         // var evt = document.createEvent('MouseEvents');
         // evt.initEvent('wheel', true, true);
         // evt.deltaY = 106;
@@ -145,6 +199,14 @@ function showData(flightData) {
     // Create a point for sublines.
     console.log("add sublines");
     // let positionProperty_sublines_collection = [];
+    function callback_afterSublinesLoaded()
+    {
+        for(let i = 0;i<entity_collection_toTrack.length;i++)
+        {
+            viewer.trackedEntity = entity_collection_toTrack[i];
+        }
+        viewer.clock.shouldAnimate = true;
+    }
     for (let i = 0; i < sublines.length; i++) {
         let positionProperty_sublines = new Cesium.SampledPositionProperty();
         for (let j = 0; j < sublines[i].length;j++) {
@@ -161,30 +223,61 @@ function showData(flightData) {
             // Store the position along with its timestamp.
             // Here we add the positions all upfront, but thesat run-time ase can be added  samples are received from a server.
             positionProperty_sublines.addSample(time, position);
-            console.log("add point", i,":",j);
+            // console.log("add point", i,":",j);
             viewer.entities.add({
                 description: `Location: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`,
                 position: position,
                 point: { pixelSize: 10, color: Cesium.Color.RED }
             });
             // STEP 6 CODE (airplane entity)
-            async function loadModel() {
+            if(i == sublines.length-1 && j == sublines[i].length-1)
+            {
+                async function loadModel(callback_afterSublinesLoaded) {
 
-                // Load the glTF model from Cesium ion.
-                const airplaneUri = await Cesium.IonResource.fromAssetId(780866);
-                const airplaneEntity = viewer.entities.add({
-                    availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
-                    position: positionProperty_sublines,
-                    // Attach the 3D model instead of the green point.
-                    model: { uri: airplaneUri, scale: 1000.0 },
-                    // Automatically compute the orientation from the position.
-                    orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
-                    path: new Cesium.PathGraphics({ width: 3 })
-                });
-                // console.log("add model", i);
-                // viewer.trackedEntity = airplaneEntity;
+                    // Load the glTF model from Cesium ion.
+                    const airplaneUri = await Cesium.IonResource.fromAssetId(780866);
+                    const airplaneEntity = viewer.entities.add({
+                        availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
+                        position: positionProperty_sublines,
+                        // Attach the 3D model instead of the green point.
+                        model: { uri: airplaneUri, scale: 2000.0 },
+                        // Automatically compute the orientation from the position.
+                        orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
+                        path: new Cesium.PathGraphics({ width: 3 })
+                    });
+                     console.log("add model", j);
+                    // viewer.trackedEntity = airplaneEntity;
+                    callback_afterSublinesLoaded();
+                }
+                loadModel(callback_afterSublinesLoaded);
             }
-            loadModel();
+            else
+            {
+                async function loadModel(callback) {
+
+                    // Load the glTF model from Cesium ion.
+                    const airplaneUri = await Cesium.IonResource.fromAssetId(780866);
+                    const airplaneEntity = viewer.entities.add({
+                        availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
+                        position: positionProperty_sublines,
+                        // Attach the 3D model instead of the green point.
+                        model: { uri: airplaneUri, scale: 1000.0 },
+                        // Automatically compute the orientation from the position.
+                        orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
+                        path: new Cesium.PathGraphics({ width: 3 })
+                    });
+                    console.log("add model", j);
+                    // viewer.trackedEntity = airplaneEntity;
+                    if (j == sublines[i].length-1) {
+                        total_point_count = total_point_count - 1;
+                        callback(total_point_count,sublines[i].length);
+                    }
+                    else{
+                        callback(total_point_count,sublines[i].length-j);
+                    }
+                }
+                loadModel(update_loading);
+            }
         }
     }
 }
