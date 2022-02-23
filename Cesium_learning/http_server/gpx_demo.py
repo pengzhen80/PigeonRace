@@ -45,32 +45,32 @@ def gpx_reader(path):
         for name in trk:
             # print(name.tag)
             for trkpt in name:
-                cell = MyTransParams()
+                cell = {}
                 # print(trkpt.attrib['lat'],trkpt.attrib['lon'])
-                cell.latitude = float(trkpt.attrib['lat'])
+                cell['latitude'] = float(trkpt.attrib['lat'])
                 # print(cell.latitude)
                 # print(cell.latitude)
-                cell.longitude = float(trkpt.attrib['lon'])
+                cell['longitude'] = float(trkpt.attrib['lon'])
                 # print(cell.longitude)
                 # print(trkpt.tag)
                 for ele in trkpt:
                     # if ele.tag == ''
                     # print(ele.tag)
                     if ele.tag == '{http://www.topografix.com/GPX/1/1}time':
-                        cell.time = ele.text
+                        cell['time'] = ele.text
                     if ele.tag == '{http://www.topografix.com/GPX/1/1}speed':
                         # print(ele.text)
-                        cell.speed = float(ele.text)
+                        cell['speed'] = float(ele.text)
                     if ele.tag == '{http://www.topografix.com/GPX/1/1}ele':
                         # print(ele.text)
-                        cell.elevation = float(ele.text)
+                        cell['elevation'] = float(ele.text)
                     if ele.tag == '{http://www.topografix.com/GPX/1/1}distance':
                         # print(ele.text)
-                        cell.distance = float(ele.text)
+                        cell['distance'] = float(ele.text)
                         # print(cell.distance)
                     if ele.tag == '{http://www.topografix.com/GPX/1/1}heading':
                         # print(ele.text)
-                        cell.heading = int(ele.text)
+                        cell['heading'] = int(ele.text)
                 result.append(cell)
 
     print(len(result))
@@ -80,10 +80,20 @@ def gpx_reader(path):
 def gpx_reader_multiFiles(paths):
     result = []
     for path in paths:
-        featrues = gpx_reader(path)
-        # print(featrues)
-        result.append(featrues)
+        features = gpx_reader(path,)
+        # print(features)
+        gpxToArray(features)
+        result.append(features)
+    print(len(result))
+    gpxToArray(result)
     return result
+
+def gpxToArray(features):
+    file = open('./files_array/gpx_array.txt','a+')
+    for feature in features:
+        file.write(str(feature))
+        file.write(',')
+    file.close()
 
 import os
 if __name__ == '__main__':
