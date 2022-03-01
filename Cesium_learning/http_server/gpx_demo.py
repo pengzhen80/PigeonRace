@@ -82,7 +82,6 @@ def gpx_reader_multiFiles(paths):
     for path in paths:
         features = gpx_reader(path,)
         # print(features)
-        gpxToArray(features)
         result.append(features)
     print(len(result))
     gpxToArray(result)
