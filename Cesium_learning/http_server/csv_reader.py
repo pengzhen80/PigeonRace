@@ -32,8 +32,8 @@ class Csv_Reader:
                     city_info['province'] = row[0]
                     city_info['city'] = row[1]
                     city_info['county'] = row[2]
-                    city_info['latitude'] = row[3]
-                    city_info['longitude'] = row[4]
+                    city_info['longitude'] = row[3]
+                    city_info['latitude'] = row[4]
                     citys.append(city_info)
                     # print(row)
         return citys
