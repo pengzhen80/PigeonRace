@@ -382,7 +382,7 @@ function showData(flightData) {
     const positionProperty = new Cesium.SampledPositionProperty();
 
     //store entity to track 
-    var entity_collection_toTrack_main = [];
+    // var entity_collection_toTrack_main = [];
     //store entitycollection to array to change track;
     var entity_collection_toTrack_array = new Map();
 
@@ -437,7 +437,11 @@ function showData(flightData) {
                 viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
             });
             // console.log("add model", i);
-            entity_collection_toTrack_main.push(airplaneEntity);
+            if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[0]['number']))
+            {
+                entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'],airplaneEntity);
+            }
+            // entity_collection_toTrack_main.push(airplaneEntity);
             // viewer.trackedEntity = airplaneEntity;
             if (i == flightData.length - 1) {
                 total_point_count = total_point_count - 1;
@@ -457,20 +461,17 @@ function showData(flightData) {
     //store url and size; when await finish, need to get the size of model
     let map_airplaneUrl_size = new Map();
     function callback_afterSublinesLoaded() {
-        entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'],entity_collection_toTrack_main);
-        for (let i = 0; i < entity_collection_toTrack_main.length; i++) {
-            viewer.trackedEntity = entity_collection_toTrack_main[i];
-        }
+        // entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'],entity_collection_toTrack_main);
+        // for (let i = 0; i < entity_collection_toTrack_main.length; i++) {
+        //     viewer.trackedEntity = entity_collection_toTrack_main[0];
+        // }
+        viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
         viewer.clock.shouldAnimate = true;
-        viewer.trackedEntityChanged.addEventListener(function(entity)
-        {
-            console.log(entity.id);
-        });
     }
     for (let i = 0; i < sublines.length; i++) {
         let positionProperty_sublines = new Cesium.SampledPositionProperty();
         //init entity_collect to track
-        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'], []);
+        // entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'], []);
         for (let j = 0; j < sublines[i].length; j++) {
             // for (let i = 0; i < 2; i++) {
             // console.log(i);
@@ -523,7 +524,11 @@ function showData(flightData) {
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;
-                    entity_collection_toTrack_array.get(demo_fakeData_pigeons[i + 1]['number']).push(airplaneEntity);
+                    
+                    if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number']))
+                    {
+                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'],airplaneEntity);
+                    }
                     callback_afterSublinesLoaded();
                 }
                 loadModel(callback_afterSublinesLoaded);
@@ -557,7 +562,11 @@ function showData(flightData) {
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;
-                    entity_collection_toTrack_array.get(demo_fakeData_pigeons[i + 1]['number']).push(airplaneEntity);
+                    if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number']))
+                    {
+                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'],airplaneEntity);
+                    }
+
                     if (j == sublines[i].length - 1) {
                         total_point_count = total_point_count - 1;
                         callback(total_point_count, sublines[i].length);
