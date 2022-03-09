@@ -65,7 +65,7 @@ class CityManage {
                 && citys[i]['latitude'] > this._scale_fly['latitude_min']
                 && citys[i]['latitude'] < this._scale_fly['latitude_max']) {
                 this._result.push(citys[i]);
-                console.log('good city : ', citys[i]);
+                // console.log('good city : ', citys[i]);
             }
         }
     }
@@ -145,10 +145,13 @@ const osm = new Cesium.OpenStreetMapImageryProvider({
     url: 'https://a.tile.openstreetmap.org/'
 });
 
-class Pigeon_Rank{
-    constructor() {
+class Pigeon_Rank {
+    constructor(rankInfos) {
         this._initHead();
         this.pigeons_id = [];
+        this.pigeonRank_init(rankInfos);
+        //pigeons_leftdistance : pigeon number -> left distance
+        this.pigeons_leftdistance = new Map();
     }
     _initHead() {
         //set pigeon rank style
@@ -164,61 +167,125 @@ class Pigeon_Rank{
         document.body.appendChild(div_pigeonsRank);
     }
     _init_CameraTrack(callback) {
+        // console.log('init track success : ',this.pigeons_id,this.pigeons_id.length);
         for (var i = 0; i < this.pigeons_id.length; i++) {
-            document.getElementById(this.pigeons_id[i]).addEventListener("click", function (event) {
-                // 在 “clicked div”顯示點擊次數
-                // event.target.innerHTML = "click count: " + event.detail;
-                console.log('show pigeon infos : ', this.id);
-                //show pigeon infos
-                //change camera to this pigeon
-                callback(this.id);
-            }, false);
+            let ele = document.getElementById(this.pigeons_id[i]);
+            // console.log(ele);
+            if (ele) {
+                // console.log("add listener to ele:", ele.id);
+                ele.addEventListener("click", function (event) {
+                    // 在 “clicked div”顯示點擊次數
+                    // event.target.innerHTML = "click count: " + event.detail;
+                    console.log('show pigeon infos : ', this.id);
+                    //show pigeon infos
+                    //change camera to this pigeon
+                    callback(this.id);
+                }, false);
+            }
         }
     }
     //rank infos {id,rank} array;
-    pigeonRank_update(rankInfos) {
-        console.log('update rank');
+    pigeonRank_init(rankInfos) {
+        console.log('init rank');
         //search element by id
         for (var i = 0; i < rankInfos.length; i++) {
-            var element = document.getElementById(rankInfos[i]['id']);
-            console.log(typeof (element));
-            if (typeof (element) != 'undefined' && element != null) {
-                // Exists,update element
-                console.log('update element');
-                rankinfo.innerHTML = rankInfos[i]['rank'];
+            //add element
+            console.log('add element');
+            var rankinfo = document.createElement('div');
+            rankinfo.setAttribute("id", rankInfos[i]['number']);
+            console.log('origin type is ', typeof (rankinfo.id));
+            this.pigeons_id.push(rankInfos[i]['number']);
+            // console.log('id is', rankinfo.id);
+            // rankinfo.setAttribute("align", "center");
+            function make_space(number) {
+                console.log('number is', number);
+                var result = '&nbsp;';
+                for (var make_space_i = 0; make_space_i < number; make_space_i++) {
+                    result += '&nbsp;';
+                }
+                return result;
+            }
+            //make_space(12-rankInfos[i]['number'].length-rankInfos[i]['rank'].length)
+            rankinfo.innerHTML = '<span style="font-size:30px">' + rankInfos[i]['number']
+                + make_space(12 - rankInfos[i]['number'].length - rankInfos[i]['rank'].length)
+                + rankInfos[i]['rank'] + '</span>';
+            rankinfo.style.position = 'absolute';
+            // console.log(100 + Number(rankInfos[i]['rank']) * 10);
+            rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 30 + 'px';
+            rankinfo.style.right = 30 + 'px';
+            rankinfo.style.color = '#FFFF00';
+            document.body.appendChild(rankinfo);
+        }
+    }
+
+    //pigeonsDistance is an array : elment is :{number,distance},distance is total distance
+    init_pigeons_leftdistance(pigeonsDistance) {
+        // this.pigeons_leftdistance.clear();
+        for (var i = 0; i < pigeonsDistance.length; i++) {
+            this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], pigeonsDistance[i]['distance']);
+        }
+        console.log('total distance is',this.pigeons_leftdistance);
+    }
+    //pigeonsDistance is an array : elment is :{number,distance},distance is run distance
+    update_pigeons_leftdistance(pigeonsDistance) {
+        console.log(pigeonsDistance);
+        for (var i = 0; i < pigeonsDistance.length; i++) {
+            console.log(pigeonsDistance[i]['number']);
+            console.log(this.pigeons_leftdistance);
+            if (this.pigeons_leftdistance.has(pigeonsDistance[i]['number'])) {
+                this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], this.pigeons_leftdistance.get(pigeonsDistance[i]['number']) - pigeonsDistance[i]['distance']);
             }
             else {
-                //add element
-                console.log('add element');
-                var rankinfo = document.createElement('div');
-                rankinfo.setAttribute("id", rankInfos[i]['number']);
-                this.pigeons_id = rankInfos[i]['number'];
-                console.log('id is', rankinfo.id);
-                // rankinfo.setAttribute("align", "center");
+                console.log('cannot find pigeon in rank');
+            }
+        }
+        this._updateRankInfos();
+    }
+    _updateRankInfos() {
+        var ranks = [];
+        var lastvalue;
+        this.pigeons_leftdistance.forEach(function (value, key) {
+            if (ranks.length === 0) {
+                ranks.push(key);
+                lastvalue = value;
+            }
+            else {
+                if (lastvalue > value) {
+                    var lastKey = ranks.pop();
+                    ranks.push(key);
+                    ranks.push(lastKey);
+                }
+                else {
+                    ranks.push(key);
+                }
+            }
+        });
+
+        for (var i = 0; i < ranks.length; i++) {
+            var element = document.getElementById(ranks[i]);
+            // console.log(typeof (element));
+            if (typeof (element) != 'undefined' && element != null) {
+                // Exists,update element
+                // console.log('update element');
                 function make_space(number) {
-                    console.log('number is', number);
+                    // console.log('number is', number);
                     var result = '&nbsp;';
                     for (var make_space_i = 0; make_space_i < number; make_space_i++) {
                         result += '&nbsp;';
                     }
                     return result;
                 }
-                //make_space(12-rankInfos[i]['number'].length-rankInfos[i]['rank'].length)
-                rankinfo.innerHTML = '<span style="font-size:30px">' + rankInfos[i]['number']
-                    + make_space(12 - rankInfos[i]['number'].length - rankInfos[i]['rank'].length)
-                    + rankInfos[i]['rank'] + '</span>';
-                rankinfo.style.position = 'absolute';
-                // console.log(100 + Number(rankInfos[i]['rank']) * 10);
-                rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 30 + 'px';
-                rankinfo.style.right = 30 + 'px';
-                rankinfo.style.color = '#FFFF00';
-                document.body.appendChild(rankinfo);
+                element.innerHTML = '<span style="font-size:30px">' + ranks[i]
+                    + make_space(12 - ranks[i].length - (i + 1).toString().length)
+                    + (i + 1).toString() + '</span>';
             }
         }
     }
 }
 
-let pigeonRank_instance = new Pigeon_Rank();
+
+
+let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
 
 //track entity changes
 function onChanged(collection, added, removed, changed) {
@@ -323,6 +390,25 @@ function showData(flightData) {
         sublines[i] = flightData_singleNearPoints(sublines[i]);
     }
 
+    //init pigeon rank's total distance
+    //make number distance data
+    var make_pigeonRankdistance_array = [];
+    var make_pigeonRankdistance = 0;
+    for( var i =0;i<flightData.length;i++)
+    {
+        make_pigeonRankdistance += flightData[i]['distance'];
+    }
+    make_pigeonRankdistance_array.push({'number':demo_fakeData_pigeons[0]['number'],'distance':make_pigeonRankdistance});
+    for(var i=0;i<sublines.length;i++)
+    {
+        make_pigeonRankdistance=0;
+        for( var j=0;j<sublines[i].length;j++)
+        {
+            make_pigeonRankdistance+=sublines[i][j]['distance'];
+        }
+        make_pigeonRankdistance_array.push({'number':demo_fakeData_pigeons[i+1]['number'],'distance':make_pigeonRankdistance});
+    }
+    pigeonRank_instance.init_pigeons_leftdistance(make_pigeonRankdistance_array);
 
     var time_GregorianDate = timeToGregorianDate(flightData[0].time);
     const start = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
@@ -343,35 +429,67 @@ function showData(flightData) {
     viewer.clock.shouldAnimate = false;
     //add clock listener
     //get all timestamp
-    var timestamp = [];
+    //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
+    var timestamp_pigeonNumbers = new Map();
     for (var i = 0; i < flightData.length; i++) {
         var time_GregorianDate = timeToGregorianDate(flightData[i].time);
         const time_stamp = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
             time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
             time_GregorianDate.second, 0, false));
-        timestamp.push(time_stamp);
+        // timestamp.push(time_stamp);
         // console.log(time_stamp);
+        if (!timestamp_pigeonNumbers.has(time_stamp)) {
+            var tmp_value = [];
+            var tmp_ele = {};
+            tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
+            tmp_ele['distance'] = flightData[i]['distance'];
+            tmp_value.push(tmp_ele);
+            timestamp_pigeonNumbers.set(time_stamp,tmp_value);
+        }
+        else {
+            var tmp_ele = {};
+            tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
+            tmp_ele['distance'] = flightData[i]['distance'];
+            var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
+            timestamp_pigeonNumbers.set(time_stamp, new_value);
+        }
     }
-    // for(var i=0;i<sublines.length;i++)
-    // {
-    //     for(var j=0;j<sublines[i].length;j++)
-    //     {
-    //         var time_GregorianDate = timeToGregorianDate(sublines[i][j].time);
-    //         const time_stamp = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
-    //             time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
-    //             time_GregorianDate.second, 0, false));
-    //         timestamp.add(time_stamp);
-    //     }
-    // }
+    for (var i = 0; i < sublines.length; i++) {
+        for (var j = 0; j < sublines[i].length; j++) {
+            var time_GregorianDate = timeToGregorianDate(sublines[i][j].time);
+            const time_stamp = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
+                time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
+                time_GregorianDate.second, 0, false));
+
+            if (!timestamp_pigeonNumbers.has(time_stamp)) {
+                var tmp_value = [];
+                var tmp_ele = {};
+                tmp_ele['number'] = demo_fakeData_pigeons[i + 1]['number'];
+                tmp_ele['distance'] = sublines[i][j]['distance'];
+                tmp_value.push(tmp_ele);
+                timestamp_pigeonNumbers.set(time_stamp, tmp_value);
+            }
+            else {
+                var tmp_ele = {};
+                tmp_ele['number'] = demo_fakeData_pigeons[i + 1]['number'];
+                tmp_ele['distance'] = sublines[i][j]['distance'];
+
+                var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
+                timestamp_pigeonNumbers.set(time_stamp, new_value);
+            }
+        }
+    }
     viewer.clock.onTick.addEventListener(function (clock) {
         // console.log(viewer.clock.currentTime);
-        for (var i = 0; i < timestamp.length; i++) {
-            var time_diff = Cesium.JulianDate.compare(timestamp[i], viewer.clock.currentTime);
+        for(let item of timestamp_pigeonNumbers.keys())
+        {
+            var time_diff = Cesium.JulianDate.compare(item, viewer.clock.currentTime);
             if ((-10 < time_diff) && (time_diff < 10)) {
-                console.log(flightData.length, ' arrive ', flightData.length - timestamp.length, ' point', Cesium.JulianDate.compare(timestamp[i], viewer.clock.currentTime));
-                timestamp.shift();
-                //send timestamp.lenth to update rank;
-                pigeonRank_instance.pigeonRank_update(demo_fakeData_pigeons);
+                //update rank;
+                //pigeonRank_instance.pigeonRank_update(demo_fakeData_pigeons);
+                // var pigeons_distances = timestamp_pigeonNumbers.get(item);
+                pigeonRank_instance.update_pigeons_leftdistance(timestamp_pigeonNumbers.get(item));
+                timestamp_pigeonNumbers.delete(item);
                 break;
                 // console.log('arrive second point',viewer.clock.currentTime);
             }
@@ -387,10 +505,12 @@ function showData(flightData) {
     var entity_collection_toTrack_array = new Map();
 
     function pigeon_rank_clicked_changeTrack(pigeon_id) {
-        var tmp_totrack = entity_collection_toTrack_array.get(pigeon_id);
-        for (let i = 0; i < tmp_totrack.length; i++) {
-            viewer.trackedEntity = tmp_totrack[i];
-        }
+        console.log('change track');
+        // var tmp_totrack = entity_collection_toTrack_array.get(pigeon_id);
+        // for (let i = 0; i < tmp_totrack.length; i++) {
+        //     viewer.trackedEntity = tmp_totrack[i];
+        // }
+        viewer.trackedEntity = entity_collection_toTrack_array.get(pigeon_id);
     }
     pigeonRank_instance._init_CameraTrack(pigeon_rank_clicked_changeTrack);
 
@@ -437,9 +557,8 @@ function showData(flightData) {
                 viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
             });
             // console.log("add model", i);
-            if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[0]['number']))
-            {
-                entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'],airplaneEntity);
+            if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[0]['number'])) {
+                entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'], airplaneEntity);
             }
             // entity_collection_toTrack_main.push(airplaneEntity);
             // viewer.trackedEntity = airplaneEntity;
@@ -520,14 +639,14 @@ function showData(flightData) {
                             material: color_path_array[i + 1],
                             leadTime: 1,
                             trailTime: 100000,
-                        })
+                        }),
+                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;
-                    
-                    if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number']))
-                    {
-                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'],airplaneEntity);
+
+                    if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number'])) {
+                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'], airplaneEntity);
                     }
                     callback_afterSublinesLoaded();
                 }
@@ -558,13 +677,13 @@ function showData(flightData) {
                             material: color_path_array[i + 1],
                             leadTime: 1,
                             trailTime: 100000,
-                        })
+                        }),
+                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;
-                    if(!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number']))
-                    {
-                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'],airplaneEntity);
+                    if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i + 1]['number'])) {
+                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'], airplaneEntity);
                     }
 
                     if (j == sublines[i].length - 1) {
