@@ -32,8 +32,8 @@ class Csv_Reader:
                     city_info['province'] = row[0]
                     city_info['city'] = row[1]
                     city_info['county'] = row[2]
-                    city_info['longitude'] = row[3]
-                    city_info['latitude'] = row[4]
+                    city_info['latitude'] = row[3]
+                    city_info['longitude'] = row[4]
                     citys.append(city_info)
                     # print(row)
         return citys
@@ -47,7 +47,7 @@ def csvToArray(citys):
 
 if __name__ == '__main__':
     csv_reader = Csv_Reader()
-    citys = csv_reader.reader('./csvfiles/cn_cityname.csv')
+    citys = csv_reader.reader('./csvfiles/tw_citys.csv')
     # for city in citys:
     #     print(city.province)
     #     print(city.city)

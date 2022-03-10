@@ -95,22 +95,23 @@ def gpxToArray(features):
     file.close()
 
 import os
-if __name__ == '__main__':
-    filenames = ['./gpxfiles/2021-02-0142906.gpx']
-    filenames_subline = os.listdir('./gpxfiles/sub_lines')
-    for name in filenames_subline:
-        filenames.append('./gpxfiles/sub_lines/'+name)
-    # filenames.append('./gpxfiles/sub_lines/'+filenames_subline[0])
-    print(filenames)
-    gpx_data = gpx_reader_multiFiles(filenames)
-    # print(len(gpx_data))
 # if __name__ == '__main__':
-#     filenames = os.listdir('./gpxfiles/gxp_taiwan')
-#     file_paths = []
-#     for name in filenames:
-#         file_paths.append('./gpxfiles/gpx_taiwan/'+name)
-#     print(file_paths)
+#     filenames = ['./gpxfiles/2021-02-0142906.gpx']
+#     filenames_subline = os.listdir('./gpxfiles/sub_lines')
+#     for name in filenames_subline:
+#         filenames.append('./gpxfiles/sub_lines/'+name)
 #     # filenames.append('./gpxfiles/sub_lines/'+filenames_subline[0])
-#     # print(filenames)
-#     gpx_data = gpx_reader_multiFiles(file_paths)
-#     # print(len(gpx_data))
+#     print(filenames)
+#     gpx_data = gpx_reader_multiFiles(filenames)
+    # print(len(gpx_data))
+if __name__ == '__main__':
+    filenames = os.listdir('./gpxfiles/gpx_tw')
+    file_paths = []
+    # for name in filenames:
+    #     file_paths.append('./gpxfiles/gpx_tw/'+name)
+    file_paths.append('./gpxfiles/gpx_tw/'+filenames[0])
+    print(file_paths)
+    # filenames.append('./gpxfiles/sub_lines/'+filenames_subline[0])
+    # print(filenames)
+    gpx_data = gpx_reader_multiFiles(file_paths)
+    # print(len(gpx_data))
