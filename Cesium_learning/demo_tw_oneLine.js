@@ -96,10 +96,16 @@ Cesium.Color.BLACK, Cesium.Color.WHITE, Cesium.Color.BROWN
 ];
 
 //store sublines model id by array : cannot find more free model,so if index >lenth,then use the first model; set size by file size
+
+// const threeD_models_id_array = [
+//     { "id": 854046, "size": 128 },
+//     { "id": 853973, "size": 50 },
+//     { "id": 853981, "size": 16 },
+// ];
 const threeD_models_id_array = [
-    { "id": 854046, "size": 128 },
-    { "id": 853973, "size": 50 },
     { "id": 853981, "size": 16 },
+    { "id": 854046, "size": 128 },
+    { "id": 853973, "size": 50 },    
 ];
 
 //store fake data of pigeons: number and rank
@@ -129,10 +135,12 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 //         // }
 //     ),
 // });
-const viewer = new Cesium.Viewer("cesiumContainer");
-const imageryLayer = viewer.imageryLayers.addImageryProvider(
-    new Cesium.IonImageryProvider({ assetId: 2 })
-);
+const viewer = new Cesium.Viewer("cesiumContainer", {
+    shouldAnimate: true,
+});
+// const imageryLayer = viewer.imageryLayers.addImageryProvider(
+//     new Cesium.IonImageryProvider({ assetId: 2 })
+// );
 
 // const viewer = new Cesium.Viewer("cesiumContainer", {
 //     imageryProvider: Cesium.createWorldImagery({
@@ -158,9 +166,8 @@ class Pigeon_Rank {
         //pigeons_leftdistance : pigeon number -> left distance
         this.pigeons_leftdistance = new Map();
         this.pigeonInfos_map = new Map();
-        for(var i=0;i<rankInfos.length;i++)
-        {
-            this.pigeonInfos_map.set(rankInfos[i]['number'],rankInfos[i]['rank']);
+        for (var i = 0; i < rankInfos.length; i++) {
+            this.pigeonInfos_map.set(rankInfos[i]['number'], rankInfos[i]['rank']);
         }
         // console.log('pigeonInfos_map',this.pigeonInfos_map);
     }
@@ -169,7 +176,6 @@ class Pigeon_Rank {
         var div_pigeonsRank = document.createElement("pigeonsRank");
         //set style
         // div_pigeonsRank.style.position = 'relative';
-        div_pigeonsRank.style.backgroundColor = 'transparent';
         div_pigeonsRank.style.position = 'absolute';
         div_pigeonsRank.style.bottom = 400 + 'px';
         div_pigeonsRank.style.right = 30 + 'px';
@@ -192,15 +198,13 @@ class Pigeon_Rank {
                     var cont = this.textContent;
                     // console.log(this.textContent);
                     //get pigeon number by text (text is dynamic)
-                    const tmp_number_set = ['0','1','2','3','4','5','6','7','8','9'];
+                    const tmp_number_set = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
                     var tmp_pigeon_number = '';
-                    for(var i=0;i<cont.length;i++)
-                    {
-                        if(tmp_number_set.includes(cont[i]))
-                        {
+                    for (var i = 0; i < cont.length; i++) {
+                        if (tmp_number_set.includes(cont[i])) {
                             tmp_pigeon_number += cont[i];
                         }
-                        else{
+                        else {
                             break;
                         }
                         // console.log(typeof(cont[i]),',',cont[i]);
@@ -222,9 +226,9 @@ class Pigeon_Rank {
             console.log('add element');
             var rankinfo = document.createElement('div');
             // rankinfo.setAttribute("id", rankInfos[i]['number']);
-            rankinfo.setAttribute("id", 'rank'+i.toString());
+            rankinfo.setAttribute("id", 'rank' + i.toString());
             console.log('origin type is ', typeof (rankinfo.id));
-            this.ranks_id.push('rank'+i.toString());
+            this.ranks_id.push('rank' + i.toString());
             // console.log('id is', rankinfo.id);
             // rankinfo.setAttribute("align", "center");
             function make_space(number) {
@@ -239,7 +243,6 @@ class Pigeon_Rank {
             rankinfo.innerHTML = '<span style="font-size:30px">' + rankInfos[i]['number']
                 + make_space(12 - rankInfos[i]['number'].length - rankInfos[i]['rank'].length)
                 + rankInfos[i]['rank'] + '</span>';
-            rankinfo.style.backgroundColor = 'transparent';
             rankinfo.style.position = 'absolute';
             // console.log(100 + Number(rankInfos[i]['rank']) * 10);
             rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 30 + 'px';
@@ -293,7 +296,7 @@ class Pigeon_Rank {
         });
 
         for (var i = 0; i < ranks.length; i++) {
-            var element = document.getElementById('rank'+i.toString());
+            var element = document.getElementById('rank' + i.toString());
             // console.log(typeof (element));
             if (typeof (element) != 'undefined' && element != null) {
                 // Exists,update element
@@ -381,28 +384,29 @@ function add_citys_labels(citys) {
 
     for (var i = 0; i < citys.length; i++) {
 
-        // var entity_city = viewer.entities.add({
-        //     position: Cesium.Cartesian3.fromDegrees(citys[i]['longitude'], citys[i]['latitude']),
-        //     billboard: {
-        //         image: pinBuilder.fromText(citys[i]['county'], Cesium.Color.LIGHTSKYBLUE, 96).toDataURL(),
-        //         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        //         scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-        //         scale: 1.0,
-        //     },
-        // });
-        viewer.entities.add({
+        var entity_city = viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(citys[i]['longitude'], citys[i]['latitude']),
-            label: {
-              text: citys[i]['county'],
-              font: "14px Helvetica",
-              fillColor: Cesium.Color.WHITE,
-              scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+            billboard: {
+                image: pinBuilder.fromText(citys[i]['county'], Cesium.Color.LIGHTSKYBLUE, 96).toDataURL(),
+                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+                scale: 1.0,
             },
         });
     }
 
 }
 // add_citys_labels(demo_data_citys);
+
+//load model
+let pigeon_models_array = [];
+for(var i =0;i<threeD_models_id_array.length;i++)
+{
+    var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+    pigeon_models_array.push(airplaneUri);
+}
+
+
 // These are all the radar points from this flight.
 showData(demo_data);
 
@@ -412,9 +416,17 @@ function showData(flightData) {
     var city_manage = new CityManage(demo_data_citys, flightData);
     add_citys_labels(city_manage._get_citys_toshow());
 
+    var tmp_flightData = [];
+    for(var i=0;i<flightData.length-9;i++)
+    {
+        tmp_flightData.push(flightData[i]);
+    }
+    flightData = tmp_flightData;
+
     //for loading 
     var total_point_count = flightData.length;
     update_loading(total_point_count);
+
 
     for (var i = 0; i < flightData.length; i++) {
         flightData[i] = flightData_singleNearPoints(flightData[i]);
@@ -459,29 +471,6 @@ function showData(flightData) {
     //get all timestamp
     //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
     var timestamp_pigeonNumbers = new Map();
-    // for (var i = 0; i < flightData.length; i++) {
-    //     var time_GregorianDate = timeToGregorianDate(flightData[i].time);
-    //     const time_stamp = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
-    //         time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
-    //         time_GregorianDate.second, 0, false));
-    //     // timestamp.push(time_stamp);
-    //     // console.log(time_stamp);
-    //     if (!timestamp_pigeonNumbers.has(time_stamp)) {
-    //         var tmp_value = [];
-    //         var tmp_ele = {};
-    //         tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
-    //         tmp_ele['distance'] = flightData[i]['distance'];
-    //         tmp_value.push(tmp_ele);
-    //         timestamp_pigeonNumbers.set(time_stamp, tmp_value);
-    //     }
-    //     else {
-    //         var tmp_ele = {};
-    //         tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
-    //         tmp_ele['distance'] = flightData[i]['distance'];
-    //         var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
-    //         timestamp_pigeonNumbers.set(time_stamp, new_value);
-    //     }
-    // }
     for (var i = 0; i < flightData.length; i++) {
         for (var j = 0; j < flightData[i].length; j++) {
             var time_GregorianDate = timeToGregorianDate(flightData[i][j].time);
@@ -527,8 +516,6 @@ function showData(flightData) {
     const positionProperty = new Cesium.SampledPositionProperty();
 
     //store entity to track 
-    // var entity_collection_toTrack_main = [];
-    //store entitycollection to array to change track;
     var entity_collection_toTrack_array = new Map();
 
     function pigeon_rank_clicked_changeTrack(pigeon_id) {
@@ -574,9 +561,9 @@ function showData(flightData) {
             positionProperty_sublines.addSample(time, position);
             // console.log("add point", i,":",j);
             viewer.entities.add({
-                description: `points: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`,
+                description: `Location: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`,
                 position: position,
-                point: { pixelSize: 10, color: Cesium.Color.WHITE }
+                point: { pixelSize: 10, color: Cesium.Color.RED }
             });
             // STEP 6 CODE (airplane entity)
             if (i == flightData.length - 1 && j == flightData[i].length - 1) {
@@ -587,18 +574,18 @@ function showData(flightData) {
                     var airplaneUri;
                     //cannot find more free model,so if index > lenth,then use the first model
                     if (i < threeD_models_id_array.length) {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+                        airplaneUri = pigeon_models_array[i];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
                     }
                     else {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]['id']);
+                        airplaneUri = pigeon_models_array[0];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
                     }
                     const airplaneEntity = viewer.entities.add({
                         availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                         position: positionProperty_sublines,
                         // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
+                        model: { uri: airplaneUri, scale: 1.0 },
                         // Automatically compute the orientation from the position.
                         orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                         path: new Cesium.PathGraphics({
@@ -625,18 +612,18 @@ function showData(flightData) {
                     // Load the glTF model from Cesium ion.
                     var airplaneUri;
                     if (i < threeD_models_id_array.length) {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+                        airplaneUri = pigeon_models_array[i];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
                     }
                     else {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]['id']);
+                        airplaneUri = pigeon_models_array[0];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
                     }
                     const airplaneEntity = viewer.entities.add({
                         availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                         position: positionProperty_sublines,
                         // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
+                        model: { uri: airplaneUri, scale: 1.0 },
                         // Automatically compute the orientation from the position.
                         orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                         path: new Cesium.PathGraphics({

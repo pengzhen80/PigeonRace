@@ -158,22 +158,27 @@ class Pigeon_Rank {
         //pigeons_leftdistance : pigeon number -> left distance
         this.pigeons_leftdistance = new Map();
         this.pigeonInfos_map = new Map();
-        for(var i=0;i<rankInfos.length;i++)
-        {
-            this.pigeonInfos_map.set(rankInfos[i]['number'],rankInfos[i]['rank']);
+        for (var i = 0; i < rankInfos.length; i++) {
+            this.pigeonInfos_map.set(rankInfos[i]['number'], rankInfos[i]['rank']);
         }
         // console.log('pigeonInfos_map',this.pigeonInfos_map);
+        // this.lastBlueDiv = null;
     }
     _initHead() {
         //set pigeon rank style
         var div_pigeonsRank = document.createElement("pigeonsRank");
         //set style
         // div_pigeonsRank.style.position = 'relative';
-        div_pigeonsRank.style.backgroundColor = 'transparent';
+        div_pigeonsRank.style.backgroundColor = 'white';
+        // div_pigeonsRank.style.opacity = "0.5";
         div_pigeonsRank.style.position = 'absolute';
         div_pigeonsRank.style.bottom = 400 + 'px';
         div_pigeonsRank.style.right = 30 + 'px';
-        div_pigeonsRank.style.color = '#FFFF00';
+        div_pigeonsRank.style.height = 40 + 'px';
+        div_pigeonsRank.style['border-radius'] = 2 / 4 + 'em';
+        div_pigeonsRank.style['width'] = 180 + 'px';
+        div_pigeonsRank.style.color = 'black';
+        div_pigeonsRank.style['text-align'] = 'center';
         // div_pigeonsRank.style.right = document.body.width+'px';
         div_pigeonsRank.innerHTML = '<span style="font-size:30px">' + 'pigeons rank' + '</span> ';
         document.body.appendChild(div_pigeonsRank);
@@ -189,18 +194,29 @@ class Pigeon_Rank {
                     // 在 “clicked div”顯示點擊次數
                     // event.target.innerHTML = "click count: " + event.detail;
                     // console.log('show pigeon infos : ', this.id);
+                    // if(this.lastBlueDiv)
+                    // {
+                    //     this.lastBlueDiv.backgroundColor = 'rgba(0,0,0,.5)';
+                    //     this.style.backgroundColor = 'blue';
+                    //     this.lastBlueDiv = this;
+                    // }
+                    // else
+                    // {
+                    //     console.log('no such div');
+                    //     this.style.backgroundColor = 'blue';
+                    //     this.lastBlueDiv = this;
+                    // }
+                    this.style.backgroundColor = "blue";
                     var cont = this.textContent;
                     // console.log(this.textContent);
                     //get pigeon number by text (text is dynamic)
-                    const tmp_number_set = ['0','1','2','3','4','5','6','7','8','9'];
+                    const tmp_number_set = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
                     var tmp_pigeon_number = '';
-                    for(var i=0;i<cont.length;i++)
-                    {
-                        if(tmp_number_set.includes(cont[i]))
-                        {
+                    for (var i = 0; i < cont.length; i++) {
+                        if (tmp_number_set.includes(cont[i])) {
                             tmp_pigeon_number += cont[i];
                         }
-                        else{
+                        else {
                             break;
                         }
                         // console.log(typeof(cont[i]),',',cont[i]);
@@ -222,9 +238,9 @@ class Pigeon_Rank {
             console.log('add element');
             var rankinfo = document.createElement('div');
             // rankinfo.setAttribute("id", rankInfos[i]['number']);
-            rankinfo.setAttribute("id", 'rank'+i.toString());
+            rankinfo.setAttribute("id", 'rank' + i.toString());
             console.log('origin type is ', typeof (rankinfo.id));
-            this.ranks_id.push('rank'+i.toString());
+            this.ranks_id.push('rank' + i.toString());
             // console.log('id is', rankinfo.id);
             // rankinfo.setAttribute("align", "center");
             function make_space(number) {
@@ -239,13 +255,37 @@ class Pigeon_Rank {
             rankinfo.innerHTML = '<span style="font-size:30px">' + rankInfos[i]['number']
                 + make_space(12 - rankInfos[i]['number'].length - rankInfos[i]['rank'].length)
                 + rankInfos[i]['rank'] + '</span>';
-            rankinfo.style.backgroundColor = 'transparent';
+            rankinfo.style.backgroundColor = 'rgba(0,0,0,.5)';
             rankinfo.style.position = 'absolute';
             // console.log(100 + Number(rankInfos[i]['rank']) * 10);
-            rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 30 + 'px';
+            rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 35 + 'px';
             rankinfo.style.right = 30 + 'px';
-            rankinfo.style.color = '#FFFF00';
+            rankinfo.style.color = 'white';
+            rankinfo.style.height = 30 + 'px';
+            // rankinfo.style['border-radius'] = 2/4+'em';
+            rankinfo.style['width'] = 180 + 'px';
+            rankinfo.style['text-align'] = 'center';
+            rankinfo.style['hover'] = {
+                'background-color': 'yellow',
+            };
+
+            rankinfo.addEventListener("mouseleave", function( event ) {
+                // highlight the mouseleave target
+                this.style.backgroundColor = "rgba(0,0,0,.5)";
+                // setTimeout(function () {
+                //     this.style.color = "rgba(0,0,0,.5)";
+                // }, 500);
+              }, false);
+            // Creamos el evento mouseout para cada imagen
+            rankinfo.addEventListener("mouseout", function (e) {
+                this.style.backgroundColor = "rgba(0,0,0,.5)";
+                // setTimeout(function () {
+                //     this.style.color = "rgba(0,0,0,.5)";
+                // }, 500);
+            });
+
             document.body.appendChild(rankinfo);
+
         }
     }
 
@@ -293,7 +333,7 @@ class Pigeon_Rank {
         });
 
         for (var i = 0; i < ranks.length; i++) {
-            var element = document.getElementById('rank'+i.toString());
+            var element = document.getElementById('rank' + i.toString());
             // console.log(typeof (element));
             if (typeof (element) != 'undefined' && element != null) {
                 // Exists,update element
@@ -393,16 +433,25 @@ function add_citys_labels(citys) {
         viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(citys[i]['longitude'], citys[i]['latitude']),
             label: {
-              text: citys[i]['county'],
-              font: "14px Helvetica",
-              fillColor: Cesium.Color.WHITE,
-              scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
+                text: citys[i]['county'],
+                font: "14px Helvetica",
+                fillColor: Cesium.Color.WHITE,
+                scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
             },
         });
     }
 
 }
 // add_citys_labels(demo_data_citys);
+
+//loading models
+let pigeon_models_array = [];
+for (var i = 0; i < threeD_models_id_array.length; i++) {
+    update_loading(threeD_models_id_array.length - i, 0);
+    var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+    pigeon_models_array.push(airplaneUri);
+}
+
 // These are all the radar points from this flight.
 showData(demo_data);
 
@@ -414,7 +463,7 @@ function showData(flightData) {
 
     //for loading 
     var total_point_count = flightData.length;
-    update_loading(total_point_count);
+    // update_loading(total_point_count);
 
     for (var i = 0; i < flightData.length; i++) {
         flightData[i] = flightData_singleNearPoints(flightData[i]);
@@ -587,11 +636,11 @@ function showData(flightData) {
                     var airplaneUri;
                     //cannot find more free model,so if index > lenth,then use the first model
                     if (i < threeD_models_id_array.length) {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+                        airplaneUri = pigeon_models_array[i];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
                     }
                     else {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]['id']);
+                        airplaneUri = pigeon_models_array[0];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
                     }
                     const airplaneEntity = viewer.entities.add({
@@ -625,11 +674,11 @@ function showData(flightData) {
                     // Load the glTF model from Cesium ion.
                     var airplaneUri;
                     if (i < threeD_models_id_array.length) {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+                        airplaneUri = pigeon_models_array[i];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
                     }
                     else {
-                        airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]['id']);
+                        airplaneUri = pigeon_models_array[0];
                         map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
                     }
                     const airplaneEntity = viewer.entities.add({
@@ -655,10 +704,10 @@ function showData(flightData) {
 
                     if (j == flightData[i].length - 1) {
                         total_point_count = total_point_count - 1;
-                        callback(total_point_count, flightData[i].length);
+                        // callback(total_point_count, flightData[i].length);
                     }
                     else {
-                        callback(total_point_count, flightData[i].length - j);
+                        // callback(total_point_count, flightData[i].length - j);
                     }
                 }
                 loadModel(update_loading);
