@@ -170,6 +170,7 @@ class Pigeon_Rank {
             this.pigeonInfos_map.set(rankInfos[i]['number'], rankInfos[i]['rank']);
         }
         // console.log('pigeonInfos_map',this.pigeonInfos_map);
+        this.pigeonInfos_chart_pigeonNumber;
     }
     _initHead() {
         //set pigeon rank style

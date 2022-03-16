@@ -1,3 +1,6 @@
+// const { INSPECT_MAX_BYTES } = require("buffer");
+// const { ImplicitTileset } = require("cesium/Build/Cesium/Cesium");
+
 class CityManage {
     constructor(citys, flyDatas) {
         console.log('city type is ', typeof (citys[0]['latitude']), 'flydata type is ', typeof (flyDatas[0][0]['latitude']));
@@ -163,6 +166,11 @@ class Pigeon_Rank {
         }
         // console.log('pigeonInfos_map',this.pigeonInfos_map);
         // this.lastBlueDiv = null;
+
+        this.pigeonInfo_process;
+        this.pigeonInfosChart_curPigeonNumber;
+        //key: pigeon number; value: index;
+        this.pigeonInfosChart_number_index = new Map();
     }
     _initHead() {
         //set pigeon rank style
@@ -229,6 +237,35 @@ class Pigeon_Rank {
             }
         }
     }
+    _init_pigeonInfosTrack(callback) {
+        for (var i = 0; i < this.ranks_id.length; i++) {
+            let ele = document.getElementById(this.ranks_id[i]);
+            // console.log(ele);
+            if (ele) {
+                // console.log("add listener to ele:", ele.id);
+                ele.addEventListener("click", function (event) {
+                    var cont = this.textContent;
+                    // console.log(this.textContent);
+                    //get pigeon number by text (text is dynamic)
+                    const tmp_number_set = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+                    var tmp_pigeon_number = '';
+                    for (var i = 0; i < cont.length; i++) {
+                        if (tmp_number_set.includes(cont[i])) {
+                            tmp_pigeon_number += cont[i];
+                        }
+                        else {
+                            break;
+                        }
+                        // console.log(typeof(cont[i]),',',cont[i]);
+                    }
+                    //show pigeon infos
+                    //change camera to this pigeon
+                    console.log(tmp_pigeon_number);
+                    callback(tmp_pigeon_number);
+                }, false);
+            }
+        }
+    }
     //rank infos {id,rank} array;
     pigeonRank_init(rankInfos) {
         console.log('init rank');
@@ -269,13 +306,13 @@ class Pigeon_Rank {
                 'background-color': 'yellow',
             };
 
-            rankinfo.addEventListener("mouseleave", function( event ) {
+            rankinfo.addEventListener("mouseleave", function (event) {
                 // highlight the mouseleave target
                 this.style.backgroundColor = "rgba(0,0,0,.5)";
                 // setTimeout(function () {
                 //     this.style.color = "rgba(0,0,0,.5)";
                 // }, 500);
-              }, false);
+            }, false);
             // Creamos el evento mouseout para cada imagen
             rankinfo.addEventListener("mouseout", function (e) {
                 this.style.backgroundColor = "rgba(0,0,0,.5)";
@@ -301,8 +338,8 @@ class Pigeon_Rank {
     update_pigeons_leftdistance(pigeonsDistance) {
         console.log(pigeonsDistance);
         for (var i = 0; i < pigeonsDistance.length; i++) {
-            console.log(pigeonsDistance[i]['number']);
-            console.log(this.pigeons_leftdistance);
+            // console.log(pigeonsDistance[i]['number']);
+            // console.log(this.pigeons_leftdistance);
             if (this.pigeons_leftdistance.has(pigeonsDistance[i]['number'])) {
                 this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], this.pigeons_leftdistance.get(pigeonsDistance[i]['number']) - pigeonsDistance[i]['distance']);
             }
@@ -354,11 +391,102 @@ class Pigeon_Rank {
             }
         }
     }
+
+    updateChart_process_updatePigeonIndex(numbers) {
+        // console.log('update process',numbers.length);
+        for (var i = 0; i < numbers.length; i++) {
+            // console.log('update process',numbers[i]['number']);
+            if (this.pigeonInfosChart_number_index.has(numbers[i]['number'])) {
+                var cur_index = this.pigeonInfosChart_number_index.get(numbers[i]['number']);
+                this.pigeonInfosChart_number_index.set(numbers[i]['number'], cur_index + 1);
+            }
+            else {
+                this.pigeonInfosChart_number_index.set(numbers[i]['number'], 0);
+            }
+
+            if (this.pigeonInfosChart_curPigeonNumber === numbers[i]['number']) {
+                // console.log('update cur process',numbers[i]['number']);
+                this.updateChart_pigeonInfos_process();
+            }
+        }
+    }
+    init_pigeonInfos_process(pigeonNumber, pigeon_flightData) {
+        this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
+        const ctx = document.getElementById('myChart_PigeonInfos').getContext('2d');
+
+        var data_x = [];
+        console.log('process : ',pigeon_flightData);
+        for (var i = 0; i < pigeon_flightData.length; i++) {
+            data_x.push(i);
+        }
+
+        var backgound_color = [];
+        backgound_color.push('blue');
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data_x,
+                datasets: [{
+                    label: 'progress',
+                    data: pigeon_flightData,
+                    backgroundColor: backgound_color,
+                    // borderColor: [
+                    //     'rgba(255, 99, 132, 1)',
+                    //     'rgba(54, 162, 235, 1)',
+                    //     'rgba(255, 206, 86, 1)',
+                    //     'rgba(75, 192, 192, 1)',
+                    //     'rgba(153, 102, 255, 1)',
+                    //     'rgba(255, 159, 64, 1)'
+                    // ],
+                    // borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        this.pigeonInfo_process = myChart;
+    }
+    //update the chart when the pigeon is another one
+    //pigeonNumber:type is string ;pigeon_flightData : type is [],element is elevation; cur_index : type is number
+    updateChart_changePigeon(pigeonNumber, pigeon_flightData) {
+        if (this.pigeonInfo_process) {
+            //update graph
+            var data_x = [];
+            for(var i=0;i<pigeon_flightData.length;i++)
+            {
+                data_x.push(i);
+            }
+            var backgound_color = [];
+            console.log('process cur pigeon index is ',this.pigeonInfosChart_number_index.get(pigeonNumber));
+            for (var i = 0; i <= this.pigeonInfosChart_number_index.get(pigeonNumber); i++) {
+                backgound_color.push('blue');
+            }
+            this.pigeonInfo_process.data.labels = data_x;
+            this.pigeonInfo_process.data.datasets[0].backgroundColor = backgound_color;
+            this.pigeonInfo_process.data.datasets[0].data = pigeon_flightData;
+            this.pigeonInfo_process.update();
+        }
+    }
+
+    updateChart_pigeonInfos_process() {
+        if (this.pigeonInfo_process) {
+            //update graph
+            this.pigeonInfo_process.data.datasets[0].backgroundColor.push('blue');
+            this.pigeonInfo_process.update();
+        }
+    }
 }
 
 
 
 let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
+// pigeonRank_instance.updateChart_pigeonInfos();
 
 //track entity changes
 function onChanged(collection, added, removed, changed) {
@@ -508,29 +636,6 @@ function showData(flightData) {
     //get all timestamp
     //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
     var timestamp_pigeonNumbers = new Map();
-    // for (var i = 0; i < flightData.length; i++) {
-    //     var time_GregorianDate = timeToGregorianDate(flightData[i].time);
-    //     const time_stamp = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
-    //         time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
-    //         time_GregorianDate.second, 0, false));
-    //     // timestamp.push(time_stamp);
-    //     // console.log(time_stamp);
-    //     if (!timestamp_pigeonNumbers.has(time_stamp)) {
-    //         var tmp_value = [];
-    //         var tmp_ele = {};
-    //         tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
-    //         tmp_ele['distance'] = flightData[i]['distance'];
-    //         tmp_value.push(tmp_ele);
-    //         timestamp_pigeonNumbers.set(time_stamp, tmp_value);
-    //     }
-    //     else {
-    //         var tmp_ele = {};
-    //         tmp_ele['number'] = demo_fakeData_pigeons[0]['number'];
-    //         tmp_ele['distance'] = flightData[i]['distance'];
-    //         var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
-    //         timestamp_pigeonNumbers.set(time_stamp, new_value);
-    //     }
-    // }
     for (var i = 0; i < flightData.length; i++) {
         for (var j = 0; j < flightData[i].length; j++) {
             var time_GregorianDate = timeToGregorianDate(flightData[i][j].time);
@@ -556,6 +661,7 @@ function showData(flightData) {
             }
         }
     }
+    console.log('time stamp map :',timestamp_pigeonNumbers.values());
     viewer.clock.onTick.addEventListener(function (clock) {
         // console.log(viewer.clock.currentTime);
         for (let item of timestamp_pigeonNumbers.keys()) {
@@ -564,8 +670,12 @@ function showData(flightData) {
                 //update rank;
                 //pigeonRank_instance.pigeonRank_update(demo_fakeData_pigeons);
                 // var pigeons_distances = timestamp_pigeonNumbers.get(item);
-                pigeonRank_instance.update_pigeons_leftdistance(timestamp_pigeonNumbers.get(item));
+                var tmp_pigeonNumber = timestamp_pigeonNumbers.get(item);
+                pigeonRank_instance.update_pigeons_leftdistance(tmp_pigeonNumber);
                 timestamp_pigeonNumbers.delete(item);
+                //update pigeon process index
+                pigeonRank_instance.updateChart_process_updatePigeonIndex(tmp_pigeonNumber);
+
                 break;
                 // console.log('arrive second point',viewer.clock.currentTime);
             }
@@ -590,6 +700,23 @@ function showData(flightData) {
     }
     pigeonRank_instance._init_CameraTrack(pigeon_rank_clicked_changeTrack);
 
+    function pigeon_rank_clicked_changePigeonInfos(pigeon_id) {
+        console.log('change pigeon infos');
+        var index = 0;
+        for (var i = 0; i < demo_fakeData_pigeons.length; i++) {
+            if (demo_fakeData_pigeons[i]['number'] === pigeon_id) {
+                index = i;
+                break;
+            }
+        }
+        var tmp_elevation = [];
+        for (var i = 0; i < flightData[index].length; i++) {
+            tmp_elevation.push(flightData[index][i]['elevation']);
+        }
+        pigeonRank_instance.updateChart_changePigeon(pigeon_id, tmp_elevation);
+    }
+    pigeonRank_instance._init_pigeonInfosTrack(pigeon_rank_clicked_changePigeonInfos);
+
     // Create a point for sublines.
     // console.log("add sublines");
     // let positionProperty_sublines_collection = [];
@@ -602,6 +729,13 @@ function showData(flightData) {
         // }
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
         viewer.clock.shouldAnimate = true;
+
+        //show the first pigeon infos
+        var tmp_elevation = [];
+        for (var i = 0; i < flightData[0].length; i++) {
+            tmp_elevation.push(flightData[0][i]['elevation']);
+        }
+        pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_elevation);
     }
     for (let i = 0; i < flightData.length; i++) {
         let positionProperty_sublines = new Cesium.SampledPositionProperty();
@@ -760,4 +894,3 @@ function Model_Size_SetByFileSize(size) {
     // console.log(model_scale);
     return model_scale;
 }
-
