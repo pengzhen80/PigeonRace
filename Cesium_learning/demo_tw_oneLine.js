@@ -125,7 +125,7 @@ const demo_fakeData_pigeons = [
 //store view from demo: learn from Relive to change viewFrom by clock;
 
 
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNzAyMWZhNS02MTk3LTRjYjYtOGMwYi1kOGEzYzg5ZmMxMjgiLCJpZCI6Nzg0MDUsImlhdCI6MTY0MjU3NzYyM30.ir47ZDuE5O8TYRJmEUeUgtHohabYGEUbO7HCJe8qjrI';
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3YmNlZGQ3YS0xMDRiLTRiNmQtOWUzOC00M2NmODg0NTc5ODMiLCJpZCI6Nzg0MDUsImlhdCI6MTY0MTI2MjYzM30.PiLfhNVHA_cjUtej8K1yD8J1EBfxaN0a4mEtINkDzKU';
 // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
 // const viewer = new Cesium.Viewer('cesiumContainer', {
 //     terrainProvider: Cesium.createWorldTerrain(
@@ -149,9 +149,9 @@ const viewer = new Cesium.Viewer("cesiumContainer", {
 //     baseLayerPicker: false,
 // });
 
-const osm = new Cesium.OpenStreetMapImageryProvider({
-    url: 'https://a.tile.openstreetmap.org/'
-});
+// const osm = new Cesium.OpenStreetMapImageryProvider({
+//     url: 'https://a.tile.openstreetmap.org/'
+// });
 
 //Add Cesium Inspector
 // viewer.extend(Cesium.viewerCesiumInspectorMixin);
@@ -380,18 +380,15 @@ viewer.zoomTo(entity_loading);//居中到该点
 //add city entitys
 function add_citys_labels(citys) {
     console.log('city length is ', citys.length);
-    //make city name as pin
-    const pinBuilder = new Cesium.PinBuilder();
 
     for (var i = 0; i < citys.length; i++) {
-
-        var entity_city = viewer.entities.add({
+        viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(citys[i]['longitude'], citys[i]['latitude']),
-            billboard: {
-                image: pinBuilder.fromText(citys[i]['county'], Cesium.Color.LIGHTSKYBLUE, 96).toDataURL(),
-                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            label: {
+                text: citys[i]['county'],
+                font: "14px Helvetica",
+                fillColor: Cesium.Color.WHITE,
                 scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 1.5e7, 0.5),
-                scale: 1.0,
             },
         });
     }
@@ -400,12 +397,12 @@ function add_citys_labels(citys) {
 // add_citys_labels(demo_data_citys);
 
 //load model
-let pigeon_models_array = [];
-for(var i =0;i<threeD_models_id_array.length;i++)
-{
-    var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
-    pigeon_models_array.push(airplaneUri);
-}
+// let pigeon_models_array = [];
+// for(var i =0;i<threeD_models_id_array.length;i++)
+// {
+//     var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+//     pigeon_models_array.push(airplaneUri);
+// }
 
 
 // These are all the radar points from this flight.
@@ -542,6 +539,13 @@ function showData(flightData) {
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
         viewer.clock.shouldAnimate = true;
     }
+
+    //local model
+    const localModel = Cesium.Model({
+        gltf :'./models/CesiumMilkTruck.glb',
+        show : true,
+        scale:100.0,
+    });
     for (let i = 0; i < flightData.length; i++) {
         let positionProperty_sublines = new Cesium.SampledPositionProperty();
         //init entity_collect to track
@@ -572,21 +576,21 @@ function showData(flightData) {
 
                     // Load the glTF model from Cesium ion.
                     // const airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]);
-                    var airplaneUri;
+                    // var airplaneUri;
                     //cannot find more free model,so if index > lenth,then use the first model
-                    if (i < threeD_models_id_array.length) {
-                        airplaneUri = pigeon_models_array[i];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
-                    }
-                    else {
-                        airplaneUri = pigeon_models_array[0];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
-                    }
+                    // if (i < threeD_models_id_array.length) {
+                    //     airplaneUri = pigeon_models_array[i];
+                    //     map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
+                    // }
+                    // else {
+                    //     airplaneUri = pigeon_models_array[0];
+                    //     map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
+                    // }
                     const airplaneEntity = viewer.entities.add({
                         availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                         position: positionProperty_sublines,
                         // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: 1.0 },
+                        model: localModel,
                         // Automatically compute the orientation from the position.
                         orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                         path: new Cesium.PathGraphics({
@@ -595,7 +599,7 @@ function showData(flightData) {
                             leadTime: 1,
                             trailTime: 2500,
                         }),
-                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
+                        viewFrom: new Cesium.Cartesian3(-2080, -1715, 779),//second is left and right,third is altitude
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;
@@ -611,20 +615,20 @@ function showData(flightData) {
                 async function loadModel(callback) {
 
                     // Load the glTF model from Cesium ion.
-                    var airplaneUri;
-                    if (i < threeD_models_id_array.length) {
-                        airplaneUri = pigeon_models_array[i];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
-                    }
-                    else {
-                        airplaneUri = pigeon_models_array[0];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
-                    }
+                    // var airplaneUri;
+                    // if (i < threeD_models_id_array.length) {
+                    //     airplaneUri = pigeon_models_array[i];
+                    //     map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
+                    // }
+                    // else {
+                    //     airplaneUri = pigeon_models_array[0];
+                    //     map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
+                    // }
                     const airplaneEntity = viewer.entities.add({
                         availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                         position: positionProperty_sublines,
                         // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: 1.0 },
+                        model: localModel, 
                         // Automatically compute the orientation from the position.
                         orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                         path: new Cesium.PathGraphics({
@@ -633,7 +637,7 @@ function showData(flightData) {
                             leadTime: 1,
                             trailTime: 2500,
                         }),
-                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
+                        viewFrom: new Cesium.Cartesian3(-2080, -1715, 779),//second is left and right,third is altitude
                     });
                     // console.log("add model", j);
                     // viewer.trackedEntity = airplaneEntity;

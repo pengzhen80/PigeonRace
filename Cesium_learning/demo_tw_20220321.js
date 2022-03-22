@@ -120,7 +120,10 @@ const demo_fakeData_pigeons = [
 ];
 
 //store view from demo: learn from Relive to change viewFrom by clock;
-
+const demo_viewFrom_byRelive ={
+    'from_back':[2080 * 3, 1715 / 2, 7790 * 4],
+    'from_head':[-2080 * 3, -1715 / 2, 7790 * 4],
+};
 
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNzAyMWZhNS02MTk3LTRjYjYtOGMwYi1kOGEzYzg5ZmMxMjgiLCJpZCI6Nzg0MDUsImlhdCI6MTY0MjU3NzYyM30.ir47ZDuE5O8TYRJmEUeUgtHohabYGEUbO7HCJe8qjrI';
 // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
@@ -135,8 +138,8 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 // Create a viewer that will not render frames based on changes in 
 // simulation time.
 var viewer = new Cesium.Viewer('cesiumContainer', {
-    requestRenderMode : true,
-    maximumRenderTimeChange : Infinity
+    requestRenderMode: true,
+    maximumRenderTimeChange: Infinity
 });
 viewer.scene.debugShowFramesPerSecond = true;
 
@@ -174,7 +177,10 @@ class Pigeon_Rank {
         // console.log('pigeonInfos_map',this.pigeonInfos_map);
         // this.lastBlueDiv = null;
 
+        //animate the process
         this.pigeonInfo_process;
+
+        //record current process's pigeon number
         this.pigeonInfosChart_curPigeonNumber;
         //key: pigeon number; value: index;
         this.pigeonInfosChart_number_index = new Map();
@@ -349,7 +355,7 @@ class Pigeon_Rank {
             // console.log(this.pigeons_leftdistance);
             if (this.pigeons_leftdistance.has(pigeonsDistance[i]['number'])) {
                 this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], this.pigeons_leftdistance.get(pigeonsDistance[i]['number']) - pigeonsDistance[i]['distance']);
-                console.log(this.pigeons_leftdistance.get(pigeonsDistance[i]['number']));
+                // console.log(this.pigeons_leftdistance.get(pigeonsDistance[i]['number']));
             }
             else {
                 console.log('cannot find pigeon in rank');
@@ -361,6 +367,7 @@ class Pigeon_Rank {
         var ranks = [];
         var lastvalue;
         this.pigeons_leftdistance.forEach(function (value, key) {
+            console.log(key,':',value);
             if (ranks.length === 0) {
                 ranks.push(key);
                 lastvalue = value;
@@ -376,7 +383,7 @@ class Pigeon_Rank {
                 }
             }
         });
-
+        console.log('cur rank is');
         for (var i = 0; i < ranks.length; i++) {
             var element = document.getElementById('rank' + i.toString());
             // console.log(typeof (element));
@@ -407,6 +414,7 @@ class Pigeon_Rank {
             if (this.pigeonInfosChart_number_index.has(numbers[i]['number'])) {
                 var cur_index = this.pigeonInfosChart_number_index.get(numbers[i]['number']);
                 this.pigeonInfosChart_number_index.set(numbers[i]['number'], cur_index + 1);
+
             }
             else {
                 this.pigeonInfosChart_number_index.set(numbers[i]['number'], 0);
@@ -422,86 +430,104 @@ class Pigeon_Rank {
         this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
         var canvas = document.createElement('canvas');
         var div = document.getElementById('cesiumContainer');
-        // const ctx = document.getElementById('myChart_PigeonInfos').getContext('2d');
-        canvas.setAttribute("width", screen.availWidth/2);
+        canvas.setAttribute("width", 400);
         canvas.setAttribute("height", 100);
         canvas.setAttribute("id", "myChart_PigeonInfos");
-        // canvas.width = 200+'px';
-        // canvas.height = 100+'px';
         canvas.style.left = "100px";
         canvas.style.top = "100px";
         canvas.style.position = "absolute";
         // canvas.style.border   = "1px solid";
-        canvas.style.backgroundColor = 'white';
+        canvas.style.backgroundColor = 'transparent';
         div.appendChild(canvas);
 
         var data_x = [];
-        console.log('process : ',pigeon_flightData);
+        console.log('process : ', pigeon_flightData);
         for (var i = 0; i < pigeon_flightData.length; i++) {
             data_x.push(i);
         }
 
-        var backgound_color = [];
-        backgound_color.push('blue');
-
         const myChart = new Chart(canvas, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: data_x,
-                datasets: [{
-                    label: 'progress',
-                    data: pigeon_flightData,
-                    backgroundColor: backgound_color,
-                    // borderColor: [
-                    //     'rgba(255, 99, 132, 1)',
-                    //     'rgba(54, 162, 235, 1)',
-                    //     'rgba(255, 206, 86, 1)',
-                    //     'rgba(75, 192, 192, 1)',
-                    //     'rgba(153, 102, 255, 1)',
-                    //     'rgba(255, 159, 64, 1)'
-                    // ],
-                    // borderWidth: 1
-                }]
+                datasets: [
+                    {
+                        type: 'line',
+                        // label: 'progress',
+                        data: pigeon_flightData,
+                        backgroundColor: 'gray',
+                        fill: false,
+                        // tension: 0.1,
+                    },
+                    {
+                        type:'line',
+                        data: [],
+                        backgroundColor: 'blue',
+                    }
+                ]
             },
             options: {
-                responsive:true,
+                responsive: false,
                 legend: { display: false },
-                scales: {
-                    y: {
-                        beginAtZero: true
+                elements: {
+                    point:{
+                        radius: 0
                     }
-                }
+                },
+                scales: {
+                    yAxes: [{
+                        beginAtZero: true,
+                        fontSize : 0,
+                        padding:1,
+                        gridLines: {
+                            display:false
+                        },
+                    }],
+                    xAxes: [{
+                        ticks:{
+                          fontColor : "#000",
+                          fontSize : 0
+                        },
+                        gridLines: {
+                            display:false
+                        },
+                        padding:10,
+                        // display:false,
+                        // position:'bottom',
+                    }],
+                },
             }
         });
         this.pigeonInfo_process = myChart;
+        
     }
     //update the chart when the pigeon is another one
     //pigeonNumber:type is string ;pigeon_flightData : type is [],element is elevation; cur_index : type is number
     updateChart_changePigeon(pigeonNumber, pigeon_flightData) {
-        console.log('change pigeon to ',pigeonNumber);
         if (this.pigeonInfo_process) {
             //update graph
             var data_x = [];
-            for(var i=0;i<pigeon_flightData.length;i++)
-            {
+            for (var i = 0; i < pigeon_flightData.length; i++) {
                 data_x.push(i);
             }
-            var backgound_color = [];
-            console.log('process cur pigeon index is ',this.pigeonInfosChart_number_index.get(pigeonNumber));
-            for (var i = 0; i <= this.pigeonInfosChart_number_index.get(pigeonNumber); i++) {
-                backgound_color.push('blue');
-            }
             this.pigeonInfo_process.data.labels = data_x;
-            this.pigeonInfo_process.data.datasets[0].backgroundColor = backgound_color;
             this.pigeonInfo_process.data.datasets[0].data = pigeon_flightData;
+            var tmp_index = this.pigeonInfosChart_number_index.get(pigeonNumber);
+            console.log('temp_index ',tmp_index);
+            // var tmp_data = this.pigeonInfo_process.data.datasets[0].slice(0,tmp_index);
+            var tmp_data = pigeon_flightData.slice(0, tmp_index);
+            this.pigeonInfo_process.data.datasets[1].data = tmp_data;
             this.pigeonInfo_process.update();
+            this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
         }
     }
 
     updateChart_pigeonInfos_process() {
         if (this.pigeonInfo_process) {
             //update graph
-            this.pigeonInfo_process.data.datasets[0].backgroundColor.push('blue');
+            var tmp_index = this.pigeonInfo_process.data.datasets[1].data.length;
+            var tmp_data = this.pigeonInfo_process.data.datasets[0].data[tmp_index];
+            this.pigeonInfo_process.data.datasets[1].data.push(tmp_data);
             this.pigeonInfo_process.update();
         }
     }
@@ -595,19 +621,25 @@ function add_citys_labels(citys) {
 
 //loading models
 let pigeon_models_array = [];
-async function loadModelOnline()
-{
+async function loadModelOnline(callback) {
     for (var i = 0; i < threeD_models_id_array.length; i++) {
         update_loading(threeD_models_id_array.length - i, 0);
         var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
         pigeon_models_array.push(airplaneUri);
     }
+    callback(demo_data)
 }
-loadModelOnline();
+loadModelOnline(showData);
 
+// for (var i = 0; i < threeD_models_id_array.length; i++) {
+//     update_loading(threeD_models_id_array.length - i, 0);
+//     var airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[i]['id']);
+//     pigeon_models_array.push(airplaneUri);
+// }
 
-// These are all the radar points from this flight.
-showData(demo_data);
+//These are all the radar points from this flight.
+
+// showData(demo_data);
 
 function showData(flightData) {
     //add city labels
@@ -687,24 +719,24 @@ function showData(flightData) {
             }
         }
     }
-    console.log('time stamp map :',timestamp_pigeonNumbers.values());
+    console.log('time stamp map :', timestamp_pigeonNumbers.keys());
     viewer.clock.onTick.addEventListener(function (clock) {
         // console.log(viewer.clock.currentTime);
-        for (let item of timestamp_pigeonNumbers.keys()) {
+        var key_timestamp_pigeonNumbers = timestamp_pigeonNumbers.keys();
+        for (let item of key_timestamp_pigeonNumbers) {
             var time_diff = Cesium.JulianDate.compare(item, viewer.clock.currentTime);
             if ((-10 < time_diff) && (time_diff < 10)) {
+                // console.log(viewer.clock.currentTime,'vs',item);
                 //update rank;
-                //pigeonRank_instance.pigeonRank_update(demo_fakeData_pigeons);
-                // var pigeons_distances = timestamp_pigeonNumbers.get(item);
                 var tmp_pigeonNumber = timestamp_pigeonNumbers.get(item);
                 pigeonRank_instance.update_pigeons_leftdistance(tmp_pigeonNumber);
                 timestamp_pigeonNumbers.delete(item);
+                // console.log(timestamp_pigeonNumbers.size);
                 //update pigeon process index
                 pigeonRank_instance.updateChart_process_updatePigeonIndex(tmp_pigeonNumber);
-
-                break;
                 // console.log('arrive second point',viewer.clock.currentTime);
             }
+            
         }
     });
 
@@ -749,10 +781,6 @@ function showData(flightData) {
     //store url and size; when await finish, need to get the size of model
     let map_airplaneUrl_size = new Map();
     function callback_afterSublinesLoaded() {
-        // entity_collection_toTrack_array.set(demo_fakeData_pigeons[0]['number'],entity_collection_toTrack_main);
-        // for (let i = 0; i < entity_collection_toTrack_main.length; i++) {
-        //     viewer.trackedEntity = entity_collection_toTrack_main[0];
-        // }
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
         viewer.clock.shouldAnimate = true;
 
@@ -761,10 +789,10 @@ function showData(flightData) {
         for (var i = 0; i < flightData[0].length; i++) {
             tmp_elevation.push(flightData[0][i]['elevation']);
         }
-        // pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_elevation);
+        pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_elevation);
     }
     for (let i = 0; i < flightData.length; i++) {
-        let positionProperty_sublines = new Cesium.SampledPositionProperty();
+        var positionProperty_sublines = new Cesium.SampledPositionProperty();
         //init entity_collect to track
         // entity_collection_toTrack_array.set(demo_fakeData_pigeons[i + 1]['number'], []);
         for (let j = 0; j < flightData[i].length; j++) {
@@ -787,91 +815,59 @@ function showData(flightData) {
                 position: position,
                 point: { pixelSize: 10, color: Cesium.Color.WHITE }
             });
-            // STEP 6 CODE (airplane entity)
-            if (i == flightData.length - 1 && j == flightData[i].length - 1) {
-                async function loadModel(callback_afterSublinesLoaded) {
-
-                    // Load the glTF model from Cesium ion.
-                    // const airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]);
-                    var airplaneUri;
-                    //cannot find more free model,so if index > lenth,then use the first model
-                    if (i < threeD_models_id_array.length) {
-                        airplaneUri = pigeon_models_array[i];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
-                    }
-                    else {
-                        airplaneUri = pigeon_models_array[0];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
-                    }
-                    const airplaneEntity = viewer.entities.add({
-                        availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
-                        position: positionProperty_sublines,
-                        // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
-                        // Automatically compute the orientation from the position.
-                        orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
-                        path: new Cesium.PathGraphics({
-                            width: 5,
-                            material: color_path_array[i],
-                            leadTime: 1,
-                            trailTime: 2500,
-                        }),
-                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
-                    });
-                    // console.log("add model", j);
-                    // viewer.trackedEntity = airplaneEntity;
-
-                    if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i]['number'])) {
-                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i]['number'], airplaneEntity);
-                    }
-                    callback_afterSublinesLoaded();
-                }
-                loadModel(callback_afterSublinesLoaded);
+        }
+        function loadModel(callback) {
+            // Load the glTF model from Cesium ion.
+            // const airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]);
+            var airplaneUri;
+            //cannot find more free model,so if index > lenth,then use the first model
+            if (i < threeD_models_id_array.length) {
+                airplaneUri = pigeon_models_array[i];
+                map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
             }
             else {
-                async function loadModel(callback) {
-
-                    // Load the glTF model from Cesium ion.
-                    var airplaneUri;
-                    if (i < threeD_models_id_array.length) {
-                        airplaneUri = pigeon_models_array[i];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[i]['size']);
-                    }
-                    else {
-                        airplaneUri = pigeon_models_array[0];
-                        map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
-                    }
-                    const airplaneEntity = viewer.entities.add({
-                        availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
-                        position: positionProperty_sublines,
-                        // Attach the 3D model instead of the green point.
-                        model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
-                        // Automatically compute the orientation from the position.
-                        orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
-                        path: new Cesium.PathGraphics({
-                            width: 5,
-                            material: color_path_array[i + 1],
-                            leadTime: 1,
-                            trailTime: 2500,
-                        }),
-                        viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//second is left and right,third is altitude
-                    });
-                    // console.log("add model", j);
-                    // viewer.trackedEntity = airplaneEntity;
-                    if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i]['number'])) {
-                        entity_collection_toTrack_array.set(demo_fakeData_pigeons[i]['number'], airplaneEntity);
-                    }
-
-                    if (j == flightData[i].length - 1) {
-                        total_point_count = total_point_count - 1;
-                        // callback(total_point_count, flightData[i].length);
-                    }
-                    else {
-                        // callback(total_point_count, flightData[i].length - j);
-                    }
-                }
-                loadModel(update_loading);
+                airplaneUri = pigeon_models_array[0];
+                map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
             }
+
+            //set viewFrom
+            var tmp_viewForm = demo_viewFrom_byRelive['from_back'];
+            if(j > flightData[i].length/2)
+            {
+                tmp_viewForm = demo_viewFrom_byRelive['from_head'];
+            }
+
+
+
+            const airplaneEntity = viewer.entities.add({
+                availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
+                position: positionProperty_sublines,
+                // Attach the 3D model instead of the green point.
+                model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
+                // Automatically compute the orientation from the position.
+                orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
+                path: new Cesium.PathGraphics({
+                    width: 5,
+                    material: color_path_array[i],
+                    leadTime: 1,
+                    trailTime: 2500,
+                }),
+                viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//first is back and head,second is left and right,third is altitude
+            });
+            // console.log("add model", j);
+            // viewer.trackedEntity = airplaneEntity;
+
+            if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i]['number'])) {
+                entity_collection_toTrack_array.set(demo_fakeData_pigeons[i]['number'], airplaneEntity);
+            }
+            callback();
+        }
+        // STEP 6 CODE (airplane entity)
+        if (i == flightData.length - 1) {
+            loadModel(callback_afterSublinesLoaded);
+        }
+        else {
+            loadModel(update_loading);
         }
     }
 }
