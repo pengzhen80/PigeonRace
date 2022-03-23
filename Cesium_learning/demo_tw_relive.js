@@ -125,9 +125,6 @@ const demo_viewFrom_byRelive ={
     'from_head':[-2080 * 3, -1715 / 2, 7790 * 4],
 };
 
-//set a goal of race
-const demo_raceGoal = new Cesium.Cartesian3(demo_data[0][demo_data[0].length-1].longitude,demo_data[0][demo_data[0].length-1].latitude,demo_data[0][demo_data[0].length-1].elevation); 
-
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNzAyMWZhNS02MTk3LTRjYjYtOGMwYi1kOGEzYzg5ZmMxMjgiLCJpZCI6Nzg0MDUsImlhdCI6MTY0MjU3NzYyM30.ir47ZDuE5O8TYRJmEUeUgtHohabYGEUbO7HCJe8qjrI';
 // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
 // const viewer = new Cesium.Viewer('cesiumContainer', {
@@ -342,49 +339,23 @@ class Pigeon_Rank {
         }
     }
 
-    //pigeonsDistance is an array : elment is :{number,Cesium.Cartesian3}
-    init_pigeons_leftdistance(pigeonsPoint) {
+    //pigeonsDistance is an array : elment is :{number,distance},distance is total distance
+    init_pigeons_leftdistance(pigeonsDistance) {
         // this.pigeons_leftdistance.clear();
-        for (var i = 0; i < pigeonsPoint.length; i++) {
-            this.pigeons_leftdistance.set(pigeonsPoint[i]['number'], Cesium.Cartesian3.distance(demo_raceGoal,pigeonsPoint[i]['point']));
+        for (var i = 0; i < pigeonsDistance.length; i++) {
+            this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], pigeonsDistance[i]['distance']);
         }
         console.log('total distance is', this.pigeons_leftdistance);
     }
     //pigeonsDistance is an array : elment is :{number,distance},distance is run distance
-    // update_pigeons_leftdistance(pigeonsDistance) {
-    //     // console.log(pigeonsDistance);
-    //     for (var i = 0; i < pigeonsDistance.length; i++) {
-    //         console.log(pigeonsDistance[i]['number']);
-    //         // console.log(this.pigeons_leftdistance);
-    //         if (this.pigeons_leftdistance.has(pigeonsDistance[i]['number'])) {
-    //             this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], this.pigeons_leftdistance.get(pigeonsDistance[i]['number']) - pigeonsDistance[i]['distance']);
-    //             // console.log(this.pigeons_leftdistance.get(pigeonsDistance[i]['number']));
-    //         }
-    //         else {
-    //             console.log('cannot find pigeon in rank');
-    //         }
-    //     }
-    //     this._updateRankInfos();
-    // }
-
-     //pigeonsDistance is an array : elment is :{number,Cesium.Cartesian3}
-    update_pigeons_leftdistance(pigeonsPoint) {
+    update_pigeons_leftdistance(pigeonsDistance) {
         // console.log(pigeonsDistance);
-        for (var i = 0; i < pigeonsPoint.length; i++) {
-            // console.log(pigeonsPoint[i]['number']);
+        for (var i = 0; i < pigeonsDistance.length; i++) {
+            // console.log(pigeonsDistance[i]['number']);
             // console.log(this.pigeons_leftdistance);
-            if (this.pigeons_leftdistance.has(pigeonsPoint[i]['number'])) {
-                //distance of x y ,without elevation
-                var tmp_resetElevation = new Cesium.Cartesian3(pigeonsPoint[i]['point'].x, pigeonsPoint[i]['point'].y, demo_raceGoal.z);
-
-                this.pigeons_leftdistance.set(pigeonsPoint[i]['number'],
-                Cesium.Cartesian3.distance(demo_raceGoal,tmp_resetElevation));
-                // console.log(this.pigeons_leftdistance.get(pigeonsPoint[i]['number']));
-                // if(pigeonsPoint[i]['number'] === demo_fakeData_pigeons[1]['number'])
-                // {
-                //     // console.log(demo_raceGoal);
-                //     // console.log(pigeonsPoint[i]['point']);
-                // }
+            if (this.pigeons_leftdistance.has(pigeonsDistance[i]['number'])) {
+                this.pigeons_leftdistance.set(pigeonsDistance[i]['number'], this.pigeons_leftdistance.get(pigeonsDistance[i]['number']) - pigeonsDistance[i]['distance']);
+                // console.log(this.pigeons_leftdistance.get(pigeonsDistance[i]['number']));
             }
             else {
                 console.log('cannot find pigeon in rank');
@@ -396,10 +367,7 @@ class Pigeon_Rank {
         var ranks = [];
         var lastvalue;
         this.pigeons_leftdistance.forEach(function (value, key) {
-            if(key === demo_fakeData_pigeons[1]['number'])
-            {
-                console.log(key,':',value);
-            }
+            // console.log(key,':',value);
             if (ranks.length === 0) {
                 ranks.push(key);
                 lastvalue = value;
@@ -594,7 +562,7 @@ handler.setInputAction(function (click) {
     console.log('Left button press event:', click.position);
 }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
 
-console.log(viewer.camera.position);
+// console.log(viewer.camera.position);
 var entity_loading = viewer.entities.add({
     position: viewer.camera.position,
     point: {
@@ -649,7 +617,11 @@ function add_citys_labels(citys) {
     }
 
 }
-// add_citys_labels(demo_data_citys);
+
+// var center = Cesium.Cartesian3.fromRadians(demo_data[0][0].longitude, demo_data[0][0].latitude, demo_data[0][0].elevation);
+// var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
+// viewer.scene.camera.lookAtTransform(transform, new Cesium.HeadingPitchRange(0, -Math.PI/4, 2900));
+
 
 //loading models
 let pigeon_models_array = [];
@@ -690,13 +662,18 @@ function showData(flightData) {
     //init pigeon rank's total distance
     //make number distance data
     var make_pigeonRankdistance_array = [];
+    var make_pigeonRankdistance = 0;
     // for (var i = 0; i < flightData[0].length; i++) {
     //     make_pigeonRankdistance += flightData[0][i]['distance'];
     // }
     // make_pigeonRankdistance_array.push({ 'number': demo_fakeData_pigeons[0]['number'], 'distance': make_pigeonRankdistance });
-    // console.log(flightData.length);
+    console.log(flightData.length);
     for (var i = 0; i < flightData.length; i++) {
-        make_pigeonRankdistance_array.push({ 'number': demo_fakeData_pigeons[i]['number'], 'point': new Cesium.Cartesian3(flightData[i][0].longitude, flightData[i][0].latitude, flightData[i][0].elevation)});
+        make_pigeonRankdistance = 0;
+        for (var j = 0; j < flightData[i].length; j++) {
+            make_pigeonRankdistance += flightData[i][j]['distance'];
+        }
+        make_pigeonRankdistance_array.push({ 'number': demo_fakeData_pigeons[i]['number'], 'distance': make_pigeonRankdistance });
     }
     pigeonRank_instance.init_pigeons_leftdistance(make_pigeonRankdistance_array);
 
@@ -720,6 +697,12 @@ function showData(flightData) {
     //add clock listener
     //get all timestamp
     //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
+
+    var time_GregorianDate_middle = timeToGregorianDate(flightData[0][10].time);
+    const time_middle = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_middle.year,
+        time_GregorianDate_middle.month, time_GregorianDate_middle.day, time_GregorianDate_middle.hour, time_GregorianDate_middle.minute,
+        time_GregorianDate_middle.second, 0, false));
+
     var timestamp_pigeonNumbers = new Map();
     for (var i = 0; i < flightData.length; i++) {
         for (var j = 0; j < flightData[i].length; j++) {
@@ -732,14 +715,14 @@ function showData(flightData) {
                 var tmp_value = [];
                 var tmp_ele = {};
                 tmp_ele['number'] = demo_fakeData_pigeons[i]['number'];
-                tmp_ele['point'] = new Cesium.Cartesian3(flightData[i][j].longitude, flightData[i][j].latitude, flightData[i][j].elevation);
+                tmp_ele['distance'] = flightData[i][j]['distance'];
                 tmp_value.push(tmp_ele);
                 timestamp_pigeonNumbers.set(time_stamp, tmp_value);
             }
             else {
                 var tmp_ele = {};
                 tmp_ele['number'] = demo_fakeData_pigeons[i]['number'];
-                tmp_ele['distance'] = new Cesium.Cartesian3(flightData[i][j].longitude, flightData[i][j].latitude, flightData[i][j].elevation);
+                tmp_ele['distance'] = flightData[i][j]['distance'];
 
                 var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
                 timestamp_pigeonNumbers.set(time_stamp, new_value);
@@ -764,6 +747,18 @@ function showData(flightData) {
                 // console.log('arrive second point',viewer.clock.currentTime);
             }
             
+        }
+
+        var time_diff_middle = Cesium.JulianDate.compare(time_middle, viewer.clock.currentTime);
+        if((-2 < time_diff_middle) && (time_diff_middle < 2))
+        {
+            console.log('time middle');
+            if(viewer.trackedEntity)
+            {
+                var tmp_entity = viewer.trackedEntity;
+                tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1],demo_viewFrom_byRelive['from_head'][2]);
+                viewer.trackedEntity = tmp_entity;
+            }
         }
     });
 
@@ -809,6 +804,8 @@ function showData(flightData) {
     let map_airplaneUrl_size = new Map();
     function callback_afterSublinesLoaded() {
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
+        console.log('view from ',viewer.trackedEntity.viewFrom);
+        
         viewer.clock.shouldAnimate = true;
 
         //show the first pigeon infos
@@ -818,6 +815,7 @@ function showData(flightData) {
         }
         pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_elevation);
     }
+
     for (let i = 0; i < flightData.length; i++) {
         var positionProperty_sublines = new Cesium.SampledPositionProperty();
         //init entity_collect to track
@@ -837,13 +835,14 @@ function showData(flightData) {
             // Here we add the positions all upfront, but thesat run-time ase can be added  samples are received from a server.
             positionProperty_sublines.addSample(time, position);
             // console.log("add point", i,":",j);
-            viewer.entities.add({
+            var entity_point = viewer.entities.add({
                 description: `points: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`,
                 position: position,
                 point: { pixelSize: 10, color: Cesium.Color.WHITE }
             });
         }
-        function loadModel(callback) {
+        
+        function loadModel() {
             // Load the glTF model from Cesium ion.
             // const airplaneUri = await Cesium.IonResource.fromAssetId(threeD_models_id_array[0]);
             var airplaneUri;
@@ -856,15 +855,6 @@ function showData(flightData) {
                 airplaneUri = pigeon_models_array[0];
                 map_airplaneUrl_size.set(airplaneUri, threeD_models_id_array[0]['size']);
             }
-
-            //set viewFrom
-            var tmp_viewForm = demo_viewFrom_byRelive['from_back'];
-            if(j > flightData[i].length/2)
-            {
-                tmp_viewForm = demo_viewFrom_byRelive['from_head'];
-            }
-
-
 
             const airplaneEntity = viewer.entities.add({
                 availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
@@ -879,7 +869,7 @@ function showData(flightData) {
                     leadTime: 1,
                     trailTime: 2500,
                 }),
-                viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//first is back and head,second is left and right,third is altitude
+                viewFrom: new Cesium.Cartesian3(demo_viewFrom_byRelive['from_back'][0], demo_viewFrom_byRelive['from_back'][1], demo_viewFrom_byRelive['from_back'][2]),//first is back and head,second is left and right,third is altitude
             });
             // console.log("add model", j);
             // viewer.trackedEntity = airplaneEntity;
@@ -887,14 +877,11 @@ function showData(flightData) {
             if (!entity_collection_toTrack_array.has(demo_fakeData_pigeons[i]['number'])) {
                 entity_collection_toTrack_array.set(demo_fakeData_pigeons[i]['number'], airplaneEntity);
             }
-            callback();
         }
         // STEP 6 CODE (airplane entity)
-        if (i == flightData.length - 1) {
-            loadModel(callback_afterSublinesLoaded);
-        }
-        else {
-            loadModel(update_loading);
+        loadModel();
+        if (i === flightData.length - 1) {
+            callback_afterSublinesLoaded();
         }
     }
 }
