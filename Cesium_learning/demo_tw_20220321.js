@@ -83,9 +83,13 @@ for(var i=0;i<demo_data.length&&i<demo_fakeData_pigeons.length;i++)
 
 
 //set color datas ,number is 11 :sort by red,orange,yellow,yellow-green,green,blue,Purple,black,white,brown;
-const color_path_array = [Cesium.Color.RED, Cesium.Color.ORANGE, Cesium.Color.YELLOW,
-Cesium.Color.YELLOWGREEN, Cesium.Color.GREEN, Cesium.Color.BLUE, Cesium.Color.PURPLE,
-Cesium.Color.BLACK, Cesium.Color.WHITE, Cesium.Color.BROWN
+// const color_path_array = [Cesium.Color.RED, Cesium.Color.ORANGE, Cesium.Color.YELLOW,
+// Cesium.Color.YELLOWGREEN, Cesium.Color.GREEN, Cesium.Color.BLUE, Cesium.Color.PURPLE,
+// Cesium.Color.BLACK, Cesium.Color.WHITE, Cesium.Color.BROWN
+// ];
+
+const color_path_array_alpha = [Cesium.Color.fromAlpha(Cesium.Color.RED,0.5), Cesium.Color.fromAlpha(Cesium.Color.ORANGE,0.5), Cesium.Color.fromAlpha(Cesium.Color.YELLOW,0.5),
+    Cesium.Color.fromAlpha(Cesium.Color.YELLOWGREEN,0.5), Cesium.Color.fromAlpha(Cesium.Color.GREEN,0.5), Cesium.Color.fromAlpha(Cesium.Color.BLUE,0.5), Cesium.Color.fromAlpha(Cesium.Color.PURPLE,0.5),Cesium.Color.fromAlpha(Cesium.Color.BLACK,0.5), Cesium.Color.fromAlpha(Cesium.Color.WHITE,0.5), Cesium.Color.fromAlpha(Cesium.Color.BROWN,0.5)
 ];
 
 //set sublines model id by array : cannot find more free model,so if index >lenth,then use the first model; set size by file size
@@ -410,7 +414,7 @@ class Pigeon_Rank {
                 // }
             }
             else {
-                console.log('cannot find pigeon in rank');
+                console.log('cannot find pigeon in rank : ',pigeonsPoint[i]['number']);
             }
         }
         this._updateRankInfos();
@@ -781,7 +785,11 @@ function showData(flightData) {
     //add clock listener
     //get all timestamp
     //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
+    
     var timestamp_pigeonNumbers = new Map();
+    //show point when the timestamp is near
+    //set a map : timestamp and points array: point entitys
+    let timestamp_pointEntitys = new Map();
     for (var i = 0; i < flightData.length; i++) {
         for (var j = 0; j < flightData[i].length; j++) {
             var time_GregorianDate = timeToGregorianDate(flightData[i][j].time);
@@ -805,9 +813,39 @@ function showData(flightData) {
                 var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
                 timestamp_pigeonNumbers.set(time_stamp, new_value);
             }
+
+            var dataPoint = flightData[i][j];
+            const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.elevation);
+            var tmp_entity_point = viewer.entities.add({
+                description: 
+                `坐標: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`
+                +`<br/>`
+                +`時間:${dataPoint.time}`
+                +`<br/>`
+                +`速度:${dataPoint.time}`,
+                position: position,
+                point: { 
+                    pixelSize: 10, color: Cesium.Color.WHITE,
+                    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 8.0e5, 0.0),
+                },
+                show:false,
+            });
+        
+            if (!timestamp_pointEntitys.has(time_stamp)) {
+                var tmp_value = [];
+                tmp_value.push(tmp_entity_point);
+                timestamp_pointEntitys.set(time_stamp, tmp_value);
+            }
+            else {
+                var new_value = timestamp_pointEntitys.get(time_stamp).push(tmp_entity_point);
+                timestamp_pointEntitys.set(time_stamp, new_value);
+            }
+
         }
     }
     console.log('time stamp map :', timestamp_pigeonNumbers.keys());
+    console.log('time stamp map :', timestamp_pointEntitys.keys());
+
     viewer.clock.onTick.addEventListener(function (clock) {
         // console.log(viewer.clock.currentTime);
         var key_timestamp_pigeonNumbers = timestamp_pigeonNumbers.keys();
@@ -817,12 +855,19 @@ function showData(flightData) {
                 // console.log(viewer.clock.currentTime,'vs',item);
                 //update rank;
                 var tmp_pigeonNumber = timestamp_pigeonNumbers.get(item);
+                console.log(tmp_pigeonNumber);
                 pigeonRank_instance.update_pigeons_leftdistance(tmp_pigeonNumber);
                 timestamp_pigeonNumbers.delete(item);
                 // console.log(timestamp_pigeonNumbers.size);
                 //update pigeon process index
                 pigeonRank_instance.updateChart_process_updatePigeonIndex(tmp_pigeonNumber);
                 // console.log('arrive second point',viewer.clock.currentTime);
+
+                var tmp_pointEntitys = timestamp_pointEntitys.get(item);
+                for(var i=0;i<tmp_pointEntitys.length;i++)
+                {
+                    tmp_pointEntitys[i].show = true;
+                }
             }
             
         }
@@ -889,6 +934,8 @@ function showData(flightData) {
         }
         pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_fd);
     }
+
+
     for (let i = 0; i < flightData.length; i++) {
         var positionProperty_sublines = new Cesium.SampledPositionProperty();
         //init entity_collect to track
@@ -908,19 +955,6 @@ function showData(flightData) {
             // Here we add the positions all upfront, but thesat run-time ase can be added  samples are received from a server.
             positionProperty_sublines.addSample(time, position);
             // console.log("add point", i,":",j);
-            viewer.entities.add({
-                description: 
-                `坐標: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`
-                +`<br/>`
-                +`時間:${dataPoint.time}`
-                +`<br/>`
-                +`速度:${dataPoint.time}`,
-                position: position,
-                point: { 
-                    pixelSize: 10, color: Cesium.Color.WHITE,
-                    scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 8.0e5, 0.0),
-                }
-            });
         }
         function loadModel(callback) {
             // Load the glTF model from Cesium ion.
@@ -954,7 +988,7 @@ function showData(flightData) {
                 orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                 path: new Cesium.PathGraphics({
                     width: 3,
-                    material: color_path_array[i],
+                    material: color_path_array_alpha[i],
                     leadTime: 1,
                     trailTime: 100000,
                     distanceDisplayCondition:new Cesium.DistanceDisplayCondition(1.5e2, 8.0e5),
