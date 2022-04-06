@@ -58,6 +58,13 @@ function input_datas(gpx_datas, city_datas, options) {
 
 input_datas(test_demo_data_fake, test_demo_data_citys, {});
 
+//update speed to meter/minute
+for (var i = 0; i < demo_data.length; i++) {
+    for (var j = 0; j < demo_data[i].length; j++) {
+        demo_data[i][j]['speed'] = demo_data[i][j]['speed'] * 60;
+    }
+}
+
 //set a goal of race
 const demo_raceGoal = new Cesium.Cartesian3(demo_data[0][demo_data[0].length - 1].longitude, demo_data[0][demo_data[0].length - 1].latitude, demo_data[0][demo_data[0].length - 1].elevation);
 
@@ -218,6 +225,9 @@ class Pigeon_Rank {
         this.pigeonInfosChart_curPigeonNumber;
         //key: pigeon number; value: index;
         this.pigeonInfosChart_number_index = new Map();
+        //small map's center postion
+        this.smallMap_handler = null;
+        this.smallMap_marker = null;
     }
     _initHead() {
         //set pigeon rank style
@@ -341,9 +351,9 @@ class Pigeon_Rank {
             // rankinfo.style['border-radius'] = 2/4+'em';
             rankinfo.style['width'] = 180 + 'px';
             rankinfo.style['text-align'] = 'center';
-            rankinfo.style['hover'] = {
-                'background-color': 'yellow',
-            };
+            // rankinfo.style['hover'] = {
+            //     'background-color': 'yellow',
+            // };
 
             // rankinfo.addEventListener("mouseleave", function (event) {
             //     // highlight the mouseleave target
@@ -367,7 +377,7 @@ class Pigeon_Rank {
 
     //click pigeon model and make pigeon rank blue and update current pigeon
     pigeonRank_updateCurrentFallow(pigeonNumber) {
-        console.log("this.ranks_curPigeonNumber",this.ranks_curPigeonNumber,pigeonNumber);
+        console.log("this.ranks_curPigeonNumber", this.ranks_curPigeonNumber, pigeonNumber);
         if (this.ranks_curPigeonNumber != pigeonNumber) {
             let ele = document.getElementById(this.map_pigeonNumber_ranksId.get(this.ranks_curPigeonNumber));
             // console.log(ele);
@@ -417,6 +427,12 @@ class Pigeon_Rank {
             }
             else {
                 console.log('cannot find pigeon in rank : ', pigeonsPoint[i]['number']);
+            }
+
+            //update position in small map
+            if(pigeonsPoint[i]['number'] === this.ranks_curPigeonNumber)
+            {
+                this.update_smallMap(pigeonsPoint[i]['point'].y, pigeonsPoint[i]['point'].x);
             }
         }
         this._updateRankInfos();
@@ -495,7 +511,7 @@ class Pigeon_Rank {
         }
     }
 
-    //pigeonNumber:type is string ;pigeon_flightData : type is [],element is {}:'elevation' and 'speed' ; cur_index : type is number
+    //pigeonNumber:type is string ;pigeon_flightData : type is [],element is {}:'elevation' and 'speed' ; 
     init_pigeonInfos_process(pigeonNumber, pigeon_flightData) {
         this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
         var canvas = document.createElement('canvas');
@@ -517,7 +533,7 @@ class Pigeon_Rank {
         for (var i = 0; i < pigeon_flightData.length; i++) {
             data_x.push(i);
             data_elevation.push(pigeon_flightData[i]['elevation']);
-            data_speed.push(pigeon_flightData[i]['speed'] + 600);
+            data_speed.push(pigeon_flightData[i]['speed']);
         }
 
         const myChart = new Chart(canvas, {
@@ -531,6 +547,7 @@ class Pigeon_Rank {
                         // label: 'progress',
                         data: data_elevation,
                         backgroundColor: 'gray',
+                        borderColor: 'rgba(255,255,0,0.5)',
                         fill: false,
                         // tension: 0.1,
                     },
@@ -593,9 +610,162 @@ class Pigeon_Rank {
         });
         this.pigeonInfo_process = myChart;
 
+        this.init_pigeonInfos_dashBoard(pigeon_flightData[0]['speed'], pigeon_flightData[0]['elevation'], "", "");
     }
+
+    //add a dashBoard
+    init_pigeonInfos_dashBoard(speed, elevation, fly_distance, left_distance) {
+        function extendString(str) {
+            var result = '';
+            var len = str.length;
+            for (var i = 0; i < 5 - len; i++) {
+                result += '&nbsp;';
+            }
+            result += str;
+            return result;
+        }
+        if (!speed) {
+            speed = extendString('0');
+        }
+        else {
+            speed = extendString(speed);
+        }
+        if (!elevation) {
+            elevation = extendString('0');
+        }
+        else {
+            elevation = extendString(elevation);
+        }
+        if (!fly_distance) {
+            fly_distance = extendString('0');
+        }
+        else {
+            fly_distance = extendString(fly_distance);
+        }
+        if (!left_distance) {
+            left_distance = extendString('0');
+        }
+        else {
+            left_distance = extendString(left_distance);
+        }
+        // this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
+        var canvas = document.createElement('div');
+        // canvas.setAttribute("width", 200);
+        // canvas.setAttribute("height", 50);
+        canvas.setAttribute("id", "PigeonInfos_dashBoard");
+        canvas.style.left = "150px";
+        canvas.style.top = "50px";
+        canvas.style.height = 40 + 'px';
+        // rankinfo.style['border-radius'] = 2/4+'em';
+        canvas.style['width'] = 400 + 'px';
+        canvas.style.position = "absolute";
+        canvas.style['border-radius'] = 2 / 4 + 'em';
+        // canvas.style.border   = "1px solid";
+        canvas.style.backgroundColor = 'white';
+        // canvas.style.color = 'black';
+        canvas.innerHTML = '<span style="font-size:30px">'
+            + speed + '</span>'
+            + '<span style="font-size:10px">'
+            + 'm/min'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + fly_distance
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'km'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + elevation
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'm'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + left_distance
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'km'
+            + '</span>';
+        canvas.style['text-align'] = 'center';
+        document.body.appendChild(canvas);
+    }
+
+    //update dashboard
+    update_pigeonInfos_dashBoard(speed, elevation, fly_distance, left_distance) {
+        //normalize parameters
+        function extendString(str) {
+            // console.log(str,":",str.length);
+            var result = '';
+            var len = str.length;
+            for (var i = 0; i < 5 - len; i++) {
+                result += '&nbsp;';
+            }
+            result += str;
+            // console.log(result,":",result.length);
+            return result;
+        }
+        if (!speed) {
+            speed = extendString('0');
+        }
+        else {
+            speed = speed.toString();
+            speed = extendString(speed);
+        }
+        if (!elevation) {
+            elevation = extendString('0');
+        }
+        else {
+            elevation = elevation.toString();
+            elevation = extendString(elevation);
+        }
+        if (!fly_distance) {
+            fly_distance = extendString('0');
+        }
+        else {
+            fly_distance = extendString(fly_distance);
+        }
+        if (!left_distance) {
+            left_distance = extendString('0');
+        }
+        else {
+            left_distance = extendString(left_distance);
+        }
+        // this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
+        var canvas = document.getElementById('PigeonInfos_dashBoard');
+        canvas.innerHTML = '<span style="font-size:30px">'
+            + speed + '</span>'
+            + '<span style="font-size:10px">'
+            + 'm/min'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + fly_distance
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'km'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + elevation
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'm'
+            + '</span>'
+            + '<span style="font-size:30px">'
+            + ' '
+            + left_distance
+            + '</span>'
+            + '<span style="font-size:10px">'
+            + 'km'
+            + '</span>';
+    }
+
+
     //update the chart when the pigeon is another one
-    //pigeonNumber:type is string ;pigeon_flightData : type is [],element is {}:'elevation' and 'speed' ; cur_index : type is number
+    //pigeonNumber:type is string ;pigeon_flightData : type is [],element is {}:'elevation' and 'speed' ;
     updateChart_changePigeon(pigeonNumber, pigeon_flightData) {
         if (this.pigeonInfo_process) {
             //update graph
@@ -605,7 +775,7 @@ class Pigeon_Rank {
             for (var i = 0; i < pigeon_flightData.length; i++) {
                 data_x.push(i);
                 data_elevation.push(pigeon_flightData[i]['elevation']);
-                data_speed.push(pigeon_flightData[i]['speed'] + 600);
+                data_speed.push(pigeon_flightData[i]['speed']);
             }
             //update elevation process
             this.pigeonInfo_process.data.labels = data_x;
@@ -621,6 +791,9 @@ class Pigeon_Rank {
 
             this.pigeonInfo_process.update();
             this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
+
+            //udpate dashboard
+            this.update_pigeonInfos_dashBoard(tmp_data_spd[tmp_data_spd.length-1],tmp_data_ele[tmp_data_ele.length-1],'','');
         }
     }
 
@@ -635,10 +808,43 @@ class Pigeon_Rank {
             this.pigeonInfo_process.data.datasets[3].data.push(tmp_data_spd);
 
             this.pigeonInfo_process.update();
+            //udpate dashboard
+            this.update_pigeonInfos_dashBoard(tmp_data_spd,tmp_data,'','');
+        }
+    }
+
+    //init small map with leaflet with a center postion
+    init_smallMap(latitude,longitude)
+    {
+        var div_smallMap = document.getElementById('smallMap');
+        div_smallMap.setAttribute('style','width:20%;height:20%;');
+        // canvas.setAttribute("width", 400);
+        // canvas.setAttribute("height", 100);
+        div_smallMap.style.left = "10px";
+        div_smallMap.style.bottom = "130px";
+        div_smallMap.style.position = "absolute";
+        div_smallMap.style.zIndex = "1";
+
+        //the last number is the zoom level, smaller is farer;
+        this.smallMap_handler = L.map('smallMap').setView([latitude, longitude], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: '<a href="https://www.openstreetmap.org/">OSM</a>',
+	    maxZoom: 18,}).addTo(this.smallMap_handler);
+
+        this.marker = L.marker([latitude, longitude]).addTo(this.smallMap_handler);
+
+    }
+    //update small map by update center position
+    update_smallMap(latitude,longitude)
+    {
+        if(this.smallMap_handler)
+        {
+            console.log('update small map marker',latitude,longitude);
+            this.smallMap_handler.setView([latitude, longitude], 10);
+            this.marker.setLatLng([latitude,longitude]);
         }
     }
 }
-
 
 
 let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
@@ -703,7 +909,7 @@ function add_citys_labels(citys) {
                 text: citys[i]['county'],
                 font: "14px Helvetica",
                 fillColor: Cesium.Color.WHITE,
-                scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 8.0e5, 0.0),
+                scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 4.0e5, 0.0),
             },
         });
     }
@@ -811,13 +1017,18 @@ function showData(flightData) {
 
             var dataPoint = flightData[i][j];
             const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.elevation);
+            // add point points
             var tmp_entity_point = viewer.entities.add({
                 description:
+                    `公環號碼:${demo_fakeData_pigeons[i]['number']}<br>`
+                    +
                     `坐標: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`
                     + `<br/>`
                     + `時間:${dataPoint.time}`
                     + `<br/>`
-                    + `速度:${dataPoint.time}`,
+                    + `速度:${dataPoint.speed}`
+                    + `<br/>`
+                    + `方位角:${dataPoint.heading}`,
                 position: position,
                 point: {
                     pixelSize: 10, color: Cesium.Color.WHITE,
@@ -880,8 +1091,10 @@ function showData(flightData) {
         //change track
         viewer.trackedEntity = entity_collection_toTrack_array.get(pigeon_id);
 
-         //change color 
-         pigeonRank_instance.pigeonRank_updateCurrentFallow(pigeon_id);
+        //change selected
+        viewer.selectedEntity = entity_collection_toTrack_array.get(pigeon_id); 
+        //change color 
+        pigeonRank_instance.pigeonRank_updateCurrentFallow(pigeon_id);
     }
     pigeonRank_instance._init_CameraTrack(pigeon_rank_clicked_changeTrack);
 
@@ -927,6 +1140,8 @@ function showData(flightData) {
             // tmp_elevation.push(flightData[0][i]['elevation']);
         }
         pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_fd);
+
+        pigeonRank_instance.init_smallMap(flightData[0][0]['latitude'], flightData[0][0]['longitude']);
     }
 
     //store model entitys' id with pigeon number
@@ -979,7 +1194,10 @@ function showData(flightData) {
                 availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
                 position: positionProperty_sublines,
                 // Attach the 3D model instead of the green point.
-                model: { uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) },
+                model: { 
+                uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) ,
+                // color:color_path_array_alpha[i]
+                },
                 // Automatically compute the orientation from the position.
                 orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
                 path: new Cesium.PathGraphics({
@@ -987,7 +1205,7 @@ function showData(flightData) {
                     material: color_path_array_alpha[i],
                     leadTime: 1,
                     trailTime: 100000,
-                    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(1.5e2, 8.0e5),
+                    // distanceDisplayCondition: new Cesium.DistanceDisplayCondition(1.5e2, 8.0e5),
                 }),
                 viewFrom: new Cesium.Cartesian3(2080 * 3, 1715 / 2, 7790 * 4),//first is back and head,second is left and right,third is altitude
             });
