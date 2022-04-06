@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-29T01:33:19.512Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36" etag="5vaM46P9iyUDLJn7HxS_" version="17.2.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-06T02:22:06.608Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36" etag="MZYwsKL6tTp1GdhzZ0TE" version="17.2.4" type="github">
   <diagram id="5e5Dk54hfpTxT54ZvgJR" name="Page-1">
     <mxGraphModel dx="2932" dy="584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -615,6 +615,30 @@
           <mxGeometry x="180" width="610" height="55" as="geometry">
             <mxRectangle width="610" height="55" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="3800" width="840" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-3" value="&lt;font style=&quot;font-size: 48px&quot;&gt;速度與海拔歷程：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="830" y="3810" width="400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-4" value="根據當前鴿子改變歷程" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="840" y="3870" width="570" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-5" value="根據clock.tick更新歷程進度" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="840" y="3950" width="670" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="820" y="4070" width="840" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-7" value="儀錶盤：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="840" y="4090" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-8" value="切換鴿子的時候，切換顯示的內容" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="865" y="4140" width="750" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ydw3ClJfoL74oRs7GUdY-9" value="更新當前鴿子的內容" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+          <mxGeometry x="865" y="4220" width="715" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
