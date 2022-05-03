@@ -755,9 +755,21 @@ function showData(flightData) {
             console.log('time middle');
             if(viewer.trackedEntity)
             {
-                var tmp_entity = viewer.trackedEntity;
-                tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1],demo_viewFrom_byRelive['from_head'][2]);
-                viewer.trackedEntity = tmp_entity;
+                var tmp_entity = entity_collection_toTrack_array.get(pigeonRank_instance.ranks_curPigeonNumber);
+                if(tmp_entity)
+                {
+                    tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1],demo_viewFrom_byRelive['from_head'][2]);
+                    viewer.trackedEntity = tmp_entity;
+                }
+                else
+                {
+                    console.log('no entity to track');
+                }
+
+
+                // var tmp_entity = viewer.trackedEntity;
+                // tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1],demo_viewFrom_byRelive['from_head'][2]);
+                // viewer.trackedEntity = tmp_entity;
             }
         }
     });
@@ -804,7 +816,11 @@ function showData(flightData) {
     let map_airplaneUrl_size = new Map();
     function callback_afterSublinesLoaded() {
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
-        console.log('view from ',viewer.trackedEntity.viewFrom);
+        // console.log('view from ',viewer.trackedEntity.viewFrom);
+
+        // var tmp_entity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
+        // tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1],demo_viewFrom_byRelive['from_head'][2]);
+        // viewer.trackedEntity = tmp_entity;
         
         viewer.clock.shouldAnimate = true;
 

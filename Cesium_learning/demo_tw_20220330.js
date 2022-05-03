@@ -111,13 +111,27 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 // simulation time.
 var viewer = new Cesium.Viewer('cesiumContainer', {
     requestRenderMode: true,
-    maximumRenderTimeChange: Infinity
+    maximumRenderTimeChange: Infinity,
+    infoBox: false,
+    selectionIndicator: false,
+    timeline: false,
 });
 viewer.scene.debugShowFramesPerSecond = true;
 
 const imageryLayer = viewer.imageryLayers.addImageryProvider(
     new Cesium.IonImageryProvider({ assetId: 2 })
 );
+
+var mapOpenWeatherMaps = viewer.imageryLayers.addImageryProvider(
+    new Cesium.UrlTemplateImageryProvider({
+        url: 'https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=da6170ee8455a85fb5a409ad27b479b2',
+        // fileExtension: 'png' + '?appid = { APPID }',
+    })
+);
+
+var rain_image = 'https://github.com/CesiumGS/cesium/blob/master/Apps/SampleData/circular_particle.png';
+console.log('rain image',rain_image);
+
 
 //Add Cesium Inspector
 // viewer.extend(Cesium.viewerCesiumInspectorMixin);
@@ -211,6 +225,9 @@ class Pigeon_Rank {
         this.pigeonRank_init(rankInfos);
         //pigeons_leftdistance : pigeon number -> left distance
         this.pigeons_leftdistance = new Map();
+        this.pigeons_leftdistance_Ranks = [];
+        //for dashboard distance values : []:ele{'number':xxx,'distance':xxx,'leftdistance':xxx}
+        this.pigeons_leftdistance_dashBoard = new Map();
         this.pigeonInfos_map = new Map();
         for (var i = 0; i < rankInfos.length; i++) {
             this.pigeonInfos_map.set(rankInfos[i]['number'], rankInfos[i]['rank']);
@@ -227,7 +244,9 @@ class Pigeon_Rank {
         this.pigeonInfosChart_number_index = new Map();
         //small map's center postion
         this.smallMap_handler = null;
-        this.smallMap_marker = null;
+        // this.smallMap_marker = null;
+        //ele: {'number':xxx,'position':{'longitude':xxx,'latitude:xxx}};
+        this.smallMap_points = new Map();
     }
     _initHead() {
         //set pigeon rank style
@@ -237,16 +256,17 @@ class Pigeon_Rank {
         div_pigeonsRank.style.backgroundColor = 'white';
         // div_pigeonsRank.style.opacity = "0.5";
         div_pigeonsRank.style.position = 'absolute';
-        div_pigeonsRank.style.bottom = 400 + 'px';
-        div_pigeonsRank.style.right = 30 + 'px';
-        div_pigeonsRank.style.height = 40 + 'px';
+        div_pigeonsRank.style.bottom = '60%';
+        div_pigeonsRank.style.right = 10 + 'px';
+        div_pigeonsRank.style.height = '6%';
         div_pigeonsRank.style['border-radius'] = 2 / 4 + 'em';
-        div_pigeonsRank.style['width'] = 180 + 'px';
+        div_pigeonsRank.style['width'] = '15%';
         div_pigeonsRank.style.color = 'black';
         div_pigeonsRank.style['text-align'] = 'center';
         // div_pigeonsRank.style.right = document.body.width+'px';
-        div_pigeonsRank.innerHTML = '<span style="font-size:30px">' + 'pigeons rank' + '</span> ';
+        div_pigeonsRank.innerHTML = '<span style="font-size:200%">' + 'pigeons rank' + '</span> ';
         document.body.appendChild(div_pigeonsRank);
+        // console.log('pigeonsRank',div_pigeonsRank.style);
     }
     _init_CameraTrack(callback) {
         // console.log('init track success : ',this.pigeons_id,this.pigeons_id.length);
@@ -332,7 +352,7 @@ class Pigeon_Rank {
                 return result;
             }
             //make_space(12-rankInfos[i]['number'].length-rankInfos[i]['rank'].length)
-            rankinfo.innerHTML = '<span style="font-size:30px">' + rankInfos[i]['number']
+            rankinfo.innerHTML = '<span style="font-size:200%">' + rankInfos[i]['number']
                 + make_space(12 - rankInfos[i]['number'].length - rankInfos[i]['rank'].length)
                 + rankInfos[i]['rank'] + '</span>';
             if (0 == i) {
@@ -344,12 +364,12 @@ class Pigeon_Rank {
             }
             rankinfo.style.position = 'absolute';
             // console.log(100 + Number(rankInfos[i]['rank']) * 10);
-            rankinfo.style.bottom = 400 - Number(rankInfos[i]['rank']) * 35 + 'px';
-            rankinfo.style.right = 30 + 'px';
+            rankinfo.style.bottom = (60 - Number(rankInfos[i]['rank']) * 5.5).toString() + '%';
+            rankinfo.style.right = 10 + 'px';
             rankinfo.style.color = 'white';
-            rankinfo.style.height = 30 + 'px';
+            rankinfo.style.height = '5%';
             // rankinfo.style['border-radius'] = 2/4+'em';
-            rankinfo.style['width'] = 180 + 'px';
+            rankinfo.style['width'] = '15%';
             rankinfo.style['text-align'] = 'center';
             // rankinfo.style['hover'] = {
             //     'background-color': 'yellow',
@@ -377,13 +397,16 @@ class Pigeon_Rank {
 
     //click pigeon model and make pigeon rank blue and update current pigeon
     pigeonRank_updateCurrentFallow(pigeonNumber) {
-        console.log("this.ranks_curPigeonNumber", this.ranks_curPigeonNumber, pigeonNumber);
+        // console.log("this.ranks_curPigeonNumber", this.ranks_curPigeonNumber, pigeonNumber);
         if (this.ranks_curPigeonNumber != pigeonNumber) {
             let ele = document.getElementById(this.map_pigeonNumber_ranksId.get(this.ranks_curPigeonNumber));
             // console.log(ele);
             if (ele) {
                 ele.style.backgroundColor = "rgba(0,0,0,.5)";
             }
+
+            //update small's picked color
+            this.update_smallMap_ChangePigeon(this.ranks_curPigeonNumber, pigeonNumber);
         }
 
         if (this.map_pigeonNumber_ranksId.has(pigeonNumber)) {
@@ -394,7 +417,6 @@ class Pigeon_Rank {
                 this.ranks_curPigeonNumber = pigeonNumber;
             }
         }
-
     }
 
     //pigeonsDistance is an array : elment is :{number,Cesium.Cartesian3}
@@ -404,6 +426,16 @@ class Pigeon_Rank {
             this.pigeons_leftdistance.set(pigeonsPoint[i]['number'], Cesium.Cartesian3.distance(demo_raceGoal_multi.get(pigeonsPoint[i]['number']), pigeonsPoint[i]['point']));
         }
         console.log('total distance is', this.pigeons_leftdistance);
+    }
+
+    //total distances with numbers :[]:{'number':xxx,'distance':xxx}
+    init_pigeonInfos_dashBoard_leftDistance(pigeon_distances) {
+        for (var i = 0; i < pigeon_distances.length; i++) {
+            var tmp_value = {};
+            tmp_value['distance'] = 0;
+            tmp_value['leftDistance'] = pigeon_distances[i]['distance'];
+            this.pigeons_leftdistance_dashBoard.set(pigeon_distances[i]['number'], tmp_value);
+        }
     }
 
     //pigeonsDistance is an array : elment is :{number,Cesium.Cartesian3}
@@ -418,49 +450,127 @@ class Pigeon_Rank {
 
                 this.pigeons_leftdistance.set(pigeonsPoint[i]['number'],
                     Cesium.Cartesian3.distance(demo_raceGoal_multi.get(pigeonsPoint[i]['number']), tmp_resetElevation));
-                // console.log(this.pigeons_leftdistance.get(pigeonsPoint[i]['number']));
-                // if(pigeonsPoint[i]['number'] === demo_fakeData_pigeons[1]['number'])
-                // {
-                //     // console.log(demo_raceGoal);
-                //     // console.log(pigeonsPoint[i]['point']);
+
+                // if (pigeonsPoint[i]['number'] === '10010') {
+                //     console.log(pigeonsPoint[i]['number'], this.pigeons_leftdistance.get(pigeonsPoint[i]['number']));
+                // }
+
+                // if (pigeonsPoint[i]['number'] === '1002') {
+                //     console.log(pigeonsPoint[i]['number'], this.pigeons_leftdistance.get(pigeonsPoint[i]['number']));
                 // }
             }
             else {
                 console.log('cannot find pigeon in rank : ', pigeonsPoint[i]['number']);
             }
 
-            //update position in small map
-            if(pigeonsPoint[i]['number'] === this.ranks_curPigeonNumber)
-            {
-                this.update_smallMap(pigeonsPoint[i]['point'].y, pigeonsPoint[i]['point'].x);
-            }
-        }
-        this._updateRankInfos();
-    }
-    _updateRankInfos() {
-        var ranks = [];
-        var lastvalue;
-        this.pigeons_leftdistance.forEach(function (value, key) {
-            if (key === demo_fakeData_pigeons[1]['number']) {
-                // console.log(key,':',value);
-            }
-            if (ranks.length === 0) {
-                ranks.push(key);
-                lastvalue = value;
+            if (this.pigeons_leftdistance_dashBoard.has(pigeonsPoint[i]['number'])) {
+                var tmp_value = this.pigeons_leftdistance_dashBoard.get(pigeonsPoint[i]['number']);
+                tmp_value['distance'] += pigeonsPoint[i]['distance'];
+                tmp_value['leftDistance'] -= pigeonsPoint[i]['distance'];
+                this.pigeons_leftdistance_dashBoard.set(pigeonsPoint[i]['number'], tmp_value);
             }
             else {
-                if (lastvalue > value) {
-                    var lastKey = ranks.pop();
-                    ranks.push(key);
-                    ranks.push(lastKey);
+                console.log('cannot find pigeon in rank : ', pigeonsPoint[i]['number']);
+            }
+
+            //update position in small map
+            if (pigeonsPoint[i]['number'] === this.ranks_curPigeonNumber) {
+                var tmp_value = this.pigeons_leftdistance_dashBoard.get(pigeonsPoint[i]['number']);
+                this.update_smallMap(pigeonsPoint[i]['point'].y, pigeonsPoint[i]['point'].x, tmp_value['distance'], tmp_value['leftDistance']);
+            }
+
+            this.update_smallMap_points(pigeonsPoint[i]['number'], pigeonsPoint[i]['point'].y, pigeonsPoint[i]['point'].x);
+
+            this._updateRankInfos(pigeonsPoint[i]['number']);
+        }
+
+    }
+    _updateRankInfos(pigeonNumber) {
+        // console.log(this.pigeons_leftdistance_Ranks,this.pigeons_leftdistance_Ranks.length);
+        if (this.pigeons_leftdistance_Ranks.length > 0) {
+            //step1:remove the pigeonNumber
+            //step2:re insert by distance
+            var myIndex = this.pigeons_leftdistance_Ranks.indexOf(pigeonNumber);
+            if (myIndex !== -1) {
+                this.pigeons_leftdistance_Ranks.splice(myIndex, 1);
+                // console.log('remove',pigeonNumber,this.pigeons_leftdistance_Ranks);
+            }
+            var tmp_ranks_head = [];
+            var tmp_ranks_tail = [];
+
+            for (var i = 0, j = this.pigeons_leftdistance_Ranks.length - 1; i < j;) {
+                if (this.pigeons_leftdistance.get(this.pigeons_leftdistance_Ranks[i]) < this.pigeons_leftdistance.get(pigeonNumber)) {
+                    // console.log(this.pigeons_leftdistance.get(this.pigeons_leftdistance_Ranks[i]));
+                    // console.log(this.pigeons_leftdistance.get(pigeonNumber));
+
+                    tmp_ranks_head.push(this.pigeons_leftdistance_Ranks[i]);
+                    // console.log('head',tmp_ranks_head);
+                    i++;
+                    continue;
                 }
                 else {
-                    ranks.push(key);
+                    if (this.pigeons_leftdistance.get(this.pigeons_leftdistance_Ranks[j]) > this.pigeons_leftdistance.get(pigeonNumber)) {
+                        // console.log(this.pigeons_leftdistance.get(this.pigeons_leftdistance_Ranks[j]));
+                        // console.log(this.pigeons_leftdistance.get(pigeonNumber));
+
+                        tmp_ranks_tail.unshift(this.pigeons_leftdistance_Ranks[j]);
+                        // console.log('tail',tmp_ranks_tail);
+                        j--;
+                        continue;
+                    }
+                    else {
+                        tmp_ranks_head.push(pigeonNumber);
+                        tmp_ranks_head.concat(tmp_ranks_tail);
+                        break;
+                    }
                 }
             }
-        });
-        // console.log('cur rank is');
-        for (var i = 0; i < ranks.length; i++) {
+            this.pigeons_leftdistance_Ranks = tmp_ranks_head;
+            // console.log('update ranks',this.pigeons_leftdistance_Ranks);
+        }
+        else {
+            //init ranks;
+            var numbers = this.pigeons_leftdistance.keys();
+            // console.log(numbers.length);
+            var arry_numbers = Array.from(numbers);
+            for (var i = 0; i < arry_numbers.length; i++) {
+                // console.log(arry_numbers);
+                for (var j = i; j < arry_numbers.length; j++) {
+                    if (this.pigeons_leftdistance.get(arry_numbers[i]) > this.pigeons_leftdistance.get(arry_numbers[j])) {
+                        var tmp = arry_numbers[i];
+                        arry_numbers[i] = arry_numbers[j];
+                        arry_numbers[j] = tmp;
+                    }
+                }
+            }
+            // console.log(numbers);
+            this.pigeons_leftdistance_Ranks = arry_numbers;
+            // console.log('init ranks',this.pigeons_leftdistance_Ranks,this.pigeons_leftdistance_Ranks.length);
+        }
+        // var ranks = [];
+        // var lastvalue;
+        // this.pigeons_leftdistance.forEach(function (value, key) {
+        //     // if (key === demo_fakeData_pigeons[1]['number']) {
+        //     //     // console.log(key,':',value);
+        //     // }
+        //     console.log(key,':',value);
+        //     if (ranks.length === 0) {
+        //         ranks.push(key);
+        //         lastvalue = value;
+        //     }
+        //     else {
+        //         if (lastvalue > value) {
+        //             var lastKey = ranks.pop();
+        //             ranks.push(key);
+        //             ranks.push(lastKey);
+        //         }
+        //         else {
+        //             ranks.push(key);
+        //         }
+        //     }
+        // });
+        // console.log('cur rank is',ranks);
+        for (var i = 0; i < this.pigeons_leftdistance_Ranks.length; i++) {
             var element = document.getElementById('rank' + i.toString());
             // console.log(typeof (element));
             if (typeof (element) != 'undefined' && element != null) {
@@ -474,16 +584,16 @@ class Pigeon_Rank {
                     }
                     return result;
                 }
-                var tmp_rank = this.pigeonInfos_map.get(ranks[i]);
+                var tmp_rank = this.pigeonInfos_map.get(this.pigeons_leftdistance_Ranks[i]);
                 // console.log(tmp_rank);
-                element.innerHTML = '<span style="font-size:30px">' + ranks[i]
-                    + make_space(12 - ranks[i].length - tmp_rank.length)
+                element.innerHTML = '<span style="font-size:200%">' + this.pigeons_leftdistance_Ranks[i]
+                    + make_space(12 - this.pigeons_leftdistance_Ranks[i].length - tmp_rank.length)
                     + tmp_rank + '</span>';
             }
             //update this.map_pigeonNumber_ranksId
-            this.map_pigeonNumber_ranksId.set(ranks[i], 'rank' + i.toString());
-            if (ranks[i] === this.ranks_curPigeonNumber) {
-                this.pigeonRank_updateCurrentFallow(ranks[i]);
+            this.map_pigeonNumber_ranksId.set(this.pigeons_leftdistance_Ranks[i], 'rank' + i.toString());
+            if (this.pigeons_leftdistance_Ranks[i] === this.ranks_curPigeonNumber) {
+                this.pigeonRank_updateCurrentFallow(this.pigeons_leftdistance_Ranks[i]);
             }
             else {
                 element.style.backgroundColor = "rgba(0,0,0,.5)";
@@ -519,9 +629,10 @@ class Pigeon_Rank {
         canvas.setAttribute("width", 400);
         canvas.setAttribute("height", 100);
         canvas.setAttribute("id", "myChart_PigeonInfos");
-        canvas.style.left = "100px";
-        canvas.style.top = "100px";
+        canvas.style.left = "50%";
+        canvas.style.bottom = "50px";
         canvas.style.position = "absolute";
+        canvas.style['margin-left'] = '-200px';
         // canvas.style.border   = "1px solid";
         canvas.style.backgroundColor = 'transparent';
         div.appendChild(canvas);
@@ -610,11 +721,13 @@ class Pigeon_Rank {
         });
         this.pigeonInfo_process = myChart;
 
-        this.init_pigeonInfos_dashBoard(pigeon_flightData[0]['speed'], pigeon_flightData[0]['elevation'], "", "");
+
+        this.init_pigeonInfos_dashBoard(pigeon_flightData[0]['speed'], pigeon_flightData[0]['elevation'], "", this.pigeons_leftdistance_dashBoard.get(pigeonNumber)['leftDistance']);
     }
 
     //add a dashBoard
     init_pigeonInfos_dashBoard(speed, elevation, fly_distance, left_distance) {
+        console.log('dash init', speed, elevation, fly_distance, left_distance);
         function extendString(str) {
             var result = '';
             var len = str.length;
@@ -640,12 +753,14 @@ class Pigeon_Rank {
             fly_distance = extendString('0');
         }
         else {
+            fly_distance = (fly_distance / 1000).toFixed(1);
             fly_distance = extendString(fly_distance);
         }
         if (!left_distance) {
             left_distance = extendString('0');
         }
         else {
+            left_distance = (left_distance / 1000).toFixed(1);
             left_distance = extendString(left_distance);
         }
         // this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
@@ -653,15 +768,18 @@ class Pigeon_Rank {
         // canvas.setAttribute("width", 200);
         // canvas.setAttribute("height", 50);
         canvas.setAttribute("id", "PigeonInfos_dashBoard");
-        canvas.style.left = "150px";
         canvas.style.top = "50px";
+        canvas.style.left = "50%";
+        canvas.style.position = "absolute";
+        canvas.style['margin-left'] = '-200px';
         canvas.style.height = 40 + 'px';
         // rankinfo.style['border-radius'] = 2/4+'em';
         canvas.style['width'] = 400 + 'px';
         canvas.style.position = "absolute";
         canvas.style['border-radius'] = 2 / 4 + 'em';
         // canvas.style.border   = "1px solid";
-        canvas.style.backgroundColor = 'white';
+        canvas.style.backgroundColor = 'rgba(0,0,0,.5)';
+        canvas.style.color = 'white';
         // canvas.style.color = 'black';
         canvas.innerHTML = '<span style="font-size:30px">'
             + speed + '</span>'
@@ -695,9 +813,14 @@ class Pigeon_Rank {
 
     //update dashboard
     update_pigeonInfos_dashBoard(speed, elevation, fly_distance, left_distance) {
+        //console.log('dash update', speed, elevation, fly_distance, left_distance);
         //normalize parameters
         function extendString(str) {
             // console.log(str,":",str.length);
+            if (str.length > 5) {
+                return str.split('.')[0];
+            }
+
             var result = '';
             var len = str.length;
             for (var i = 0; i < 5 - len; i++) {
@@ -725,12 +848,17 @@ class Pigeon_Rank {
             fly_distance = extendString('0');
         }
         else {
+            fly_distance = (fly_distance / 1000).toFixed(1);
+            fly_distance = fly_distance.toString();
             fly_distance = extendString(fly_distance);
         }
+
         if (!left_distance) {
             left_distance = extendString('0');
         }
         else {
+            left_distance = (left_distance / 1000).toFixed(1);
+            left_distance = left_distance.toString();
             left_distance = extendString(left_distance);
         }
         // this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
@@ -783,7 +911,7 @@ class Pigeon_Rank {
             var tmp_index = this.pigeonInfosChart_number_index.get(pigeonNumber);
             console.log('temp_index ', tmp_index);
             var tmp_data_ele = data_elevation.slice(0, tmp_index);
-            this.pigeonInfo_process.data.datasets[1].data = tmp_data_ele;
+            // this.pigeonInfo_process.data.datasets[1].data = tmp_data_ele;
             //update speed process
             this.pigeonInfo_process.data.datasets[2].data = data_speed;
             var tmp_data_spd = data_speed.slice(0, tmp_index);
@@ -793,7 +921,8 @@ class Pigeon_Rank {
             this.pigeonInfosChart_curPigeonNumber = pigeonNumber;
 
             //udpate dashboard
-            this.update_pigeonInfos_dashBoard(tmp_data_spd[tmp_data_spd.length-1],tmp_data_ele[tmp_data_ele.length-1],'','');
+            var tmp_value = this.pigeons_leftdistance_dashBoard.get(this.ranks_curPigeonNumber);
+            this.update_pigeonInfos_dashBoard(tmp_data_spd[tmp_data_spd.length - 1], tmp_data_ele[tmp_data_ele.length - 1], tmp_value['distance'], tmp_value['leftDistance']);
         }
     }
 
@@ -802,53 +931,331 @@ class Pigeon_Rank {
             //update elevation 
             var tmp_index = this.pigeonInfo_process.data.datasets[1].data.length;
             var tmp_data = this.pigeonInfo_process.data.datasets[0].data[tmp_index];
-            this.pigeonInfo_process.data.datasets[1].data.push(tmp_data);
+            // this.pigeonInfo_process.data.datasets[1].data.push(tmp_data);
             //update speed
-            var tmp_data_spd = this.pigeonInfo_process.data.datasets[2].data[tmp_index];
+            var tmp_index_spd = this.pigeonInfo_process.data.datasets[3].data.length;
+            var tmp_data_spd = this.pigeonInfo_process.data.datasets[2].data[tmp_index_spd];
             this.pigeonInfo_process.data.datasets[3].data.push(tmp_data_spd);
 
             this.pigeonInfo_process.update();
             //udpate dashboard
-            this.update_pigeonInfos_dashBoard(tmp_data_spd,tmp_data,'','');
+            var tmp_value = this.pigeons_leftdistance_dashBoard.get(this.ranks_curPigeonNumber);
+            this.update_pigeonInfos_dashBoard(tmp_data_spd, tmp_data, tmp_value['distance'], tmp_value['leftDistance']);
         }
     }
 
     //init small map with leaflet with a center postion
-    init_smallMap(latitude,longitude)
-    {
+    init_smallMap(latitude, longitude, option = 'default') {
         var div_smallMap = document.getElementById('smallMap');
-        div_smallMap.setAttribute('style','width:20%;height:20%;');
+        div_smallMap.setAttribute('style', 'width:25%;height:25%;');
         // canvas.setAttribute("width", 400);
         // canvas.setAttribute("height", 100);
         div_smallMap.style.left = "10px";
-        div_smallMap.style.bottom = "130px";
+        div_smallMap.style.top = "10px";
         div_smallMap.style.position = "absolute";
         div_smallMap.style.zIndex = "1";
 
         //the last number is the zoom level, smaller is farer;
-        this.smallMap_handler = L.map('smallMap').setView([latitude, longitude], 10);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	    attribution: '<a href="https://www.openstreetmap.org/">OSM</a>',
-	    maxZoom: 18,}).addTo(this.smallMap_handler);
+        if (option === 'default') {
+            this.smallMap_handler = L.map('smallMap', { zoomControl: false }).setView([latitude, longitude], 8);
+        }
+        else if (option === 'taiwan') {
+            this.smallMap_handler = L.map('smallMap', { zoomControl: false }).setView([latitude, longitude], 6);
+        }
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            maxZoom: 20,
+            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }).addTo(this.smallMap_handler);
 
-        this.marker = L.marker([latitude, longitude]).addTo(this.smallMap_handler);
+        // var Wind_layer = L.tileLayer('http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=da6170ee8455a85fb5a409ad27b479b2', {
+        //     maxZoom: 18,
+        //     attribution: '&copy; <a href="http://owm.io">VANE</a>'
+        // }).addTo(this.smallMap_handler);
 
+        var Wind_layer = L.tileLayer('http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=da6170ee8455a85fb5a409ad27b479b2', {
+            maxZoom: 18,
+            // attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+        }).addTo(this.smallMap_handler);
+
+
+
+        //init points
+        // console.log(demo_fakeData_pigeons.length);
+        for (var i = 0; i < demo_fakeData_pigeons.length; i++) {
+            // console.log('add points in 2d map', i);
+            // var tmp_point = L.circle([latitude, longitude], { radius: 200 }).addTo(this.smallMap_handler);
+            var tmp_point = L.circleMarker([latitude, longitude], { radius: 1 });
+            // console.log('tmp_point', tmp_point);
+            if (demo_fakeData_pigeons[i]['number'] == this.ranks_curPigeonNumber) {
+                tmp_point.setStyle({ color: 'red' });
+                // console.log('tmp_point._path.color', tmp_point._path.color);
+            }
+            else {
+                // rgba(0,0,0,.5)
+                tmp_point.setStyle({ color: 'rgba(255, 255, 255,.5)' });
+            }
+            tmp_point.addTo(this.smallMap_handler);
+            this.smallMap_points.set(demo_fakeData_pigeons[i]['number'], tmp_point);
+        }
     }
     //update small map by update center position
-    update_smallMap(latitude,longitude)
-    {
-        if(this.smallMap_handler)
-        {
-            console.log('update small map marker',latitude,longitude);
-            this.smallMap_handler.setView([latitude, longitude], 10);
-            this.marker.setLatLng([latitude,longitude]);
+    update_smallMap(latitude, longitude) {
+        if (this.smallMap_handler) {
+            // console.log('update small map marker',latitude,longitude);
+            this.smallMap_handler.setView([latitude, longitude], 8);
+            // this.smallMap_marker.setLatLng([latitude, longitude]);
+        }
+    }
+    update_smallMap_points(pigeonNumber, latitude, longitude) {
+        var tmp_point = this.smallMap_points.get(pigeonNumber);
+        if (tmp_point) {
+            tmp_point.setLatLng([latitude, longitude]);
+        }
+        else {
+            console.log('update small map points error');
+        }
+    }
+    update_smallMap_ChangePigeon(lastpigeonNumber, pigeonNumber) {
+        var tmp_point = this.smallMap_points.get(lastpigeonNumber);
+        if (tmp_point) {
+            tmp_point.setStyle({ color: 'rgba(255, 255, 255,.5)' });
+        }
+
+        var tmp_point = this.smallMap_points.get(pigeonNumber);
+        if (tmp_point) {
+            tmp_point.setStyle({ color: 'red' });
+        }
+        else {
+            console.log('update small map points error');
         }
     }
 }
+// seperate ui and function
+// set ui here and callback function
+class UI_allUiElementsManagement
+{
+    constructor()
+    {
+        // this.buttons = [];
+    }
+    //id: string
+    //style:{'background-color','opacity','position','bottom','left','right','top','width','height','border-radius','color','text',}
+    //text:string ,callback: function
+    Add_button(id,style,text)
+    {
+        if(document.getElementById(id))
+        {
+            console.log('add button error',id,'already exist');
+        }
+        console.log('add button');
+        var tmp_button = document.createElement('button');
+        tmp_button.setAttribute('id',id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_button.style.bottom = style['bottom'];
+        tmp_button.style.left = style['left'];
+        tmp_button.style.position = style['position'];
+        tmp_button.style['text-align'] = style['text-align'];
+        tmp_button.style.height = style['height'];
+        tmp_button.style['border-radius'] = style['border-radius'];
+        tmp_button.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        tmp_button.style.backgroundColor = style['backgroundColor'];
+         // tmp_button.style.opacity = "0.5";
+        tmp_button.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        tmp_button.innerHTML = text;
+        console.log(tmp_button.style);
+        console.log(tmp_button.getAttribute('style'));
+       
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(tmp_button);
+        // return tmp_button;
+    }
+    Add_CallBack(id,callback)
+    {
+        var tmp_button  = document.getElementById(id);
+        if(tmp_button)
+        {
+            tmp_button.addEventListener('click',callback);
+        }
+        else
+        {
+            console.log('find button error',id,'not exist');
+        }
+    }
+};
+
+let ui_managemer_instance = new UI_allUiElementsManagement();
+//add two button to control the recorder
+class VedioCapture {
+    // constructor(canvas, option) {
+    //     // this._init_cesiumCanvas(canvas,option)
+    //     // setTimeout( this.mediaRecorder.stop(), 5000);
+    //     this._init_wholeScreen();
+    //     this._init_Ui_addButtons(this.start,this.download);
+    // }
+    constructor() {
+        // this._init_cesiumCanvas(canvas,option)
+        // setTimeout( this.mediaRecorder.stop(), 5000);
+        // this._init_wholeScreen();
+    }
+    init_Ui_addButtonStart(id) {
+        ui_managemer_instance.Add_button(id,{'backgroundColor':'rgba(0,0,0,.5)','opacity':'0.5','position':'absolute','bottom':'30%','left':'1%','height':'6%','border-radius':'2/4em','width':'10%','color':'white','text-align':'center'},'<span style="font-size:150%">' + '開始錄影' + '</span> ');
+    }
+
+    init_Ui_addButtonDownload(id) {
+        ui_managemer_instance.Add_button(id,{'backgroundColor':'rgba(0,0,0,.5)','opacity':'0.5','position':'absolute','bottom':'20%','left':'1%','height':'6%','border-radius':'2/4em','width':'10%','color':'white','text-align':'center'},'<span style="font-size:150%">' + '下載錄影' + '</span> ');
+    }
+
+    _init_wholeScreen() {
+        async function startCapture(displayMediaOptions) {
+            let captureStream = null;
+            try {
+                captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+            } catch (err) {
+                console.error("Error: " + err);
+            }
+            return captureStream;
+        }
+
+        var displayMediaOptions = {
+            video: {
+                cursor: "always"
+            },
+            audio: false
+        };
+
+        startCapture(displayMediaOptions).then(stream => {
+            console.log('stream', stream);
+            this.mediaRecorder = new MediaRecorder(stream);
+            var chunks = [];
+            this.mediaRecorder.ondataavailable = function (e) {
+                chunks.push(e.data);
+            };
+
+            // var video;
+            this.mediaRecorder.onstop = function (e) {
+                var blob = new Blob(chunks, { 'type': 'video/mp4' });
+                chunks = [];
+                // var videoURL = URL.createObjectURL(blob);
+                // video.src = videoURL;
+                this.downLoadlink = document.createElement('a');
+                this.downLoadlink.href = window.URL.createObjectURL(blob);
+                this.downLoadlink.download = 'test.mp4';
+                this.downLoadlink.click();
+            };
+
+            this.mediaRecorder.ondataavailable = function (e) {
+                chunks.push(e.data);
+            };
+
+            this.mediaRecorder.start();
+        });
+    }
+    // _init_cesiumCanvas(canvas,option)
+    // {
+    //       // this.capturer = new CanvasCaptureMediaStreamTrack();
+    //       this.videoStream = canvas.captureStream(option['fps']);
+    //       this.mediaRecorder = new MediaRecorder(this.videoStream);
+
+    //       var chunks = [];
+    //       this.mediaRecorder.ondataavailable = function (e) {
+    //           chunks.push(e.data);
+    //       };
+
+    //       // var video;
+    //       this.mediaRecorder.onstop = function (e) {
+    //           var blob = new Blob(chunks, { 'type': 'video/mp4' });
+    //           chunks = [];
+    //           // var videoURL = URL.createObjectURL(blob);
+    //           // video.src = videoURL;
+    //           const link = document.createElement('a');
+    //           link.href = window.URL.createObjectURL(blob);
+    //           link.download = 'test.mp4';
+    //           link.click();
+    //       };
+
+    //       this.mediaRecorder.ondataavailable = function (e) {
+    //           chunks.push(e.data);
+    //       };
+
+
+    // }
+    start() {
+        this._init_wholeScreen();
+        // if (this.mediaRecorder.state === 'paused') {
+        //     this.mediaRecorder.start();
+        // }
+        // if(this.mediaRecorder.state !== 'recording')
+        // {
+        //     this.mediaRecorder.start();
+        // }   
+    }
+    //currently no use
+    pause() {
+        if (this.mediaRecorder.state === 'recording') {
+            this.mediaRecorder.pause();
+        }
+    }
+    stop() {
+        console.log('stop capture',this.mediaRecorder.state);
+        if (this.mediaRecorder.state !== 'inactive') {
+            this.mediaRecorder.stop();
+        }
+    }
+    download() {
+        this.stop();
+        // console.log(this);
+        // this.downLoadlink.click();
+    }
+}
+//for test 
+//add mouse event listener
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+// console.log('handler', handler);
+// console.log("view handler",viewer.screenSpaceEventHandler);
+// console.log("view handler",viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK));
+// console.log("view handler",viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_DOWN));
+// console.log("view handler",viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.MIDDLE_DOWN));
+
+handler.setInputAction(function (click) {
+    console.log('Left click event:', click.position);
+}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+handler.setInputAction(function (wheelment) {
+    console.log('wheel event:', wheelment);
+}, Cesium.ScreenSpaceEventType.WHEEL);
+
+handler.setInputAction(function (click) {
+    console.log('Left button press event:', click.position);
+}, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
 
 
 let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
 // pigeonRank_instance.updateChart_pigeonInfos();
+// console.log(viewer.scene.canvas);
+// let vedioCapture_instance = new VedioCapture(viewer.scene.canvas, { fps: 10 });
+let vedioCapture_instance = new VedioCapture();
+vedioCapture_instance.init_Ui_addButtonStart('RecorderButton_Start');
+function callback_vedioCapture_buttonStart()
+{
+    console.log('callback_vedioCapture_buttonStart');
+    vedioCapture_instance.start();
+}
+ui_managemer_instance.Add_CallBack('RecorderButton_Start', callback_vedioCapture_buttonStart);
+
+vedioCapture_instance.init_Ui_addButtonDownload('RecorderButton_Download');
+function callback_vedioCapture_buttonDownload()
+{
+    console.log('callback_vedioCapture_buttonDownload');
+    vedioCapture_instance.download();
+}
+ui_managemer_instance.Add_CallBack('RecorderButton_Download', callback_vedioCapture_buttonDownload);
+
+// vedioCapture_instance._init_buttons_clickHandler(vedioCapture_instance.start,vedioCapture_instance.download);
 
 //track entity changes
 function onChanged(collection, added, removed, changed) {
@@ -890,6 +1297,7 @@ function update_loading(line_count, point_count) {
 viewer.zoomTo(entity_loading);//居中到该点
 //set city elevation by elevation_highest_demoData
 //add city entitys
+var city_entitys = [];
 function add_citys_labels(citys) {
     console.log('city length is ', citys.length);
     for (var i = 0; i < citys.length; i++) {
@@ -903,7 +1311,7 @@ function add_citys_labels(citys) {
         //         scale: 1.0,
         //     },
         // });
-        viewer.entities.add({
+        var tmp_entity = viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(citys[i]['longitude'], citys[i]['latitude']),
             label: {
                 text: citys[i]['county'],
@@ -912,10 +1320,67 @@ function add_citys_labels(citys) {
                 scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 4.0e5, 0.0),
             },
         });
+        city_entitys.push(tmp_entity);
     }
 
 }
-// add_citys_labels(demo_data_citys);
+
+//if point show box has been shown, then update it's position and info
+//else add it to the viewer
+//default id is "pointInfo_showBox"
+//update show point info ; point: {longitude,latitude,elevation,speed,time}
+// function update_label_points_showbox(position,info) {
+//     var tmp_div = document.getElementById('pointInfo_showBox'); 
+//     if(tmp_div){
+//         console.log('update point show box');
+//         // tmp_entity.position = position;
+//         tmp_entity.text = info;
+//     }
+//     else{
+//         console.log('add point show box');
+//         viewer.entities.add({
+//             id: 'pointInfo_showBox',
+//             position: position,
+//             label: {
+//                 text: info,
+//                 font: "14px Helvetica",
+//                 fillColor: Cesium.Color.WHITE,
+//                 scaleByDistance: new Cesium.NearFarScalar(1.5e2, 2.0, 4.0e5, 0.0),
+//             },
+//         });
+//         viewer.cesiumWidget.resize();
+//     }
+// }
+function update_label_points_showbox(info) {
+    var tmp_div = document.getElementById('pointInfo_showBox');
+    if (tmp_div) {
+        console.log('update point show box');
+        tmp_div.innerHTML = info;
+    }
+    else {
+        console.log('add point show box');
+        var canvas = document.createElement('div');
+        // canvas.setAttribute("width", 200);
+        // canvas.setAttribute("height", 50);
+        canvas.setAttribute("id", "pointInfo_showBox");
+        canvas.style.top = "10%";
+        canvas.style.right = "10%";
+        canvas.style.position = "absolute";
+        canvas.style['margin-left'] = '-100px';
+        canvas.style.height = 140 + 'px';
+        // rankinfo.style['border-radius'] = 2/4+'em';
+        canvas.style['width'] = 200 + 'px';
+        canvas.style.position = "absolute";
+        canvas.style['border-radius'] = 2 / 4 + 'em';
+        // canvas.style.border   = "1px solid";
+        canvas.style.backgroundColor = 'rgba(0,0,0,.5)';
+        canvas.style.color = 'white';
+        // canvas.style.color = 'black';
+        canvas.innerHTML = info;
+        canvas.style['text-align'] = 'left';
+        document.body.appendChild(canvas);
+    }
+}
 
 //loading models
 let pigeon_models_array = [];
@@ -966,18 +1431,31 @@ function showData(flightData) {
     }
     pigeonRank_instance.init_pigeons_leftdistance(make_pigeonRankdistance_array);
 
+    var make_dashBoarddistance_array = [];
+    for (var i = 0; i < flightData.length; i++) {
+        var left_distance = 0;
+        for (var j = 0; j < flightData[i].length; j++) {
+            left_distance += flightData[i][j]['distance'];
+        }
+        var ele = {};
+        ele['number'] = demo_fakeData_pigeons[i]['number'];
+        ele['distance'] = left_distance;
+        make_dashBoarddistance_array.push(ele);
+    }
+    pigeonRank_instance.init_pigeonInfos_dashBoard_leftDistance(make_dashBoarddistance_array);
+
     var time_GregorianDate = timeToGregorianDate(flightData[0][0].time);
-    const start = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
+    const time_start = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate.year,
         time_GregorianDate.month, time_GregorianDate.day, time_GregorianDate.hour, time_GregorianDate.minute,
         time_GregorianDate.second, 0, false));
     var time_GregorianDate_stop = timeToGregorianDate(flightData[0][flightData[0].length - 1].time);
-    const stop = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_stop.year,
+    const time_stop = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_stop.year,
         time_GregorianDate_stop.month, time_GregorianDate_stop.day, time_GregorianDate_stop.hour, time_GregorianDate_stop.minute,
         time_GregorianDate_stop.second, 0, false));
-    viewer.clock.startTime = start.clone();
-    viewer.clock.stopTime = stop.clone();
-    viewer.clock.currentTime = start.clone();
-    viewer.timeline.zoomTo(start, stop);
+    viewer.clock.startTime = time_start.clone();
+    viewer.clock.stopTime = time_stop.clone();
+    viewer.clock.currentTime = time_start.clone();
+    // viewer.timeline.zoomTo(start, stop);
     // Speed up the playback speed 50x.
     viewer.clock.multiplier = 100;
     // Start playing the scene.
@@ -987,10 +1465,22 @@ function showData(flightData) {
     //get all timestamp
     //timestamp_pigeonNumbers : key{timestamp(JuliaDate); value:[]:element is {number,run_distance};
 
+    //for relive to change viewFrom
+    var time_GregorianDate_middle = timeToGregorianDate(flightData[0][10].time);
+    const time_middle = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_middle.year,
+        time_GregorianDate_middle.month, time_GregorianDate_middle.day, time_GregorianDate_middle.hour, time_GregorianDate_middle.minute,
+        time_GregorianDate_middle.second, 0, false));
+    
+        
+    //test
+    // viewer.clock.stopTime = time_middle.clone();
+
+
     var timestamp_pigeonNumbers = new Map();
     //show point when the timestamp is near
     //set a map : timestamp and points array: point entitys
     let timestamp_pointEntitys = new Map();
+    let map_pointId_pointEntity = new Map();
     for (var i = 0; i < flightData.length; i++) {
         for (var j = 0; j < flightData[i].length; j++) {
             var time_GregorianDate = timeToGregorianDate(flightData[i][j].time);
@@ -1003,15 +1493,19 @@ function showData(flightData) {
                 var tmp_ele = {};
                 tmp_ele['number'] = demo_fakeData_pigeons[i]['number'];
                 tmp_ele['point'] = new Cesium.Cartesian3(flightData[i][j].longitude, flightData[i][j].latitude, flightData[i][j].elevation);
+                tmp_ele['distance'] = flightData[i][j]['distance'];
                 tmp_value.push(tmp_ele);
                 timestamp_pigeonNumbers.set(time_stamp, tmp_value);
             }
             else {
                 var tmp_ele = {};
                 tmp_ele['number'] = demo_fakeData_pigeons[i]['number'];
-                tmp_ele['distance'] = new Cesium.Cartesian3(flightData[i][j].longitude, flightData[i][j].latitude, flightData[i][j].elevation);
+                tmp_ele['point'] = new Cesium.Cartesian3(flightData[i][j].longitude, flightData[i][j].latitude, flightData[i][j].elevation);
+                tmp_ele['distance'] = flightData[i][j]['distance'];
+                tmp_value.push(tmp_ele);
 
                 var new_value = timestamp_pigeonNumbers.get(time_stamp).push(tmp_ele);
+
                 timestamp_pigeonNumbers.set(time_stamp, new_value);
             }
 
@@ -1029,6 +1523,16 @@ function showData(flightData) {
                     + `速度:${dataPoint.speed}`
                     + `<br/>`
                     + `方位角:${dataPoint.heading}`,
+                // description:
+                // `公環號碼:${demo_fakeData_pigeons[i]['number']}\n`
+                // +
+                // `坐標: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.elevation})`
+                // + `\n`
+                // + `時間:${dataPoint.time}`
+                // + `\n`
+                // + `速度:${dataPoint.speed}`
+                // + `\n`
+                // + `方位角:${dataPoint.heading}`,
                 position: position,
                 point: {
                     pixelSize: 10, color: Cesium.Color.WHITE,
@@ -1036,6 +1540,10 @@ function showData(flightData) {
                 },
                 show: false,
             });
+
+            if (!map_pointId_pointEntity.has(tmp_entity_point.id)) {
+                map_pointId_pointEntity.set(tmp_entity_point.id, tmp_entity_point);
+            }
 
             if (!timestamp_pointEntitys.has(time_stamp)) {
                 var tmp_value = [];
@@ -1076,6 +1584,55 @@ function showData(flightData) {
             }
 
         }
+
+        var time_diff_middle = Cesium.JulianDate.compare(time_middle, viewer.clock.currentTime);
+        if (viewer.clock.shouldAnimate &&(-2 < time_diff_middle) && (time_diff_middle < 2)) {
+            console.log('time middle');
+            // console.log(viewer.clock.currentTime,viewer.clock.stopTime);
+            //test : stop clock and fly to middle point
+            // viewer.clock.shouldAnimate = false;
+            // var array_points = Array.from(map_pointId_pointEntity.values());
+            // var all_points_entity = [];
+            // for(var i = 0; i < array_points.length; i++){
+            //     all_points_entity.push(array_points[i]);
+            // }
+            // viewer.flyTo(all_points_entity, { duration: 3 });
+
+            if (viewer.trackedEntity) {
+
+                // var tmp_entity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[1]['number']);
+                // tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1], demo_viewFrom_byRelive['from_head'][2]);
+                // viewer.trackedEntity = tmp_entity;
+
+                //update all entitys' viewFrom to head
+                //    var tmp_entity_numbers = entity_collection_toTrack_array.keys();
+                for (var i = 0; i < demo_fakeData_pigeons.length; i++) {
+                    var tmp_entity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[i]['number']);
+                    tmp_entity.viewFrom = new Cesium.Cartesian3(demo_viewFrom_byRelive['from_head'][0], demo_viewFrom_byRelive['from_head'][1], demo_viewFrom_byRelive['from_head'][2]);
+                    entity_collection_toTrack_array.set(demo_fakeData_pigeons[i]['number'], tmp_entity);
+                }
+            }
+        }
+
+        //set the stop function here to avoid the error of viewer.clock.onStop(cannot be detected)
+        var time_diff_stop = Cesium.JulianDate.compare(time_stop, viewer.clock.currentTime);
+        if (viewer.clock.shouldAnimate &&(-2 < time_diff_stop) && (time_diff_stop < 2)) {
+            console.log('time stop');
+            viewer.clock.shouldAnimate = false;
+            var array_points = Array.from(map_pointId_pointEntity.values());
+            var all_points_entity = [];
+            for(var i = 0; i < array_points.length; i++){
+                all_points_entity.push(array_points[i]);
+            }
+            viewer.flyTo(all_points_entity, { duration: 3 });
+        }
+    });
+
+    viewer.clock.onStop.addEventListener(function (clock) {
+        console.log('clock stop');
+        viewer.clock.shouldAnimate = false;
+        // //record and download
+        // vedioCapture_instance.stop();
     });
 
     // The SampledPositionedProperty stores the position and timestamp for each sample along the radar sample series.
@@ -1092,7 +1649,8 @@ function showData(flightData) {
         viewer.trackedEntity = entity_collection_toTrack_array.get(pigeon_id);
 
         //change selected
-        viewer.selectedEntity = entity_collection_toTrack_array.get(pigeon_id); 
+        // viewer.selectedEntity = entity_collection_toTrack_array.get(pigeon_id);
+        pigeonRank_click_changePigeonModelScale(pigeon_id);
         //change color 
         pigeonRank_instance.pigeonRank_updateCurrentFallow(pigeon_id);
     }
@@ -1126,8 +1684,16 @@ function showData(flightData) {
     //store url and size; when await finish, need to get the size of model
     let map_airplaneUrl_size = new Map();
     function callback_afterSublinesLoaded() {
+
+        // viewer.flyTo(entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']), { duration: 1 });
+        // console.log('entitys',Array.from(entity_collection_toTrack_array.values()));
+        // viewer.flyTo(city_entitys, { duration: 3 });
+
+        viewer.selectedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
         viewer.trackedEntity = entity_collection_toTrack_array.get(demo_fakeData_pigeons[0]['number']);
+
         viewer.clock.shouldAnimate = true;
+
 
         //show the first pigeon infos
         var tmp_fd = [];
@@ -1142,6 +1708,34 @@ function showData(flightData) {
         pigeonRank_instance.init_pigeonInfos_process(demo_fakeData_pigeons[0]['number'], tmp_fd);
 
         pigeonRank_instance.init_smallMap(flightData[0][0]['latitude'], flightData[0][0]['longitude']);
+
+
+        // var evt = document.createEvent('MouseEvents');
+        // evt.initEvent('wheel', true, true);
+        // evt.deltaY = +120;
+        // // document.body.dispatchEvent(evt);
+        // document.getElementById('cesiumContainer').dispatchEvent(evt);
+
+        // var mouseEvent = document.createEvent('MouseEvents');
+        // mouseEvent.initMouseEvent('click', true, true, window, 0, 0, 0);
+
+        // tmp_evt = new MouseEvent("mousemove", {
+        //     bubbles: true,
+        //     screenX: 200,
+        // });
+        // document.body.dispatchEvent(tmp_evt);
+        // tmp_evt = new MouseEvent("mouseup", {
+        //     bubbles: true,
+        // });
+        // document.body.dispatchEvent(tmp_evt);
+
+        //start to record
+        // vedioCapture_instance.start();
+
+        //when finish flys , move the camera to view all the entitys;
+        viewer.clock.onStop.addEventListener(function (clock) {
+            viewer.flyTo(city_entitys, { duration: 3 });
+        });
     }
 
     //store model entitys' id with pigeon number
@@ -1189,14 +1783,15 @@ function showData(flightData) {
 
 
             const airplaneEntity = viewer.entities.add({
+                // id:'pigeon_model_' + demo_fakeData_pigeons[i]['number'],
                 description:
                     `編號: ${demo_fakeData_pigeons[i]['number']}`,
-                availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: start, stop: stop })]),
+                availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({ start: time_start, stop: time_stop })]),
                 position: positionProperty_sublines,
                 // Attach the 3D model instead of the green point.
-                model: { 
-                uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)) ,
-                // color:color_path_array_alpha[i]
+                model: {
+                    uri: airplaneUri, scale: Model_Size_SetByFileSize(map_airplaneUrl_size.get(airplaneUri)),
+                    // color:color_path_array_alpha[i]
                 },
                 // Automatically compute the orientation from the position.
                 orientation: new Cesium.VelocityOrientationProperty(positionProperty_sublines),
@@ -1223,30 +1818,63 @@ function showData(flightData) {
             loadModel(callback_afterSublinesLoaded);
         }
         else {
-            loadModel(update_loading);
+            // loadModel(update_loading);
+            loadModel(() => {
+                console.log("load a pigeon");
+            });
         }
     }
 
     //add mouse click model listener
     var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    var cur_pickedPigeonEntity = null;
     // var curSelectedModelId = null;
     handler.setInputAction(function (click) {
-        // console.log(click);
+        console.log('get a click', click);
         var pickedObject = viewer.scene.pick(click.position);
         console.log(pickedObject);
+        //for models
         if (Cesium.defined(pickedObject)) {
             var entityId = pickedObject.id._id;
             console.log(entityId);
 
             if (map_modelEntityId_pigeonNumber.has(entityId)) {
+                //show the model by scale 2
+                // pickedObject.id._model._scale._value = 2*pickedObject.id._model._scale._value;
+                // //restore last picked model
+                // if(cur_pickedPigeonEntity)
+                // {
+                //     cur_pickedPigeonEntity.id._model._scale._value = cur_pickedPigeonEntity.id._model._scale._value/2;
+                //     cur_pickedPigeonEntity = pickedObject;
+                // }
+                // else
+                // {
+                //     cur_pickedPigeonEntity = pickedObject;
+                // }
+
+
+
                 //change process's pigeon
                 var pigeonNumber = map_modelEntityId_pigeonNumber.get(entityId);
                 console.log(pigeonNumber);
+
+                var tmp_entity = entity_collection_toTrack_array.get(pigeonNumber);
+                console.log(tmp_entity);
+                tmp_entity._model._scale._value = 2 * tmp_entity._model._scale._value;
+                //restore last picked model
+                if (cur_pickedPigeonEntity) {
+                    cur_pickedPigeonEntity._model._scale._value = cur_pickedPigeonEntity._model._scale._value / 2;
+                    cur_pickedPigeonEntity = tmp_entity;
+                }
+                else {
+                    cur_pickedPigeonEntity = tmp_entity;
+                }
+
                 var tmp_fd = [];
                 for (var i = 0; i < demo_fakeData_pigeons.length; i++) {
                     // console.log(demo_fakeData_pigeons[i]['number']);
                     if (demo_fakeData_pigeons[i]['number'] === pigeonNumber.toString()) {
-                        console.log(flightData[i].length);
+                        // console.log(flightData[i].length);
                         for (var j = 0; j < flightData[i].length; j++) {
                             var tmp_data = {};
                             tmp_data['elevation'] = flightData[i][j]['elevation'];
@@ -1265,8 +1893,44 @@ function showData(flightData) {
                 //change track
                 pigeon_rank_clicked_changeTrack(pigeonNumber);
             }
+
+            //for points
+            if (map_pointId_pointEntity.has(entityId)) {
+                //show infos of the point
+                var pointEntity = map_pointId_pointEntity.get(entityId);
+                var point_info = pointEntity.description;
+                console.log(point_info);
+
+                //make description to infos
+                update_label_points_showbox(point_info);
+            }
         }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    // handler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)(new Cesium.Cartesian2(1,1));
+    // var tmp_evt = new MouseEvent("click", {
+    //     // view: window,
+    //     // bubbles: true,
+    //     // cancelable: true,
+    //     // clientX: 20,
+    // });
+    // document.body.dispatchEvent(tmp_evt);
+
+    // console.log(flightData[0][0]['latitude'],flightData[0][0]['longitude']);
+    // viewer.screenSpaceEventHandler.getInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)(new Cesium.Cartesian2(0,0));
+
+    function pigeonRank_click_changePigeonModelScale(pigeonNumber) {
+        var tmp_entity = entity_collection_toTrack_array.get(pigeonNumber);
+        console.log(tmp_entity);
+        tmp_entity._model._scale._value = 2 * tmp_entity._model._scale._value;
+        //restore last picked model
+        if (cur_pickedPigeonEntity) {
+            cur_pickedPigeonEntity._model._scale._value = cur_pickedPigeonEntity._model._scale._value / 2;
+            cur_pickedPigeonEntity = tmp_entity;
+        }
+        else {
+            cur_pickedPigeonEntity = tmp_entity;
+        }
+    }
 }
 
 function timeToGregorianDate(time) {
@@ -1312,4 +1976,15 @@ function Model_Size_SetByFileSize(size) {
     var model_scale = (4 / size) * 2000.0;
     // console.log(model_scale);
     return model_scale;
+}
+
+//eType(string)
+function MouseEvent_Simulate(eType) {
+    var tmp_evt = new MouseEvent(eType, {
+        // view: window,
+        // bubbles: true,
+        // cancelable: true,
+        // clientX: 20,
+    });
+    document.body.dispatchEvent(tmp_evt);
 }
