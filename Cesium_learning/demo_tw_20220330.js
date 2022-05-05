@@ -115,6 +115,7 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     infoBox: false,
     selectionIndicator: false,
     timeline: false,
+    shouldAnimate: true,
 });
 viewer.scene.debugShowFramesPerSecond = true;
 
@@ -122,15 +123,119 @@ const imageryLayer = viewer.imageryLayers.addImageryProvider(
     new Cesium.IonImageryProvider({ assetId: 2 })
 );
 
-var mapOpenWeatherMaps = viewer.imageryLayers.addImageryProvider(
-    new Cesium.UrlTemplateImageryProvider({
-        url: 'https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=da6170ee8455a85fb5a409ad27b479b2',
-        // fileExtension: 'png' + '?appid = { APPID }',
-    })
-);
+//wind map with color
+// var mapOpenWeatherMaps = viewer.imageryLayers.addImageryProvider(
+//     new Cesium.UrlTemplateImageryProvider({
+//         url: 'https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=da6170ee8455a85fb5a409ad27b479b2',
+//         // fileExtension: 'png' + '?appid = { APPID }',
+//     })
+// );
 
-var rain_image = 'https://github.com/CesiumGS/cesium/blob/master/Apps/SampleData/circular_particle.png';
-console.log('rain image',rain_image);
+class WeatherManagement {
+    constructor() {
+        this._init_rain_parameters();
+    }
+    //init rain parameters: size, image url, etc.
+    _init_rain_parameters() {
+        // rain
+        const rainParticleSize = 15.0;
+        this.rainRadius = 100000.0;
+        this.rainImageSize = new Cesium.Cartesian2(
+            rainParticleSize,
+            rainParticleSize * 2.0
+        );
+        this.rainGravityScratch = new Cesium.Cartesian3();
+    }
+
+    //set update function
+    rainUpdate(particle, dt) {
+        this.rainGravityScratch = Cesium.Cartesian3.normalize(
+            particle.position,
+            this.rainGravityScratch
+        );
+        this.rainGravityScratch = Cesium.Cartesian3.multiplyByScalar(
+            this.rainGravityScratch,
+            -1050.0,
+            this.rainGravityScratch
+        );
+
+        particle.position = Cesium.Cartesian3.add(
+            particle.position,
+            this.rainGravityScratch,
+            particle.position
+        );
+
+        const distance = Cesium.Cartesian3.distance(
+            viewer.scene.camera.position,
+            particle.position
+        );
+        if (distance > this.rainRadius) {
+            particle.endColor.alpha = 0.0;
+        } else {
+            particle.endColor.alpha =
+                Cesium.Color.BLUE.alpha / (distance / this.rainRadius + 0.1);
+        }
+    };
+
+    //set particle system
+    rain_particle_init(position) {
+        viewer.scene.primitives.removeAll();
+        this.rainParticle = viewer.scene.primitives.add(
+            new Cesium.ParticleSystem({
+                modelMatrix: new Cesium.Matrix4.fromTranslation(
+                    position
+                ),
+                speed: -1.0,
+                lifetime: 15.0,
+                emitter: new Cesium.SphereEmitter(this.rainRadius),
+                startScale: 1.0,
+                endScale: 0.0,
+                image: "./examples/rain.png",
+                emissionRate: 90.0,
+                startColor: new Cesium.Color(0.27, 0.5, 0.7, 0.0),
+                endColor: new Cesium.Color(0.27, 0.5, 0.7, 0.98),
+                imageSize: this.rainImageSize,
+                updateCallback: this.rainUpdate.bind(this),
+            })
+        );
+
+        viewer.scene.skyAtmosphere.hueShift = -0.97;
+        viewer.scene.skyAtmosphere.saturationShift = 0.25;
+        viewer.scene.skyAtmosphere.brightnessShift = -0.4;
+        viewer.scene.fog.density = 0.00025;
+        viewer.scene.fog.minimumBrightness = 0.01;
+    }
+
+    //track the position of camera
+    rain_particle_update(position) {
+        console.log(this.rainParticle);
+        console.log('particle position:',this.rainParticle.modelMatrix);
+        this.rainParticle.modelMatrix = new Cesium.Matrix4.fromTranslation(
+                    position);             
+    }
+}
+
+let weather_instance = new WeatherManagement();
+weather_instance.rain_particle_init(viewer.camera.position);
+
+viewer.camera.changed.addEventListener(function() {
+    var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.heading))
+    console.log('Heading:', deg);
+  
+    var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.pitch))
+    console.log('Pitch:', deg);
+
+    console.log('camera position:',viewer.camera.position);
+
+    weather_instance.rain_particle_update(viewer.camera.position)
+});
+
+
+// var rain_image = new Image(100, 100);
+// rain_image.src = './examples/rain.png';
+// // rain_image.src = 'http://webpage.com/images/mouse.jpg';
+// console.log('rain image', rain_image);
+// // document.body.appendChild(rain_image);
 
 
 //Add Cesium Inspector
@@ -1032,24 +1137,20 @@ class Pigeon_Rank {
 }
 // seperate ui and function
 // set ui here and callback function
-class UI_allUiElementsManagement
-{
-    constructor()
-    {
+class UI_allUiElementsManagement {
+    constructor() {
         // this.buttons = [];
     }
     //id: string
     //style:{'background-color','opacity','position','bottom','left','right','top','width','height','border-radius','color','text',}
     //text:string ,callback: function
-    Add_button(id,style,text)
-    {
-        if(document.getElementById(id))
-        {
-            console.log('add button error',id,'already exist');
+    Add_button(id, style, text) {
+        if (document.getElementById(id)) {
+            console.log('add button error', id, 'already exist');
         }
         console.log('add button');
         var tmp_button = document.createElement('button');
-        tmp_button.setAttribute('id',id);
+        tmp_button.setAttribute('id', id);
         // tmp_button.setAttribute('style',style);
 
         tmp_button.style.bottom = style['bottom'];
@@ -1061,28 +1162,25 @@ class UI_allUiElementsManagement
         tmp_button.style['width'] = style['width'];
         // canvas.style.border   = "1px solid";
         tmp_button.style.backgroundColor = style['backgroundColor'];
-         // tmp_button.style.opacity = "0.5";
+        // tmp_button.style.opacity = "0.5";
         tmp_button.style.color = style['color'];
         // canvas.style.color = 'black';
 
         tmp_button.innerHTML = text;
         console.log(tmp_button.style);
         console.log(tmp_button.getAttribute('style'));
-       
+
         // this.buttons.push(tmp_button);
         document.body.appendChild(tmp_button);
         // return tmp_button;
     }
-    Add_CallBack(id,callback)
-    {
-        var tmp_button  = document.getElementById(id);
-        if(tmp_button)
-        {
-            tmp_button.addEventListener('click',callback);
+    Add_CallBack(id, callback) {
+        var tmp_button = document.getElementById(id);
+        if (tmp_button) {
+            tmp_button.addEventListener('click', callback);
         }
-        else
-        {
-            console.log('find button error',id,'not exist');
+        else {
+            console.log('find button error', id, 'not exist');
         }
     }
 };
@@ -1102,11 +1200,11 @@ class VedioCapture {
         // this._init_wholeScreen();
     }
     init_Ui_addButtonStart(id) {
-        ui_managemer_instance.Add_button(id,{'backgroundColor':'rgba(0,0,0,.5)','opacity':'0.5','position':'absolute','bottom':'30%','left':'1%','height':'6%','border-radius':'2/4em','width':'10%','color':'white','text-align':'center'},'<span style="font-size:150%">' + '開始錄影' + '</span> ');
+        ui_managemer_instance.Add_button(id, { 'backgroundColor': 'rgba(0,0,0,.5)', 'opacity': '0.5', 'position': 'absolute', 'bottom': '30%', 'left': '1%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' }, '<span style="font-size:150%">' + '開始錄影' + '</span> ');
     }
 
     init_Ui_addButtonDownload(id) {
-        ui_managemer_instance.Add_button(id,{'backgroundColor':'rgba(0,0,0,.5)','opacity':'0.5','position':'absolute','bottom':'20%','left':'1%','height':'6%','border-radius':'2/4em','width':'10%','color':'white','text-align':'center'},'<span style="font-size:150%">' + '下載錄影' + '</span> ');
+        ui_managemer_instance.Add_button(id, { 'backgroundColor': 'rgba(0,0,0,.5)', 'opacity': '0.5', 'position': 'absolute', 'bottom': '20%', 'left': '1%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' }, '<span style="font-size:150%">' + '下載錄影' + '</span> ');
     }
 
     _init_wholeScreen() {
@@ -1200,7 +1298,7 @@ class VedioCapture {
         }
     }
     stop() {
-        console.log('stop capture',this.mediaRecorder.state);
+        console.log('stop capture', this.mediaRecorder.state);
         if (this.mediaRecorder.state !== 'inactive') {
             this.mediaRecorder.stop();
         }
@@ -1240,16 +1338,14 @@ let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
 // let vedioCapture_instance = new VedioCapture(viewer.scene.canvas, { fps: 10 });
 let vedioCapture_instance = new VedioCapture();
 vedioCapture_instance.init_Ui_addButtonStart('RecorderButton_Start');
-function callback_vedioCapture_buttonStart()
-{
+function callback_vedioCapture_buttonStart() {
     console.log('callback_vedioCapture_buttonStart');
     vedioCapture_instance.start();
 }
 ui_managemer_instance.Add_CallBack('RecorderButton_Start', callback_vedioCapture_buttonStart);
 
 vedioCapture_instance.init_Ui_addButtonDownload('RecorderButton_Download');
-function callback_vedioCapture_buttonDownload()
-{
+function callback_vedioCapture_buttonDownload() {
     console.log('callback_vedioCapture_buttonDownload');
     vedioCapture_instance.download();
 }
@@ -1470,10 +1566,6 @@ function showData(flightData) {
     const time_middle = Cesium.JulianDate.fromGregorianDate(new Cesium.GregorianDate(time_GregorianDate_middle.year,
         time_GregorianDate_middle.month, time_GregorianDate_middle.day, time_GregorianDate_middle.hour, time_GregorianDate_middle.minute,
         time_GregorianDate_middle.second, 0, false));
-    
-        
-    //test
-    // viewer.clock.stopTime = time_middle.clone();
 
 
     var timestamp_pigeonNumbers = new Map();
@@ -1580,13 +1672,15 @@ function showData(flightData) {
                 var tmp_pointEntitys = timestamp_pointEntitys.get(item);
                 for (var i = 0; i < tmp_pointEntitys.length; i++) {
                     tmp_pointEntitys[i].show = true;
+                    // weather_instance.rain_particle(tmp_pointEntitys[i].position);
+
                 }
             }
 
         }
 
         var time_diff_middle = Cesium.JulianDate.compare(time_middle, viewer.clock.currentTime);
-        if (viewer.clock.shouldAnimate &&(-2 < time_diff_middle) && (time_diff_middle < 2)) {
+        if (viewer.clock.shouldAnimate && (-2 < time_diff_middle) && (time_diff_middle < 2)) {
             console.log('time middle');
             // console.log(viewer.clock.currentTime,viewer.clock.stopTime);
             //test : stop clock and fly to middle point
@@ -1614,14 +1708,16 @@ function showData(flightData) {
             }
         }
 
-        //set the stop function here to avoid the error of viewer.clock.onStop(cannot be detected)
-        var time_diff_stop = Cesium.JulianDate.compare(time_stop, viewer.clock.currentTime);
-        if (viewer.clock.shouldAnimate &&(-2 < time_diff_stop) && (time_diff_stop < 2)) {
+        //set the stop function here to avoid the error of viewer.clock.onStop(cannot be 
+        // var time_diff_stop = Cesium.JulianDate.compare(time_stop, viewer.clock.currentTime);
+        //test
+        var time_diff_stop = Cesium.JulianDate.compare(time_middle, viewer.clock.currentTime);
+        if (viewer.clock.shouldAnimate && (-2 < time_diff_stop) && (time_diff_stop < 2)) {
             console.log('time stop');
             viewer.clock.shouldAnimate = false;
             var array_points = Array.from(map_pointId_pointEntity.values());
             var all_points_entity = [];
-            for(var i = 0; i < array_points.length; i++){
+            for (var i = 0; i < array_points.length; i++) {
                 all_points_entity.push(array_points[i]);
             }
             viewer.flyTo(all_points_entity, { duration: 3 });
@@ -1736,6 +1832,8 @@ function showData(flightData) {
         viewer.clock.onStop.addEventListener(function (clock) {
             viewer.flyTo(city_entitys, { duration: 3 });
         });
+
+        // weather_instance.rain_particle();
     }
 
     //store model entitys' id with pigeon number
