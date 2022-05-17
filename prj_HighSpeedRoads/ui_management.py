@@ -1,4 +1,6 @@
 # from msilib.schema import SelfReg
+import matplotlib
+# matplotlib.use('Agg')
 import PIL._tkinter_finder
 # import imp
 import os
