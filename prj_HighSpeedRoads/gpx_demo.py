@@ -1,6 +1,5 @@
 import xml.etree.ElementTree as ET
 
-
 class MyTransParams:
     def __init__(self):
         self.latitude = ''
