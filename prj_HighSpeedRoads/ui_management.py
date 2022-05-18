@@ -1,7 +1,7 @@
 # from msilib.schema import SelfReg
-import matplotlib
+# import matplotlib
 # matplotlib.use('Agg')
-import PIL._tkinter_finder
+# import PIL._tkinter_finder
 # import imp
 import os
 import tkinter as tk
