@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
+from turtle import width
 # from tkinterhtml import HtmlFrame
 import tkintermapview
 import urllib.request
@@ -87,7 +88,7 @@ class StartPage_GpxDataManagePg(tk.Frame):
 
         width_button = 7
         height_button = 1
-        font_buttonText = tkFont.Font(size=30)
+        font_buttonText = tkFont.Font(size=22)
 
         button_pg_gpxDataManage = tk.Button(
             self, width=width_button, height=height_button, font=font_buttonText, text="導入數據", state="disabled")
@@ -121,18 +122,17 @@ class StartPage_GpxDataManagePg(tk.Frame):
         # create map widget
         width_map = self.winfo_screenwidth()
         height_map = self.winfo_screenheight()
+        # tp_mapWidget = Toplevel(self)
+        # tp_mapWidget.geometry(str(width_map)+"x"+str(height_map))
         map_widget = tkintermapview.TkinterMapView(
-            self, width=width_map/3, height=height_map/3*2, corner_radius=0)
+            self, width=width_map, height=height_map, corner_radius=0)
+        # map_widget = tkintermapview.TkinterMapView(
+        #     self, width=width_map/3, height=height_map/3*2, corner_radius=0)
 
         # map_widget.set_overlay_tile_server(
         #     "http://a.tiles.openhighwaymap.org/standard/{z}/{x}/{y}.png")  # railway infrastructure
 
         map_widget.place(relx=0.6, rely=0.6, anchor='c')
-        # points: example :[(52.57, 13.4), (52.55, 13.35)]
-        # marker_2 = map_widget.set_marker(
-        #     52.516268, 13.377695, text="Brandenburger Tor")
-        # marker_3 = map_widget.set_marker(52.55, 13.4, text="52.55, 13.4")
-
         map_widget.set_tile_server(
             "https://tile.openstreetmap.org/{z}/{x}/{y}.png", max_zoom=22)
 
@@ -147,27 +147,45 @@ class StartPage_GpxDataManagePg(tk.Frame):
         # init list box
         listbox_gpxDatas = tk.Listbox(
             self, width=20, height=20, selectmode=tk.SINGLE)
-        font_listbox_gpxDatas = tkFont.Font(size=20)
+        font_listbox_gpxDatas = tkFont.Font(size=12)
         listbox_gpxDatas.config(font=font_listbox_gpxDatas)
         listbox_gpxDatas.grid(row=3, column=1, padx=10, pady=10)
         # set select function
 
-        self.cur_path = None
+        # self.cur_path = None
 
         def items_selected(event):
             # todo : get selected gpx data
-            filename = listbox_gpxDatas.get(
-                listbox_gpxDatas.curselection())
+            filename = listbox_gpxDatas.get(listbox_gpxDatas.curselection())
+            filename = filename[2:]
             print(filename)
             filedata = gpxDataManager.getDataByName_toPath(filename)
+            allfiledata = gpxDataManager.getAllDataByName_toPath(filename)
             # todo : draw path
             # map_widget.set_path([marker_2.position, marker_3.position,(52.57, 13.4), (52.55, 13.35)])
-            tmp_path = map_widget.set_path(filedata)
-            if self.cur_path:
-                self.cur_path.delete()
-                self.cur_path = tmp_path
-            else:
-                self.cur_path = tmp_path
+            # make new window
+            tp_newmapWidget = Toplevel(self)
+            tp_newmapWidget.geometry(str(width_map)+"x"+str(height_map))
+            newmap_widget = tkintermapview.TkinterMapView(
+                tp_newmapWidget, width=width_map, height=height_map, corner_radius=0)
+
+            newmap_widget.place(relx=0.5, rely=0.5, anchor='c')
+            newmap_widget.set_tile_server(
+                "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", max_zoom=22)
+            newmap_widget.set_address("china")
+
+            newmap_widget.set_pathBigWidth(filedata)
+            tmp_path = newmap_widget.set_path(allfiledata)
+            # print('line:',tmp_path.canvas_line)
+            # print('width:',tmp_path.canvas_line['width'])
+            # tmp_path.canvas_line['width'] = 100
+            # tmp_path.canvas_line.coords(width = 100)
+            # tmp_polygon = newmap_widget.set_polygon(filedata,fill_color = 'red',outline_color='red')
+            # if self.cur_path:
+            #     self.cur_path.delete()
+            #     self.cur_path = tmp_path
+            # else:
+            #     self.cur_path = tmp_path
         listbox_gpxDatas.bind('<<ListboxSelect>>', items_selected)
 
         # read all files and send to gpxDataManager
@@ -181,8 +199,11 @@ class StartPage_GpxDataManagePg(tk.Frame):
             # todo:read all files and send to gpxDataManager
             gpxDataManager.decode_dir(pathOfGpxFiles)
             gpxDatas = gpxDataManager.get_datas()
+            count_listbox_gpxDatas = 1
             for gpxData in gpxDatas:
-                listbox_gpxDatas.insert(tk.END, gpxData['name'])
+                listbox_gpxDatas.insert(tk.END, str(
+                    count_listbox_gpxDatas)+' '+gpxData['name'])
+                count_listbox_gpxDatas = count_listbox_gpxDatas+1
 
         button_func_setGpxData = tk.Button(
             self, width=width_button+2, height=height_button, font=font_buttonText, text="導入GPX數據", command=lambda: readAllFiles_in_folder('./gpxfiles/OriginGPX/CN/NFZ/'))
@@ -204,7 +225,7 @@ class Page_DBManagePg(tk.Frame):
 
         width_button = 7
         height_button = 1
-        font_buttonText = tkFont.Font(size=30)
+        font_buttonText = tkFont.Font(size=22)
         button_pg_gpxDataManage = tk.Button(self, text="導入數據", height=height_button, width=width_button, font=font_buttonText,
                                             command=lambda: controller.show_frame(StartPage_GpxDataManagePg))
         # putting the button in its place
@@ -234,7 +255,7 @@ class Page_DBManagePg(tk.Frame):
         new_data_list = tk.Listbox(
             self, width=20, height=20, selectmode=tk.SINGLE)
         new_data_list.grid(row=3, column=1, padx=10, pady=10)
-        font_new_data_list = tkFont.Font(size=20)
+        font_new_data_list = tkFont.Font(size=12)
         new_data_list.config(font=font_new_data_list)
         # # todo : get gpxdatas from gpxDataManager and show in listbox
         # gpxDatas_names = gpxDataManager.get_pathNames()
@@ -268,11 +289,14 @@ class Page_DBManagePg(tk.Frame):
         def func_cb_button_insert_new_list():
             # get points from gpxDataManager
             shedId = None
+            flag_addNewHouse = False
             if label_house_name_input.get() != "輸入工棚":
                 shedId = label_house_name_input.get()
+                flag_addNewHouse = True
             else:
                 shedId = house_combobox.get()
             print('shedId', shedId)
+            print('index:', new_data_list.curselection())
             pathName = new_data_list.get(new_data_list.curselection())
             print('pathName', pathName)
             gpxData = gpxDataManager.getDataByName_toPath(pathName)
@@ -284,8 +308,14 @@ class Page_DBManagePg(tk.Frame):
             if dbManager.insertByShedAndPath(
                     shedid=shedId, path=pathName, points=gpxData, note=note):
                 # update listbox
-                old_data_list.insert(tk.END, new_data_list.get(
-                    new_data_list.curselection()))
+                if flag_addNewHouse:
+                    # pass
+                    # combobox add new house
+                    showinfo("警告", "新增工棚成功")
+                    house_combobox['value'] += (shedId,)
+                else:
+                    old_data_list.insert(tk.END, new_data_list.get(
+                        new_data_list.curselection()))
             else:
                 showinfo("警告", "插入失敗")
 
@@ -315,10 +345,22 @@ class Page_DBManagePg(tk.Frame):
         label_house_name_input.insert(tk.END, "輸入工棚")
 
         # set old data list ui
+
+        #
+
         old_data_list = tk.Listbox(
             self, width=40, height=20, selectmode=tk.SINGLE)
-        old_data_list.config(font=font_new_data_list)
-        old_data_list.grid(row=3, column=3, padx=10, pady=10)
+
+        old_data_list_scrollbarX = tk.Scrollbar(
+            old_data_list, orient=HORIZONTAL)
+
+        old_data_list.config(font=font_new_data_list,
+                             xscrollcommand=old_data_list_scrollbarX.set)
+        old_data_list_scrollbarX.config(command=old_data_list.xview, width=20)
+
+        old_data_list.grid(row=3, column=3, padx=10,
+                           pady=10, rowspan=4, sticky=N+E+S+W)
+        old_data_list_scrollbarX.pack(side="top", anchor=NE)
 
         # set button to remove old list
         def func_cb_button_remove_old_list():
@@ -361,6 +403,9 @@ class Page_DBManagePg(tk.Frame):
                 showinfo(title='Information', message='link formal db')
 
             # todo : get gpxdatas from gpxDataManager and show in listbox
+            # clear list box
+            new_data_list.delete(0, tk.END)
+
             gpxDatas_names = gpxDataManager.get_pathNames()
             print(gpxDatas_names)
             for name in gpxDatas_names:
@@ -388,9 +433,9 @@ class Page_DBManagePg(tk.Frame):
         house_combobox.bind('<<ComboboxSelected>>',
                             func_houseComboBox_showOldDatas)
 
-        entry_Note = tk.Entry(self, width=40, font=font_buttonText)
+        entry_Note = tk.Entry(self, width=10, font=font_buttonText)
         entry_Note.grid(row=1, column=4, padx=10, pady=10)
-        entry_Note.insert(tk.END, "注釋")
+        entry_Note.insert(tk.END, "維護人員名字")
 
 
 # Driver Code

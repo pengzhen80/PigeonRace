@@ -1,3 +1,4 @@
+from asyncio import shield
 from cgi import test
 from re import T
 from unittest import result
@@ -95,6 +96,7 @@ class DBManagement ():
 
         return result
     def getPathsByShedId(self, shedid):
+        print(shedid,':',self.shedsMapToPaths[shedid])
         return self.shedsMapToPaths[shedid]
 
     def deleteByShedAndPath(self, shedid, path):
@@ -138,6 +140,7 @@ class DBManagement ():
         # print('longitude',longitude)
 
         if self.insert_single(nfzid=id, nfzTitle=path, nfzType=shedid, latitude=latitude, longitude=longitude, countryCode="CN", note=note):
+            self.shedsMapToPaths[shedid].append(path)
             return True
         return False
         

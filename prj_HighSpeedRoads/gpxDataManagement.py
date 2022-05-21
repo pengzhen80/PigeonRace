@@ -25,6 +25,7 @@ def haversine(coord1, coord2):
 
 class GpxdataManagement:
     def __init__(self):
+        self.allgpxDatas = []
         self.gpxDatas = []
         self.names = []
         # def readAllFiles_in_folder(pathOfGpxFiles):
@@ -48,9 +49,20 @@ class GpxdataManagement:
             # file_paths.append(path+name)
             file_ele = {}
             file_ele['name'] = name.split('.')[0]
-            file_ele['data'] = self.gpx_filter_deletePoints(self.gpx_reader(path+name),1000)
+
+            allData = self.gpx_reader(path+name)
+            file_ele['data'] = self.gpx_filter_deletePoints(allData,1000)
             self.gpxDatas.append(file_ele)
             self.names.append(name.split('.')[0])
+
+            ##make all points map
+            ele_allPoints = {}
+            ele_allPoints['name'] = name.split('.')[0]
+            ele_allPoints['data'] = self.gpx_filter_AllPoints(allData)
+            self.allgpxDatas.append(ele_allPoints)
+            
+            
+
         print(len(self.gpxDatas))
 
     # get all data from a gpx file
@@ -100,6 +112,14 @@ class GpxdataManagement:
         print(len(result))
         return result
 
+    def gpx_filter_AllPoints(self,datas):
+        result = []
+        for data in datas:
+            data =[float(data['latitude']),float(data['longitude'])]
+            result.append(data)
+        print(len(result))
+        return result
+
     # def gpx_reader_multiFiles(self, paths):
     #     result = []
     #     for path in paths:
@@ -119,6 +139,16 @@ class GpxdataManagement:
     def getDataByName_toPath(self,name):
         result = []
         for data in self.gpxDatas:
+            if data['name'] == name:
+                for point in data['data']:
+                    tmp_tuple = (point[0],point[1])
+                    result.append(tmp_tuple)
+        # print(result)
+        return result
+    
+    def getAllDataByName_toPath(self,name):
+        result = []
+        for data in self.allgpxDatas:
             if data['name'] == name:
                 for point in data['data']:
                     tmp_tuple = (point[0],point[1])
