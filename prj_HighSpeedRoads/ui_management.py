@@ -161,6 +161,7 @@ class StartPage_GpxDataManagePg(tk.Frame):
             print(filename)
             filedata = gpxDataManager.getDataByName_toPath(filename)
             allfiledata = gpxDataManager.getAllDataByName_toPath(filename)
+            polyGonData = gpxDataManager.gpxPolygonByName(filename)
             # todo : draw path
             # map_widget.set_path([marker_2.position, marker_3.position,(52.57, 13.4), (52.55, 13.35)])
             # make new window
@@ -174,13 +175,13 @@ class StartPage_GpxDataManagePg(tk.Frame):
                 "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", max_zoom=22)
             newmap_widget.set_address("china")
 
-            newmap_widget.set_pathBigWidth(filedata)
+            # newmap_widget.set_pathBigWidth(filedata)
             tmp_path = newmap_widget.set_path(allfiledata)
             # print('line:',tmp_path.canvas_line)
             # print('width:',tmp_path.canvas_line['width'])
             # tmp_path.canvas_line['width'] = 100
             # tmp_path.canvas_line.coords(width = 100)
-            # tmp_polygon = newmap_widget.set_polygon(filedata,fill_color = 'red',outline_color='red')
+            tmp_polygon = newmap_widget.set_polygon(polyGonData,fill_color = 'red',outline_color='red')
             # if self.cur_path:
             #     self.cur_path.delete()
             #     self.cur_path = tmp_path
