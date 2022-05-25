@@ -181,7 +181,10 @@ class GpxdataManagement:
     #     print(len(result))
     #     return result
     def get_pathNames(self):
-        return self.names
+        pathsName = []
+        for path in self.polygons:
+            pathsName.append(path['name'])
+        return pathsName
     def get_datas(self):
         return self.gpxDatas
     def get_data_by_name(self,name):
