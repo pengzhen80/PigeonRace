@@ -1,7 +1,6 @@
 from cmath import cos, sin
 import imp
 import os
-from site import makepath
 import xml.etree.ElementTree as ET
 import math
 import geopy
@@ -213,6 +212,14 @@ class GpxdataManagement:
             if polygon['name'] == name:
                 # print(polygon['data'])
                 return polygon['data']
+        raise('no such polygon')
+        return None
+    
+    def changePathName(self,oldName,newName):
+        for data in self.polygons:
+            if data['name'] == oldName:
+                data['name'] = newName
+                return
         raise('no such polygon')
         return None
 

@@ -8,6 +8,7 @@ import json
 from collections import defaultdict
 from datetime import datetime
 import hashlib
+import copy
 
 class DBManagement ():
     def __init__(self):
@@ -44,7 +45,7 @@ class DBManagement ():
         # print(type(x.text))
         res = json.loads(x.text)
         result = res['results']
-        print(result)
+        print('delete result:',result)
         if(result == False):
             print("delete failed")
             return False
@@ -96,8 +97,10 @@ class DBManagement ():
 
         return result
     def getPathsByShedId(self, shedid):
-        print(shedid,':',self.shedsMapToPaths[shedid])
-        return self.shedsMapToPaths[shedid]
+        if shedid in self.shedsMapToPaths.keys():
+            return self.shedsMapToPaths[shedid]
+        else:
+            return []
 
     def deleteByShedAndPath(self, shedid, path):
         if shedid+path in self.shedAndPathMapToPathId.keys():
@@ -105,6 +108,9 @@ class DBManagement ():
             if self.delete(id):
                 self.shedsMapToPaths[shedid].remove(path)
                 return True
+            return False
+        else:
+            print('no such shed and path')
             return False
     def insertByShedAndPath(self, shedid, path,points,note):
         print(shedid,path,len(points),note)
@@ -144,9 +150,36 @@ class DBManagement ():
             return True
         return False
         
+    ### check if the db has the house (house === shed)
+    def hasShed(self,houseId):
+        # print(self.shedsMapToPaths.keys())
+        # print('check houseID',houseId in self.shedsMapToPaths.keys())
+        return houseId in self.shedsMapToPaths.keys()
 
-        # print(type(id))
-        
+    def removeShed(self,houseId):
+        flag = True 
+        if houseId in self.shedsMapToPaths.keys():
+            paths = copy.deepcopy(self.shedsMapToPaths[houseId])
+            # print('len of paths : ',len(paths))
+            print('paths:',paths,'  ',len(paths))
+            # for tmp_p in paths:
+            #     print('path:',tmp_p)
+            #     result = self.deleteByShedAndPath(houseId,tmp_p)
+            #     if result == False:
+            #         flag = False
+            #     time.sleep(1)
+            for i in range(len(paths)):
+                result = self.deleteByShedAndPath(houseId,paths[i])
+                if result == False:
+                    flag = False
+                # time.sleep(1)
+            
+            if flag == True:
+                self.shedsMapToPaths.pop(houseId)
+                return True
+        else:
+            print('no such house')
+            return False
 
 
 if __name__ == '__main__':
