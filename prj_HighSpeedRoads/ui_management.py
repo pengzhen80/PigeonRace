@@ -367,7 +367,7 @@ class Page_DBManagePg(tk.Frame):
 
         button_insert_new_list = tk.Button(
             self, text="插入", height=height_button, width=width_button, font=font_buttonText, command=func_cb_button_insert_new_list)
-        button_insert_new_list.grid(row=3, column=2, padx=10, pady=10)
+        # button_insert_new_list.grid(row=3, column=2, padx=10, pady=10)
 
         # set button to insert and update
         def func_cb_button_multiInsert_new_list():
@@ -397,8 +397,8 @@ class Page_DBManagePg(tk.Frame):
             ###todo : send data to dbManager : update data###
 
         button_multiInsert_new_list = tk.Button(
-            self, text="批量插入", height=height_button, width=width_button, font=font_buttonText, command=func_cb_button_multiInsert_new_list)
-        button_multiInsert_new_list.grid(row=4, column=2, padx=10, pady=10)
+            self, text="插入", height=height_button, width=width_button, font=font_buttonText, command=func_cb_button_multiInsert_new_list)
+        button_multiInsert_new_list.grid(row=3, column=2, padx=10, pady=10)
 
         # def func_cb_button_update_new_list():
         #     old_data_list.insert()(new_data_list.curselection())
@@ -417,7 +417,7 @@ class Page_DBManagePg(tk.Frame):
         ### update : create a remove house button
         def func_cb_button_remove_house():
             # todo : remove house
-            if house_combobox.get() != "新增工棚":
+            if house_combobox.get() != "新增公棚":
                 houseId = house_combobox.get()
                 if dbManager.hasShed(houseId):
                     if dbManager.removeShed(houseId) :
@@ -426,10 +426,10 @@ class Page_DBManagePg(tk.Frame):
                         listPreValue.remove(houseId)
                         curValue = tuple(listPreValue)
                         house_combobox['value'] = curValue
-                        showinfo("警告", "資料庫中刪除工棚成功")
+                        showinfo("警告", "資料庫中刪除公棚成功")
                         # print(house_combobox['value'])
                     else:
-                        showinfo("警告", "資料庫中刪除工棚失敗")
+                        showinfo("警告", "資料庫中刪除公棚失敗")
                 else:
                     # print(type(house_combobox['value']),house_combobox['value'])
                     preValue = house_combobox['value']
@@ -437,11 +437,11 @@ class Page_DBManagePg(tk.Frame):
                     listPreValue.remove(houseId)
                     curValue = tuple(listPreValue)
                     house_combobox['value'] = curValue
-                    showinfo("警告", "本地刪除工棚成功")
+                    showinfo("警告", "本地刪除公棚成功")
             else:
-                showinfo("警告", "請選擇工棚")
+                showinfo("警告", "請選擇公棚")
         button_remove_house = tk.Button(
-            self, text="刪除工棚",width=width_button,height= height_button, font=font_buttonText,command=func_cb_button_remove_house)
+            self, text="刪除公棚",width=width_button,height= height_button, font=font_buttonText,command=func_cb_button_remove_house)
         button_remove_house.grid(row=2, column=4, padx=10, pady=10)
 
         # set old data list ui
@@ -492,7 +492,7 @@ class Page_DBManagePg(tk.Frame):
                 dict_shed_paths = dbManager.getAllShedWithPaths()
                 print(dict_shed_paths.keys())
                 house_content = list(dict_shed_paths.keys())
-                house_content.insert(0, '新增工棚')
+                house_content.insert(0, '新增公棚')
                 house_combobox['value'] = house_content
                 # for key in dict_shed_paths.keys():
                 #     print(key)
@@ -530,7 +530,7 @@ class Page_DBManagePg(tk.Frame):
             old_data_list.delete(0, 'end')
             houseId = house_combobox.get()
             print(houseId)
-            if houseId == '新增工棚':
+            if houseId == '新增公棚':
                 ### todo : create a house
                 # showinfo(title='Information', message='create a house')
                 tp = Toplevel(self)
@@ -539,7 +539,7 @@ class Page_DBManagePg(tk.Frame):
                 # y = self.winfo_y()
                 # tp_y = str(y+200)
                 tp.geometry("500x200")
-                tp.title('輸入工棚名字')
+                tp.title('輸入公棚名字')
 
                 entry1 = Entry(tp, width=20)
                 entry1.pack()
