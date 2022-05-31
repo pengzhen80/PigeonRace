@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>js test</title>
+  <script>  src = 'https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js'</script>
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+</head>
+
+<body>
+  <!-- <canvas id="myChart_PigeonInfos" width="200" height="100"></canvas> -->
+  <input id="fileUploader" type="file" multiple="multiple" />
+  <div>數據預覽：</div>
+  <!-- <div id="fileList"></div> -->
+  <select id="pathNameList" size=20 multiple></select>
+  <br></br>
+  <input id='pathNameAlter_text' type='text' />
+  <br></br>
+  <input id='pathNameAlter_button_pre' type='button' value='新增前綴' />
+  <input id='pathNameAlter_button_end' type='button' value='新增後綴' />
+
+  <!-- <label for="cars">Choose a car:</label> -->
+
+  <!-- <select name="cars" id="cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select> -->
+  <script>
+    class PathMangement {
+      //paths: [{name: '', data: ''}]
+      constructor() {
+        //parse gpx files
+        this.paths = [];
+        // var bbox = turf.bbox(features);
+        //alter path to polygons
+      }
+      decodePath(paths) {
+        //decode path to polygon
+        // console.log(paths[0]['data']);
+        var parser = new DOMParser();
+        for (var index = 0; index < paths.length; index++) {
+          var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
+          // console.log(xmlDoc.getElementsByTagName("title"));
+          // console.log(xmlDoc.getElementsByTagName("trkpt"));
+          var path = [];
+          var trkpts = xmlDoc.getElementsByTagName("trkpt");
+          for (var i = 0; i < trkpts.length; i++) {
+            var cell = {};
+            var lat = trkpts[i].getAttribute("lat");
+            var lon = trkpts[i].getAttribute("lon");
+            cell['lat'] = lat;
+            cell['lon'] = lon;
+            path.push(cell);
+            // console.log(i,'lat: '+lat+' lon: '+lon);
+          }
+          ///filter path by one kilometer
+          var path_line = this.filter_pathByOneKilo(path);
+          /// make path_polygon by path_line
+          var polygon = this.make_polygon(path_line);
+
+          this.paths.push({ name: paths[index]['name'], data: polygon });
+        }
+        console.log(this.paths.length);
+      }
+
+      Rename_path(oldname, newname) {
+        for (var index = 0; index < this.paths.length; index++) {
+          if (this.paths[index]['name'] == oldname) {
+            this.paths[index]['name'] = newname;
+          }
+        }
+      }
+
+      GetPathByName(name) {
+        for (var index = 0; index < this.paths.length; index++) {
+          if (this.paths[index]['name'] == name) {
+            return this.paths[index]['data'];
+          }
+        }
+      }
+
+      // distanceOfGpx(point1, point2) {
+      //   var lat1 = point1[0];
+      //   var lon1 = point1[1];
+      //   var lat2 = point2[0];
+      //   var lon2 = point2[1];
+      //   const R = 6371e3; // metres
+      //   const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
+      //   const φ2 = lat2 * Math.PI / 180;
+      //   const Δφ = (lat2 - lat1) * Math.PI / 180;
+      //   const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+      //   const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+      //     Math.cos(φ1) * Math.cos(φ2) *
+      //     Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      //   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      //   const d = R * c; // in metres
+      //   return d
+      // }
+      //alter path to polygons
+      filter_pathByOneKilo(path) {
+        var result = [];
+        var reference = [parseFloat(path[0]['lat']), parseFloat(path[0]['lon'])];
+        result.push(reference)
+        for (var i = 0; i < path.length; i++) {
+          var cur_point = [parseFloat(path[i]['lat']), parseFloat(path[i]['lon'])];
+          var distance = turf.distance(turf.point(reference), turf.point(cur_point), { units: 'meters' });
+
+          if (distance >= 1000) {
+            reference = cur_point;
+            result.push(reference);
+          }
+        }
+        // console.log(result.length);
+        return result;
+      }
+
+      make_polygon(path) {
+        var polygon = [];
+        for (var i = 0; i < path.length - 1; i++) {
+          var firstPoint = turf.point(path[i]);
+          var secondPoint = turf.point(path[i + 1]);
+          var bearing = turf.bearing(firstPoint, secondPoint);
+          // console.log(bearing);
+          var makePoint_first_bearing = bearing + 90;
+          var makePoint_second_bearing = bearing - 90;
+          var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+          var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+          // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+          polygon.unshift(makePoint_first.geometry.coordinates);
+          polygon.push(makePoint_second.geometry.coordinates);
+        }
+        // console.log(path.length,polygon.length);
+        return polygon;
+      }
+
+    }
+
+    ////load gpx files and show them in the page
+    let pathManger = new PathMangement();
+    var fileUploader = document.getElementById("fileUploader");
+    // var fileList = document.getElementById("fileList");
+    var pathNameList = document.getElementById("pathNameList");
+    /// add right click event to update path name by pre or end
+    pathNameList.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      alert('success!');
+      return false;
+    }, false);
+    // update path name by pre or end
+    var pathNameAlter_text = document.getElementById("pathNameAlter_text");
+    var pathNameAlter_button_pre = document.getElementById("pathNameAlter_button_pre");
+    var pathNameAlter_button_end = document.getElementById("pathNameAlter_button_end");
+    pathNameAlter_button_pre.addEventListener('click', function (ev) {
+      console.log('add pre');
+      if (pathNameAlter_text.value != '') {
+        var pathNameList_selected = pathNameList.selectedOptions;
+        console.log(pathNameList_selected.length);
+        for (var i = 0; i < pathNameList_selected.length; i++) {
+          pathNameList_selected[i].value = pathNameAlter_text.value + pathNameList_selected[i].value;
+          console.log(pathNameList.selectedOptions[i].value);
+          pathNameList_selected[i].innerHTML = pathNameList_selected[i].value;
+        }
+        // pathNameList.update();
+      }
+      return false;
+    }, false);
+    pathNameAlter_button_end.addEventListener('click', function (ev) {
+      console.log('add end');
+      if (pathNameAlter_text.value != '') {
+        var pathNameList_selected = pathNameList.selectedOptions;
+        for (var i = 0; i < pathNameList_selected.length; i++) {
+          pathNameList_selected[i].value = pathNameList_selected[i].value + pathNameAlter_text.value;
+          pathNameList_selected[i].innerHTML = pathNameList_selected[i].value;
+        }
+      }
+      return false;
+    }, false);
+
+    //store data in the form of array : element[0] = file name, element[1] = file content
+    let gpxFileDatas = [];
+
+    //用來讀取file資料的FileReader
+    var fileReader = new FileReader();
+
+    //監控#fileUploader的值變化
+    fileUploader.addEventListener("change", function (event) {
+      if (this.files.length > 0) {
+        //有選取file時，使用fileReader讀取file資料
+        // console.log(fileReader.readAsText(this.files[0]));
+        //讀取完成後，將資料轉成text
+        // console.log(this.files[i].name);
+        readmultifiles(this.files)
+      } else {
+        //沒有選取file時，例如選擇取消，
+        //將<img>的src設成""
+      }
+    }, false);
+
+    function readmultifiles(files) {
+      function readFile(index) {
+        if (index >= files.length) {
+          pathManger.decodePath(gpxFileDatas);
+          return;
+        }
+
+        var gpxFileDatas_ele = {};
+        /// path name init from file name
+        gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
+        /// add path name to pathNameList
+        var opt = document.createElement('option');
+        opt.value = gpxFileDatas_ele['name'];
+        opt.innerHTML = gpxFileDatas_ele['name'];
+        pathNameList.appendChild(opt);
+
+        // fileList.innerHTML += "<br>" + files[index].name.split('.')[0] + "</br>";
+
+        var file = files[index];
+        fileReader.onload = function (e) {
+          // get file content  
+          var data = e.target.result;
+          // console.log(data);
+          gpxFileDatas_ele['data'] = data;
+          gpxFileDatas.push(gpxFileDatas_ele);
+          // do sth with bin
+          readFile(index + 1)
+        }
+        fileReader.readAsText(file);
+      }
+      readFile(0);
+    }
+
+    ////set ui and function of db management
+    let button_link_db = document.createElement("button");
+    // button_link_db.setAttribute('id', 'button_link_db');
+    // button_link_db.style.bottom = style['bottom'];
+    // button_link_db.style.left = style['left'];
+    // button_link_db.style.position = style['position'];
+    // button_link_db.style['text-align'] = style['text-align'];
+    // button_link_db.style.height = style['height'];
+    // button_link_db.style['border-radius'] = style['border-radius'];
+    // button_link_db.style['width'] = style['width'];
+    // // canvas.style.border   = "1px solid";
+    // button_link_db.style.backgroundColor = style['backgroundColor'];
+    // // tmp_button.style.opacity = "0.5";
+    // button_link_db.style.color = style['color'];
+    // // canvas.style.color = 'black';
+
+    // button_link_db.innerHTML = text;
+    // // console.log(tmp_button.style);
+    // // console.log(tmp_button.getAttribute('style'));
+
+    // // this.buttons.push(tmp_button);
+    // document.body.appendChild(button_link_db);
+
+    function func_runAfterGpxFilesLoaded() {
+      //todo : run after gpx files loaded
+    }
+
+
+  </script>
+</body>
+
+</html>

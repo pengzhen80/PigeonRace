@@ -1,0 +1,35 @@
+<html> <body>
+    <input type="file" id="filesx" name="filesx[]"
+      onchange="readmultifiles(this.files)" multiple=""/>
+    <div id="bag"><ul/></div>
+<script>
+window.onload = function() {
+    if (typeof window.FileReader !== 'function') {
+        alert("The file API isn't supported on this browser yet.");
+    }
+}
+
+function readmultifiles(files) {
+    var ul = document.querySelector("#bag>ul");
+    while (ul.hasChildNodes()) {
+        ul.removeChild(ul.firstChild);
+    }
+
+    function setup_reader(file) {
+        var name = file.name;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var bin = e.target.result; //get file content
+
+            // do sth with text
+
+            var li = document.createElement("li");
+            li.innerHTML = name;
+            ul.appendChild(li);
+        }
+        console.log(reader.readAsText(file));
+    }
+
+    for (var i = 0; i < files.length; i++) { setup_reader(files[i]); }
+}
+</script> </body> </html>
