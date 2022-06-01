@@ -102,6 +102,7 @@ class GpxdataManagement:
     def make_polygons(self):
         for gpxData in self.gpxDatas:
             ele_polygon = {}
+            ele_polygon['origin_name'] = gpxData['name']
             ele_polygon['name'] = gpxData['name']
             ele_polygon['data'] = []
 
@@ -224,6 +225,13 @@ class GpxdataManagement:
                 data['name'] = newName
                 return
         raise('no such polygon')
+        return None
+    def OriginPathName(self,pathNames):
+        for path in pathNames:
+            for data in self.polygons:
+                if data['name'] == path:
+                    data['name'] = data['origin_name']
+                    break
         return None
 
 if __name__ == '__main__':

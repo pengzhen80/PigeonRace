@@ -161,14 +161,14 @@ class StartPage_GpxDataManagePg(tk.Frame):
         def items_selected(event):
             # todo : get selected gpx data
             filename = listbox_gpxDatas.get(listbox_gpxDatas.curselection())
-            ###filter the name: remove the count head
-            print('filename:',filename)
+            # filter the name: remove the count head
+            print('filename:', filename)
             index = listbox_gpxDatas.curselection()[0]
-            print('list index:',index)
+            print('list index:', index)
             index = str(index)
-            print('string index:',index)
+            print('string index:', index)
             filename = filename[len(index)+1:]
-            print('filename:',filename)
+            print('filename:', filename)
             print(filename)
             # filedata = gpxDataManager.getDataByName_toPath(filename)
             # allfiledata = gpxDataManager.getAllDataByName_toPath(filename)
@@ -185,7 +185,8 @@ class StartPage_GpxDataManagePg(tk.Frame):
             newmap_widget.set_tile_server(
                 "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", max_zoom=22)
             newmap_widget.set_address("china")
-            tmp_polygon = newmap_widget.set_polygon(polyGonData,fill_color = 'red',outline_color='red')
+            tmp_polygon = newmap_widget.set_polygon(
+                polyGonData, fill_color='red', outline_color='red')
         listbox_gpxDatas.bind('<<ListboxSelect>>', items_selected)
 
         # read all files and send to gpxDataManager
@@ -283,7 +284,7 @@ class Page_DBManagePg(tk.Frame):
                 new_data_list.delete(tmp_index)
                 new_data_list.insert(tmp_index, entry.get())
                 ###update gpxDataManager###
-                gpxDataManager.changePathName(oldName,newName)
+                gpxDataManager.changePathName(oldName, newName)
             tp.destroy()
 
         def items_selected(event):
@@ -301,23 +302,23 @@ class Page_DBManagePg(tk.Frame):
             button1.pack(pady=5, side=TOP)
         new_data_list.bind('<Double-1>', items_selected)
 
-        def func_cb_button_multiRename_addPreOrEnd(tp, entry, preOrEnd = 'pre'):
+        def func_cb_button_multiRename_addPreOrEnd(tp, entry, preOrEnd='pre'):
             if len(entry.get()) > 0:
                 tmp_index = new_data_list.curselection()
                 listIndex = list(tmp_index)
-                print('listIndex:',listIndex)
+                print('listIndex:', listIndex)
                 for index in listIndex:
                     oldName = new_data_list.get(index)
-                    print('oldName',oldName)
+                    print('oldName', oldName)
                     if preOrEnd == 'pre':
                         newName = entry.get()+oldName
                     else:
                         newName = oldName+entry.get()
-                        print('newName',newName)
+                        print('newName', newName)
                     new_data_list.delete(index)
                     new_data_list.insert(index, newName)
                     ###update gpxDataManager###
-                    gpxDataManager.changePathName(oldName,newName)
+                    gpxDataManager.changePathName(oldName, newName)
             tp.destroy()
 
         def func_cb_newDataList_multiRename(event):
@@ -329,11 +330,11 @@ class Page_DBManagePg(tk.Frame):
             entry1 = Entry(tp, width=20)
             entry1.pack()
             button1 = Button(
-                tp, text="新增前綴", command=lambda: func_cb_button_multiRename_addPreOrEnd(tp, entry1,'pre'))
+                tp, text="新增前綴", command=lambda: func_cb_button_multiRename_addPreOrEnd(tp, entry1, 'pre'))
             button1.pack(pady=5, side='left')
 
             button2 = Button(
-                tp, text="新增後綴", command=lambda: func_cb_button_multiRename_addPreOrEnd(tp, entry1,'end'))
+                tp, text="新增後綴", command=lambda: func_cb_button_multiRename_addPreOrEnd(tp, entry1, 'end'))
             button2.pack(pady=5, side='right')
         new_data_list.bind('<Button-3>', func_cb_newDataList_multiRename)
 
@@ -379,8 +380,10 @@ class Page_DBManagePg(tk.Frame):
             print('shedId', shedId)
             print('index:', new_data_list.curselection())
             listIndex = list(new_data_list.curselection())
+            pathsName = []
             for index in listIndex:
                 pathName = new_data_list.get(index)
+                pathsName.append(pathName)
                 print('pathName', pathName)
                 gpxData = gpxDataManager.gpxPolygonByName(pathName)
                 # print(gpxData)
@@ -390,9 +393,15 @@ class Page_DBManagePg(tk.Frame):
                 if dbManager.insertByShedAndPath(
                         shedid=shedId, path=pathName, points=gpxData, note=note):
                     old_data_list.insert(tk.END, new_data_list.get(
-                            index))
+                        index))
+
                 else:
                     showinfo("警告", "插入失敗")
+            ###orgin names###
+            new_data_list.delete(0, END)
+            gpxDataManager.OriginPathName(pathsName)
+            for pathName in gpxDataManager.get_pathNames():
+                new_data_list.insert(END, pathName)
 
             ###todo : send data to dbManager : update data###
 
@@ -408,19 +417,52 @@ class Page_DBManagePg(tk.Frame):
         #     self, text="更新", height=height_button, width=width_button, font=font_buttonText,command=func_cb_button_update_new_list)
         # button_update_new_list.grid(row=3, column=2, padx=10, pady=40)
 
+        ###search paths' name auto from a str: name,name,name###
+        entry_selectNewDataList_auto_text = tk.Entry(
+            self, width=40, font=tkFont.Font(size=12))
+        entry_selectNewDataList_auto_text.grid(row=4, column=1, padx=10, pady=10)
+
+        entry_selectNewDataList_auto_filter = tk.Entry(
+            self, width=10, font=tkFont.Font(size=12))
+        entry_selectNewDataList_auto_filter.grid(row=5, column=1, padx=10, pady=10)
+
+        def func_cb_button_selectNewDataList_auto():
+            pathname_str = entry_selectNewDataList_auto_text.get()
+            pattname_filter = entry_selectNewDataList_auto_filter.get()
+            print(pathname_str)
+            if(len(pathname_str) > 0):
+                pathname_list = pathname_str.split(pattname_filter)
+                index = 0
+                while(new_data_list.get(index)):
+                    path_name = new_data_list.get(index)
+                    if(path_name in pathname_list):
+                        new_data_list.select_set(index)
+                    else:
+                        for sub_path in pathname_list:
+                            if(sub_path in path_name):
+                                new_data_list.select_set(index)
+                                break
+                    index += 1
+                
+            return
+
+        button_selectNewDataList_auto = tk.Button(
+            self, text="搜索路徑", height=height_button, width=width_button, font=font_buttonText, command=func_cb_button_selectNewDataList_auto)
+        button_selectNewDataList_auto.grid(row=4, column=2, padx=10, pady=10)
+
         # set house list ui
         house_combobox = ttk.Combobox(
             self, height=80, width=(width_button+1)*2, font=tkFont.Font(size=22))
         house_combobox.grid(row=2, column=3, padx=10, pady=10)
 
         # set input house name
-        ### update : create a remove house button
+        # update : create a remove house button
         def func_cb_button_remove_house():
             # todo : remove house
             if house_combobox.get() != "新增公棚":
                 houseId = house_combobox.get()
                 if dbManager.hasShed(houseId):
-                    if dbManager.removeShed(houseId) :
+                    if dbManager.removeShed(houseId):
                         preValue = house_combobox['value']
                         listPreValue = list(preValue)
                         listPreValue.remove(houseId)
@@ -441,7 +483,7 @@ class Page_DBManagePg(tk.Frame):
             else:
                 showinfo("警告", "請選擇公棚")
         button_remove_house = tk.Button(
-            self, text="刪除公棚",width=width_button,height= height_button, font=font_buttonText,command=func_cb_button_remove_house)
+            self, text="刪除公棚", width=width_button, height=height_button, font=font_buttonText, command=func_cb_button_remove_house)
         button_remove_house.grid(row=2, column=4, padx=10, pady=10)
 
         # set old data list ui
@@ -484,22 +526,30 @@ class Page_DBManagePg(tk.Frame):
 
         def func_linkDb():
             db = dbcombobox.get()
+            message = ''
             if db == '測試數據庫':
                 ###todo: link test db###
                 ###search all data and show the house names in combobox:default is the first shed###
                 ###show the path names under this house in the oldDataList###
                 # showinfo(title='Information', message='link test db')
-                dict_shed_paths = dbManager.getAllShedWithPaths()
-                print(dict_shed_paths.keys())
-                house_content = list(dict_shed_paths.keys())
-                house_content.insert(0, '新增公棚')
-                house_combobox['value'] = house_content
+                message = '測試伺服器連接成功'
+                dbManager.Set_Server('test')
                 # for key in dict_shed_paths.keys():
                 #     print(key)
                 #     house_combobox.insert(tk.END, key)
             else:
                 ###todo: link formal db###
-                showinfo(title='Information', message='link formal db')
+                message = '正式伺服器連接成功'
+                dbManager.Set_Server('real')
+            dict_shed_paths = dbManager.getAllShedWithPaths()
+            if(len(dict_shed_paths) > 0):
+                showinfo(title='Information', message=message)
+            else:
+                showinfo(title='Information', message='伺服器連接失敗')
+            print(dict_shed_paths.keys())
+            house_content = list(dict_shed_paths.keys())
+            house_content.insert(0, '新增公棚')
+            house_combobox['value'] = house_content
 
             # todo : get gpxdatas from gpxDataManager and show in listbox
             # clear list box
@@ -526,12 +576,12 @@ class Page_DBManagePg(tk.Frame):
             tp.destroy()
 
         def func_houseComboBox_showOldDatas(position):
-            ### update : create a house  
+            # update : create a house
             old_data_list.delete(0, 'end')
             houseId = house_combobox.get()
             print(houseId)
             if houseId == '新增公棚':
-                ### todo : create a house
+                # todo : create a house
                 # showinfo(title='Information', message='create a house')
                 tp = Toplevel(self)
                 # x = self.winfo_x()

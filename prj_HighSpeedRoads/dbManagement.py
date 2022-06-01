@@ -16,6 +16,15 @@ class DBManagement ():
         self.shedsMapToPaths = None
         self.shedAndPathMapToPathId = None
 
+    def Set_Server(self,option = 'test'):
+        if option == 'test':
+            self.server = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        elif option == 'real':
+            self.server = 'http://www.skyracing.com.cn:8000/'
+        else:
+            raise('no such option')
+            return False
+        return True
     ## dbname = test,formal
     # def connectToDB(self,dbname = 'test'):
     #     # self.db = sqlite3.connect(dbname)
@@ -25,7 +34,13 @@ class DBManagement ():
     #         self.db = None
 
     def insert_single(self, nfzid="5834f1287869a9a48be75adb7be005be", nfzTitle="G345-洛南-扬州-V2_1km", nfzType="石家庄邯郸地区共用河南放飞", latitude="{33.5242461414517,33.5275826390726,33.52759645296828}", longitude="{109.90774501058173,109.91745473343512,109.90615135869226}", countryCode="CN", note="Oliver"):
-        url = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head +'cloudNfz'
+
         myobj = {'querytype': 'insert', 'nfzid': nfzid, 'nfzTitle': nfzTitle, 'nfzType': nfzType,
             'latitude': latitude, 'longitude': longitude, 'countryCode': countryCode, 'note': note}
 
@@ -38,7 +53,12 @@ class DBManagement ():
         return True
 
     def delete(self, nfzid="5834f1287869a9a48be75adb7be005be"):
-        url = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudNfz'
         myobj = {'querytype': 'delete', 'nfzid': nfzid}
 
         x = requests.post(url, data=myobj)
@@ -54,7 +74,12 @@ class DBManagement ():
     def search_AllNFZ(self):
         # cursor = self.db.execute('SELECT * FROM gpx_data WHERE id = ?', (id,))
         # result = cursor.fetchone()
-        url = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudGetNfzInfoJson'
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudGetNfzInfoJson'
         myobj = {'querytype': 'nfz', 'countrycode': 'CN'}
 
         x = requests.post(url, data=myobj)
@@ -67,7 +92,12 @@ class DBManagement ():
         return result
 
     def search_byNfzid(self, nfzid='1c7a8f1e0170c85ab61df65e6ec434a5'):
-        url = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudGetNfzInfoJson'
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudGetNfzInfoJson'
         myobj = {'querytype': 'nfzcoord', 'nfzid': nfzid}
 
         x = requests.post(url, data=myobj)
