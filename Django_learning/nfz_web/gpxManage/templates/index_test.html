@@ -144,10 +144,11 @@
     var fileUploader = document.getElementById("fileUploader");
     // var fileList = document.getElementById("fileList");
     var pathNameList = document.getElementById("pathNameList");
+    pathNameList.style['width'] = '15%';
     /// add right click event to update path name by pre or end
     pathNameList.addEventListener('click', function (ev) {
       ev.preventDefault();
-      alert('success!');
+      console.log('success!');
       return false;
     }, false);
     // update path name by pre or end
@@ -233,28 +234,142 @@
       readFile(0);
     }
 
+    // seperate ui and function
+    // set ui here and callback function
+    class UI_allUiElementsManagement {
+      constructor() {
+        // this.buttons = [];
+      }
+      //id: string
+      //style:{'background-color','opacity','position','bottom','left','right','top','width','height','border-radius','color','text',}
+      //text:string ,callback: function
+      Add_button(id, style, text) {
+        if (document.getElementById(id)) {
+          console.log('add button error', id, 'already exist');
+        }
+        console.log('add button');
+        var tmp_button = document.createElement('button');
+        tmp_button.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_button.style.bottom = style['bottom'];
+        tmp_button.style.left = style['left'];
+        tmp_button.style.position = style['position'];
+        tmp_button.style['text-align'] = style['text-align'];
+        tmp_button.style.height = style['height'];
+        tmp_button.style['border-radius'] = style['border-radius'];
+        tmp_button.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        tmp_button.style.backgroundColor = style['backgroundColor'];
+        // tmp_button.style.opacity = "0.5";
+        tmp_button.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        tmp_button.innerHTML = text;
+        console.log(tmp_button.style);
+        console.log(tmp_button.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(tmp_button);
+        return tmp_button;
+      }
+      Add_CallBack(id, callback) {
+        var tmp_button = document.getElementById(id);
+        if (tmp_button) {
+          tmp_button.addEventListener('click', callback);
+        }
+        else {
+          console.log('find button error', id, 'not exist');
+        }
+      }
+
+      AddElement_Select(id,style,size,options)
+      {
+        var ele = document.createElement('select');
+        ele.setAttribute('id',id);
+        ele.setAttribute('size',size);
+
+        ele.style.bottom = style['bottom'];
+        ele.style.left = style['left'];
+        ele.style.position = style['position'];
+        // ele.style['text-align'] = style['text-align'];
+        ele.style.height = style['height'];
+        ele.style['width'] = style['width'];
+
+        for(var i=0;i<options.length;i++)
+        {
+          var opt = document.createElement('option');
+          opt.value = options[i][0];
+          opt.innerHTML = options[i][1];
+          ele.appendChild(opt);
+        }
+       
+        document.body.appendChild(ele);
+        return ele;
+      }
+
+      //options : [[key,value],[key,value]] 
+      AddElement(elementType = 'input', type = '', id, style, text, options) {
+        if (document.getElementById(id)) {
+          console.log('add element error', id, 'already exist');
+        }
+
+        var ele = document.createElement(elementType);
+        ele.setAttribute('id', id);
+        if (type) {
+          ele.setAttribute('type', type);
+        }
+
+        if (options) {
+          for (var i = 0; i < options.length; i++) {
+            ele.setAttribute(options[i][0], options[i][1]);
+          }
+        }
+
+
+        ele.style.bottom = style['bottom'];
+        ele.style.left = style['left'];
+        ele.style.position = style['position'];
+        ele.style['text-align'] = style['text-align'];
+        ele.style.height = style['height'];
+        ele.style['border-radius'] = style['border-radius'];
+        ele.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        ele.style.backgroundColor = style['backgroundColor'];
+        // tmp_button.style.opacity = "0.5";
+        ele.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        ele.innerHTML = text;
+        // console.log(ele.style);
+        // console.log(ele.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(ele);
+        return ele;
+      }
+    };
+    let ui_manager = new UI_allUiElementsManagement();
     ////set ui and function of db management
-    let button_link_db = document.createElement("button");
-    // button_link_db.setAttribute('id', 'button_link_db');
-    // button_link_db.style.bottom = style['bottom'];
-    // button_link_db.style.left = style['left'];
-    // button_link_db.style.position = style['position'];
-    // button_link_db.style['text-align'] = style['text-align'];
-    // button_link_db.style.height = style['height'];
-    // button_link_db.style['border-radius'] = style['border-radius'];
-    // button_link_db.style['width'] = style['width'];
-    // // canvas.style.border   = "1px solid";
-    // button_link_db.style.backgroundColor = style['backgroundColor'];
-    // // tmp_button.style.opacity = "0.5";
-    // button_link_db.style.color = style['color'];
-    // // canvas.style.color = 'black';
+    let button_link_db = ui_manager.Add_button('button_link_db', { 'backgroundColor': 'rgba(0,0,0,.5)', 'opacity': '0.5', 'position': 'absolute', 'bottom': '90%', 'left': '30%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' }, '<span style="font-size:150%">' + '連接' + '</span> ');
+    let selectList_db =  ui_manager.AddElement_Select(id = 'selectList_db', style = { 'position': 'absolute', 'bottom': '90%', 'left': '18%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' },size = 1,options = [['test_db','測試服務器'],['real_db','正式服務器']]);
 
-    // button_link_db.innerHTML = text;
-    // // console.log(tmp_button.style);
-    // // console.log(tmp_button.getAttribute('style'));
-
-    // // this.buttons.push(tmp_button);
-    // document.body.appendChild(button_link_db);
+    function func_cb_button_link_db()
+    {
+      if(selectList_db.selectedOptions[0].value == 'test_db')
+      {
+        console.log('test_db');
+        // db_manager.link_db('test_db');
+      }
+      else
+      {
+        console.log('real_db');
+        // db_manager.link_db('real_db');
+      }
+      //todo update shedIdList
+      //todo update oldPathNameList
+    }
+    ui_manager.Add_CallBack(button_link_db.id, func_cb_button_link_db);
 
     function func_runAfterGpxFilesLoaded() {
       //todo : run after gpx files loaded
