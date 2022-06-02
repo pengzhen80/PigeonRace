@@ -170,7 +170,7 @@ class StartPage_GpxDataManagePg(tk.Frame):
             filename = filename[len(index)+1:]
             print('filename:', filename)
             print(filename)
-            # filedata = gpxDataManager.getDataByName_toPath(filename)
+            filedata = gpxDataManager.getDataByName_toPath(filename)
             # allfiledata = gpxDataManager.getAllDataByName_toPath(filename)
             polyGonData = gpxDataManager.gpxPolygonByName(filename)
             # todo : draw path
@@ -185,6 +185,8 @@ class StartPage_GpxDataManagePg(tk.Frame):
             newmap_widget.set_tile_server(
                 "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", max_zoom=22)
             newmap_widget.set_address("china")
+            filedata = filedata[:int(len(filedata)/2)]
+            newmap_widget.set_path(filedata)
             tmp_polygon = newmap_widget.set_polygon(
                 polyGonData, fill_color='red', outline_color='red')
         listbox_gpxDatas.bind('<<ListboxSelect>>', items_selected)

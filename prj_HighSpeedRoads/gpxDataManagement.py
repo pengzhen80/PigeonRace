@@ -1,11 +1,14 @@
 from cmath import cos, sin
 import imp
+from operator import imod
 import os
 import xml.etree.ElementTree as ET
 import math
 import geopy
 from geopy.distance import distance,geodesic
 from numpy import arctan2,sin,cos,degrees
+import matplotlib.pyplot as plt
+from geographiclib.geodesic import Geodesic
 
 def distance_gps(coord1, coord2):
     return distance(coord1, coord2).meters
@@ -28,7 +31,11 @@ def haversine(coord1, coord2):
     return result
 # make two points by first point and second point
 
-
+#debug bearing 
+# line_X_bearing = []
+# line_Y_bearing = []
+# line_Y_firstBearing = []
+# line_Y_secodeBearing = []
 def myGeo_MakePoints(firstPoint, secondPoint):
     if (type(firstPoint) != tuple) or (type(secondPoint) != tuple):
         raise TypeError("Only tuples are supported as arguments")
@@ -36,15 +43,29 @@ def myGeo_MakePoints(firstPoint, secondPoint):
     ALan,Alon = firstPoint
     BLan,Blon = secondPoint
 
-    dL = Blon - Alon
-    X = cos(BLan) * sin(dL)
-    Y = cos(ALan) * sin(BLan) - sin(ALan) * cos(BLan) * cos(dL)
-    # print(arctan2(X, Y))
-    bearing = degrees(arctan2(X, Y)) 
+    # dL = Blon - Alon
+    # X = cos(BLan) * sin(dL)
+    # Y = cos(ALan) * sin(BLan) - sin(ALan) * cos(BLan) * cos(dL)
+    # # print(arctan2(X, Y))
+    # bearing = degrees(arctan2(X, Y)) 
+   
+
+    # # bearing = (bearing + 360)%360
     # print('bearing:',bearing)
+    geolib_result = Geodesic.WGS84.Inverse(ALan, Alon, BLan, Blon)
+    # print('geolib_result:',geolib_result['azi1'])
+    bearing = geolib_result['azi1']
+
+    # line_X_bearing.append(len(line_X_bearing)+1)
+    # line_Y_bearing.append(bearing)
 
     makePoint_firstPoint_bearing = bearing+90
+    # line_Y_firstBearing.append(makePoint_firstPoint_bearing)
+
+
     makePoint_secondPoint_bearing = bearing-90
+    # line_Y_secodeBearing.append(makePoint_secondPoint_bearing)
+
 
     vd = geopy.distance.geodesic(kilometers=0.1)
     makePoint_firstPoint = vd.destination(firstPoint, makePoint_firstPoint_bearing)
@@ -97,6 +118,11 @@ class GpxdataManagement:
 
         self.make_polygons()            
         print(len(self.gpxDatas))
+        # print(len(line_X_bearing),len(line_Y_bearing))
+        # plt.plot(line_X_bearing, line_Y_bearing)
+        # plt.plot(line_X_bearing, line_Y_firstBearing)
+        # plt.plot(line_X_bearing, line_Y_secodeBearing)
+        # plt.savefig("out.png")
         return
 
     def make_polygons(self):
