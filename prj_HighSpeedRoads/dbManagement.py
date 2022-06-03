@@ -137,6 +137,7 @@ class DBManagement ():
             id = self.shedAndPathMapToPathId[shedid+path]
             if self.delete(id):
                 self.shedsMapToPaths[shedid].remove(path)
+                self.shedAndPathMapToPathId.pop(shedid+path)
                 return True
             return False
         else:

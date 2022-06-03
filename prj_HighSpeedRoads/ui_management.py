@@ -7,6 +7,7 @@ import dbm
 from hashlib import new
 from operator import index
 import os
+from unicodedata import name
 import PIL._tkinter_finder
 import tkinter as tk
 from tkinter import ttk
@@ -161,15 +162,15 @@ class StartPage_GpxDataManagePg(tk.Frame):
         def items_selected(event):
             # todo : get selected gpx data
             filename = listbox_gpxDatas.get(listbox_gpxDatas.curselection())
-            # filter the name: remove the count head
-            print('filename:', filename)
-            index = listbox_gpxDatas.curselection()[0]
-            print('list index:', index)
-            index = str(index)
-            print('string index:', index)
-            filename = filename[len(index)+1:]
-            print('filename:', filename)
-            print(filename)
+            # # filter the name: remove the count head
+            # print('filename:', filename)
+            # index = listbox_gpxDatas.curselection()[0]
+            # print('list index:', index)
+            # index = str(index)
+            # print('string index:', index)
+            # filename = filename[len(index)+1:]
+            # print('filename:', filename)
+            # print(filename)
             filedata = gpxDataManager.getDataByName_toPath(filename)
             # allfiledata = gpxDataManager.getAllDataByName_toPath(filename)
             polyGonData = gpxDataManager.gpxPolygonByName(filename)
@@ -202,11 +203,17 @@ class StartPage_GpxDataManagePg(tk.Frame):
             # todo:read all files and send to gpxDataManager
             gpxDataManager.decode_dir(pathOfGpxFiles)
             gpxDatas = gpxDataManager.get_datas()
-            count_listbox_gpxDatas = 1
+            # count_listbox_gpxDatas = 1
+            # for gpxData in gpxDatas:
+            #     listbox_gpxDatas.insert(tk.END, str(
+            #         count_listbox_gpxDatas)+' '+gpxData['name'])
+                # count_listbox_gpxDatas = count_listbox_gpxDatas+1
             for gpxData in gpxDatas:
-                listbox_gpxDatas.insert(tk.END, str(
-                    count_listbox_gpxDatas)+' '+gpxData['name'])
-                count_listbox_gpxDatas = count_listbox_gpxDatas+1
+                listbox_gpxDatas.insert(tk.END, gpxData['name'])
+                pathName = gpxData['name']
+                polygon = gpxDataManager.gpxPolygonByName(pathName)
+                map_widget.set_polygon(polygon, fill_color='red', outline_color='red')
+            
 
         button_func_setGpxData = tk.Button(
             self, width=width_button+2, height=height_button, font=font_buttonText, text="導入GPX數據", command=lambda: readAllFiles_in_folder('./gpxfiles/OriginGPX/CN/NFZ/'))
@@ -260,23 +267,6 @@ class Page_DBManagePg(tk.Frame):
         new_data_list.grid(row=3, column=1, padx=10, pady=10)
         font_new_data_list = tkFont.Font(size=12)
         new_data_list.config(font=font_new_data_list)
-
-        # new_data_list_scrollbarX = tk.Scrollbar(
-        #     self, orient=HORIZONTAL)
-
-        # new_data_list.config(font=font_new_data_list,
-        #                      xscrollcommand=new_data_list_scrollbarX.set)
-        # new_data_list_scrollbarX.config(command=new_data_list.xview, width=20)
-        # # new_data_list.grid(row=3, column=1, padx=10,
-        # #                    pady=10,rowspan=60,sticky=N+E+S+W)
-        # new_data_list.grid(row=3, column=1, padx=10,
-        #                    pady=10,rowspan=60,sticky=N+E+S+W)
-        # new_data_list_scrollbarX.pack(side="top", anchor=NE)
-        # # todo : get gpxdatas from gpxDataManager and show in listbox
-        # gpxDatas_names = gpxDataManager.get_pathNames()
-        # print(gpxDatas_names)
-        # for name in gpxDatas_names:
-        #     new_data_list.insert(tk.END, name)
 
         def updateSelectedItemText(tp, entry):
             if len(entry.get()) > 0:
@@ -490,7 +480,7 @@ class Page_DBManagePg(tk.Frame):
 
         # set old data list ui
         old_data_list = tk.Listbox(
-            self, width=20, height=60, selectmode=tk.SINGLE)
+            self, width=40, height=20, selectmode="multiple")
 
         old_data_list_scrollbarX = tk.Scrollbar(
             old_data_list, orient=HORIZONTAL)
@@ -503,6 +493,42 @@ class Page_DBManagePg(tk.Frame):
                            pady=10, rowspan=60, sticky=N+E+S+W)
         old_data_list_scrollbarX.pack(side="top", anchor=NE)
 
+        ###search paths' name auto from a str: name,name,name###
+        entry_selectOldDataList_auto_text = tk.Entry(
+            self, width=40, font=tkFont.Font(size=12))
+        entry_selectOldDataList_auto_text.grid(row=4, column=4, padx=10, pady=10)
+
+        entry_selectOldDataList_auto_filter = tk.Entry(
+            self, width=10, font=tkFont.Font(size=12))
+        entry_selectOldDataList_auto_filter.grid(row=5, column=4, padx=10, pady=10)
+
+        def func_cb_button_selectOldDataList_auto():
+            pathname_str = entry_selectOldDataList_auto_text.get()
+            pattname_filter = entry_selectOldDataList_auto_filter.get()
+            if len(pattname_filter) == 0 :
+                pattname_filter = ","
+            print(pathname_str)
+            if(len(pathname_str) > 0):
+                pathname_list = pathname_str.split(pattname_filter)
+                index = 0
+                while(old_data_list.get(index)):
+                    path_name = old_data_list.get(index)
+                    if(path_name in pathname_list):
+                        old_data_list.select_set(index)
+                    else:
+                        for sub_path in pathname_list:
+                            if(sub_path in path_name):
+                                old_data_list.select_set(index)
+                                break
+                    index += 1
+                
+            return
+
+        button_selectOldDataList_auto = tk.Button(
+            self, text="搜索路徑", height=height_button, width=width_button, font=font_buttonText, command=func_cb_button_selectOldDataList_auto)
+        button_selectOldDataList_auto.grid(row=6, column=4, padx=10, pady=10)
+
+
         # set button to remove old list
         def func_cb_button_remove_old_list():
             # todo :show warning message
@@ -512,11 +538,23 @@ class Page_DBManagePg(tk.Frame):
             if MsgBox:
                 print('delete item')
                 shedId = house_combobox.get()
-                path = old_data_list.get(old_data_list.curselection())
-                if dbManager.deleteByShedAndPath(shedId, path):
-                    old_data_list.delete(old_data_list.curselection())
-                else:
-                    showinfo("警告", "刪除失敗")
+                listIndex = list(old_data_list.curselection())
+                for index in listIndex:
+                    pathName = old_data_list.get(index)
+                    print('delete', pathName)
+                    if dbManager.deleteByShedAndPath(shedId, pathName):
+                    #    old_data_list.delete(old_data_list.curselection())
+                        pass
+                    else:
+                        showinfo("警告", "刪除失敗")
+                old_data_list.delete(0, END)
+                for pathName in dbManager.getPathsByShedId(shedId):
+                    old_data_list.insert(END, pathName)
+                # path = old_data_list.get(old_data_list.curselection())
+                # if dbManager.deleteByShedAndPath(shedId, path):
+                #     old_data_list.delete(old_data_list.curselection())
+                # else:
+                #     showinfo("警告", "刪除失敗")
             else:
                 print('cancel')
             # remove the selected item from listbox and
