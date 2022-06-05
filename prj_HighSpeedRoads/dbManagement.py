@@ -18,9 +18,9 @@ class DBManagement ():
 
     def Set_Server(self,option = 'test'):
         if option == 'test':
-            self.server = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+            self.server = 'test'
         elif option == 'real':
-            self.server = 'http://www.skyracing.com.cn:8000/'
+            self.server = 'real'
         else:
             raise('no such option')
             return False
@@ -36,7 +36,7 @@ class DBManagement ():
     def insert_single(self, nfzid="5834f1287869a9a48be75adb7be005be", nfzTitle="G345-洛南-扬州-V2_1km", nfzType="石家庄邯郸地区共用河南放飞", latitude="{33.5242461414517,33.5275826390726,33.52759645296828}", longitude="{109.90774501058173,109.91745473343512,109.90615135869226}", countryCode="CN", note="Oliver"):
         url_head = ''
         if(self.server == 'test'):
-            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
         else:
             url_head = 'http://www.skyracing.com.cn:8000/'
         url = url_head +'cloudNfz'
@@ -55,7 +55,7 @@ class DBManagement ():
     def delete(self, nfzid="5834f1287869a9a48be75adb7be005be"):
         url_head = ''
         if(self.server == 'test'):
-            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
         else:
             url_head = 'http://www.skyracing.com.cn:8000/'
         url = url_head+'cloudNfz'
@@ -76,10 +76,11 @@ class DBManagement ():
         # result = cursor.fetchone()
         url_head = ''
         if(self.server == 'test'):
-            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
         else:
             url_head = 'http://www.skyracing.com.cn:8000/'
         url = url_head+'cloudGetNfzInfoJson'
+        print(url)
         myobj = {'querytype': 'nfz', 'countrycode': 'CN'}
 
         x = requests.post(url, data=myobj)
@@ -94,7 +95,7 @@ class DBManagement ():
     def search_byNfzid(self, nfzid='1c7a8f1e0170c85ab61df65e6ec434a5'):
         url_head = ''
         if(self.server == 'test'):
-            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/cloudNfz'
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
         else:
             url_head = 'http://www.skyracing.com.cn:8000/'
         url = url_head+'cloudGetNfzInfoJson'
