@@ -1,1 +1,88 @@
-<mxfile host="app.diagrams.net" modified="2022-06-05T07:26:43.713Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" version="18.2.0" etag="asdxdlL214xAb-HeJcln" type="github"><diagram id="qcIqYXEZ_iftfbElvmAc">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-06-05T07:43:38.483Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="mC-8qManBJyqsQUmmx95" version="18.2.0" type="github">
+  <diagram id="qcIqYXEZ_iftfbElvmAc" name="Page-1">
+    <mxGraphModel dx="2545" dy="845" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="deFQR3jEQepBwOV52muM-21" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-570" y="50" width="1020" height="670" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-6" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;excel：所有公棚，公棚的路徑，新增路徑（有日期）&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="-520" y="100" width="400" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-7" value="doc：任務要處理的公棚：公棚中要處理的路徑" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-520" y="280" width="400" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-8" value="gpx文檔：這次要處理的路徑的資歷；" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-520" y="460" width="403" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-9" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-6" target="deFQR3jEQepBwOV52muM-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="350" as="sourcePoint" />
+            <mxPoint x="-10" y="175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-10" value="step1：doc：公棚名-&amp;gt;路徑文件名&lt;br&gt;step2：excel:公棚名-&amp;gt;路徑規範名" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="10" y="200" width="370" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-11" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-7" target="deFQR3jEQepBwOV52muM-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="350" as="sourcePoint" />
+            <mxPoint x="-50" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-7" target="deFQR3jEQepBwOV52muM-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="390" as="sourcePoint" />
+            <mxPoint x="10" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-14" value="數據：&lt;br&gt;路徑文件名 -&amp;gt; 路徑數據" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry y="460" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-8" target="deFQR3jEQepBwOV52muM-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="390" as="sourcePoint" />
+            <mxPoint x="-50" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-16" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="520" y="230" width="300" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-10" target="deFQR3jEQepBwOV52muM-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="450" as="sourcePoint" />
+            <mxPoint x="660" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="450" as="sourcePoint" />
+            <mxPoint x="520" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-19" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-16" target="deFQR3jEQepBwOV52muM-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="450" as="sourcePoint" />
+            <mxPoint x="920" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-20" value="1 刪除公棚中的舊路徑（參數：公棚名+ 路徑規範名）&lt;br&gt;&lt;br&gt;&amp;nbsp;2 插入新的路徑數據（參數：公棚名+路徑規範名字+&lt;br&gt;路徑數據）&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="900" y="180" width="320" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-22" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.526;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="deFQR3jEQepBwOV52muM-21" target="deFQR3jEQepBwOV52muM-25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-40" y="790" as="sourcePoint" />
+            <mxPoint x="-30" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-24" value="簡化" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-100" y="810" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="deFQR3jEQepBwOV52muM-25" value="1 只有excel和gpx文件檔案；根據excel文件自動檢索這次要修改的公棚，以及要修改的路徑有哪些；（舉例：比如只需要日期參數，自動檢索出需要修改的doc中的列表）&lt;br&gt;2 如果1可行的話，那摩就不需要對比這些路徑文件了，可以直接自動進行修改；" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-460" y="900" width="840" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
