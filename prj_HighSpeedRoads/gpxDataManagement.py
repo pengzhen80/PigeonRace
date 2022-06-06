@@ -67,7 +67,7 @@ def myGeo_MakePoints(firstPoint, secondPoint):
     # line_Y_secodeBearing.append(makePoint_secondPoint_bearing)
 
 
-    vd = geopy.distance.geodesic(kilometers=0.1)
+    vd = geopy.distance.geodesic(kilometers=0.2)
     makePoint_firstPoint = vd.destination(firstPoint, makePoint_firstPoint_bearing)
     makePoint_secondPoint = vd.destination(firstPoint, makePoint_secondPoint_bearing)
 
