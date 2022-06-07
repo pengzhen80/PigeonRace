@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-06-07T04:47:13.309Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="j8ug91wp4JxgPzMke6r8" version="19.0.0" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-06-07T04:47:34.764Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="WJOGDh2_Ac3oHoDDM0sW" version="19.0.0" type="github" pages="2">
   <diagram id="Bbdv9YeGxL54_T4Fy8lq" name="Page-2">
     <mxGraphModel dx="2417" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,14 +7,16 @@
         <mxCell id="tpYlpwRIXDLrp4thxZ5S-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-400" y="10" width="960" height="710" as="geometry" />
         </mxCell>
-        <UserObject label="測試服務器" link="data:page/id,SUjVGLZJdwDgN1-7lfVK" id="tpYlpwRIXDLrp4thxZ5S-2">
+        <UserObject label="測試服務器" id="tpYlpwRIXDLrp4thxZ5S-2">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
             <mxGeometry x="-190" y="360" width="330" height="60" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="tpYlpwRIXDLrp4thxZ5S-3" value="連接" style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
-          <mxGeometry x="270" y="360" width="120" height="60" as="geometry" />
-        </mxCell>
+        <UserObject label="連接" link="data:page/id,SUjVGLZJdwDgN1-7lfVK" id="tpYlpwRIXDLrp4thxZ5S-3">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=48;" vertex="1" parent="1">
+            <mxGeometry x="270" y="360" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
