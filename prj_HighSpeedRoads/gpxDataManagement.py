@@ -132,7 +132,7 @@ class GpxdataManagement:
             ele_polygon['name'] = gpxData['name']
             ele_polygon['data'] = []
 
-            for i in range(len(gpxData['data'])-2):
+            for i in range(0,len(gpxData['data'])-1):
                 # print('i:',i)
                 # print(gpxData['data'][i])
                 tuple_firstPoint = (gpxData['data'][i][0],float(gpxData['data'][i][1]))
@@ -140,6 +140,13 @@ class GpxdataManagement:
                 make_firstPoint,make_secodePoint = myGeo_MakePoints(tuple_firstPoint,tuple_secondPoint)
                 ele_polygon['data'].insert(0,make_firstPoint)
                 ele_polygon['data'].append(make_secodePoint)
+            ####make the last point
+            tuple_firstPoint = (gpxData['data'][-1][0],float(gpxData['data'][-1][1]))
+            tuple_secondPoint = (gpxData['data'][-2][0],gpxData['data'][-2][1])
+            make_firstPoint,make_secodePoint = myGeo_MakePoints(tuple_firstPoint,tuple_secondPoint)
+            ele_polygon['data'].insert(0,make_secodePoint)
+            ele_polygon['data'].append(make_firstPoint)
+
             print('polygon len:',len(ele_polygon['data']))
             self.polygons.append(ele_polygon)
         return 

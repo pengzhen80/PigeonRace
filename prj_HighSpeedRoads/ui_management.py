@@ -186,7 +186,7 @@ class StartPage_GpxDataManagePg(tk.Frame):
             newmap_widget.set_tile_server(
                 "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", max_zoom=22)
             newmap_widget.set_address("china")
-            filedata = filedata[:int(len(filedata)/2)]
+            # filedata = filedata[:int(len(filedata)/2)]
             newmap_widget.set_path(filedata)
             tmp_polygon = newmap_widget.set_polygon(
                 polyGonData, fill_color='red', outline_color='red')
@@ -211,7 +211,9 @@ class StartPage_GpxDataManagePg(tk.Frame):
             for gpxData in gpxDatas:
                 listbox_gpxDatas.insert(tk.END, gpxData['name'])
                 pathName = gpxData['name']
+                filedata = gpxDataManager.getDataByName_toPath(pathName)
                 polygon = gpxDataManager.gpxPolygonByName(pathName)
+                map_widget.set_path(filedata)
                 map_widget.set_polygon(polygon, fill_color='red', outline_color='red')
             
 
