@@ -8,4 +8,7 @@ urlpatterns = [
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('link_db/', views.link_testdb, name='link_testdb'),
+    path('link_db/', views.link_realdb, name='link_realdb'),
+    path('link_db/', views.link_test, name='link_test'),
 ]
