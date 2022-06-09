@@ -181,6 +181,45 @@ class DBManagement ():
             self.shedsMapToPaths[shedid].append(path)
             return True
         return False
+
+    def insertByShedAndPath_web(self, shedid, path,latitude_list,longitude_list,note):
+        print(shedid,path,len(latitude_list),len(longitude_list),note)
+        ###make id 
+        now = datetime.now()
+        current_time = now.strftime("%Y%m%d%H%M%S")
+        # print("Current Time =", current_time)
+        id = current_time+path
+
+        # 建立 MD5 物件
+        md_object = hashlib.md5()
+        # 要計算 MD5 雜湊值的資料
+        data = id
+        # 更新 MD5 雜湊值
+        md_object.update(data.encode("utf-8"))
+        # 取得 MD5 雜湊值
+        id = md_object.hexdigest()
+        print("id:",id)
+
+        #make latitude
+        latitude = "{"
+        longitude = "{"
+        for lat in latitude_list:
+            # print('point:',point)
+            latitude += str(lat)+","
+        for lon in longitude_list:
+            longitude += str(lon)+","
+        latitude = latitude[:-1]
+        longitude = longitude[:-1]
+        latitude += "}"
+        longitude += "}"
+
+        # print('latitude',latitude)
+        # print('longitude',longitude)
+
+        if self.insert_single(nfzid=id, nfzTitle=path, nfzType=shedid, latitude=latitude, longitude=longitude, countryCode="CN", note=note):
+            self.shedsMapToPaths[shedid].append(path)
+            return True
+        return False
         
     ### check if the db has the house (house === shed)
     def hasShed(self,houseId):

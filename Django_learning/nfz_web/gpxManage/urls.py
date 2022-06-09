@@ -8,7 +8,9 @@ urlpatterns = [
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('link_db/', views.link_testdb, name='link_testdb'),
-    path('link_db/', views.link_realdb, name='link_realdb'),
-    path('link_db/', views.link_test, name='link_test'),
+    path('link_db/<str:dbName>', views.link_db, name='link_db'),
+    ###paths filter by , 
+    path('link_db/delete_shed/<str:shedId>', views.delete_shed, name='delete_shed'),
+    path('link_db/<str:shedId>/<str:paths>', views.delete_paths, name='delete_paths'),
+    path('link_db/<str:shedId>/<str:paths>/<str:points>/<str:note>', views.insert_path, name='insert_path'),
 ]

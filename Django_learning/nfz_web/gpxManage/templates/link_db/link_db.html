@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>js test</title>
+    <title>禁航區管理</title>
     <script>  src = 'https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js'</script>
     <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -87,6 +87,8 @@
                         result.push(reference);
                     }
                 }
+                var last_point = [parseFloat(path[path.length - 1]['lat']), parseFloat(path[path.length - 1]['lon'])];
+                result.push(last_point);
                 // console.log(result.length);
                 return result;
             }
@@ -106,6 +108,19 @@
                     polygon.unshift(makePoint_first.geometry.coordinates);
                     polygon.push(makePoint_second.geometry.coordinates);
                 }
+
+                var firstPoint = turf.point(path[path.length - 2]);
+                var secondPoint = turf.point(path[path.length - 1]);
+                var bearing = turf.bearing(firstPoint, secondPoint);
+                // console.log(bearing);
+                var makePoint_first_bearing = bearing + 90;
+                var makePoint_second_bearing = bearing - 90;
+                var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+                var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+                // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+                polygon.unshift(makePoint_second.geometry.coordinates);
+                polygon.push(makePoint_first.geometry.coordinates);
+
                 // console.log(path.length,polygon.length);
                 return polygon;
             }
@@ -118,6 +133,7 @@
         fileUploader.style['position'] = 'absolute';;
         fileUploader.style['top'] = '10%';
         fileUploader.style['left'] = '50%';
+        // fileUploader.innerHTML = '選擇文件';
         // var fileList = document.getElementById("fileList");
         var pathNameList = document.getElementById("pathNameList");
         pathNameList.style['width'] = '15%';
@@ -134,16 +150,17 @@
         // update path name by pre or end
         var pathNameAlter_text = document.getElementById("pathNameAlter_text");
         pathNameAlter_text.style['position'] = 'absolute';;
-        pathNameAlter_text.style['top'] = '40%';
+        pathNameAlter_text.style['top'] = '25%';
         pathNameAlter_text.style['left'] = '70%';
+        pathNameAlter_text.setAttribute('placeholder', '请输入前綴或者後綴');
         var pathNameAlter_button_pre = document.getElementById("pathNameAlter_button_pre");
         pathNameAlter_button_pre.style['position'] = 'absolute';;
-        pathNameAlter_button_pre.style['top'] = '45%';
+        pathNameAlter_button_pre.style['top'] = '30%';
         pathNameAlter_button_pre.style['width'] = '8%';
         pathNameAlter_button_pre.style['left'] = '70%';
         var pathNameAlter_button_end = document.getElementById("pathNameAlter_button_end");
         pathNameAlter_button_end.style['position'] = 'absolute';;
-        pathNameAlter_button_end.style['top'] = '45%';
+        pathNameAlter_button_end.style['top'] = '30%';
         pathNameAlter_button_end.style['width'] = '8%';
         pathNameAlter_button_end.style['left'] = '80%';
         pathNameAlter_button_pre.addEventListener('click', function (ev) {
@@ -152,9 +169,9 @@
                 var pathNameList_selected = pathNameList.selectedOptions;
                 console.log(pathNameList_selected.length);
                 for (var i = 0; i < pathNameList_selected.length; i++) {
-                    pathNameList_selected[i].value = pathNameAlter_text.value + pathNameList_selected[i].value;
-                    console.log(pathNameList.selectedOptions[i].value);
-                    pathNameList_selected[i].innerHTML = pathNameList_selected[i].value;
+                    // pathNameList_selected[i].value = pathNameAlter_text.value + pathNameList_selected[i].value;
+                    // console.log(pathNameList.selectedOptions[i].value);
+                    pathNameList_selected[i].innerHTML = pathNameAlter_text.value + pathNameList_selected[i].innerHTML;
                 }
                 // pathNameList.update();
             }
@@ -165,8 +182,8 @@
             if (pathNameAlter_text.value != '') {
                 var pathNameList_selected = pathNameList.selectedOptions;
                 for (var i = 0; i < pathNameList_selected.length; i++) {
-                    pathNameList_selected[i].value = pathNameList_selected[i].value + pathNameAlter_text.value;
-                    pathNameList_selected[i].innerHTML = pathNameList_selected[i].value;
+                    // pathNameList_selected[i].value = pathNameList_selected[i].value + pathNameAlter_text.value;
+                    pathNameList_selected[i].innerHTML = pathNameList_selected[i].innerHTML + pathNameAlter_text.value;
                 }
             }
             return false;
@@ -359,9 +376,9 @@
         };
         let ui_manager = new UI_allUiElementsManagement();
         ///set auto select pathname to pathNameList
-        let textInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('textInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '20%', 'left': '70%', 'width': '15%' }, 'auto select pathname');
-        let filterInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('filterInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '15%', 'left': '70%', 'width': '5%' }, 'auto select pathname');
-        let button_autoselect_pathNameList = ui_manager.Add_button('button_autoselect_pathNameList', { 'position': 'absolute', 'bottom': '15%', 'left': '80%', 'width': '5%' }, '搜索');
+        let textInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('textInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '45%', 'left': '70%', 'width': '15%' }, '輸入名字列表');
+        let filterInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('filterInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '40%', 'left': '70%', 'width': '5%' }, '分隔符');
+        let button_autoselect_pathNameList = ui_manager.Add_button('button_autoselect_pathNameList', { 'position': 'absolute', 'bottom': '40%', 'left': '80%', 'width': '5%' }, '搜索');
         function func_cb_button_autoselect_pathNameList() {
             // let pathNameList = document.getElementById('pathNameList');
             // let filterInput_autoselect_pathNamelist = document.getElementById('filterInput_autoselect_pathNamelist');
@@ -443,15 +460,61 @@
             console.log(selectList_Sheds.value);
             var shedId = selectList_Sheds.value;
             var paths = linkDb_sheds_paths[shedId];
-            console.log(paths.length, paths);
+            if (paths) {
+                console.log(paths.length, paths);
 
-            for (var i = 0; i < paths.length; i++) {
-                var option = document.createElement('option');
-                option.value = paths[i];
-                option.innerHTML = paths[i];
-                selectList_Shed_Paths.appendChild(option);
+                for (var i = 0; i < paths.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = paths[i];
+                    option.innerHTML = paths[i];
+                    selectList_Shed_Paths.appendChild(option);
+                }
+            }
+            else {
+                console.log('no path');
             }
         }
+
+        function func_cb_button_createShed() {
+            shedId = input_text_createShed_Name.value;
+            console.log(shedId)
+            var opt = document.createElement('option');
+            opt.value = shedId;
+            opt.innerHTML = shedId;
+            selectList_Sheds.appendChild(opt);
+        }
+        ui_manager.Add_CallBack('button_createShed', func_cb_button_createShed);
+
+        function func_cb_button_deleteShed() {
+            var shedId = selectList_Sheds.value;
+            console.log(shedId);
+            let shedIdList = selectList_Sheds.options;
+            for (let i = 0; i < shedIdList.length; i++) {
+                if (shedIdList[i].value === shedId) {
+                    selectList_Sheds.removeChild(shedIdList[i]);
+                    break;
+                }
+            }
+
+            var paths = linkDb_sheds_paths[shedId];
+            if (paths != undefined) {
+                console.log('delete shed in server')
+                function reqListener() {
+                    // console.log(this.responseText);
+                }
+
+                //todo send requests
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("GET", 'delete_shed'+'/'+shedId);
+                oReq.send();
+            }
+
+            //clear selectList_Shed_Paths
+            selectList_Shed_Paths.innerHTML = null;
+        }
+        ui_manager.Add_CallBack('button_deleteShed', func_cb_button_deleteShed);
+
 
         //add all sheds to selectList
         function func_init_selectList_db_addSheds() {
@@ -499,21 +562,71 @@
         ///set delete button 
         let button_deletePaths_selectList_Shed_Paths = ui_manager.Add_button('button_deletePaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '55%', 'left': '30%', 'width': '8%' }, '刪除路徑');
         function func_cb_button_deletePaths_selectList_Shed_Paths() {
+            // console.log(selectList_Sheds.value);
             var shedId = selectList_Sheds.value;
             var paths = [];
             let pathNameList_ele = selectList_Shed_Paths.options;
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 if (pathNameList_ele[i].selected) {
-                    paths.append(concat(pathNameList_ele[i].value));
+                    paths.push(pathNameList_ele[i].value);
                     selectList_Shed_Paths.removeChild(pathNameList_ele[i]);
                     i--;
                 }
             }
-            var localSend_value = {'shedId': shedId, 'paths': paths};
+            // var localSend_value = { 'shedId': shedId, 'paths': paths };
             ///update db 
-            $('#receiptsForm').append('<input type="hidden" name="myparam " value="abc" />');
-            $("#receiptsForm").submit();
+            var pathstr = '';
+            for (var i = 0; i < paths.length - 1; i++) {
+                pathstr += paths[i] + ',';
+            }
+            pathstr += paths[paths.length - 1];
+
+            function reqListener() {
+                console.log(this.responseText);
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", shedId + '/' + pathstr);
+            oReq.send();
         }
+        ui_manager.Add_CallBack('button_deletePaths_selectList_Shed_Paths', func_cb_button_deletePaths_selectList_Shed_Paths);
+
+        ///set add paths button
+        let button_insertPaths_selectList_Shed_Paths = ui_manager.Add_button('button_insertPaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '35%', 'left': '30%', 'width': '8%' }, '插入路徑');
+        function func_cb_button_insertPaths_selectList_Shed_Paths() {
+            // console.log(selectList_Sheds.value);
+            var shedId = selectList_Sheds.value;
+            let pathNameList_ele = pathNameList.options;
+            for (let i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    var path = pathNameList_ele[i].innerHTML;
+                    //reset pathname in pathNameList
+                    pathNameList_ele[i].innerHTML = pathNameList_ele[i].value;
+                    var points = pathManger.GetPathByName(pathNameList_ele[i].value);
+                    var pathstr = points.toString();
+                    console.log(pathstr);
+
+                    function reqListener() {
+                        console.log(this.responseText);
+                    }
+
+                    var oReq = new XMLHttpRequest();
+                    oReq.addEventListener("load", reqListener);
+                    oReq.open("GET", shedId + '/' + path + '/' + pathstr + '/' + 'pengzhen');
+                    oReq.send();
+
+                    //todo update selectList_Shed_Paths by result
+                    let option = document.createElement('option');
+                    option.value = path;
+                    option.innerHTML = path;
+                    selectList_Shed_Paths.appendChild(option);
+
+                }
+            }
+        }
+        ui_manager.Add_CallBack('button_insertPaths_selectList_Shed_Paths', func_cb_button_insertPaths_selectList_Shed_Paths);
+
 
         function func_runAfterGpxFilesLoaded() {
             //todo : run after gpx files loaded
