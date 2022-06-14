@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-06-14T01:47:28.167Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="zZDT4Z1wIFI4rwwN2_Fz" version="19.0.1" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-06-14T05:14:24.684Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="54ERTj_fAfYKXmlnn4OG" version="19.0.1" type="github" pages="4">
   <diagram id="Bbdv9YeGxL54_T4Fy8lq" name="Page-2">
     <mxGraphModel dx="2417" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -221,6 +221,50 @@
             <mxPoint y="840" as="sourcePoint" />
             <mxPoint x="50" y="790" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DIyxJ5LuHT3VWaVP-xe5" name="彈窗地圖">
+    <mxGraphModel dx="1590" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="90" y="60" width="280" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-2" value="link_db.html" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="205" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-3" value="btn_map" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="150" y="140" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-4" value="path,polygon" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="130" y="240" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-5" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="390" y="480" width="300" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-6" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YljkwmdpbvnUHI3N9CCL-1" target="YljkwmdpbvnUHI3N9CCL-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="530" as="sourcePoint" />
+            <mxPoint x="440" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-7" value="views.py" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-8" value="make html" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="414" y="570" width="246" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-9" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="620" y="70" width="360" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-10" value="show_map.html" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="770" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YljkwmdpbvnUHI3N9CCL-13" value="draw path&lt;br&gt;draw polygon" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="660" y="150" width="270" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
