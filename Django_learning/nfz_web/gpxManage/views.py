@@ -5,7 +5,13 @@ from matplotlib.style import context
 # Create your views here.
 # from .models import Book, Author, BookInstance, Genre
 from .dbManagement import DBManagement
+from .gpxExtractor import OriginGpxdataManagement
 import json
+from django.http import JsonResponse
+
+
+dbManager = DBManagement()
+originGpxManager =  OriginGpxdataManagement()
 
 
 def index(request):
@@ -15,6 +21,7 @@ def index(request):
     #     dbManager = DBManagement()
     #     dbManager.getAllShedWithPaths()
     #     print('dbManager.shedsMapToPaths:', dbManager.shedsMapToPaths)
+    print('request path is',request.path,request.path_info,request.content_params)
 
     context = {
         'shedsMapToPaths': json.dumps({'1': ['1', '2', '3'], '2': ['4', '5', '6']}),
@@ -25,10 +32,8 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-dbManager = DBManagement()
-
-
 def link_db(request, dbName):
+    print('link_db')
     """View function for home page of site."""
     if dbName == 'test':
         dbManager.Set_Server('test')
@@ -47,6 +52,7 @@ def link_db(request, dbName):
 
 
 def delete_paths(request, shedId, paths):
+    print('delete_paths')
     # filter paths
     print('shedId:', shedId)
     print('paths:', paths)
@@ -67,9 +73,11 @@ def delete_paths(request, shedId, paths):
 
 
 def insert_path(request, shedId, paths, points, note):
+    print('insert_path')
     print(len(points), type(points))
     # normalize points to array
     points_list = points.split(',')
+    print(points_list)
     latitude_list = []
     longitude_list = []
     for i in range(0, len(points_list)-1):
@@ -90,6 +98,7 @@ def insert_path(request, shedId, paths, points, note):
 
 
 def delete_shed(request, shedId):
+    print('delete_shed')
     # filter paths
     print('shedId:', shedId)
     if dbManager.removeShed(shedId):
@@ -100,3 +109,41 @@ def delete_shed(request, shedId):
         'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
     }
     return render(request, 'link_db/link_db.html', context=context)
+
+def decodePathLine_toPolygon(request,pathName,pathLine):
+    print('decodePathLine_toPolygon')
+    # filter paths
+    print(len(pathLine), type(pathLine))
+    # normalize points to array
+    points_list = pathLine.split(',')
+    print(len(points_list), type(points_list))
+
+    originGpxManager.DecodeData(pathName,points_list)
+
+    # if request.method == 'GET':
+    #     do_something()
+
+    context = {
+        'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
+        'pathName': pathName,
+        'polygon': json.dumps(originGpxManager.GetPolygon(pathName)),
+    }
+    # return render(request, 'link_db/link_db.html', context=context)
+    return JsonResponse({'pathname': pathName, 'polygon': json.dumps(originGpxManager.GetPolygon(pathName))}) 
+
+def showPath(request, pathName):
+    print('showPath')
+    ## filter paths
+    print('pathname:', pathName)
+    pathLine_origin = originGpxManager.GetPathLine_origin(pathName)
+    pathLine_filter = originGpxManager.GetPathLine_filter(pathName)
+    pathPolygon = originGpxManager.GetPolygon(pathName)
+
+    context = {
+        'pathName': pathName,
+        'pathLine_origin': json.dumps(pathLine_origin),
+        'pathLine_filter': json.dumps(pathLine_filter),
+        'pathPolygon': json.dumps(pathPolygon),
+    }
+
+    return render(request, 'link_db/showPath.html', context=context)

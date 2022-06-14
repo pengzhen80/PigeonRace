@@ -25,6 +25,8 @@
             constructor() {
                 //parse gpx files
                 this.paths = [];
+                this.originalPaths = [];
+                this.originPolygon = [];
                 // var bbox = turf.bbox(features);
                 //alter path to polygons
             }
@@ -53,8 +55,14 @@
                     var polygon = this.make_polygon(path_line);
 
                     this.paths.push({ name: paths[index]['name'], data: polygon });
+                    this.originalPaths.push({ name: paths[index]['name'], data: path });
                 }
                 console.log(this.paths.length);
+                // return this.paths;
+            }
+
+            GetOringinalPaths() {
+                return this.originalPaths;
             }
 
             Rename_path(oldname, newname) {
@@ -123,6 +131,19 @@
 
                 // console.log(path.length,polygon.length);
                 return polygon;
+            }
+
+            AddOriginPolygon(pathName, polygon) {
+                this.originPolygon.push({ name: pathName, data: polygon });
+            }
+
+            GetOriginPolygon(pathName) {
+                for (var index = 0; index < this.originPolygon.length; index++) {
+                    if (this.originPolygon[index]['name'] == pathName) {
+                        return this.originPolygon[index]['data'];
+                    }
+                }
+                console.log('no such path');
             }
 
         }
@@ -211,11 +232,14 @@
 
         function readmultifiles(files) {
             function readFile(index) {
+                //when all files loaded , start to decode datas
                 if (index >= files.length) {
                     pathManger.decodePath(gpxFileDatas);
+                    func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPaths());
                     return;
                 }
 
+                // store file name and file content to gpxFileDatas
                 var gpxFileDatas_ele = {};
                 /// path name init from file name
                 gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
@@ -240,6 +264,43 @@
                 fileReader.readAsText(file);
             }
             readFile(0);
+        }
+
+        function func_sendRequest_makePolygonByOldCalculater(paths) {
+            //make paths to str
+            // console.log('origin paths', paths);
+            for (var i = 0; i < paths.length; i++) {
+                var pathname = paths[i]['name'];
+                var path = paths[i]['data'];
+                var path_normalize = [];
+                for (var j = 0; j < path.length; j++) {
+                    path_normalize.push(path[j]['lat']);
+                    path_normalize.push(path[j]['lon']);
+                }
+
+                var str_paths = path_normalize.toString();
+                // console.log('str_paths', str_paths.length, str_paths);
+                //send to servers
+                function reqListener() {
+                    console.log(typeof (this.responseText), typeof (this.response));
+                    console.log(this)
+
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+
+                    var pathName = decodeURI(response['pathname']);
+                    var polygon = response['polygon'];
+                    console.log('pathName', pathName);
+
+                    //add polygon to gpxmanager
+                    pathManger.AddOriginPolygon(pathName, polygon);
+                }
+
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+                oReq.send();
+            }
         }
 
         // seperate ui and function
@@ -506,7 +567,7 @@
                 //todo send requests
                 var oReq = new XMLHttpRequest();
                 oReq.addEventListener("load", reqListener);
-                oReq.open("GET", 'delete_shed'+'/'+shedId);
+                oReq.open("GET", 'delete_shed' + '/' + shedId);
                 oReq.send();
             }
 
@@ -626,6 +687,25 @@
             }
         }
         ui_manager.Add_CallBack('button_insertPaths_selectList_Shed_Paths', func_cb_button_insertPaths_selectList_Shed_Paths);
+
+        //// add button to show map
+        let button_showMap = ui_manager.Add_button('button_showMap', { 'position': 'absolute', 'bottom': '20%', 'left': '80%', 'width': '8%' }, '顯示路徑');
+        function func_cb_button_showMap() {
+            let pathNameList_ele = pathNameList.options;
+            for (var i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    var pathName = pathNameList_ele[i].value;
+                    console.log(pathName);
+                    window.open('showPath'+'/'+pathName);
+                    return;
+                }
+            }
+            
+            alert('請先選擇路徑');
+            return;
+        }
+
+        ui_manager.Add_CallBack('button_showMap', func_cb_button_showMap);
 
 
         function func_runAfterGpxFilesLoaded() {
