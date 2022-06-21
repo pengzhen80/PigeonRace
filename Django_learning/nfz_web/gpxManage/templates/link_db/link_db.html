@@ -279,14 +279,14 @@
                 }
 
                 var str_paths = path_normalize.toString();
-                // console.log('str_paths', str_paths.length, str_paths);
+                console.log(pathname, str_paths.length);
                 //send to servers
                 function reqListener() {
-                    console.log(typeof (this.responseText), typeof (this.response));
-                    console.log(this)
+                    // console.log(typeof (this.responseText), typeof (this.response));
+                    // console.log(this)
 
                     var response = JSON.parse(this.responseText);
-                    console.log(response);
+                    // console.log(response);
 
                     var pathName = decodeURI(response['pathname']);
                     var polygon = response['polygon'];
@@ -461,10 +461,9 @@
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 // console.log(pathNameList_ele[i].value);
                 for (let j = 0; j < namelist.length; j++) {
-                    if (namelist[j].includes(pathNameList_ele[i].value)) {
+                    if (pathNameList_ele[i].value.includes(namelist[j])) {
                         console.log('find');
                         pathNameList_ele[i].selected = true;
-                        break;
                     }
                 }
             }
@@ -608,12 +607,12 @@
             let pathNameList_ele = selectList_Shed_Paths.options;
             // console.log(pathNameList_ele);
             for (let i = 0; i < pathNameList_ele.length; i++) {
-                // console.log(pathNameList_ele[i].value);
+                console.log(pathNameList_ele[i].value);
                 for (let j = 0; j < namelist.length; j++) {
-                    if (namelist[j].includes(pathNameList_ele[i].value)) {
+                    if (pathNameList_ele[i].value.includes(namelist[j])) {
                         console.log('find');
                         pathNameList_ele[i].selected = true;
-                        break;
+                        // break;
                     }
                 }
             }
@@ -661,12 +660,13 @@
             let pathNameList_ele = pathNameList.options;
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 if (pathNameList_ele[i].selected) {
-                    var path = pathNameList_ele[i].innerHTML;
+                    var pathCurrentName = pathNameList_ele[i].innerHTML;
+                    var pathOriginalName = pathNameList_ele[i].value;
                     //reset pathname in pathNameList
                     pathNameList_ele[i].innerHTML = pathNameList_ele[i].value;
-                    var points = pathManger.GetPathByName(pathNameList_ele[i].value);
-                    var pathstr = points.toString();
-                    console.log(pathstr);
+                    // var points = pathManger.GetPathByName(pathNameList_ele[i].value);
+                    // var pathstr = points.toString();
+                    // console.log(pathstr);
 
                     function reqListener() {
                         console.log(this.responseText);
@@ -674,13 +674,13 @@
 
                     var oReq = new XMLHttpRequest();
                     oReq.addEventListener("load", reqListener);
-                    oReq.open("GET", shedId + '/' + path + '/' + pathstr + '/' + 'pengzhen');
+                    oReq.open("GET", shedId + '/' + pathOriginalName + '/' + pathCurrentName + '/' + 'pengzhen');
                     oReq.send();
 
                     //todo update selectList_Shed_Paths by result
                     let option = document.createElement('option');
-                    option.value = path;
-                    option.innerHTML = path;
+                    option.value = pathCurrentName;
+                    option.innerHTML = pathCurrentName;
                     selectList_Shed_Paths.appendChild(option);
 
                 }

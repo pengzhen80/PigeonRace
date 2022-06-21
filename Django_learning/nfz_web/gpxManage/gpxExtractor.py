@@ -124,10 +124,10 @@ def coords2track(coordsLIST, kilometers, outputFile=""):
         tmpLng = lng
         coordsCount += 1
 
-    if outputFile != "":
-        trackFILE = open("{}_{}km.track".format(filePath, kilometers), "w")
-        trackFILE.write("\n".join(trackLIST))
-        trackFILE.close()
+    # if outputFile != "":
+    #     trackFILE = open("{}_{}km.track".format(filePath, kilometers), "w")
+    #     trackFILE.write("\n".join(trackLIST))
+    #     trackFILE.close()
 
     trackLIST = [x.split(",") for x in trackLIST if x != '']
     trackLIST = np.array(trackLIST, dtype=float).tolist()
