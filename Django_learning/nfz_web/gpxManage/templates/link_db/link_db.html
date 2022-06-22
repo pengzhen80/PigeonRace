@@ -298,8 +298,12 @@
 
                 var oReq = new XMLHttpRequest();
                 oReq.addEventListener("load", reqListener);
-                oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
-                oReq.send();
+                // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+                oReq.open("post", 'decodePathLine_toPolygon' + '/' + pathname + '/' + pathname);
+                // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+                oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}'); 
+                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+                oReq.send(str_paths);
             }
         }
 

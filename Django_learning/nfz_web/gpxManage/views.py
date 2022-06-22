@@ -115,15 +115,23 @@ def delete_shed(request, shedId):
 
 def decodePathLine_toPolygon(request, pathName, pathLine):
     print('decodePathLine_toPolygon')
+    print(pathName)
     # filter paths
-    print(len(pathLine), type(pathLine))
+    # print(len(pathLine), type(pathLine))
     # normalize points to array
-    points_list = pathLine.split(',')
-    print(len(points_list), type(points_list))
+    # points_list = pathLine.split(',')
+    # print(len(points_list), type(points_list))
 
-    originGpxManager.DecodeData(pathName, points_list)
+    # originGpxManager.DecodeData(pathName, points_list)
 
-    # if request.method == 'GET':
+    if request.method == 'POST':
+        print('decode data')
+        # print(type(request.body))
+        # print(request.body.decode("utf-8"))
+        points = request.body.decode("utf-8")
+        points_list = points.split(',')
+        originGpxManager.DecodeData(pathName, points_list)
+
     #     do_something()
 
     # context = {
