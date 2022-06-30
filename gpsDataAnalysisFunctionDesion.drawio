@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-06-28T01:39:46.083Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="egtawX58D3Z0VoiMX0oU" version="20.0.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-06-30T06:41:46.955Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="YFYQCX0-QJtm-mMMcNF1" version="20.0.3" type="github" pages="4">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
-    <mxGraphModel dx="1590" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1590" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -127,7 +127,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="1AQMfttWKt1U3ZZJh7IM" name="時間目標拆解">
-    <mxGraphModel dx="2417" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2417" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -158,6 +158,14 @@
             <mxPoint x="300" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="HKfhhw679OXp-a2lWLh9" name="路徑效率和提升方案">
+    <mxGraphModel dx="1590" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
