@@ -45,6 +45,7 @@ def link_db(request, dbName):
     # print('dbManager.shedsMapToPaths:', dbManager.shedsMapToPaths)
     print('get all sheds')
     context = {
+        'linkDb':dbName,
         'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
     }
     # print(context)
@@ -52,66 +53,69 @@ def link_db(request, dbName):
     return render(request, 'link_db/link_db.html', context=context)
 
 
-def delete_paths(request, shedId, paths):
-    print('delete_paths')
+# def delete_paths(request, shedId, paths):
+#     print('delete_paths')
+#     # filter paths
+#     print('shedId:', shedId)
+#     print('paths:', paths)
+#     path_list = paths.split(',')
+#     response_SuccessPaths = ''
+#     for path in path_list:
+#         if dbManager.deleteByShedAndPath(shedId, path):
+#             print('delete path success',path)
+#             response_SuccessPaths += path +','
+#         else:
+#             print('delete path failed',paths)
+#     # todo : return the response
+#     if(len(response_SuccessPaths)>0):
+#         response_SuccessPaths = response_SuccessPaths[:-1]
+#         return JsonResponse({'result': 'success','pathnames': response_SuccessPaths}) 
+#     return JsonResponse({'result': 'fail','pathname': ''}) 
+def delete_path(request, shedId, path):
+    print('delete_path')
     # filter paths
     print('shedId:', shedId)
-    print('paths:', paths)
-    path_list = paths.split(',')
-    response_count_success = 0
-    response_failedPaths = []
-    for path in path_list:
-        print('path:', path)
-        if dbManager.deleteByShedAndPath(shedId, path):
-            response_count_success += 1
-        else:
-            response_failedPaths.append(path)
-    # todo : return the response
-    context = {
-        'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
-    }
-    return render(request, 'link_db/link_db.html', context=context)
+    print('paths:', path)
+    if dbManager.deleteByShedAndPath(shedId, path):
+        print('delete path success',path)
+        return JsonResponse({'result': 'success','pathname': path}) 
+    else:
+        print('delete path failed',path)
+    return JsonResponse({'result': 'fail','pathname': path}) 
 
 
 def insert_path(request, shedId, pathOriginalName, pathCurrentName, note):
     print('insert_path')
     pathPolygon = originGpxManager.GetPolygon(pathOriginalName)
-    # print(len(points), type(points))
-    # # normalize points to array
-    # points_list = points.split(',')
-    # print(len(points_list))
-    # latitude_list = []
-    # longitude_list = []
-    # for i in range(0, len(points_list)-1):
-    #     if i % 2 == 0:
-    #         latitude_list.append(points_list[i])
-    #     else:
-    #         longitude_list.append(points_list[i])
 
     if dbManager.insertByShedAndPath(shedId, pathCurrentName, pathPolygon, note):
         print('insert success')
         return JsonResponse({'result': 'success','pathname': pathCurrentName})
-    # context = {
-    #     'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
-    # }
 
-    # return render(request, 'link_db/link_db.html', context=context)
     return JsonResponse({'result': 'failed','pathname':pathCurrentName})
 
 
+# def delete_shed(request, shedId):
+#     print('delete_shed')
+#     # filter paths
+#     print('shedId:', shedId)
+#     if dbManager.removeShed(shedId):
+#         print('delete success')
+#         pass
+#         # todo : return the response
+#     context = {
+#         'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
+#     }
+#     return render(request, 'link_db/link_db.html', context=context)
 def delete_shed(request, shedId):
     print('delete_shed')
     # filter paths
     print('shedId:', shedId)
-    if dbManager.removeShed(shedId):
+    result = dbManager.deleteShedDirectly(shedId)
+    if result>0:
         print('delete success')
-        pass
-        # todo : return the response
-    context = {
-        'shedsMapToPaths': json.dumps(dbManager.shedsMapToPaths),
-    }
-    return render(request, 'link_db/link_db.html', context=context)
-
+        return JsonResponse({'result':'success','deletecount': result})
+    return JsonResponse({'result':'fail','deletecount': result})
 
 def decodePathLine_toPolygon(request, pathName, pathLine):
     print('decodePathLine_toPolygon')
@@ -159,3 +163,13 @@ def showPath(request, pathName):
     }
 
     return render(request, 'link_db/showPath.html', context=context)
+
+def updatePathName(request,option,shedId,oldPathName,newPathName,note):
+    ### update pathname
+    print('updatePathName',option)
+    if option == 'updatePathName':
+        if dbManager.updatePathName(shedId,oldPathName,newPathName):
+            return JsonResponse({'result':'success','oldpathname': oldPathName,'newpathname':newPathName})
+        return JsonResponse({'result':'fail','oldpathname': oldPathName,'newpathname':newPathName})
+    
+    return JsonResponse({'result':'fail'})

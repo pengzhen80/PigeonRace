@@ -13,7 +13,8 @@ urlpatterns = [
     path('link_db/delete_shed/<str:shedId>', views.delete_shed, name='delete_shed'),
     path('link_db/decodePathLine_toPolygon/<str:pathName>/<str:pathLine>', views.decodePathLine_toPolygon, name='decodePathLine_toPolygon'),
     path('link_db/showPath/<str:pathName>', views.showPath, name='showPath'),
-    path('link_db/<str:shedId>/<str:paths>', views.delete_paths, name='delete_paths'),
+    # path('link_db/<str:shedId>/<str:paths>', views.delete_paths, name='delete_paths'),
+    path('link_db/<str:shedId>/<str:path>', views.delete_path, name='delete_path'),
     path('link_db/<str:shedId>/<str:pathOriginalName>/<str:pathCurrentName>/<str:note>', views.insert_path, name='insert_path'),
-    # path('link_db/<int:option>/<str:pathName>', views.showPath, name='showPath'),
+    path('link_db/<str:option>/<str:shedId>/<str:oldPathName>/<str:newPathName>/<str:note>', views.updatePathName, name='updatePathName'),
 ]

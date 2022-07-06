@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>禁航區管理</title>
+  <script>  src = 'https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js'</script>
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <form action="/gpxManage/link_db/test" method="post">
+    {% csrf_token %}
+    <button type="submit" name='linkTestDB' id="button_linkTestDB"> </button>
+  </form>
+  <form action="/gpxManage/link_db/real" method="post">
+    {% csrf_token %}
+    <button type="submit" name='linkRealDB' id="button_linkRealDB"> </button>
+  </form>
+
+  <script>
+    // seperate ui and function
+    // set ui here and callback function
+    // let button_link_db = ui_manager.Add_button('button_link_db', { 'backgroundColor': 'rgba(0,0,0,.5)', 'opacity': '0.5', 'position': 'absolute', 'bottom': '90%', 'left': '22%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' }, '<span style="font-size:150%">' + '連接' + '</span> ');
+    // let button_link_db_test = ui_manager.AddElement_AddSubmit('button_link_db_test', { 'backgroundColor': 'rgba(0,0,0,.5)', 'opacity': '0.5', 'position': 'absolute', 'bottom': '90%', 'left': '30%', 'height': '6%', 'border-radius': '2/4em', 'width': '10%', 'color': 'white', 'text-align': 'center' }, '<span style="font-size:150%">' + '連接' + '</span> ');
+    var button_link_db_test = document.getElementById('button_linkTestDB');
+    button_link_db_test.style.position = 'absolute';
+    button_link_db_test.style.bottom = '90%';
+    button_link_db_test.style.left = '1%';
+    button_link_db_test.style.height = '6%';
+    button_link_db_test.style.width = '15%';
+    button_link_db_test.innerHTML = '連接測試服務器';
+
+    var button_link_db_test = document.getElementById('button_linkRealDB');
+    button_link_db_test.style.position = 'absolute';
+    button_link_db_test.style.bottom = '90%';
+    button_link_db_test.style.left = '21%';
+    button_link_db_test.style.height = '6%';
+    button_link_db_test.style.width = '15%';
+    button_link_db_test.innerHTML = '連接正式服務器';
+
+
+    // var button_link_db_test = document.getElementById('button_link_test');
+    // button_link_db_test.style.position = 'absolute';
+    // button_link_db_test.style.bottom = '80%';
+    // button_link_db_test.style.left = '21%';
+    // button_link_db_test.style.height = '6%';
+    // button_link_db_test.style.width = '15%';
+    // button_link_db_test.innerHTML = '連接測試';
+
+  </script>
+</body>
+
+</html>

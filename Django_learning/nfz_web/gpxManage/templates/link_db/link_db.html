@@ -10,7 +10,7 @@
 
 <body>
     <!-- <canvas id="myChart_PigeonInfos" width="200" height="100"></canvas> -->
-    <input id="fileUploader" type="file" multiple="multiple" />
+    <input id="fileUploader" type="file" multiple="multiple" accept=".gpx" />
     <!-- <div>數據預覽：</div> -->
     <!-- <div id="fileList"></div> -->
     <select id="pathNameList" size=20 multiple></select>
@@ -20,295 +20,6 @@
     <input id='pathNameAlter_button_pre' type='button' value='新增前綴' />
     <input id='pathNameAlter_button_end' type='button' value='新增後綴' />
     <script>
-        class PathMangement {
-            //paths: [{name: '', data: ''}]
-            constructor() {
-                //parse gpx files
-                this.paths = [];
-                this.originalPaths = [];
-                this.originPolygon = [];
-                // var bbox = turf.bbox(features);
-                //alter path to polygons
-            }
-            decodePath(paths) {
-                //decode path to polygon
-                // console.log(paths[0]['data']);
-                var parser = new DOMParser();
-                for (var index = 0; index < paths.length; index++) {
-                    var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
-                    // console.log(xmlDoc.getElementsByTagName("title"));
-                    // console.log(xmlDoc.getElementsByTagName("trkpt"));
-                    var path = [];
-                    var trkpts = xmlDoc.getElementsByTagName("trkpt");
-                    for (var i = 0; i < trkpts.length; i++) {
-                        var cell = {};
-                        var lat = trkpts[i].getAttribute("lat");
-                        var lon = trkpts[i].getAttribute("lon");
-                        cell['lat'] = lat;
-                        cell['lon'] = lon;
-                        path.push(cell);
-                        // console.log(i,'lat: '+lat+' lon: '+lon);
-                    }
-                    ///filter path by one kilometer
-                    var path_line = this.filter_pathByOneKilo(path);
-                    /// make path_polygon by path_line
-                    var polygon = this.make_polygon(path_line);
-
-                    this.paths.push({ name: paths[index]['name'], data: polygon });
-                    this.originalPaths.push({ name: paths[index]['name'], data: path });
-                }
-                console.log(this.paths.length);
-                // return this.paths;
-            }
-
-            GetOringinalPaths() {
-                return this.originalPaths;
-            }
-
-            Rename_path(oldname, newname) {
-                for (var index = 0; index < this.paths.length; index++) {
-                    if (this.paths[index]['name'] == oldname) {
-                        this.paths[index]['name'] = newname;
-                    }
-                }
-            }
-
-            GetPathByName(name) {
-                for (var index = 0; index < this.paths.length; index++) {
-                    if (this.paths[index]['name'] == name) {
-                        return this.paths[index]['data'];
-                    }
-                }
-            }
-
-            //alter path to polygons
-            filter_pathByOneKilo(path) {
-                var result = [];
-                var reference = [parseFloat(path[0]['lat']), parseFloat(path[0]['lon'])];
-                result.push(reference)
-                for (var i = 0; i < path.length; i++) {
-                    var cur_point = [parseFloat(path[i]['lat']), parseFloat(path[i]['lon'])];
-                    var distance = turf.distance(turf.point(reference), turf.point(cur_point), { units: 'meters' });
-
-                    if (distance >= 1000) {
-                        reference = cur_point;
-                        result.push(reference);
-                    }
-                }
-                var last_point = [parseFloat(path[path.length - 1]['lat']), parseFloat(path[path.length - 1]['lon'])];
-                result.push(last_point);
-                // console.log(result.length);
-                return result;
-            }
-
-            make_polygon(path) {
-                var polygon = [];
-                for (var i = 0; i < path.length - 1; i++) {
-                    var firstPoint = turf.point(path[i]);
-                    var secondPoint = turf.point(path[i + 1]);
-                    var bearing = turf.bearing(firstPoint, secondPoint);
-                    // console.log(bearing);
-                    var makePoint_first_bearing = bearing + 90;
-                    var makePoint_second_bearing = bearing - 90;
-                    var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
-                    var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
-                    // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
-                    polygon.unshift(makePoint_first.geometry.coordinates);
-                    polygon.push(makePoint_second.geometry.coordinates);
-                }
-
-                var firstPoint = turf.point(path[path.length - 2]);
-                var secondPoint = turf.point(path[path.length - 1]);
-                var bearing = turf.bearing(firstPoint, secondPoint);
-                // console.log(bearing);
-                var makePoint_first_bearing = bearing + 90;
-                var makePoint_second_bearing = bearing - 90;
-                var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
-                var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
-                // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
-                polygon.unshift(makePoint_second.geometry.coordinates);
-                polygon.push(makePoint_first.geometry.coordinates);
-
-                // console.log(path.length,polygon.length);
-                return polygon;
-            }
-
-            AddOriginPolygon(pathName, polygon) {
-                this.originPolygon.push({ name: pathName, data: polygon });
-            }
-
-            GetOriginPolygon(pathName) {
-                for (var index = 0; index < this.originPolygon.length; index++) {
-                    if (this.originPolygon[index]['name'] == pathName) {
-                        return this.originPolygon[index]['data'];
-                    }
-                }
-                console.log('no such path');
-            }
-
-        }
-
-        ////load gpx files and show them in the page
-        let pathManger = new PathMangement();
-        var fileUploader = document.getElementById("fileUploader");
-        fileUploader.style['position'] = 'absolute';;
-        fileUploader.style['top'] = '10%';
-        fileUploader.style['left'] = '50%';
-        // fileUploader.innerHTML = '選擇文件';
-        // var fileList = document.getElementById("fileList");
-        var pathNameList = document.getElementById("pathNameList");
-        pathNameList.style['width'] = '15%';
-        pathNameList.style['height'] = '60%';
-        pathNameList.style['position'] = 'absolute';;
-        pathNameList.style['top'] = '20%';
-        pathNameList.style['left'] = '50%';
-        /// add right click event to update path name by pre or end
-        pathNameList.addEventListener('click', function (ev) {
-            ev.preventDefault();
-            console.log('success!');
-            return false;
-        }, false);
-        // update path name by pre or end
-        var pathNameAlter_text = document.getElementById("pathNameAlter_text");
-        pathNameAlter_text.style['position'] = 'absolute';;
-        pathNameAlter_text.style['top'] = '25%';
-        pathNameAlter_text.style['left'] = '70%';
-        pathNameAlter_text.setAttribute('placeholder', '请输入前綴或者後綴');
-        var pathNameAlter_button_pre = document.getElementById("pathNameAlter_button_pre");
-        pathNameAlter_button_pre.style['position'] = 'absolute';;
-        pathNameAlter_button_pre.style['top'] = '30%';
-        pathNameAlter_button_pre.style['width'] = '8%';
-        pathNameAlter_button_pre.style['left'] = '70%';
-        var pathNameAlter_button_end = document.getElementById("pathNameAlter_button_end");
-        pathNameAlter_button_end.style['position'] = 'absolute';;
-        pathNameAlter_button_end.style['top'] = '30%';
-        pathNameAlter_button_end.style['width'] = '8%';
-        pathNameAlter_button_end.style['left'] = '80%';
-        pathNameAlter_button_pre.addEventListener('click', function (ev) {
-            console.log('add pre');
-            if (pathNameAlter_text.value != '') {
-                var pathNameList_selected = pathNameList.selectedOptions;
-                console.log(pathNameList_selected.length);
-                for (var i = 0; i < pathNameList_selected.length; i++) {
-                    // pathNameList_selected[i].value = pathNameAlter_text.value + pathNameList_selected[i].value;
-                    // console.log(pathNameList.selectedOptions[i].value);
-                    pathNameList_selected[i].innerHTML = pathNameAlter_text.value + pathNameList_selected[i].innerHTML;
-                }
-                // pathNameList.update();
-            }
-            return false;
-        }, false);
-        pathNameAlter_button_end.addEventListener('click', function (ev) {
-            console.log('add end');
-            if (pathNameAlter_text.value != '') {
-                var pathNameList_selected = pathNameList.selectedOptions;
-                for (var i = 0; i < pathNameList_selected.length; i++) {
-                    // pathNameList_selected[i].value = pathNameList_selected[i].value + pathNameAlter_text.value;
-                    pathNameList_selected[i].innerHTML = pathNameList_selected[i].innerHTML + pathNameAlter_text.value;
-                }
-            }
-            return false;
-        }, false);
-
-        //store data in the form of array : element[0] = file name, element[1] = file content
-        let gpxFileDatas = [];
-
-        //用來讀取file資料的FileReader
-        var fileReader = new FileReader();
-
-        //監控#fileUploader的值變化
-        fileUploader.addEventListener("change", function (event) {
-            if (this.files.length > 0) {
-                //有選取file時，使用fileReader讀取file資料
-                // console.log(fileReader.readAsText(this.files[0]));
-                //讀取完成後，將資料轉成text
-                // console.log(this.files[i].name);
-                readmultifiles(this.files)
-            } else {
-                //沒有選取file時，例如選擇取消，
-                //將<img>的src設成""
-            }
-        }, false);
-
-        function readmultifiles(files) {
-            function readFile(index) {
-                //when all files loaded , start to decode datas
-                if (index >= files.length) {
-                    pathManger.decodePath(gpxFileDatas);
-                    func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPaths());
-                    return;
-                }
-
-                // store file name and file content to gpxFileDatas
-                var gpxFileDatas_ele = {};
-                /// path name init from file name
-                gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
-                /// add path name to pathNameList
-                var opt = document.createElement('option');
-                opt.value = gpxFileDatas_ele['name'];
-                opt.innerHTML = gpxFileDatas_ele['name'];
-                pathNameList.appendChild(opt);
-
-                // fileList.innerHTML += "<br>" + files[index].name.split('.')[0] + "</br>";
-
-                var file = files[index];
-                fileReader.onload = function (e) {
-                    // get file content  
-                    var data = e.target.result;
-                    // console.log(data);
-                    gpxFileDatas_ele['data'] = data;
-                    gpxFileDatas.push(gpxFileDatas_ele);
-                    // do sth with bin
-                    readFile(index + 1)
-                }
-                fileReader.readAsText(file);
-            }
-            readFile(0);
-        }
-
-        function func_sendRequest_makePolygonByOldCalculater(paths) {
-            //make paths to str
-            // console.log('origin paths', paths);
-            for (var i = 0; i < paths.length; i++) {
-                var pathname = paths[i]['name'];
-                var path = paths[i]['data'];
-                var path_normalize = [];
-                for (var j = 0; j < path.length; j++) {
-                    path_normalize.push(path[j]['lat']);
-                    path_normalize.push(path[j]['lon']);
-                }
-
-                var str_paths = path_normalize.toString();
-                console.log(pathname, str_paths.length);
-                //send to servers
-                function reqListener() {
-                    // console.log(typeof (this.responseText), typeof (this.response));
-                    // console.log(this)
-
-                    var response = JSON.parse(this.responseText);
-                    // console.log(response);
-
-                    var pathName = decodeURI(response['pathname']);
-                    var polygon = response['polygon'];
-                    console.log('pathName', pathName);
-
-                    //add polygon to gpxmanager
-                    pathManger.AddOriginPolygon(pathName, polygon);
-                }
-
-                var oReq = new XMLHttpRequest();
-                oReq.addEventListener("load", reqListener);
-                // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
-                oReq.open("post", 'decodePathLine_toPolygon' + '/' + pathname + '/' + pathname);
-                // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-                oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}'); 
-                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
-                oReq.send(str_paths);
-            }
-        }
-
-        // seperate ui and function
-        // set ui here and callback function
         class UI_allUiElementsManagement {
             constructor() {
                 // this.buttons = [];
@@ -438,39 +149,551 @@
                 document.body.appendChild(ele);
                 return ele;
             }
+
+            CreateElement_Label(id, style, text = '') {
+                if (document.getElementById(id)) {
+                    console.log('add button error', id, 'already exist');
+                }
+                console.log('add label');
+                var tmp_label = document.createElement('label');
+                tmp_label.setAttribute('id', id);
+                // tmp_button.setAttribute('style',style);
+
+                tmp_label.style.bottom = style['bottom'];
+                tmp_label.style.left = style['left'];
+                tmp_label.style.position = style['position'];
+                tmp_label.style['text-align'] = style['text-align'];
+                tmp_label.style.height = style['height'];
+                tmp_label.style['border-radius'] = style['border-radius'];
+                tmp_label.style['width'] = style['width'];
+                tmp_label.style.backgroundColor = style['backgroundcolor'];
+                // tmp_button.style.opacity = "0.5";
+                tmp_label.style.color = style['color'];
+                // canvas.style.color = 'black';
+
+                tmp_label.innerHTML = text;
+                // console.log(tmp_button.style);
+                // console.log(tmp_button.getAttribute('style'));
+
+                // this.buttons.push(tmp_button);
+                // document.body.appendChild(tmp_label);
+                return tmp_label;
+            }
+
+            AddElement_Label(id, style, text = '') {
+                if (document.getElementById(id)) {
+                    console.log('add button error', id, 'already exist');
+                }
+                console.log('add label');
+                var tmp_label = document.createElement('label');
+                tmp_label.setAttribute('id', id);
+                // tmp_button.setAttribute('style',style);
+
+                tmp_label.style.bottom = style['bottom'];
+                tmp_label.style.left = style['left'];
+                tmp_label.style.position = style['position'];
+                tmp_label.style['text-align'] = style['text-align'];
+                tmp_label.style.height = style['height'];
+                tmp_label.style['border-radius'] = style['border-radius'];
+                tmp_label.style['width'] = style['width'];
+                // canvas.style.border   = "1px solid";
+                // console.log(style['backgroundcolor']);
+                tmp_label.style.backgroundColor = style['backgroundcolor'];
+                // tmp_button.style.opacity = "0.5";
+                tmp_label.style.color = style['color'];
+                // canvas.style.color = 'black';
+
+                tmp_label.innerHTML = text;
+                // console.log(tmp_button.style);
+                // console.log(tmp_button.getAttribute('style'));
+
+                // this.buttons.push(tmp_button);
+                document.body.appendChild(tmp_label);
+                return tmp_label;
+            }
+
+            CreateElement_Div(id, style) {
+                if (document.getElementById(id)) {
+                    console.log('add div error', id, 'already exist');
+                }
+                console.log('add div');
+                var tmp_div = document.createElement('div');
+                tmp_div.setAttribute('id', id);
+                // tmp_button.setAttribute('style',style);
+
+                tmp_div.style.bottom = style['bottom'];
+                tmp_div.style.left = style['left'];
+                tmp_div.style.position = style['position'];
+                tmp_div.style.height = style['height'];
+                tmp_div.style['width'] = style['width'];
+                tmp_div.style.backgroundColor = style['backgroundcolor'];
+                // tmp_div.style.color = style['color'];
+
+                return tmp_div;
+            }
+
+            AddElement_Div(id, style) {
+                if (document.getElementById(id)) {
+                    console.log('add div error', id, 'already exist');
+                }
+                console.log('add div');
+                var tmp_div = document.createElement('div');
+                tmp_div.setAttribute('id', id);
+                // tmp_button.setAttribute('style',style);
+
+                tmp_div.style.bottom = style['bottom'];
+                tmp_div.style.left = style['left'];
+                tmp_div.style.position = style['position'];
+                tmp_div.style.height = style['height'];
+                tmp_div.style['width'] = style['width'];
+                tmp_div.style.backgroundColor = style['backgroundcolor'];
+                // tmp_div.style.color = style['color'];
+                document.body.appendChild(tmp_div);
+
+                return tmp_div;
+            }
         };
         let ui_manager = new UI_allUiElementsManagement();
+        class PathMangement {
+            //paths: [{name: '', data: ''}]
+            constructor() {
+                //parse gpx files
+                this.paths = [];
+                this.originalPaths = [];
+                this.originPolygon = [];
+                // var bbox = turf.bbox(features);
+                //alter path to polygons
+            }
+            decodePath(paths) {
+                //decode path to polygon
+                // console.log(paths[0]['data']);
+                var parser = new DOMParser();
+                for (var index = 0; index < paths.length; index++) {
+                    var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
+                    // console.log(xmlDoc.getElementsByTagName("title"));
+                    // console.log(xmlDoc.getElementsByTagName("trkpt"));
+                    var path = [];
+                    var trkpts = xmlDoc.getElementsByTagName("trkpt");
+                    for (var i = 0; i < trkpts.length; i++) {
+                        var cell = {};
+                        var lat = trkpts[i].getAttribute("lat");
+                        var lon = trkpts[i].getAttribute("lon");
+                        cell['lat'] = lat;
+                        cell['lon'] = lon;
+                        path.push(cell);
+                        // console.log(i,'lat: '+lat+' lon: '+lon);
+                    }
+                    ///filter path by one kilometer
+                    var path_line = this.filter_pathByOneKilo(path);
+                    /// make path_polygon by path_line
+                    var polygon = this.make_polygon(path_line);
+
+                    this.paths.push({ name: paths[index]['name'], data: polygon });
+                    this.originalPaths.push({ name: paths[index]['name'], data: path });
+                }
+                console.log(this.paths.length);
+                // return this.paths;
+            }
+
+            GetOringinalPaths() {
+                return this.originalPaths;
+            }
+            GetOringinalPathsByPathNames(pathNames) {
+                var result = [];
+                for (var i = 0; i < this.originalPaths.length; i++) {
+                    if (pathNames.includes(this.originalPaths[i]['name'])) {
+                        result.push(this.originalPaths[i]);
+                    }
+                }
+                return result;
+            }
+
+            Rename_path(oldname, newname) {
+                for (var index = 0; index < this.paths.length; index++) {
+                    if (this.paths[index]['name'] == oldname) {
+                        this.paths[index]['name'] = newname;
+                    }
+                }
+            }
+
+            GetPathByName(name) {
+                for (var index = 0; index < this.paths.length; index++) {
+                    if (this.paths[index]['name'] == name) {
+                        return this.paths[index]['data'];
+                    }
+                }
+            }
+
+            //alter path to polygons
+            filter_pathByOneKilo(path) {
+                var result = [];
+                var reference = [parseFloat(path[0]['lat']), parseFloat(path[0]['lon'])];
+                result.push(reference)
+                for (var i = 0; i < path.length; i++) {
+                    var cur_point = [parseFloat(path[i]['lat']), parseFloat(path[i]['lon'])];
+                    var distance = turf.distance(turf.point(reference), turf.point(cur_point), { units: 'meters' });
+
+                    if (distance >= 1000) {
+                        reference = cur_point;
+                        result.push(reference);
+                    }
+                }
+                var last_point = [parseFloat(path[path.length - 1]['lat']), parseFloat(path[path.length - 1]['lon'])];
+                result.push(last_point);
+                // console.log(result.length);
+                return result;
+            }
+
+            make_polygon(path) {
+                var polygon = [];
+                for (var i = 0; i < path.length - 1; i++) {
+                    var firstPoint = turf.point(path[i]);
+                    var secondPoint = turf.point(path[i + 1]);
+                    var bearing = turf.bearing(firstPoint, secondPoint);
+                    // console.log(bearing);
+                    var makePoint_first_bearing = bearing + 90;
+                    var makePoint_second_bearing = bearing - 90;
+                    var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+                    var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+                    // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+                    polygon.unshift(makePoint_first.geometry.coordinates);
+                    polygon.push(makePoint_second.geometry.coordinates);
+                }
+
+                var firstPoint = turf.point(path[path.length - 2]);
+                var secondPoint = turf.point(path[path.length - 1]);
+                var bearing = turf.bearing(firstPoint, secondPoint);
+                // console.log(bearing);
+                var makePoint_first_bearing = bearing + 90;
+                var makePoint_second_bearing = bearing - 90;
+                var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+                var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+                // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+                polygon.unshift(makePoint_second.geometry.coordinates);
+                polygon.push(makePoint_first.geometry.coordinates);
+
+                // console.log(path.length,polygon.length);
+                return polygon;
+            }
+
+            AddOriginPolygon(pathName, polygon) {
+                this.originPolygon.push({ name: pathName, data: polygon });
+            }
+
+            GetOriginPolygon(pathName) {
+                for (var index = 0; index < this.originPolygon.length; index++) {
+                    if (this.originPolygon[index]['name'] == pathName) {
+                        return this.originPolygon[index]['data'];
+                    }
+                }
+                console.log('no such path');
+            }
+            GetAllPathNames() {
+                var result = [];
+                for (var i = 0; i < this.paths.length; i++) {
+                    result.push(this.paths[i]['name']);
+                }
+                return result;
+            }
+            RemovePathByNames(pathNames) {
+                console.log('delete path:', pathNames);
+                for (var i = 0; i < this.paths.length; i++) {
+                    console.log(this.paths[i]['name']);
+                    if (pathNames.includes(this.paths[i]['name'])) {
+                        this.paths.splice(i, 1);
+                        this.originalPaths.splice(i, 1);
+                        this.originPolygon.splice(i, 1);
+                        // console.log(this.paths);
+                        i--;
+                    }
+                }
+                // console.log(this.paths);
+
+            }
+        }
+
+        ////load gpx files and show them in the page
+        let pathManger = new PathMangement();
+        var fileUploader = document.getElementById("fileUploader");
+        fileUploader.style['position'] = 'absolute';;
+        fileUploader.style['top'] = '10%';
+        fileUploader.style['left'] = '50%';
+        // fileUploader.innerHTML = '選擇文件';
+        // var fileList = document.getElementById("fileList");
+        let pathNameList = document.getElementById("pathNameList");
+        pathNameList.style['width'] = '15%';
+        pathNameList.style['height'] = '60%';
+        pathNameList.style['position'] = 'absolute';;
+        pathNameList.style['top'] = '20%';
+        pathNameList.style['left'] = '50%';
+
+        // update path name by pre or end
+        var pathNameAlter_text = document.getElementById("pathNameAlter_text");
+        pathNameAlter_text.style['position'] = 'absolute';;
+        pathNameAlter_text.style['top'] = '25%';
+        pathNameAlter_text.style['left'] = '70%';
+        pathNameAlter_text.setAttribute('placeholder', '请输入前綴或者後綴');
+        var pathNameAlter_button_pre = document.getElementById("pathNameAlter_button_pre");
+        pathNameAlter_button_pre.style['position'] = 'absolute';;
+        pathNameAlter_button_pre.style['top'] = '30%';
+        pathNameAlter_button_pre.style['width'] = '8%';
+        pathNameAlter_button_pre.style['left'] = '70%';
+        var pathNameAlter_button_end = document.getElementById("pathNameAlter_button_end");
+        pathNameAlter_button_end.style['position'] = 'absolute';;
+        pathNameAlter_button_end.style['top'] = '30%';
+        pathNameAlter_button_end.style['width'] = '8%';
+        pathNameAlter_button_end.style['left'] = '80%';
+        pathNameAlter_button_pre.addEventListener('click', function (ev) {
+            console.log('add pre');
+            if (pathNameAlter_text.value != '') {
+                var pathNameList_selected = pathNameList.selectedOptions;
+                console.log(pathNameList_selected.length);
+                for (var i = 0; i < pathNameList_selected.length; i++) {
+                    // pathNameList_selected[i].value = pathNameAlter_text.value + pathNameList_selected[i].value;
+                    // console.log(pathNameList.selectedOptions[i].value);
+                    pathNameList_selected[i].innerHTML = pathNameAlter_text.value + pathNameList_selected[i].innerHTML;
+                }
+                // pathNameList.update();
+            }
+            return false;
+        }, false);
+        pathNameAlter_button_end.addEventListener('click', function (ev) {
+            console.log('add end');
+            if (pathNameAlter_text.value != '') {
+                var pathNameList_selected = pathNameList.selectedOptions;
+                for (var i = 0; i < pathNameList_selected.length; i++) {
+                    // pathNameList_selected[i].value = pathNameList_selected[i].value + pathNameAlter_text.value;
+                    pathNameList_selected[i].innerHTML = pathNameList_selected[i].innerHTML + pathNameAlter_text.value;
+                }
+            }
+            return false;
+        }, false);
+
+        //add process of loading files
+        let process_loadingFiles_max = ui_manager.AddElement_Div('process_loadingFiles_max', { 'position': 'absolute', 'bottom': '85%', 'left': '50%', 'width': '15%', 'backgroundcolor': 'gray' });
+        let process_loadingFiles_cur = ui_manager.CreateElement_Label('process_loadingFiles_cur', { 'position': 'absolute', 'width': '100%', 'backgroundcolor': 'gray', 'text-align': 'center' }, '');
+        process_loadingFiles_max.appendChild(process_loadingFiles_cur);
+
+
+        //store data in the form of array : element[0] = file name, element[1] = file content
+        // let gpxFileDatas = [];
+
+        //用來讀取file資料的FileReader
+        var fileReader = new FileReader();
+
+        //監控#fileUploader的值變化
+        fileUploader.addEventListener("change", function (event) {
+            if (this.files.length > 0) {
+                //有選取file時，使用fileReader讀取file資料
+                // console.log(fileReader.readAsText(this.files[0]));
+                //讀取完成後，將資料轉成text
+                console.log(this.files.length);
+                readmultifiles(this.files)
+            } else {
+                //沒有選取file時，例如選擇取消，
+                //將<img>的src設成""
+            }
+        }, false);
+
+        function readmultifiles(files) {
+            var gpxFileDatas = [];
+            function readFile(index) {
+                //when all files loaded , start to decode datas
+                if (index >= files.length) {
+                    var old_pathNames = pathManger.GetAllPathNames();
+                    var filtered_gpxFileDatas = [];
+                    var newPathNames = [];
+                    var repeatedPathNames_str = '';
+                    console.log(gpxFileDatas);
+                    for (var index_gpxData = 0; index_gpxData < gpxFileDatas.length; index_gpxData++) {
+                        if (old_pathNames.includes(gpxFileDatas[index_gpxData]['name'])) {
+                            console.log('repeated path:', gpxFileDatas[index_gpxData]['name']);
+                            repeatedPathNames_str += gpxFileDatas[index_gpxData]['name'] + ',';
+                            continue;
+                        }
+                        else {
+                            filtered_gpxFileDatas.push(gpxFileDatas[index_gpxData]);
+                            newPathNames.push(gpxFileDatas[index_gpxData]['name']);
+                        }
+                    }
+                    if (repeatedPathNames_str.length > 0) {
+                        alert('重複載入的路徑:' + repeatedPathNames_str);
+                    }
+
+                    pathManger.decodePath(filtered_gpxFileDatas);
+                    func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPathsByPathNames(newPathNames));
+                    // console.log(gpxFileDatas);
+                    // pathManger.decodePath(gpxFileDatas);
+                    // func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPaths());
+                    return;
+                }
+
+                // store file name and file content to gpxFileDatas
+                var gpxFileDatas_ele = {};
+                /// path name init from file name
+                gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
+                // /// add path name to pathNameList
+                // var opt = document.createElement('option');
+                // opt.value = gpxFileDatas_ele['name'];
+                // opt.innerHTML = gpxFileDatas_ele['name'];
+                // pathNameList.appendChild(opt);
+
+                // fileList.innerHTML += "<br>" + files[index].name.split('.')[0] + "</br>";
+
+                var file = files[index];
+                fileReader.onload = function (e) {
+                    // get file content  
+                    var data = e.target.result;
+                    // console.log(data);
+                    gpxFileDatas_ele['data'] = data;
+                    gpxFileDatas.push(gpxFileDatas_ele);
+                    // do sth with bin
+                    readFile(index + 1)
+                }
+                fileReader.readAsText(file);
+            }
+            readFile(0);
+        }
+
+        function func_sendRequest_makePolygonByOldCalculater(paths) {
+            //make paths to str
+            // console.log('origin paths', paths);
+            var total_pathToLoad = paths.length;
+            var total_pathLoaded = 0;
+
+            process_loadingFiles_cur.style.backgroundColor = 'green';
+            process_loadingFiles_cur.style['width'] = '0%';
+
+
+
+            for (var i = 0; i < paths.length; i++) {
+                var pathname = paths[i]['name'];
+                // if(old_pathNames.includes(pathname))
+                // {
+                //     continue;
+                // }
+
+                var path = paths[i]['data'];
+                var path_normalize = [];
+                for (var j = 0; j < path.length; j++) {
+                    path_normalize.push(path[j]['lat']);
+                    path_normalize.push(path[j]['lon']);
+                }
+
+                var str_paths = path_normalize.toString();
+                console.log(pathname, str_paths.length);
+                //send to servers
+                function reqListener() {
+                    // console.log(typeof (this.responseText), typeof (this.response));
+                    // console.log(this)
+
+                    var response = JSON.parse(this.responseText);
+                    // console.log(response);
+
+                    var pathName = decodeURI(response['pathname']);
+                    var polygon = response['polygon'];
+                    console.log('pathName', pathName);
+
+                    //add polygon to gpxmanager
+                    pathManger.AddOriginPolygon(pathName, polygon);
+
+                    /// add path name to pathNameList
+                    var opt = document.createElement('option');
+                    opt.value = pathName;
+                    opt.innerHTML = pathName;
+                    pathNameList.appendChild(opt);
+
+                    total_pathLoaded++;
+                    if (total_pathLoaded == total_pathToLoad) {
+                        // process_insertPaths_selectList_Shed_Paths_cur.style['width'] = '100%';
+                        // process_insertPaths_selectList_Shed_Paths_cur.innerHTML = '100%';
+                        alert('加載路徑:' + total_pathToLoad.toString());
+                        process_loadingFiles_cur.innerHTML = '';
+                        process_loadingFiles_cur.style.backgroundColor = 'gray';
+                    }
+                    else {
+                        var process_percent = parseInt((total_pathLoaded / total_pathToLoad) * 100);
+                        process_loadingFiles_cur.style['width'] = process_percent.toString() + '%';
+                        process_loadingFiles_cur.innerHTML = process_percent.toString() + '%';
+                    }
+                }
+
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+                oReq.open("post", 'decodePathLine_toPolygon' + '/' + pathname + '/' + pathname);
+                // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+                oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+                oReq.send(str_paths);
+            }
+        }
+
+        // seperate ui and function
+        // set ui here and callback function
+
+        // let ui_manager = new UI_allUiElementsManagement();
         ///set auto select pathname to pathNameList
+        let label_pathNamelist_selectedCount = ui_manager.AddElement_Label('label_pathNamelist_selectedCount', { 'position': 'absolute', 'bottom': '50%', 'left': '70%', 'width': '8%' }, '0');
+        pathNameList.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            // console.log('click');
+            var eles = pathNameList.options;
+            var count_selected = 0;
+            for (var i = 0; i < eles.length; i++) {
+                // console.log(eles[i].innerHTML);
+                if (eles[i].selected == true) {
+                    count_selected++;
+                }
+            }
+            label_pathNamelist_selectedCount.innerHTML = count_selected;
+            return false;
+        }, false);
+
         let textInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('textInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '45%', 'left': '70%', 'width': '15%' }, '輸入名字列表');
         let filterInput_autoselect_pathNamelist = ui_manager.AddElement_TextInput('filterInput_autoselect_pathNamelist', { 'position': 'absolute', 'bottom': '40%', 'left': '70%', 'width': '5%' }, '分隔符');
-        let button_autoselect_pathNameList = ui_manager.Add_button('button_autoselect_pathNameList', { 'position': 'absolute', 'bottom': '40%', 'left': '80%', 'width': '5%' }, '搜索');
+        let button_autoselect_pathNameList = ui_manager.Add_button('button_autoselect_pathNameList', { 'position': 'absolute', 'bottom': '40%', 'left': '80%', 'width': '8%' }, '搜索路徑');
         function func_cb_button_autoselect_pathNameList() {
             // let pathNameList = document.getElementById('pathNameList');
             // let filterInput_autoselect_pathNamelist = document.getElementById('filterInput_autoselect_pathNamelist');
             let filter = filterInput_autoselect_pathNamelist.value;
             var namestr = textInput_autoselect_pathNamelist.value;
+            if (namestr.length < 1) {
+                return;
+            }
 
             var namelist;
             if (filter) {
                 namelist = namestr.split(filter);
             }
             else {
-                namelist = namestr.split(' ');
+                namelist = namestr.split(',');
             }
 
             console.log(namelist);
+            //normalize namlist
+            for (var i = 0; i < namelist.length; i++) {
+                if (namelist[i].length < 1) {
+                    namelist.remove(i, 1)
+                }
+                // i--;
+            }
 
             let pathNameList_ele = pathNameList.options;
+            var count_selected = 0;
             // console.log(pathNameList_ele);
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 // console.log(pathNameList_ele[i].value);
+                pathNameList_ele[i].selected = false;
                 for (let j = 0; j < namelist.length; j++) {
                     if (pathNameList_ele[i].value.includes(namelist[j])) {
                         console.log('find');
                         pathNameList_ele[i].selected = true;
+                        count_selected++;
                     }
                 }
             }
+            label_pathNamelist_selectedCount.innerHTML = count_selected;
         }
         ui_manager.Add_CallBack('button_autoselect_pathNameList', func_cb_button_autoselect_pathNameList);
 
@@ -537,15 +760,33 @@
             else {
                 console.log('no path');
             }
+            //todo set selected number = 0
+            label_selectList_Shed_Paths_selectedCount.innerHTML = 0;
+
         }
+
 
         function func_cb_button_createShed() {
             shedId = input_text_createShed_Name.value;
+            if (shedId.length < 1) {
+                return;
+            }
+            //check repeated shedId
+            var eles = selectList_Sheds.options;
+            for (var i = 0; i < eles.length; i++) {
+                if (eles[i].value == shedId) {
+                    alert('新增公棚失敗：公棚名重複');
+                    return;
+                }
+            }
+
             console.log(shedId)
             var opt = document.createElement('option');
             opt.value = shedId;
             opt.innerHTML = shedId;
             selectList_Sheds.appendChild(opt);
+
+            // linkDb_sheds_paths.push({key:shedId,value:[]});
         }
         ui_manager.Add_CallBack('button_createShed', func_cb_button_createShed);
 
@@ -564,7 +805,19 @@
             if (paths != undefined) {
                 console.log('delete shed in server')
                 function reqListener() {
-                    // console.log(this.responseText);
+                    console.log(this.responseText);
+                    var response = JSON.parse(this.responseText);
+                    // console.log(response);
+                    var tmp_res = decodeURI(response['result']);
+                    var res_deleteCount = decodeURI(response['deletecount']);
+                    console.log(tmp_res);
+                    if ('success' === tmp_res) {
+                        //todo update selectList_Shed_Paths by result
+                        console.log('delete nfz paths number:', res_deleteCount);
+                        //clear selectList_Shed_Paths
+                        selectList_Shed_Paths.innerHTML = null;
+                        linkDb_sheds_paths[shedId] = [];
+                    }
                 }
 
                 //todo send requests
@@ -573,9 +826,6 @@
                 oReq.open("GET", 'delete_shed' + '/' + shedId);
                 oReq.send();
             }
-
-            //clear selectList_Shed_Paths
-            selectList_Shed_Paths.innerHTML = null;
         }
         ui_manager.Add_CallBack('button_deleteShed', func_cb_button_deleteShed);
 
@@ -590,41 +840,70 @@
                 selectList_Sheds.appendChild(option);
             }
         }
-
-
+        function add_db_label() {
+            var label_db_server_name = '{{ linkDb|safe }}';
+            if (label_db_server_name == 'test')
+                ui_manager.AddElement_Label('label_showDBServerName', { 'position': 'absolute', 'bottom': '90%', 'left': '40%', 'width': '10%' }, '測試服務器');
+            else {
+                ui_manager.AddElement_Label('label_showDBServerName', { 'position': 'absolute', 'bottom': '90%', 'left': '40%', 'width': '10%', 'color': 'red' }, '正式服務器');
+            }
+        }
+        add_db_label();
         ///set auto select pathname to selectList_Shed_Paths
+        let label_selectList_Shed_Paths_selectedCount = ui_manager.AddElement_Label('label_selectList_Shed_Paths_selectedCount', { 'position': 'absolute', 'bottom': '82%', 'left': '30%', 'width': '8%' }, '0');
         let textInput_autoselect_selectList_Shed_Paths = ui_manager.AddElement_TextInput('textInput_autoselect_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '75%', 'left': '30%', 'width': '15%' }, '輸入名字列表');
         let filterInput_autoselect_selectList_Shed_Paths = ui_manager.AddElement_TextInput('filterInput_autoselect_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '68%', 'left': '30%', 'width': '5%' }, '分隔符');
-        let button_autoselect_selectList_Shed_Paths = ui_manager.Add_button('button_autoselect_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '68%', 'left': '37%', 'width': '5%' }, '搜索');
+        let button_autoselect_selectList_Shed_Paths = ui_manager.Add_button('button_autoselect_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '68%', 'left': '37%', 'width': '8%' }, '搜索路徑');
+
         function func_cb_button_autoselect_selectList_Shed_Paths() {
             let filter = filterInput_autoselect_selectList_Shed_Paths.value;
             var namestr = textInput_autoselect_selectList_Shed_Paths.value;
+            if (namestr.length < 1) {
+                return;
+            }
             var namelist;
             if (filter) {
                 namelist = namestr.split(filter);
             }
             else {
-                namelist = namestr.split(' ');
+                namelist = namestr.split(',');
+            }
+            console.log(namelist);
+            //normalize namlist
+            for (var i = 0; i < namelist.length; i++) {
+                if (namelist[i].length < 1) {
+                    namelist.remove(i, 1)
+                }
+                // i--;
             }
             console.log(namelist);
 
             let pathNameList_ele = selectList_Shed_Paths.options;
+            var count_selected = 0;
             // console.log(pathNameList_ele);
             for (let i = 0; i < pathNameList_ele.length; i++) {
-                console.log(pathNameList_ele[i].value);
+                // console.log(pathNameList_ele[i].value);
+                pathNameList_ele[i].selected = false;
                 for (let j = 0; j < namelist.length; j++) {
                     if (pathNameList_ele[i].value.includes(namelist[j])) {
                         console.log('find');
                         pathNameList_ele[i].selected = true;
+                        count_selected++;
                         // break;
                     }
                 }
             }
+            console.log('selected path:', count_selected);
+            label_selectList_Shed_Paths_selectedCount.innerHTML = count_selected;
         }
         ui_manager.Add_CallBack('button_autoselect_selectList_Shed_Paths', func_cb_button_autoselect_selectList_Shed_Paths);
 
         ///set delete button 
-        let button_deletePaths_selectList_Shed_Paths = ui_manager.Add_button('button_deletePaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '55%', 'left': '30%', 'width': '8%' }, '刪除路徑');
+        let button_deletePaths_selectList_Shed_Paths = ui_manager.Add_button('button_deletePaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '60%', 'left': '30%', 'width': '8%' }, '刪除路徑');
+        let process_deletePaths_selectList_Shed_Paths_max = ui_manager.AddElement_Div('process_deletePaths_selectList_Shed_Paths_max', { 'position': 'absolute', 'bottom': '55%', 'left': '30%', 'width': '15%', 'backgroundcolor': 'gray' });
+        let process_deletePaths_selectList_Shed_Paths_cur = ui_manager.CreateElement_Label('process_deletePaths_selectList_Shed_Paths_cur', { 'position': 'absolute', 'width': '100%', 'backgroundcolor': 'gray', 'text-align': 'center' }, '');
+        process_deletePaths_selectList_Shed_Paths_max.appendChild(process_deletePaths_selectList_Shed_Paths_cur);
+
         function func_cb_button_deletePaths_selectList_Shed_Paths() {
             // console.log(selectList_Sheds.value);
             var shedId = selectList_Sheds.value;
@@ -633,47 +912,228 @@
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 if (pathNameList_ele[i].selected) {
                     paths.push(pathNameList_ele[i].value);
-                    selectList_Shed_Paths.removeChild(pathNameList_ele[i]);
-                    i--;
                 }
             }
-            // var localSend_value = { 'shedId': shedId, 'paths': paths };
-            ///update db 
-            var pathstr = '';
-            for (var i = 0; i < paths.length - 1; i++) {
-                pathstr += paths[i] + ',';
+            if (paths.length > 0) {
+                process_deletePaths_selectList_Shed_Paths_cur.style.backgroundColor = 'green';
+                process_deletePaths_selectList_Shed_Paths_cur.style['width'] = '0%';
             }
-            pathstr += paths[paths.length - 1];
+            var total_pathDelete_success = 0 ;
+            var total_pathDelete_fail = 0;
+            var total_pathToDelete =  paths.length;
+            // function reqListener() {
+            //     console.log(this.responseText);
+            //     var response = JSON.parse(this.responseText);
+            //     // console.log(response);
+            //     var tmp_res = decodeURI(response['result']);
+            //     console.log(tmp_res);
+            //     if ('success' === tmp_res) {
+            //         var res_pathnames = decodeURI(response['pathnames']);
+            //         var res_pathNameList = res_pathnames.split(',');
 
+            //         for (var i = 0; i < pathNameList_ele.length; i++) {
+            //             if (pathNameList_ele[i].selected) {
+            //                 if (res_pathNameList.includes(pathNameList_ele[i].value)) {
+            //                     selectList_Shed_Paths.removeChild(pathNameList_ele[i]);
+
+            //                     //todo remove pathname from old pathlist
+            //                     var shedId = selectList_Sheds.value;
+            //                     linkDb_sheds_paths[shedId].splice(i, 1);
+
+            //                     i--;
+
+            //                 }
+            //             }
+            //         }
+            //         alert('刪除路徑成功');
+            //     }
+            //     else {
+            //         alert('刪除路徑失敗');
+            //     }
+
+
+            // }
             function reqListener() {
                 console.log(this.responseText);
+                var response = JSON.parse(this.responseText);
+                // console.log(response);
+                var tmp_res = decodeURI(response['result']);
+                console.log(tmp_res);
+                if ('success' === tmp_res) {
+                    var res_pathname = decodeURI(response['pathname']);
+                    // var res_pathNameList = res_pathnames.split(',');
+
+                    for (var i = 0; i < pathNameList_ele.length; i++) {
+                        if (pathNameList_ele[i].selected) {
+                            if (res_pathname === pathNameList_ele[i].value) {
+                                selectList_Shed_Paths.removeChild(pathNameList_ele[i]);
+
+                                //todo remove pathname from old pathlist
+                                var shedId = selectList_Sheds.value;
+                                linkDb_sheds_paths[shedId].splice(i, 1);
+
+                                break;
+                            }
+                        }
+                    }
+                    total_pathDelete_success++;
+                    // alert('刪除路徑成功');
+                }
+                else
+                {
+                    total_pathDelete_fail++;
+                }
+                // else {
+                //     alert('刪除路徑失敗');
+                // }
+                if ((total_pathDelete_success+total_pathDelete_fail) === total_pathToDelete) {
+                    alert('刪除路徑:' + total_pathDelete_success.toString() + ',刪除路徑失敗:'+total_pathDelete_fail.toString());
+                    process_deletePaths_selectList_Shed_Paths_cur.innerHTML = '';
+                    process_deletePaths_selectList_Shed_Paths_cur.style.backgroundColor = 'gray';
+                }
+                else {
+                    var process_percent = parseInt((total_pathDelete_success / total_pathToDelete) * 100);
+                    process_deletePaths_selectList_Shed_Paths_cur.style['width'] = process_percent.toString() + '%';
+                    process_deletePaths_selectList_Shed_Paths_cur.innerHTML = process_percent.toString() + '%';
+                }
+
             }
 
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", reqListener);
-            oReq.open("GET", shedId + '/' + pathstr);
-            oReq.send();
+            for (var i = 0; i < paths.length; i++) {
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("GET", shedId + '/' + paths[i]);
+                oReq.send();
+            }
+
         }
         ui_manager.Add_CallBack('button_deletePaths_selectList_Shed_Paths', func_cb_button_deletePaths_selectList_Shed_Paths);
 
         ///set add paths button
-        let button_insertPaths_selectList_Shed_Paths = ui_manager.Add_button('button_insertPaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '35%', 'left': '30%', 'width': '8%' }, '插入路徑');
+        let button_insertPaths_selectList_Shed_Paths = ui_manager.Add_button('button_insertPaths_selectList_Shed_Paths', { 'position': 'absolute', 'bottom': '45%', 'left': '30%', 'width': '8%' }, '插入路徑');
+        let process_insertPaths_selectList_Shed_Paths_max = ui_manager.AddElement_Div('process_insertPaths_selectList_Shed_Paths_max', { 'position': 'absolute', 'bottom': '40%', 'left': '30%', 'width': '15%', 'backgroundcolor': 'gray' });
+        let process_insertPaths_selectList_Shed_Paths_cur = ui_manager.CreateElement_Label('process_insertPaths_selectList_Shed_Paths_cur', { 'position': 'absolute', 'width': '100%', 'backgroundcolor': 'gray', 'text-align': 'center' }, '');
+        process_insertPaths_selectList_Shed_Paths_max.appendChild(process_insertPaths_selectList_Shed_Paths_cur);
+
         function func_cb_button_insertPaths_selectList_Shed_Paths() {
             // console.log(selectList_Sheds.value);
+            // alert('插入路徑中，請稍等');
             var shedId = selectList_Sheds.value;
             let pathNameList_ele = pathNameList.options;
+            var total_pathToInsert = 0;
+            var total_pathInserted = 0;
+            var total_pathInsertFailed = 0;
+            var repeatedPathName = '';
+
+            ///alter repeated names
             for (let i = 0; i < pathNameList_ele.length; i++) {
                 if (pathNameList_ele[i].selected) {
                     var pathCurrentName = pathNameList_ele[i].innerHTML;
                     var pathOriginalName = pathNameList_ele[i].value;
+
+                    ///check the name in selectList_Shed_Paths or not : if in , pass the path
+                    var oldpathNames = linkDb_sheds_paths[shedId];
+                    if (oldpathNames) {
+                        // console.log(oldpathNames.length,oldpathNames)
+                        for (var i_oldpathNames = 0; i_oldpathNames < oldpathNames.length; i_oldpathNames++) {
+                            // console.log(oldpathNames[i_oldpathNames]);
+                            if (oldpathNames[i_oldpathNames].includes(pathOriginalName)) {
+                                console.log('already has this path');
+                                // alert('插入重複路徑名:' + pathOriginalName);
+                                repeatedPathName += pathOriginalName + '\n';
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (repeatedPathName.length > 0) {
+                alert('插入重複路徑名:\n' + repeatedPathName);
+            }
+
+            ///insert paths not repeated
+            var flag_init_process = false;
+            for (let i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    var pathCurrentName = pathNameList_ele[i].innerHTML;
+                    var pathOriginalName = pathNameList_ele[i].value;
+
+                    ///check the name in selectList_Shed_Paths or not : if in , pass the path
+                    var oldpathNames = linkDb_sheds_paths[shedId];
+                    if (oldpathNames) {
+                        // console.log(oldpathNames.length,oldpathNames)
+                        var flag_alreadyHasName = false;
+                        for (var i_oldpathNames = 0; i_oldpathNames < oldpathNames.length; i_oldpathNames++) {
+                            // console.log(oldpathNames[i_oldpathNames]);
+                            if (oldpathNames[i_oldpathNames].includes(pathOriginalName)) {
+                                flag_alreadyHasName = true;
+                                console.log('already has this path');
+                                // alert('插入重複路徑名:' + pathOriginalName);
+                                // repeatedPathName += pathOriginalName + ',';
+                                break;
+                            }
+                        }
+                        if (flag_alreadyHasName) {
+                            continue;
+                        }
+                    }
+
+
                     //reset pathname in pathNameList
                     pathNameList_ele[i].innerHTML = pathNameList_ele[i].value;
+                    total_pathToInsert++;
                     // var points = pathManger.GetPathByName(pathNameList_ele[i].value);
                     // var pathstr = points.toString();
                     // console.log(pathstr);
+                    if (!flag_init_process) {
+                        process_insertPaths_selectList_Shed_Paths_cur.style.backgroundColor = 'green';
+                        process_insertPaths_selectList_Shed_Paths_cur.style['width'] = '0%';
+                        flag_init_process = true;
+                    }
 
                     function reqListener() {
                         console.log(this.responseText);
+                        var response = JSON.parse(this.responseText);
+                        // console.log(response);
+                        var tmp_res = decodeURI(response['result']);
+                        var res_pathName = decodeURI(response['pathname']);
+                        console.log(tmp_res);
+
+                        total_pathInserted++;
+
+                        if ('success' === tmp_res) {
+                            //todo update selectList_Shed_Paths by result
+                            let option = document.createElement('option');
+                            option.value = res_pathName;
+                            option.innerHTML = res_pathName;
+                            selectList_Shed_Paths.appendChild(option);
+
+                            //todo add pathname to old pathlist
+                            var shedId = selectList_Sheds.value;
+                            if (linkDb_sheds_paths[shedId]) {
+                                linkDb_sheds_paths[shedId].push(res_pathName);
+                            }
+                            else {
+                                linkDb_sheds_paths[shedId] = [res_pathName];
+                            }
+                            // alert('插入路徑成功');
+                        }
+                        else {
+                            // alert('插入路徑失敗');
+                            total_pathInsertFailed++;
+                        }
+                        if (total_pathInserted == total_pathToInsert) {
+                            // process_insertPaths_selectList_Shed_Paths_cur.style['width'] = '100%';
+                            // process_insertPaths_selectList_Shed_Paths_cur.innerHTML = '100%';
+                            alert('插入路徑:' + total_pathToInsert.toString() + ',插入路徑失敗:' + total_pathInsertFailed.toString());
+                            process_insertPaths_selectList_Shed_Paths_cur.innerHTML = '';
+                            process_insertPaths_selectList_Shed_Paths_cur.style.backgroundColor = 'gray';
+                        }
+                        else {
+                            var process_percent = parseInt((total_pathInserted / total_pathToInsert) * 100);
+                            process_insertPaths_selectList_Shed_Paths_cur.style['width'] = process_percent.toString() + '%';
+                            process_insertPaths_selectList_Shed_Paths_cur.innerHTML = process_percent.toString() + '%';
+                        }
                     }
 
                     var oReq = new XMLHttpRequest();
@@ -681,16 +1141,108 @@
                     oReq.open("GET", shedId + '/' + pathOriginalName + '/' + pathCurrentName + '/' + 'pengzhen');
                     oReq.send();
 
-                    //todo update selectList_Shed_Paths by result
-                    let option = document.createElement('option');
-                    option.value = pathCurrentName;
-                    option.innerHTML = pathCurrentName;
-                    selectList_Shed_Paths.appendChild(option);
+                    // //todo update selectList_Shed_Paths by result
+                    // let option = document.createElement('option');
+                    // option.value = pathCurrentName;
+                    // option.innerHTML = pathCurrentName;
+                    // selectList_Shed_Paths.appendChild(option);
 
                 }
             }
+
         }
         ui_manager.Add_CallBack('button_insertPaths_selectList_Shed_Paths', func_cb_button_insertPaths_selectList_Shed_Paths);
+
+        ///set update shed path list name 
+        let input_text_updateShedPathName = ui_manager.AddElement_TextInput(id = 'input_text_updateShedPathName', style = { 'position': 'absolute', 'bottom': '25%', 'left': '30%', 'width': '15%' }, text = '更新路徑名字');
+        let button_updateShedPathName = ui_manager.Add_button('button_updateShedPathName', { 'position': 'absolute', 'bottom': '18%', 'left': '30%', 'width': '8%' }, '更新');
+        function func_cb_button_updateShedPathName() {
+            var shedId = selectList_Sheds.value;
+            console.log(shedId);
+
+            let pathNameList_ele = selectList_Shed_Paths.options;
+            var oldPathName = '';
+            var newPathName = input_text_updateShedPathName.value;
+            if (newPathName.length < 1) {
+                console.log('new path name is null');
+                return;
+            }
+            for (let i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    oldPathName = pathNameList_ele[i].value;
+                    break;
+                }
+            }
+            if (oldPathName.length < 1) {
+                console.log('no old path selected');
+                return;
+            }
+
+            function reqListener() {
+                console.log(this.responseText);
+                var response = JSON.parse(this.responseText);
+                // console.log(response);
+                var tmp_res = decodeURI(response['result']);
+                console.log(tmp_res);
+                if ('success' === tmp_res) {
+                    var res_oldPathName = decodeURI(response['oldpathname']);
+                    var res_newPathName = decodeURI(response['newpathname']);
+                    //todo update selectList_Shed_Paths by result
+                    for (let i = 0; i < pathNameList_ele.length; i++) {
+                        if (pathNameList_ele[i].selected) {
+                            if (pathNameList_ele[i].value === oldPathName) {
+                                pathNameList_ele[i].value = newPathName;
+                                pathNameList_ele[i].innerHTML = newPathName;
+                            }
+                            break;
+                        }
+                    }
+
+                    //todo add pathname to old pathlist
+                    var shedId = selectList_Sheds.value;
+                    var index_oldName = linkDb_sheds_paths[shedId].indexOf(oldPathName);
+                    console.log(index_oldName);
+                    if (index_oldName !== -1) {
+                        linkDb_sheds_paths[shedId][index_oldName] = newPathName;
+                    }
+                    // linkDb_sheds_paths[shedId].remove(oldPathName);
+                    // linkDb_sheds_paths[shedId].push(newPathName);
+
+                    alert('更新路徑名成功');
+                }
+                else {
+                    alert('更新路徑名失敗');
+                }
+            }
+
+            //todo send requests
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", 'updatePathName' + '/' + shedId + '/' + oldPathName + '/' + newPathName + '/' + 'pengzhen');
+            oReq.send();
+
+            //clear selectList_Shed_Paths
+        }
+        ui_manager.Add_CallBack('button_updateShedPathName', func_cb_button_updateShedPathName);
+
+        ///set input_text_updateShedPathName by click 
+        selectList_Shed_Paths.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            console.log('click');
+            var eles = selectList_Shed_Paths.options;
+            var count_selected = 0;
+            for (var i = 0; i < eles.length; i++) {
+                // console.log(eles[i].innerHTML);
+                if (eles[i].selected == true) {
+                    // console.log(eles[i].innerHTML);
+                    input_text_updateShedPathName.value = eles[i].innerHTML;
+                    // break;
+                    count_selected++;
+                }
+            }
+            label_selectList_Shed_Paths_selectedCount.innerHTML = count_selected;
+            return false;
+        }, false);
 
         //// add button to show map
         let button_showMap = ui_manager.Add_button('button_showMap', { 'position': 'absolute', 'bottom': '20%', 'left': '80%', 'width': '8%' }, '顯示路徑');
@@ -700,17 +1252,50 @@
                 if (pathNameList_ele[i].selected) {
                     var pathName = pathNameList_ele[i].value;
                     console.log(pathName);
-                    window.open('showPath'+'/'+pathName);
+                    window.open('showPath' + '/' + pathName);
                     return;
                 }
             }
-            
+
             alert('請先選擇路徑');
             return;
         }
 
         ui_manager.Add_CallBack('button_showMap', func_cb_button_showMap);
 
+        ///create button to remove pathname from pathlist
+        let button_pathNameList_removePath = ui_manager.Add_button('button_pathNameList_removePath', { 'position': 'absolute', 'bottom': '85%', 'left': '70%', 'width': '8%' }, '刪除路徑');
+        function func_cb_button_pathNameList_removePath() {
+            let pathNameList_ele = pathNameList.options;
+            var pathToRemove = [];
+            for (var i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    pathToRemove.push(pathNameList_ele[i].value);
+                    pathNameList.remove(pathNameList_ele[i]);
+                    i--;
+                    // return;
+                }
+            }
+            //todo remove path from pathManager
+            pathManger.RemovePathByNames(pathToRemove);
+            return;
+        }
+
+        ui_manager.Add_CallBack('button_pathNameList_removePath', func_cb_button_pathNameList_removePath);
+
+        ////create button to reset pathname of selected items of pathlist
+        let button_pathNameList_resetPathName = ui_manager.Add_button('button_pathNameList_resetPathName', { 'position': 'absolute', 'bottom': '85%', 'left': '80%', 'width': '8%' }, '重置名字');
+        function func_cb_button_pathNameList_resetPathName() {
+            let pathNameList_ele = pathNameList.options;
+            for (var i = 0; i < pathNameList_ele.length; i++) {
+                if (pathNameList_ele[i].selected) {
+                    pathNameList_ele[i].innerHTML = pathNameList_ele[i].value;
+                }
+            }
+            return;
+        }
+
+        ui_manager.Add_CallBack('button_pathNameList_resetPathName', func_cb_button_pathNameList_resetPathName);
 
         function func_runAfterGpxFilesLoaded() {
             //todo : run after gpx files loaded

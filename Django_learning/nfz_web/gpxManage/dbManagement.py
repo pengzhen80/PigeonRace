@@ -179,6 +179,7 @@ class DBManagement ():
 
         if self.insert_single(nfzid=id, nfzTitle=path, nfzType=shedid, latitude=latitude, longitude=longitude, countryCode="CN", note=note):
             self.shedsMapToPaths[shedid].append(path)
+            self.shedAndPathMapToPathId[shedid+path].append(id)
             return True
         return False
 
@@ -252,6 +253,55 @@ class DBManagement ():
             print('no such house')
             return False
 
+    def updatePathName(self,shedId,oldPathName,newPathName):
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudNfz'
+        nfzid = self.shedAndPathMapToPathId[shedId+oldPathName]
+        myobj = {'querytype': 'updateNfzTitle', 'nfzid': nfzid,'nfzTitle':newPathName}
+
+        print(nfzid,shedId,oldPathName,newPathName)
+        x = requests.post(url, data=myobj)
+        # print(type(x.text))
+        res = json.loads(x.text)
+        result = res['results']
+        print('update pathname result:',result)
+        if(result == False):
+            print("update pathname failed")
+            return False
+        ### update pathname local
+        self.shedsMapToPaths[shedId].remove(oldPathName)
+        self.shedsMapToPaths[shedId].append(newPathName)
+
+        self.shedAndPathMapToPathId.pop(shedId+oldPathName)
+        self.shedAndPathMapToPathId[shedId+newPathName] = nfzid
+        return True
+
+    def deleteShedDirectly(self,shedId):
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudNfz'
+
+        myobj = {'querytype': 'deleteByOrg', 'nfzType': shedId}
+
+        x = requests.post(url, data=myobj)
+        # print(type(x.text))
+        res = json.loads(x.text)
+        result = res['results']
+        print('deleteShedDirectly result:',result)
+        if(result == 0):
+            print("delete shed failed")
+            return 0
+            
+        ### deleteShedDirectly local
+        self.shedsMapToPaths.pop(shedId)
+        return result
 
 if __name__ == '__main__':
     dbManager = DBManagement()
