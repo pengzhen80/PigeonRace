@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-06-30T06:41:46.955Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="YFYQCX0-QJtm-mMMcNF1" version="20.0.3" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-07-07T07:17:15.147Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="NtqFn6un8pePqqvzSVaG" version="20.0.4" type="github" pages="4">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
-    <mxGraphModel dx="1590" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1590" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -162,10 +162,74 @@
     </mxGraphModel>
   </diagram>
   <diagram id="HKfhhw679OXp-a2lWLh9" name="路徑效率和提升方案">
-    <mxGraphModel dx="1590" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1590" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="79aNu5XGKrknYhau1nWH-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="120" y="110" width="830" height="750" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-1" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="530" as="sourcePoint" />
+            <mxPoint x="790" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-2" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="530" as="sourcePoint" />
+            <mxPoint x="190" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-3" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;轉向效率&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="240" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-5" value="距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="700" y="555" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-7" value="單條路徑內部分析：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="110" y="130" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-8" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="530" as="sourcePoint" />
+            <mxPoint x="740" y="530" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="420" />
+              <mxPoint x="490" y="500" />
+              <mxPoint x="590" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-11" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="760" as="sourcePoint" />
+            <mxPoint x="810" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-12" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="79aNu5XGKrknYhau1nWH-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="760" as="sourcePoint" />
+            <mxPoint x="600" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-13" value="速度" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="180" y="570" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-14" value="距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="750" y="780" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="79aNu5XGKrknYhau1nWH-15" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="760" as="sourcePoint" />
+            <mxPoint x="760" y="760" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="390" y="650" />
+              <mxPoint x="510" y="730" />
+              <mxPoint x="610" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
