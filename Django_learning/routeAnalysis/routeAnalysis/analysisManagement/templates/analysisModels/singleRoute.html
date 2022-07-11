@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>路徑分析器-單條路徑分析</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    th,
+    td {
+      padding: 10px 20px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="fileUploader" type="file" accept=".gpx" />
+  <script>
+    class UI_allUiElementsManagement {
+      constructor() {
+        // this.buttons = [];
+      }
+      //id: string
+      //style:{'background-color','opacity','position','bottom','left','right','top','width','height','border-radius','color','text',}
+      //text:string ,callback: function
+      Add_button(id, style, text) {
+        if (document.getElementById(id)) {
+          console.log('add button error', id, 'already exist');
+        }
+        console.log('add button');
+        var tmp_button = document.createElement('button');
+        tmp_button.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_button.style.bottom = style['bottom'];
+        tmp_button.style.left = style['left'];
+        tmp_button.style.position = style['position'];
+        tmp_button.style['text-align'] = style['text-align'];
+        tmp_button.style.height = style['height'];
+        tmp_button.style['border-radius'] = style['border-radius'];
+        tmp_button.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        tmp_button.style.backgroundColor = style['backgroundColor'];
+        // tmp_button.style.opacity = "0.5";
+        tmp_button.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        tmp_button.innerHTML = text;
+        // console.log(tmp_button.style);
+        // console.log(tmp_button.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(tmp_button);
+        return tmp_button;
+      }
+      Add_CallBack(id, callback) {
+        var tmp_button = document.getElementById(id);
+        if (tmp_button) {
+          tmp_button.addEventListener('click', callback);
+        }
+        else {
+          console.log('find button error', id, 'not exist');
+        }
+      }
+
+      AddElement_Select(id, style, size, options = []) {
+        var ele = document.createElement('select');
+        ele.setAttribute('id', id);
+        ele.setAttribute('size', size);
+
+        ele.style.bottom = style['bottom'];
+        ele.style.left = style['left'];
+        ele.style.position = style['position'];
+        ele.style.height = style['height'];
+        ele.style['width'] = style['width'];
+
+        if (options) {
+          for (var i = 0; i < options.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = options[i][0];
+            opt.innerHTML = options[i][1];
+            ele.appendChild(opt);
+          }
+        }
+
+        document.body.appendChild(ele);
+        return ele;
+      }
+
+      //text input
+      AddElement_TextInput(id, style, text) {
+        if (document.getElementById(id)) {
+          console.log('add element error', id, 'already exist');
+        }
+
+        var ele = document.createElement('input');
+
+        ele.style.bottom = style['bottom'];
+        ele.style.left = style['left'];
+        ele.style.position = style['position'];
+        ele.style['text-align'] = style['text-align'];
+        ele.style.height = style['height'];
+        ele.style['border-radius'] = style['border-radius'];
+        ele.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        ele.style.backgroundColor = style['backgroundColor'];
+        // tmp_button.style.opacity = "0.5";
+        ele.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        // ele.innerHTML = text;
+        ele.setAttribute('placeholder', text);
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(ele);
+        return ele;
+      }
+
+      AddElement_AddSubmit(id, style, text) {
+        if (document.getElementById(id)) {
+          console.log('add element error', id, 'already exist');
+        }
+
+        var ele = document.createElement('input');
+        ele['type'] = 'submit';
+
+        ele.style.bottom = style['bottom'];
+        ele.style.left = style['left'];
+        ele.style.position = style['position'];
+        ele.style['text-align'] = style['text-align'];
+        ele.style.height = style['height'];
+        ele.style['border-radius'] = style['border-radius'];
+        ele.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        ele.style.backgroundColor = style['backgroundColor'];
+        // tmp_button.style.opacity = "0.5";
+        ele.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        ele.innerHTML = text;
+        // console.log(ele.style);
+        // console.log(ele.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(ele);
+        return ele;
+      }
+
+      CreateElement_Label(id, style, text = '') {
+        if (document.getElementById(id)) {
+          console.log('add button error', id, 'already exist');
+        }
+        console.log('add label');
+        var tmp_label = document.createElement('label');
+        tmp_label.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_label.style.bottom = style['bottom'];
+        tmp_label.style.left = style['left'];
+        tmp_label.style.position = style['position'];
+        tmp_label.style['text-align'] = style['text-align'];
+        tmp_label.style.height = style['height'];
+        tmp_label.style['border-radius'] = style['border-radius'];
+        tmp_label.style['width'] = style['width'];
+        tmp_label.style.backgroundColor = style['backgroundcolor'];
+        // tmp_button.style.opacity = "0.5";
+        tmp_label.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        tmp_label.innerHTML = text;
+        // console.log(tmp_button.style);
+        // console.log(tmp_button.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        // document.body.appendChild(tmp_label);
+        return tmp_label;
+      }
+
+      AddElement_Label(id, style, text = '') {
+        if (document.getElementById(id)) {
+          console.log('add button error', id, 'already exist');
+        }
+        console.log('add label');
+        var tmp_label = document.createElement('label');
+        tmp_label.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_label.style.bottom = style['bottom'];
+        tmp_label.style.left = style['left'];
+        tmp_label.style.position = style['position'];
+        tmp_label.style['text-align'] = style['text-align'];
+        tmp_label.style.height = style['height'];
+        tmp_label.style['border-radius'] = style['border-radius'];
+        tmp_label.style['width'] = style['width'];
+        // canvas.style.border   = "1px solid";
+        // console.log(style['backgroundcolor']);
+        tmp_label.style.backgroundColor = style['backgroundcolor'];
+        // tmp_button.style.opacity = "0.5";
+        tmp_label.style.color = style['color'];
+        // canvas.style.color = 'black';
+
+        tmp_label.innerHTML = text;
+        // console.log(tmp_button.style);
+        // console.log(tmp_button.getAttribute('style'));
+
+        // this.buttons.push(tmp_button);
+        document.body.appendChild(tmp_label);
+        return tmp_label;
+      }
+
+      CreateElement_Div(id, style) {
+        if (document.getElementById(id)) {
+          console.log('add div error', id, 'already exist');
+        }
+        console.log('add div');
+        var tmp_div = document.createElement('div');
+        tmp_div.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_div.style.bottom = style['bottom'];
+        tmp_div.style.left = style['left'];
+        tmp_div.style.position = style['position'];
+        tmp_div.style.height = style['height'];
+        tmp_div.style['width'] = style['width'];
+        tmp_div.style.backgroundColor = style['backgroundcolor'];
+        // tmp_div.style.color = style['color'];
+
+        return tmp_div;
+      }
+
+      AddElement_Div(id, style) {
+        if (document.getElementById(id)) {
+          console.log('add div error', id, 'already exist');
+        }
+        console.log('add div');
+        var tmp_div = document.createElement('div');
+        tmp_div.setAttribute('id', id);
+        // tmp_button.setAttribute('style',style);
+
+        tmp_div.style.bottom = style['bottom'];
+        tmp_div.style.left = style['left'];
+        tmp_div.style.position = style['position'];
+        tmp_div.style.height = style['height'];
+        tmp_div.style['width'] = style['width'];
+        tmp_div.style.backgroundColor = style['backgroundcolor'];
+        // tmp_div.style.color = style['color'];
+        document.body.appendChild(tmp_div);
+
+        return tmp_div;
+      }
+    };
+    let ui_manager = new UI_allUiElementsManagement();
+
+    class PathMangement {
+      //paths: [{name: '', data: ''}]
+      constructor() {
+        //parse gpx files
+        this.paths = [];
+        this.originalPaths = [];
+        this.originPolygon = [];
+        // var bbox = turf.bbox(features);
+        //alter path to polygons
+      }
+      decodePath(paths) {
+        //decode path to polygon
+        // console.log(paths[0]['data']);
+        var parser = new DOMParser();
+        for (var index = 0; index < paths.length; index++) {
+          var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
+          // console.log(xmlDoc.getElementsByTagName("title"));
+          // console.log(xmlDoc.getElementsByTagName("trkpt"));
+          var path = [];
+          var trkpts = xmlDoc.getElementsByTagName("trkpt");
+          for (var i = 0; i < trkpts.length; i++) {
+            var cell = {};
+            var lat = trkpts[i].getAttribute("lat");
+            var lon = trkpts[i].getAttribute("lon");
+            cell['lat'] = lat;
+            cell['lon'] = lon;
+            path.push(cell);
+            // console.log(i,'lat: '+lat+' lon: '+lon);
+          }
+          this.originalPaths.push({ name: paths[index]['name'], data: path });
+        }
+        console.log(this.paths.length);
+        // return this.paths;
+      }
+      decodePath_timeSpeed(paths) {
+        //decode path to polygon
+        // console.log(paths[0]['data']);
+        var parser = new DOMParser();
+        for (var index = 0; index < paths.length; index++) {
+          var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
+          // console.log(xmlDoc.getElementsByTagName("title"));
+          // console.log(xmlDoc.getElementsByTagName("trkpt"));
+          var path = [];
+          var trkpts = xmlDoc.getElementsByTagName("trkpt");
+          for (var i = 0; i < trkpts.length; i++) {
+            var cell = {};
+            // var lat = trkpts[i].getAttribute("lat");
+            // var lon = trkpts[i].getAttribute("lon");
+            // cell['lat'] = lat;
+            // cell['lon'] = lon;
+            // path.push(cell);
+
+            // for (var j = 0; j < trkpts[i].elements; j++) {
+            //   console.log(trkpts[i].elements[j]);
+            // }
+            // console.log(trkpts[i]);
+            // console.log(typeof(trkpts[i].childNodes));
+            for(var j=0;j<trkpts[i].childNodes.length;j++)
+            {
+              // console.log(trkpts[i].childNodes[j].nodeName);
+              // console.log(trkpts[i].childNodes[j].innerHTML);
+              if(trkpts[i].childNodes[j].nodeName === 'time')
+              {
+                console.log(trkpts[i].childNodes[j].innerHTML);
+                cell['time'] = trkpts[i].childNodes[j].innerHTML;
+              }
+
+              if(trkpts[i].childNodes[j].nodeName === 'speed')
+              {
+                console.log(trkpts[i].childNodes[j].innerHTML);
+                // console.log(trkpts[i].childNodes[j])
+                cell['speed'] = trkpts[i].childNodes[j].innerHTML;
+              }
+              path.push(cell);
+            }
+            
+            // console.log(i,'lat: '+lat+' lon: '+lon);
+          }
+          this.originalPaths.push({ name: paths[index]['name'], data: path });
+        }
+        console.log(this.paths.length);
+        // return this.paths;
+      }
+
+      GetOringinalPaths() {
+        return this.originalPaths;
+      }
+      GetOringinalPathsByPathNames(pathNames) {
+        var result = [];
+        for (var i = 0; i < this.originalPaths.length; i++) {
+          if (pathNames.includes(this.originalPaths[i]['name'])) {
+            result.push(this.originalPaths[i]);
+          }
+        }
+        return result;
+      }
+
+      Rename_path(oldname, newname) {
+        for (var index = 0; index < this.paths.length; index++) {
+          if (this.paths[index]['name'] == oldname) {
+            this.paths[index]['name'] = newname;
+          }
+        }
+      }
+
+      GetPathByName(name) {
+        for (var index = 0; index < this.paths.length; index++) {
+          if (this.paths[index]['name'] == name) {
+            return this.paths[index]['data'];
+          }
+        }
+      }
+
+      make_polygon(path) {
+        var polygon = [];
+        for (var i = 0; i < path.length - 1; i++) {
+          var firstPoint = turf.point(path[i]);
+          var secondPoint = turf.point(path[i + 1]);
+          var bearing = turf.bearing(firstPoint, secondPoint);
+          // console.log(bearing);
+          var makePoint_first_bearing = bearing + 90;
+          var makePoint_second_bearing = bearing - 90;
+          var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+          var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+          // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+          polygon.unshift(makePoint_first.geometry.coordinates);
+          polygon.push(makePoint_second.geometry.coordinates);
+        }
+
+        var firstPoint = turf.point(path[path.length - 2]);
+        var secondPoint = turf.point(path[path.length - 1]);
+        var bearing = turf.bearing(firstPoint, secondPoint);
+        // console.log(bearing);
+        var makePoint_first_bearing = bearing + 90;
+        var makePoint_second_bearing = bearing - 90;
+        var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+        var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+        // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+        polygon.unshift(makePoint_second.geometry.coordinates);
+        polygon.push(makePoint_first.geometry.coordinates);
+
+        // console.log(path.length,polygon.length);
+        return polygon;
+      }
+
+      AddOriginPolygon(pathName, polygon) {
+        this.originPolygon.push({ name: pathName, data: polygon });
+      }
+
+      GetOriginPolygon(pathName) {
+        for (var index = 0; index < this.originPolygon.length; index++) {
+          if (this.originPolygon[index]['name'] == pathName) {
+            return this.originPolygon[index]['data'];
+          }
+        }
+        console.log('no such path');
+      }
+      GetAllPathNames() {
+        var result = [];
+        for (var i = 0; i < this.paths.length; i++) {
+          result.push(this.paths[i]['name']);
+        }
+        return result;
+      }
+      RemovePathByNames(pathNames) {
+        console.log('delete path:', pathNames);
+        for (var i = 0; i < this.paths.length; i++) {
+          console.log(this.paths[i]['name']);
+          if (pathNames.includes(this.paths[i]['name'])) {
+            this.paths.splice(i, 1);
+            this.originalPaths.splice(i, 1);
+            this.originPolygon.splice(i, 1);
+            // console.log(this.paths);
+            i--;
+          }
+        }
+        // console.log(this.paths);
+
+      }
+    }
+
+    ////load gpx files and show them in the page
+    let pathManger = new PathMangement();
+
+    var fileUploader = document.getElementById("fileUploader");
+    fileUploader.style['position'] = 'absolute';;
+    fileUploader.style['top'] = '10%';
+    fileUploader.style['left'] = '20%';
+
+    //用來讀取file資料的FileReader
+    var fileReader = new FileReader();
+    //監控#fileUploader的值變化
+    fileUploader.addEventListener("change", function (event) {
+      if (this.files.length > 0) {
+        //有選取file時，使用fileReader讀取file資料
+        // console.log(fileReader.readAsText(this.files[0]));
+        //讀取完成後，將資料轉成text
+        console.log(this.files.length);
+        readmultifiles(this.files)
+      } else {
+        //沒有選取file時，例如選擇取消，
+        //將<img>的src設成""
+      }
+    }, false);
+
+    function readmultifiles(files) {
+      var gpxFileDatas = [];
+      function readFile(index) {
+        //when all files loaded , start to decode datas
+        if (index >= files.length) {
+          var filtered_gpxFileDatas = [];
+          var newPathNames = [];
+          console.log(gpxFileDatas);
+          for (var index_gpxData = 0; index_gpxData < gpxFileDatas.length; index_gpxData++) {
+            filtered_gpxFileDatas.push(gpxFileDatas[index_gpxData]);
+            newPathNames.push(gpxFileDatas[index_gpxData]['name']);
+          }
+
+          pathManger.decodePath_timeSpeed(filtered_gpxFileDatas);
+          func_sendRequest_makeSingleRouteAnalysis(pathManger.GetOringinalPathsByPathNames(newPathNames));
+          // console.log(gpxFileDatas);
+          // pathManger.decodePath(gpxFileDatas);
+          // func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPaths());
+          return;
+        }
+
+        // store file name and file content to gpxFileDatas
+        var gpxFileDatas_ele = {};
+        /// path name init from file name
+        gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
+        // /// add path name to pathNameList
+        // var opt = document.createElement('option');
+        // opt.value = gpxFileDatas_ele['name'];
+        // opt.innerHTML = gpxFileDatas_ele['name'];
+        // pathNameList.appendChild(opt);
+
+        // fileList.innerHTML += "<br>" + files[index].name.split('.')[0] + "</br>";
+
+        var file = files[index];
+        fileReader.onload = function (e) {
+          // get file content  
+          var data = e.target.result;
+          // console.log(data);
+          gpxFileDatas_ele['data'] = data;
+          gpxFileDatas.push(gpxFileDatas_ele);
+          // do sth with bin
+          readFile(index + 1)
+        }
+        fileReader.readAsText(file);
+      }
+      readFile(0);
+    }
+
+    function func_sendRequest_makeSingleRouteAnalysis(paths) {
+      //make paths to str
+      // console.log('origin paths', paths);
+      var plot_time = [];
+      var plot_speed = [];
+
+      for (var i = 0; i < paths.length; i++) {
+        var pathname = paths[i]['name'];
+        // if(old_pathNames.includes(pathname))
+        // {
+        //     continue;
+        // }
+
+        var path = paths[i]['data'];
+        var path_normalize = [];
+        for (var j = 0; j < path.length; j++) {
+          path_normalize.push(path[j]['time']);
+          path_normalize.push(path[j]['speed']);
+
+          plot_time.push(path[j]['time']);
+          plot_speed.push(path[j]['speed']);
+        }
+
+        updateChart_changeRoute(plot_time, plot_speed);
+
+        var str_paths = path_normalize.toString();
+        console.log(pathname, str_paths.length);
+        //send to servers
+        function reqListener() {
+          // console.log(typeof (this.responseText), typeof (this.response));
+          // console.log(this)
+
+          var response = JSON.parse(this.responseText);
+          // console.log(response);
+
+          var res_result = decodeURI(response['result'])
+          if (res_result === 'success') {
+            var num_average = response['num_average'];
+            var num_median = response['num_median'];
+            var num_min = response['num_min'];
+            var num_max = response['num_max'];
+            console.log('result:', num_average, num_median, num_min, num_max);
+
+            func_table_result_addData(num_average, num_median, num_min, num_max);
+          }
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", reqListener);
+        // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+        oReq.open("post", 'singleRoute' + '/' + pathname + '/' + pathname);
+        // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+        oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+        // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+        oReq.send(str_paths);
+      }
+    }
+
+    //set speed plot
+    let label_speedPlot = ui_manager.AddElement_Label('label_speedPlot', { 'position': 'absolute', 'bottom': '80%', 'left': '10%', 'width': '20%' }, '速度分析');
+
+    let canvas_SpeedPlot = document.createElement('canvas');
+    canvas_SpeedPlot.setAttribute("width", '400px');
+    canvas_SpeedPlot.setAttribute("height", '400px');
+    canvas_SpeedPlot.setAttribute("id", "canvas_SpeedPlot");
+    canvas_SpeedPlot.style.left = "10%";
+    canvas_SpeedPlot.style.bottom = "10%";
+    canvas_SpeedPlot.style.position = "absolute";
+    // canvas.style['margin-left'] = '-200px';
+    // canvas.style.border   = "1px solid";
+    // canvas.style.backgroundColor = 'transparent';
+    document.body.appendChild(canvas_SpeedPlot);
+
+
+    const myChart_SpeedPlot = new Chart(canvas_SpeedPlot, {
+      type: 'line',
+      data: {
+        labels: [1, 2, 3],
+        datasets: [
+          //speed frame
+          {
+            type: 'line',
+            // label: 'progress',
+            data: [0, 0, 0],
+            backgroundColor: 'transparent',
+            fill: false,
+          },
+          //speed process
+          {
+            type: 'line',
+            data: [],
+            fill: false,
+            borderColor: 'rgb(255, 0, 0)',
+            tension: 0.1,
+          }
+
+        ]
+      },
+      options: {
+        responsive: false,
+        legend: { display: false },
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        scales: {
+          yAxes: [{
+            beginAtZero: true,
+            fontSize: 0,
+            padding: 1,
+            gridLines: {
+              display: false
+            },
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: "#000",
+              fontSize: 0
+            },
+            gridLines: {
+              display: false
+            },
+            padding: 10,
+            // display:false,
+            // position:'bottom',
+          }],
+        },
+      }
+    });
+
+    function updateChart_changeRoute(data_time, data_speed) {
+      if (myChart_SpeedPlot) {
+        myChart_SpeedPlot.data.labels = data_time;
+        myChart_SpeedPlot.data.datasets[0].data = data_speed;
+        myChart_SpeedPlot.update();
+      }
+    }
+
+    //set speed result
+    let label_result = ui_manager.AddElement_Label('label_result', { 'position': 'absolute', 'bottom': '80%', 'left': '60%', 'width': '20%' }, '分析结果');
+    let table_result = document.createElement('table');
+    let thead_result = document.createElement('thead');
+    let tbody_result = document.createElement('tbody');
+
+    table_result.setAttribute("id", "table_result");
+    table_result.style.left = "60%";
+    table_result.style.bottom = "60%";
+    table_result.style.position = "absolute";
+
+    table_result.appendChild(thead_result);
+    table_result.appendChild(tbody_result);
+
+    // Adding the entire table to the body tag
+    document.body.appendChild(table_result);
+
+    // Creating and adding data to first row of the table
+    function func_init_table_result_head() {
+      let row_1 = document.createElement('tr');
+      let heading_1 = document.createElement('th');
+      heading_1.innerHTML = "平均";
+      let heading_2 = document.createElement('th');
+      heading_2.innerHTML = "中位";
+      let heading_3 = document.createElement('th');
+      heading_3.innerHTML = "最低";
+      let heading_4 = document.createElement('th');
+      heading_4.innerHTML = "最高";
+
+      row_1.appendChild(heading_1);
+      row_1.appendChild(heading_2);
+      row_1.appendChild(heading_3);
+      row_1.appendChild(heading_4);
+      thead_result.appendChild(row_1);
+    }
+    func_init_table_result_head();
+
+    function func_table_result_addData(num_average, num_median, num_min, num_max) {
+      var row = document.createElement('tr');
+      var row_data_avarage = document.createElement('td');
+      row_data_avarage.innerHTML = num_average.toString();
+      var row_data_midian = document.createElement('td');
+      row_data_midian.innerHTML = num_median.toString();
+      var row_data_min = document.createElement('td');
+      row_data_min.innerHTML = num_min.toString();
+      var row_data_max = document.createElement('td');
+      row_data_max.innerHTML = num_max.toString();
+
+      row.appendChild(row_data_avarage);
+      row.appendChild(row_data_midian);
+      row.appendChild(row_data_min);
+      row.appendChild(row_data_max);
+      tbody_result.appendChild(row);
+    }
+    func_table_result_addData(1, 1, 1, 1);
+
+  </script>
+</body>
+
+</html>

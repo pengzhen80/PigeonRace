@@ -791,6 +791,11 @@
         ui_manager.Add_CallBack('button_createShed', func_cb_button_createShed);
 
         function func_cb_button_deleteShed() {
+            if (confirm("確認刪除公棚嗎?") == false)
+            {
+                return;
+            } 
+
             var shedId = selectList_Sheds.value;
             console.log(shedId);
             let shedIdList = selectList_Sheds.options;
@@ -906,6 +911,10 @@
 
         function func_cb_button_deletePaths_selectList_Shed_Paths() {
             // console.log(selectList_Sheds.value);
+            if (confirm("確認刪除路徑嗎?") == false)
+            {
+                return;
+            } 
             var shedId = selectList_Sheds.value;
             var paths = [];
             let pathNameList_ele = selectList_Shed_Paths.options;
