@@ -11,6 +11,7 @@ class RouteAnalysisManagement():
         for i in range(len(points)-1):
             if(i % 2 == 0):
                 timeSpeedList.append([points[i], float(points[i+1])])
+
         result_avarage = self.analysis_singleRoute_timeSpeed_datas_averageSpeed(
             timeSpeedList)
         result_median = self.analysis_singleRoute_timeSpeed_datas_medianSpeed(
@@ -38,8 +39,14 @@ class RouteAnalysisManagement():
         return result
 
     def analysis_singleRoute_timeSpeed_datas_min(self, timeSpeedList):
-        min = timeSpeedList[0][1]
+        min = 0
         for timeSpeed in timeSpeedList:
+            if timeSpeed[1]!= 0:
+                min = timeSpeed[1]
+                break
+        for timeSpeed in timeSpeedList:
+            if timeSpeed[1]== 0:
+                continue
             if timeSpeed[1]<min:
                 min = timeSpeed[1]
 

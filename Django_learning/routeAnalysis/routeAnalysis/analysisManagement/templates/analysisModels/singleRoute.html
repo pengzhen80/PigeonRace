@@ -302,36 +302,20 @@
           var trkpts = xmlDoc.getElementsByTagName("trkpt");
           for (var i = 0; i < trkpts.length; i++) {
             var cell = {};
-            // var lat = trkpts[i].getAttribute("lat");
-            // var lon = trkpts[i].getAttribute("lon");
-            // cell['lat'] = lat;
-            // cell['lon'] = lon;
-            // path.push(cell);
-
-            // for (var j = 0; j < trkpts[i].elements; j++) {
-            //   console.log(trkpts[i].elements[j]);
-            // }
-            // console.log(trkpts[i]);
-            // console.log(typeof(trkpts[i].childNodes));
-            for(var j=0;j<trkpts[i].childNodes.length;j++)
-            {
-              // console.log(trkpts[i].childNodes[j].nodeName);
-              // console.log(trkpts[i].childNodes[j].innerHTML);
-              if(trkpts[i].childNodes[j].nodeName === 'time')
-              {
-                console.log(trkpts[i].childNodes[j].innerHTML);
+            for (var j = 0; j < trkpts[i].childNodes.length; j++) {
+              if (trkpts[i].childNodes[j].nodeName === 'time') {
+                // console.log(trkpts[i].childNodes[j].innerHTML);
                 cell['time'] = trkpts[i].childNodes[j].innerHTML;
               }
 
-              if(trkpts[i].childNodes[j].nodeName === 'speed')
-              {
-                console.log(trkpts[i].childNodes[j].innerHTML);
+              if (trkpts[i].childNodes[j].nodeName === 'speed') {
+                // console.log(trkpts[i].childNodes[j].innerHTML);
                 // console.log(trkpts[i].childNodes[j])
                 cell['speed'] = trkpts[i].childNodes[j].innerHTML;
               }
               path.push(cell);
             }
-            
+
             // console.log(i,'lat: '+lat+' lon: '+lon);
           }
           this.originalPaths.push({ name: paths[index]['name'], data: path });
@@ -512,8 +496,46 @@
     function func_sendRequest_makeSingleRouteAnalysis(paths) {
       //make paths to str
       // console.log('origin paths', paths);
+      function path_normalize_timeToCount(timeSpeed)
+      {
+        var result = [];
+        var baseTime = new Date(timeSpeed[0]['time']).getTime();
+        for (var i = 0; i < timeSpeed.length; i++) {
+          // console.log(timeSpeed[i]['time']);
+          // console.log(new Date(timeSpeed[i]['time']).getTime()/1000);
+          result.push({
+            'time': ((new Date(timeSpeed[i]['time'])).getTime() - baseTime)/1000,
+            'speed': timeSpeed[i]['speed']
+          });
+        }
+        return result;
+      }
+
+      //timeSpan is second
+      function path_normalize_sameTimeSpan(timeSpeed,timeSpan = 180) {
+        var result = [];
+        var referencePoint = timeSpeed[0];
+        result.push(referencePoint);
+
+        for (var i = 1; i < timeSpeed.length; i++) {
+          console.log(timeSpeed[i]['time'] - referencePoint['time']);
+          // console.log(new Date(timeSpeed[i]['time']));
+          if(timeSpeed[i]['time'] - referencePoint['time']<timeSpan)
+          {
+            continue;
+          }
+          else
+          {
+            referencePoint = timeSpeed[i];
+            result.push(referencePoint);
+          }
+        }
+        return result;
+      }
+
       var plot_time = [];
       var plot_speed = [];
+
 
       for (var i = 0; i < paths.length; i++) {
         var pathname = paths[i]['name'];
@@ -523,18 +545,19 @@
         // }
 
         var path = paths[i]['data'];
-        var path_normalize = [];
-        for (var j = 0; j < path.length; j++) {
-          path_normalize.push(path[j]['time']);
-          path_normalize.push(path[j]['speed']);
+        var path_normalized = path_normalize_sameTimeSpan(path_normalize_timeToCount(path));
+        var path_sendToServer = [];
+        for (var j = 0; j < path_normalized.length; j++) {
+          path_sendToServer.push(path_normalized[j]['time']);
+          path_sendToServer.push(path_normalized[j]['speed'] * 60);
 
-          plot_time.push(path[j]['time']);
-          plot_speed.push(path[j]['speed']);
+          plot_time.push(path_normalized[j]['time']);
+          plot_speed.push(path_normalized[j]['speed'] * 60);
         }
 
         updateChart_changeRoute(plot_time, plot_speed);
 
-        var str_paths = path_normalize.toString();
+        var str_paths = path_sendToServer.toString();
         console.log(pathname, str_paths.length);
         //send to servers
         function reqListener() {
@@ -571,7 +594,7 @@
     let label_speedPlot = ui_manager.AddElement_Label('label_speedPlot', { 'position': 'absolute', 'bottom': '80%', 'left': '10%', 'width': '20%' }, '速度分析');
 
     let canvas_SpeedPlot = document.createElement('canvas');
-    canvas_SpeedPlot.setAttribute("width", '400px');
+    canvas_SpeedPlot.setAttribute("width", '600px');
     canvas_SpeedPlot.setAttribute("height", '400px');
     canvas_SpeedPlot.setAttribute("id", "canvas_SpeedPlot");
     canvas_SpeedPlot.style.left = "10%";
@@ -596,15 +619,6 @@
             backgroundColor: 'transparent',
             fill: false,
           },
-          //speed process
-          {
-            type: 'line',
-            data: [],
-            fill: false,
-            borderColor: 'rgb(255, 0, 0)',
-            tension: 0.1,
-          }
-
         ]
       },
       options: {
@@ -625,6 +639,8 @@
             },
           }],
           xAxes: [{
+            // beginAtZero: true,
+            // fontSize: 0,
             ticks: {
               fontColor: "#000",
               fontSize: 0
@@ -632,7 +648,7 @@
             gridLines: {
               display: false
             },
-            padding: 10,
+            padding: 1,
             // display:false,
             // position:'bottom',
           }],
@@ -656,7 +672,7 @@
 
     table_result.setAttribute("id", "table_result");
     table_result.style.left = "60%";
-    table_result.style.bottom = "60%";
+    table_result.style.top = "30%";
     table_result.style.position = "absolute";
 
     table_result.appendChild(thead_result);
@@ -702,7 +718,7 @@
       row.appendChild(row_data_max);
       tbody_result.appendChild(row);
     }
-    func_table_result_addData(1, 1, 1, 1);
+    // func_table_result_addData(1, 1, 1, 1);
 
   </script>
 </body>

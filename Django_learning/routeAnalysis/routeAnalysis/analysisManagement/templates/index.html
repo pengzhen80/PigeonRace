@@ -6,10 +6,6 @@
 </head>
 
 <body>
-  <form action="/analysisManagement/analysisModels/" method="post">
-    {% csrf_token %}
-    <button type="submit" name='linkTestDB' id="button_linkTestDB"> </button>
-  </form>
   <script>
     class UI_allUiElementsManagement {
       constructor() {
@@ -262,13 +258,13 @@
     }
     ui_manager.Add_CallBack('button_analyseSingleRoute', func_cb_button_analyseSingleRoute);
 
-    var button_link_db_test = document.getElementById('button_linkTestDB');
-    button_link_db_test.style.position = 'absolute';
-    button_link_db_test.style.bottom = '90%';
-    button_link_db_test.style.left = '1%';
-    button_link_db_test.style.height = '6%';
-    button_link_db_test.style.width = '15%';
-    button_link_db_test.innerHTML = '連接測試服務器';
+    // var button_link_db_test = document.getElementById('button_linkTestDB');
+    // button_link_db_test.style.position = 'absolute';
+    // button_link_db_test.style.bottom = '90%';
+    // button_link_db_test.style.left = '1%';
+    // button_link_db_test.style.height = '6%';
+    // button_link_db_test.style.width = '15%';
+    // button_link_db_test.innerHTML = '連接測試服務器';
 
   </script>
 </body>
