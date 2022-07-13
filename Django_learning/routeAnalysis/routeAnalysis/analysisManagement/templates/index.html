@@ -244,11 +244,12 @@
     let button_analyseSingleRoute = ui_manager.Add_button('button_analyseSingleRoute', { 'position': 'absolute', 'bottom': '80%', 'left': '40%', 'width': '20%' }, '單條路徑分析');
     let button_analyseSinglePigeon = ui_manager.Add_button('button_analyseSinglePigeon', { 'position': 'absolute', 'bottom': '60%', 'left': '40%', 'width': '20%' }, '路徑關聯分析-單只鴿子');
     let button_analyseMultiPigeon = ui_manager.Add_button('button_analyseMultiPigeon', { 'position': 'absolute', 'bottom': '40%', 'left': '40%', 'width': '20%' }, '路徑關聯分析-群體');
+    let button_analyseMultiPigeon_sameSession = ui_manager.Add_button('button_analyseMultiPigeon_sameSession', { 'position': 'absolute', 'bottom': '20%', 'left': '40%', 'width': '20%' }, '路徑關聯分析-同批次');
     function func_cb_button_analyseSingleRoute() {
       //send to servers
       function reqListener() {
         console.log(typeof (this.responseText), typeof (this.response));
-        window.location.href = 'analysisModels/test';
+        window.location.href = 'analysisModels/singleRoute';
       }
       var oReq = new XMLHttpRequest();
       oReq.addEventListener("load", reqListener);
@@ -257,6 +258,20 @@
       oReq.send('singleRoute');
     }
     ui_manager.Add_CallBack('button_analyseSingleRoute', func_cb_button_analyseSingleRoute);
+
+    function func_cb_button_analyseMultiPigeon_sameSession() {
+      //send to servers
+      function reqListener() {
+        console.log(typeof (this.responseText), typeof (this.response));
+        window.location.href = 'analysisModels/multiPigeon_sameSession';
+      }
+      var oReq = new XMLHttpRequest();
+      oReq.addEventListener("load", reqListener);
+      oReq.open("post", 'analysisModels' + '/');
+      oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');   
+      oReq.send('multiPigeon_sameSession');
+    }
+    ui_manager.Add_CallBack('button_analyseMultiPigeon_sameSession', func_cb_button_analyseMultiPigeon_sameSession);
 
     // var button_link_db_test = document.getElementById('button_linkTestDB');
     // button_link_db_test.style.position = 'absolute';

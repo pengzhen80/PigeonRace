@@ -426,7 +426,7 @@
 
     var fileUploader = document.getElementById("fileUploader");
     fileUploader.style['position'] = 'absolute';;
-    fileUploader.style['top'] = '10%';
+    fileUploader.style['top'] = '5%';
     fileUploader.style['left'] = '20%';
 
     //用來讀取file資料的FileReader
@@ -591,10 +591,10 @@
     }
 
     //set speed plot
-    let label_speedPlot = ui_manager.AddElement_Label('label_speedPlot', { 'position': 'absolute', 'bottom': '80%', 'left': '10%', 'width': '20%' }, '速度分析');
+    // let label_speedPlot = ui_manager.AddElement_Label('label_speedPlot', { 'position': 'absolute', 'bottom': '80%', 'left': '10%', 'width': '20%' }, '速度分析');
 
     let canvas_SpeedPlot = document.createElement('canvas');
-    canvas_SpeedPlot.setAttribute("width", '600px');
+    canvas_SpeedPlot.setAttribute("width", '400px');
     canvas_SpeedPlot.setAttribute("height", '400px');
     canvas_SpeedPlot.setAttribute("id", "canvas_SpeedPlot");
     canvas_SpeedPlot.style.left = "10%";

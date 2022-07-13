@@ -59,3 +59,12 @@ class RouteAnalysisManagement():
                 max = timeSpeed[1]
 
         return max
+
+    def Analysis_multiPigeon_sameSession_datas(self, timeSpan,total_distance,points):
+        timeSpeedList = []
+        for i in range(len(points)-1):
+            if(i % 2 == 0):
+                timeSpeedList.append([points[i], float(points[i+1])])
+        result_min = self.analysis_singleRoute_timeSpeed_datas_min(timeSpeedList)
+        result_max = self.analysis_singleRoute_timeSpeed_datas_max(timeSpeedList)
+        return float(total_distance)/float(timeSpan),result_min,result_max
