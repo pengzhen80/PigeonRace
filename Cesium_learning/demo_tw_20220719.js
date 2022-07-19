@@ -215,8 +215,8 @@ class WeatherManagement {
     }
 }
 
-let weather_instance = new WeatherManagement();
-weather_instance.rain_particle_init(viewer.camera.position);
+// let weather_instance = new WeatherManagement();
+// weather_instance.rain_particle_init(viewer.camera.position);
 
 viewer.camera.changed.addEventListener(function() {
     var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.heading))
@@ -227,7 +227,7 @@ viewer.camera.changed.addEventListener(function() {
 
     console.log('camera position:',viewer.camera.position);
 
-    weather_instance.rain_particle_update(viewer.camera.position)
+    // weather_instance.rain_particle_update(viewer.camera.position)
 });
 
 
@@ -1333,25 +1333,23 @@ handler.setInputAction(function (click) {
 
 
 let pigeonRank_instance = new Pigeon_Rank(demo_fakeData_pigeons);
-// pigeonRank_instance.updateChart_pigeonInfos();
-// console.log(viewer.scene.canvas);
-// let vedioCapture_instance = new VedioCapture(viewer.scene.canvas, { fps: 10 });
+
 let vedioCapture_instance = new VedioCapture();
-vedioCapture_instance.init_Ui_addButtonStart('RecorderButton_Start');
-function callback_vedioCapture_buttonStart() {
-    console.log('callback_vedioCapture_buttonStart');
-    vedioCapture_instance.start();
-}
-ui_managemer_instance.Add_CallBack('RecorderButton_Start', callback_vedioCapture_buttonStart);
+// vedioCapture_instance.init_Ui_addButtonStart('RecorderButton_Start');
+// function callback_vedioCapture_buttonStart() {
+//     console.log('callback_vedioCapture_buttonStart');
+//     vedioCapture_instance.start();
+// }
+// ui_managemer_instance.Add_CallBack('RecorderButton_Start', callback_vedioCapture_buttonStart);
 
-vedioCapture_instance.init_Ui_addButtonDownload('RecorderButton_Download');
-function callback_vedioCapture_buttonDownload() {
-    console.log('callback_vedioCapture_buttonDownload');
-    vedioCapture_instance.download();
-}
-ui_managemer_instance.Add_CallBack('RecorderButton_Download', callback_vedioCapture_buttonDownload);
+// vedioCapture_instance.init_Ui_addButtonDownload('RecorderButton_Download');
+// function callback_vedioCapture_buttonDownload() {
+//     console.log('callback_vedioCapture_buttonDownload');
+//     vedioCapture_instance.download();
+// }
+// ui_managemer_instance.Add_CallBack('RecorderButton_Download', callback_vedioCapture_buttonDownload);
 
-// vedioCapture_instance._init_buttons_clickHandler(vedioCapture_instance.start,vedioCapture_instance.download);
+
 
 //track entity changes
 function onChanged(collection, added, removed, changed) {
