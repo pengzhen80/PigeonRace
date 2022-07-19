@@ -218,17 +218,17 @@ class WeatherManagement {
 // let weather_instance = new WeatherManagement();
 // weather_instance.rain_particle_init(viewer.camera.position);
 
-viewer.camera.changed.addEventListener(function() {
-    var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.heading))
-    console.log('Heading:', deg);
+// viewer.camera.changed.addEventListener(function() {
+//     var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.heading))
+//     console.log('Heading:', deg);
   
-    var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.pitch))
-    console.log('Pitch:', deg);
+//     var deg = Math.round( Cesium.Math.toDegrees(viewer.camera.pitch))
+//     console.log('Pitch:', deg);
 
-    console.log('camera position:',viewer.camera.position);
+//     console.log('camera position:',viewer.camera.position);
 
-    // weather_instance.rain_particle_update(viewer.camera.position)
-});
+//     // weather_instance.rain_particle_update(viewer.camera.position)
+// });
 
 
 // var rain_image = new Image(100, 100);
@@ -1709,7 +1709,7 @@ function showData(flightData) {
         //set the stop function here to avoid the error of viewer.clock.onStop(cannot be 
         // var time_diff_stop = Cesium.JulianDate.compare(time_stop, viewer.clock.currentTime);
         //test
-        var time_diff_stop = Cesium.JulianDate.compare(time_middle, viewer.clock.currentTime);
+        var time_diff_stop = Cesium.JulianDate.compare(time_stop, viewer.clock.currentTime);
         if (viewer.clock.shouldAnimate && (-2 < time_diff_stop) && (time_diff_stop < 2)) {
             console.log('time stop');
             viewer.clock.shouldAnimate = false;
