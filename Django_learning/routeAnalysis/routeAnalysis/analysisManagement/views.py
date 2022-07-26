@@ -66,10 +66,11 @@ def routeAnalysis(request, option, pigeonId, routeId):
             points_list = data.split(',')
             num_timeSpan = points_list[0]
             num_totalDistance = points_list[1]
+            print(num_timeSpan, num_totalDistance)
             points_list.pop(0)
             points_list.pop(0)
-            # print(points_list)
-            num_average,num_min,num_max = routeAnalysisManager.Analysis_multiPigeon_sameSession_datas(num_timeSpan,num_totalDistance,points_list)
-            print(num_average,num_min,num_max)
-            myReponse = {'result': 'success','routename':pigeonId, 'num_average': num_average,'num_min': num_min, 'num_max': num_max}
+            # print(len(points_list))
+            num_average,num_min,num_max,num_efficiency = routeAnalysisManager.Analysis_multiPigeon_sameSession_datas(num_timeSpan,num_totalDistance,points_list)
+            # print(num_average,num_min,num_max)
+            myReponse = {'result': 'success','routename':pigeonId, 'num_average': num_average,'num_min': num_min, 'num_max': num_max,'num_efficiency':num_efficiency}
     return JsonResponse(myReponse)

@@ -1,5 +1,5 @@
 import statistics
-
+from geopy import distance
 
 class RouteAnalysisManagement():
     def __init__(self):
@@ -62,9 +62,20 @@ class RouteAnalysisManagement():
 
     def Analysis_multiPigeon_sameSession_datas(self, timeSpan,total_distance,points):
         timeSpeedList = []
+        route_points = []
         for i in range(len(points)-1):
-            if(i % 2 == 0):
+            if(i % 5 == 0):
                 timeSpeedList.append([points[i], float(points[i+1])])
+                # print(points[i+2],points[i+3])
+                route_points.append((points[i+2],points[i+3]))
         result_min = self.analysis_singleRoute_timeSpeed_datas_min(timeSpeedList)
         result_max = self.analysis_singleRoute_timeSpeed_datas_max(timeSpeedList)
-        return float(total_distance)/float(timeSpan),result_min,result_max
+        result_routeEfficiency = self.Analysis_multiPigeon_sameSession_routeEfficiency(route_points,total_distance)
+        return float(total_distance)/float(timeSpan),result_min,result_max,result_routeEfficiency
+
+    def Analysis_multiPigeon_sameSession_routeEfficiency(self,points,total_distance):
+        start_point = points[0]
+        end_point = points[len(points)-1]
+        bee_distance = distance.distance(start_point,end_point).meters
+        print(bee_distance,total_distance)
+        return bee_distance/float(total_distance)

@@ -3,7 +3,7 @@
 
 <head>
     <title>路徑分析器-路徑關聯分析-同批次</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <style>
         table {
             border-collapse: collapse;
@@ -44,11 +44,9 @@
                 tmp_button.style.height = style['height'];
                 tmp_button.style['border-radius'] = style['border-radius'];
                 tmp_button.style['width'] = style['width'];
-                // canvas.style.border   = "1px solid";
                 tmp_button.style.backgroundColor = style['backgroundColor'];
                 // tmp_button.style.opacity = "0.5";
                 tmp_button.style.color = style['color'];
-                // canvas.style.color = 'black';
 
                 tmp_button.innerHTML = text;
                 // console.log(tmp_button.style);
@@ -107,11 +105,9 @@
                 ele.style.height = style['height'];
                 ele.style['border-radius'] = style['border-radius'];
                 ele.style['width'] = style['width'];
-                // canvas.style.border   = "1px solid";
                 ele.style.backgroundColor = style['backgroundColor'];
                 // tmp_button.style.opacity = "0.5";
                 ele.style.color = style['color'];
-                // canvas.style.color = 'black';
 
                 // ele.innerHTML = text;
                 ele.setAttribute('placeholder', text);
@@ -300,8 +296,14 @@
                     // console.log(xmlDoc.getElementsByTagName("trkpt"));
                     var path = [];
                     var trkpts = xmlDoc.getElementsByTagName("trkpt");
+                    var total_dis = 0;
+                    console.log(trkpts.length);
                     for (var i = 0; i < trkpts.length; i++) {
                         var cell = {};
+                        var lat = trkpts[i].getAttribute("lat");
+                        var lon = trkpts[i].getAttribute("lon");
+                        cell['lat'] = lat;
+                        cell['lon'] = lon;
                         for (var j = 0; j < trkpts[i].childNodes.length; j++) {
                             if (trkpts[i].childNodes[j].nodeName === 'time') {
                                 // console.log(trkpts[i].childNodes[j].innerHTML);
@@ -318,15 +320,19 @@
                                 // console.log(trkpts[i].childNodes[j].innerHTML);
                                 // console.log(trkpts[i].childNodes[j])
                                 cell['distance'] = trkpts[i].childNodes[j].innerHTML;
-                            }
-                            path.push(cell);
+                                total_dis += parseFloat(cell['distance']);
+                            }                     
                         }
+                        path.push(cell);
 
                         // console.log(i,'lat: '+lat+' lon: '+lon);
+                        // console.log(i,cell['distance']);
                     }
+                    console.log(total_dis,path.length);
                     this.originalPaths.push({ name: paths[index]['name'], data: path });
                 }
                 console.log(this.paths.length);
+                
                 // return this.paths;
             }
 
@@ -340,6 +346,7 @@
                         result.push(this.originalPaths[i]);
                     }
                 }
+                console.log(result.length);
                 return result;
             }
 
@@ -463,7 +470,7 @@
                         filtered_gpxFileDatas.push(gpxFileDatas[index_gpxData]);
                         newPathNames.push(gpxFileDatas[index_gpxData]['name']);
                     }
-
+                    console.log(newPathNames);
                     pathManger.decodePath_timeSpeedDistance(filtered_gpxFileDatas);
                     func_sendRequest_makeSingleRouteAnalysis(pathManger.GetOringinalPathsByPathNames(newPathNames));
                     // console.log(gpxFileDatas);
@@ -503,17 +510,22 @@
             //make paths to str
             // console.log('origin paths', paths);
             function path_normalize_timeToCount(timeSpeed) {
+                console.log(timeSpeed.length)
                 var result = [];
                 var baseTime = new Date(timeSpeed[0]['time']).getTime();
-                for (var i = 0; i < timeSpeed.length; i++) {
+                for (var i_timeSpeed = 0; i_timeSpeed < timeSpeed.length; i_timeSpeed++) {
                     // console.log(timeSpeed[i]['time']);
                     // console.log(new Date(timeSpeed[i]['time']).getTime()/1000);
                     result.push({
-                        'time': ((new Date(timeSpeed[i]['time'])).getTime() - baseTime) / 1000,
-                        'speed': timeSpeed[i]['speed'],
-                        'distance': timeSpeed[i]['distance'],
+                        // 'lat' : timeSpeed[i]['lat'],
+                        // 'lon':timeSpeed[i]['lon'],
+                        'time': ((new Date(timeSpeed[i_timeSpeed]['time'])).getTime() - baseTime) / 1000,
+                        'speed': timeSpeed[i_timeSpeed]['speed'],
+                        // 'distance': timeSpeed[i]['distance'],
                     });
+                    console.log(((new Date(timeSpeed[i_timeSpeed]['time'])).getTime() - baseTime)/1000);
                 }
+                console.log(result.length)
                 return result;
             }
 
@@ -547,22 +559,29 @@
                 var plot_speed = [];
 
                 var path = paths[i]['data'];
+                // console.log(path);
                 var path_normalized = path_normalize_timeToCount(path);
                 var path_sendToServer = [];
+                // var path_sendToServer_routeEff = [];
                 var totalDistance_sendToServer = 0;
-                var time_sendToServer = path_normalized[path_normalized.length-1]['time'];
+                var time_sendToServer = path_normalized[path_normalized.length - 1]['time'];
                 for (var j = 0; j < path_normalized.length; j++) {
                     path_sendToServer.push(path_normalized[j]['time']);
-                    path_sendToServer.push(path_normalized[j]['speed'] * 60);
-                    totalDistance_sendToServer += parseFloat(path_normalized[j]['distance']);
+                    path_sendToServer.push(path_normalized[j]['speed']);
+                    path_sendToServer.push(path[j]['lat']);
+                    path_sendToServer.push(path[j]['lon']);
+                    path_sendToServer.push(path[j]['distance']);
+                    // console.log(j,path[j]['distance']);
+                    totalDistance_sendToServer += parseFloat(path[j]['distance']);
 
                     // plot_time.push(path[j]['time']);
-                    plot_speed.push(path[j]['speed'] * 60);
+                    plot_speed.push(path[j]['speed']);
                 }
+                console.log('dis:',totalDistance_sendToServer);
 
                 updateChart_changeRoute(pathname, path_normalized.length, plot_speed);
 
-                var str_paths = time_sendToServer.toString()+','+totalDistance_sendToServer.toString()+','+path_sendToServer.toString();
+                var str_paths = time_sendToServer.toString() + ',' + totalDistance_sendToServer.toString() + ',' + path_sendToServer.toString();
                 // console.log(pathname, str_paths.length);
                 //send to servers
                 function reqListener() {
@@ -579,9 +598,11 @@
                         // var num_median = response['num_median'];
                         var num_min = response['num_min'];
                         var num_max = response['num_max'];
-                        // console.log('result:', num_average, num_min, num_max);
+                        var num_efficiency = response['num_efficiency'];
+                        console.log('result:', num_average,num_efficiency);
 
-                        func_table_result_addData(res_pathname,num_average, 0, num_min, num_max);
+                        func_table_result_addData(res_pathname, num_average, 0, num_min, num_max,num_efficiency);
+                        updateChart_changeRoute_bar(res_pathname, num_max, num_min,num_average,num_efficiency);
                     }
                 }
 
@@ -616,10 +637,14 @@
             type: 'line',
             data: {
                 labels: [],
-                datasets:[],
+                datasets: [],
             },
             options: {
                 responsive: false,
+                title: {
+                    display: true,
+                    text: '速度分布'
+                },
                 // legend: { display: false },
                 elements: {
                     point: {
@@ -665,7 +690,7 @@
             // },
         });
         // init char color
-        let color_Chart = ['red','yellow','blue','green','white','black','purple','orange','brown','pink','gray','cyan','indigo','teal','lime','lavender','maroon','navy','olive','silver','teal','violet','wheat','yellowgreen'];
+        let color_Chart = ['red', 'yellow', 'blue', 'green', 'black', 'purple', 'orange', 'brown', 'pink', 'gray', 'cyan', 'indigo', 'teal', 'lime', 'lavender', 'maroon', 'navy', 'olive', 'silver', 'teal', 'violet', 'wheat', 'yellowgreen'];
 
         function updateChart_changeRoute(routeName, data_time, data_speed) {
             if (myChart_SpeedPlot) {
@@ -673,7 +698,7 @@
                 //set color
                 let color_index = myChart_SpeedPlot.data.datasets.length;
                 if (color_index >= color_Chart.length) {
-                    color_index = color_index%color_Chart.length;
+                    color_index = color_index % color_Chart.length;
                 }
                 console.log(data_speed.length);
 
@@ -686,20 +711,131 @@
                     borderColor: color_Chart[color_index],
                     // backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
                 }
-                console.log('new label length is ',data_time);
+                console.log('new label length is ', data_time);
                 var old_labels = myChart_SpeedPlot.data.labels;
                 if (old_labels.length < data_time) {
                     ///make list
                     new_labels = [];
-                    for(var i=0;i<data_time;i++)
-                    {
+                    for (var i = 0; i < data_time; i++) {
                         new_labels.push(i);
                     }
-                    myChart_SpeedPlot.data.labels  = new_labels;
+                    myChart_SpeedPlot.data.labels = new_labels;
                 }
-                
+
                 myChart_SpeedPlot.data.datasets.push(newDataSet);
                 myChart_SpeedPlot.update();
+            }
+        }
+
+        let canvas_SpeedPlot_bar = document.createElement('canvas');
+        canvas_SpeedPlot_bar.setAttribute("width", '400px');
+        canvas_SpeedPlot_bar.setAttribute("height", '400px');
+        canvas_SpeedPlot_bar.setAttribute("id", "canvas_SpeedPlot_bar");
+        canvas_SpeedPlot_bar.style.left = "10%";
+        canvas_SpeedPlot_bar.style.top = "100%";
+        canvas_SpeedPlot_bar.style.position = "absolute";
+        // canvas.style['margin-left'] = '-200px';
+        // canvas.style.border   = "1px solid";
+        // canvas.style.backgroundColor = 'transparent';
+        document.body.appendChild(canvas_SpeedPlot_bar);
+
+        const myChart_SpeedPlot_bar = new Chart(canvas_SpeedPlot_bar, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: '速度',
+                        data: [],
+                        backgroundColor: 'rgba(124,252,0,0.2)',
+                        borderColor: 'rgb(124,252,0)',
+                        borderWidth: 1,
+                        borderSkip: false,
+                        stack: 'combined',
+                    },
+                    {
+                        label: '平均速度',
+                        data: [],
+                        borderColor: 'blue',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                        stack: 'combined',
+                        type: 'line'
+                    },
+                    {
+                        label: '路徑效率',
+                        data: [],
+                        borderColor: 'red',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                        stack: 'combined',
+                        type: 'line'
+                    },
+                ]
+            },
+            options: {
+                responsive: false,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: '速度'
+                },
+                // legend: { display: false },
+                // elements: {
+                //     point: {
+                //         radius: 0
+                //     }
+                // },
+
+                scales: {
+                    y: {
+                        stacked: true
+                    },
+                    yAxes: [{
+                        beginAtZero: true,
+                        fontSize: 0,
+                        padding: 1,
+                        gridLines: {
+                            display: false
+                        },
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        padding: 1,
+                        // display:false,
+                        // position:'bottom',
+                    }],
+                },
+            }
+        });
+        function updateChart_changeRoute_bar(routeName, speed_max, speed_min,speed_avarage,num_efficiency) {
+            console.log(speed_max, speed_min);
+            if (canvas_SpeedPlot_bar) {
+                console.log(myChart_SpeedPlot_bar.data.datasets[0].data.length);
+                //set color
+                let color_index = myChart_SpeedPlot_bar.data.datasets[0].data.length;
+                if (color_index >= color_Chart.length) {
+                    color_index = color_index % color_Chart.length;
+                }
+                console.log(myChart_SpeedPlot_bar.data.labels);
+                myChart_SpeedPlot_bar.data.labels.push(routeName);
+
+                myChart_SpeedPlot_bar.data.datasets[0].data.push([speed_max, speed_min]);
+                // console.log(myChart_SpeedPlot_bar.data.datasets[0].data);
+                // myChart_SpeedPlot_bar.data.datasets[0].backgroundColor.push(color_Chart[color_index]);
+                // myChart_SpeedPlot_bar.data.datasets[0].borderColor.push(color_Chart[color_index]);
+
+                myChart_SpeedPlot_bar.data.datasets[1].data.push(speed_avarage);
+                // console.log(num_efficiency);
+                myChart_SpeedPlot_bar.data.datasets[2].data.push(num_efficiency*10);
+
+                myChart_SpeedPlot_bar.update();
+                // myChart_SpeedPlot_bar.data.datasets.push(tmp_dataset);
+                // myChart_SpeedPlot_bar.update();
             }
         }
 
@@ -726,42 +862,48 @@
             let heading_0 = document.createElement('th');
             heading_0.innerHTML = "名稱";
             let heading_1 = document.createElement('th');
-            heading_1.innerHTML = "平均";
+            heading_1.innerHTML = "平均(m/s)";
             let heading_2 = document.createElement('th');
-            heading_2.innerHTML = "中位";
+            heading_2.innerHTML = "中位(m/s)";
             let heading_3 = document.createElement('th');
-            heading_3.innerHTML = "最低";
+            heading_3.innerHTML = "最低(m/s)";
             let heading_4 = document.createElement('th');
-            heading_4.innerHTML = "最高";
+            heading_4.innerHTML = "最高(m/s)";
+            let heading_5 = document.createElement('th');
+            heading_5.innerHTML = "路徑效率";
 
             row_1.appendChild(heading_0);
             row_1.appendChild(heading_1);
             // row_1.appendChild(heading_2);
             row_1.appendChild(heading_3);
             row_1.appendChild(heading_4);
+            row_1.appendChild(heading_5);
             thead_result.appendChild(row_1);
         }
         func_init_table_result_head();
 
-        function func_table_result_addData(routeName,num_average, num_median, num_min, num_max) {
+        function func_table_result_addData(routeName, num_average, num_median, num_min, num_max,num_efficiency) {
             // console.log(routeName,num_average, num_median, num_min, num_max);
             var row = document.createElement('tr');
             var row_data_routeName = document.createElement('td');
             row_data_routeName.innerHTML = routeName;
             var row_data_avarage = document.createElement('td');
-            row_data_avarage.innerHTML = num_average.toString();
+            row_data_avarage.innerHTML = (num_average.toFixed(3)).toString();
             var row_data_midian = document.createElement('td');
             row_data_midian.innerHTML = num_median.toString();
             var row_data_min = document.createElement('td');
             row_data_min.innerHTML = num_min.toString();
             var row_data_max = document.createElement('td');
             row_data_max.innerHTML = num_max.toString();
+            var row_data_effi = document.createElement('td');
+            row_data_effi.innerHTML = num_efficiency.toFixed(3).toString();
 
             row.appendChild(row_data_routeName);
             row.appendChild(row_data_avarage);
             // row.appendChild(row_data_midian);
             row.appendChild(row_data_min);
             row.appendChild(row_data_max);
+            row.appendChild(row_data_effi);
             tbody_result.appendChild(row);
         }
     // func_table_result_addData(1, 1, 1, 1);
