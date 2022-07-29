@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>禁航區管理</title>
+  <script>  src = 'https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js'</script>
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+</head>
+
+<body>
+  <div id="Map_showPaths"></div>
+  <script>
+    let pathName = '{{ pathName|safe }}';
+    let pathLine_origin = '{{ pathLine_origin|safe }}'
+    let pathLine_filter = '{{ pathLine_filter|safe }}'
+    let pathPolygon = '{{ pathPolygon|safe }}'
+
+    console.log(typeof (pathLine_origin));
+    // console.log(pathLine_origin);
+    var pathLine_origin_normalized = JSON.parse(pathLine_origin);
+    let pathLine_filter_normalized = JSON.parse(pathLine_filter);
+    let pathPolygon_normalized = JSON.parse(pathPolygon);
+    // console.log(typeof (pathLine_origin_normalized));
+    // console.log(pathLine_origin_normalized);
+
+    var div_smallMap = document.getElementById('Map_showPaths');
+    div_smallMap.setAttribute('style', 'width:100%;height:100%;');
+    // canvas.setAttribute("width", 400);
+    // canvas.setAttribute("height", 100);
+    div_smallMap.style.left = "0px";
+    div_smallMap.style.top = "0px";
+    div_smallMap.style.position = "absolute";
+    div_smallMap.style.zIndex = "1";
+
+    //the last number is the zoom level, smaller is farer;
+    console.log(pathLine_origin_normalized[0])
+
+    map_handler = L.map('Map_showPaths', { zoomControl: false }).setView(pathLine_origin_normalized[0], 8);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map_handler);
+
+    var polyline_origin = L.polyline(pathLine_origin_normalized, {color: 'red'}).addTo(map_handler);
+    var polyline_filtered = L.polyline(pathLine_filter_normalized, {color: 'yellow'}).addTo(map_handler);
+    var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+
+  </script>
+</body>
+
+</html>

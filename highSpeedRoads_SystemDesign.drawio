@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" modified="2022-05-12T11:51:04.112Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36" etag="19lQsWesNHCbrvEAC3tG" version="18.0.3" type="github">
+  <diagram id="efclQ2mYd0wn6vlMMec0" name="Page-1">
+    <mxGraphModel dx="1718" dy="845" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="10" width="410" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-2" value="&lt;font style=&quot;font-size: 36px&quot;&gt;gpx數據管理：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="60" y="30" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-3" value="gpx單個文件讀取" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-4" value="gpx多個文件讀取" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="80" y="160" width="326" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-8" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="680" y="70" width="450" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-9" value="數據庫管理：&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="700" y="80" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-11" value="增刪改查" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="730" y="140" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-12" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="330" y="480" width="610" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-13" value="UI管理：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="340" y="490" width="310" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-14" value="頁面管理" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="380" y="540" width="236" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-15" value="按鈕管理" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="380" y="610" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-16" value="數據顯示" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="380" y="680" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-17" value="地圖演示" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="660" y="540" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-18" value="輸入讀取" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="660" y="610" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-19" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=36;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="PMwcCSvuLf5VPloV6X2n-1" target="PMwcCSvuLf5VPloV6X2n-12" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PMwcCSvuLf5VPloV6X2n-20" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=36;entryX=0.539;entryY=1.002;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="PMwcCSvuLf5VPloV6X2n-8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="480" as="sourcePoint" />
+            <mxPoint x="560" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G6qQTfw-bczDcLdhpUxL-1" value="gpx數據filter" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="80" y="230" width="326" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G6qQTfw-bczDcLdhpUxL-3" value="gpx數據to Path" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="80" y="300" width="326" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KujiKlr2Vgvex7wgkR9C-2" value="查找所有工棚" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="730" y="210" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KujiKlr2Vgvex7wgkR9C-3" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 16px; line-height: 22px;&quot;&gt;&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getPathsByShedId&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="730" y="280" width="290" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
