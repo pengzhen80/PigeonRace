@@ -735,8 +735,9 @@
         let selectList_Sheds = ui_manager.AddElement_Select(id = 'selectList_Sheds', style = { 'position': 'absolute', 'bottom': '90%', 'left': '1%', 'height': '6%', 'width': '10%', 'color': 'white', 'text-align': 'center' }, size = 1, options = []);
         let selectList_Shed_Paths = ui_manager.AddElement_Select(id = 'selectList_Shed_Paths', style = { 'position': 'absolute', 'bottom': '20%', 'left': '1%', 'height': '60%', 'width': '25%', 'color': 'white', 'text-align': 'center' }, size = 20);
         let input_text_createShed_Name = ui_manager.AddElement_TextInput(id = 'input_text_createShed_Name', style = { 'position': 'absolute', 'bottom': '90%', 'left': '15%', 'width': '15%' }, text = '輸入公棚名字');
-        let button_createShed = ui_manager.Add_button(id = 'button_createShed', style = { 'position': 'absolute', 'bottom': '83%', 'left': '15%', 'height': '6%', 'width': '8%', 'text-align': 'center' }, text = '新增公棚');
+        let button_createShed = ui_manager.Add_button(id = 'button_createShed', style = { 'position': 'absolute', 'bottom': '83%', 'left': '20%', 'height': '6%', 'width': '8%', 'text-align': 'center' }, text = '新增公棚');
         let button_deleteShed = ui_manager.Add_button(id = 'button_deleteShed', style = { 'position': 'absolute', 'bottom': '83%', 'left': '1%', 'height': '6%', 'width': '8%', 'text-align': 'center' }, text = '刪除公棚');
+        let button_renameShed = ui_manager.Add_button(id = 'button_renameShed', style = { 'position': 'absolute', 'bottom': '83%', 'left': '10%', 'height': '6%', 'width': '8%', 'text-align': 'center' }, text = '重命名公棚');
         ////set old path list to multiple select
         selectList_Shed_Paths.setAttribute('multiple', 'multiple');
 
@@ -791,10 +792,9 @@
         ui_manager.Add_CallBack('button_createShed', func_cb_button_createShed);
 
         function func_cb_button_deleteShed() {
-            if (confirm("確認刪除公棚嗎?") == false)
-            {
+            if (confirm("確認刪除公棚嗎?") == false) {
                 return;
-            } 
+            }
 
             var shedId = selectList_Sheds.value;
             console.log(shedId);
@@ -833,6 +833,56 @@
             }
         }
         ui_manager.Add_CallBack('button_deleteShed', func_cb_button_deleteShed);
+
+        function func_cb_button_renameShed() {
+            if (confirm("確認重命名公棚嗎?") == false) {
+                return;
+            }
+
+            var oldshedId = selectList_Sheds.value;
+            var newshedId = input_text_createShed_Name.value;
+            console.log('rename shed:', oldshedId, 'to', newshedId);
+
+            if (oldshedId != undefined && newshedId != undefined) {
+                function reqListener() {
+                    console.log(this.responseText);
+                    var response = JSON.parse(this.responseText);
+                    // console.log(response);
+                    var tmp_res = decodeURI(response['result']);
+                    console.log(tmp_res);
+                    if ('success' === tmp_res) {
+                        var res_oldShedName = decodeURI(response['oldshedname']);
+                        var res_newShedName = decodeURI(response['newshedname']);
+                        // update selectList_Sheds by result
+                        let shedNameList_ele = selectList_Sheds.options;
+                        for (var i = 0; i < shedNameList_ele.length; i++) {
+                            if (shedNameList_ele[i].value === res_oldShedName) {
+                                shedNameList_ele[i].value = res_newShedName;
+                                shedNameList_ele[i].innerHTML = res_newShedName;
+                                break;
+                            }
+                        }
+                        // update linkDb_sheds_paths
+                        linkDb_sheds_paths[res_newShedName] = linkDb_sheds_paths[res_oldShedName];
+                        delete linkDb_sheds_paths[res_oldShedName];
+                        // linkDb_sheds_paths[shedId].remove(oldPathName);
+                        // linkDb_sheds_paths[shedId].push(newPathName);
+
+                        alert('重命名公棚成功');
+                    }
+                    else {
+                        alert('重命名公棚失敗');
+                    }
+                }
+
+                //todo send requests
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("GET", 'updateShedName' + '/' + 'renameShed' + '/' + oldshedId + '/' + newshedId + '/' + 'pengzhen');
+                oReq.send();
+            }
+        }
+        ui_manager.Add_CallBack('button_renameShed', func_cb_button_renameShed);
 
 
         //add all sheds to selectList
@@ -911,10 +961,9 @@
 
         function func_cb_button_deletePaths_selectList_Shed_Paths() {
             // console.log(selectList_Sheds.value);
-            if (confirm("確認刪除路徑嗎?") == false)
-            {
+            if (confirm("確認刪除路徑嗎?") == false) {
                 return;
-            } 
+            }
             var shedId = selectList_Sheds.value;
             var paths = [];
             let pathNameList_ele = selectList_Shed_Paths.options;
@@ -927,9 +976,9 @@
                 process_deletePaths_selectList_Shed_Paths_cur.style.backgroundColor = 'green';
                 process_deletePaths_selectList_Shed_Paths_cur.style['width'] = '0%';
             }
-            var total_pathDelete_success = 0 ;
+            var total_pathDelete_success = 0;
             var total_pathDelete_fail = 0;
-            var total_pathToDelete =  paths.length;
+            var total_pathToDelete = paths.length;
             // function reqListener() {
             //     console.log(this.responseText);
             //     var response = JSON.parse(this.responseText);
@@ -988,15 +1037,14 @@
                     total_pathDelete_success++;
                     // alert('刪除路徑成功');
                 }
-                else
-                {
+                else {
                     total_pathDelete_fail++;
                 }
                 // else {
                 //     alert('刪除路徑失敗');
                 // }
-                if ((total_pathDelete_success+total_pathDelete_fail) === total_pathToDelete) {
-                    alert('刪除路徑:' + total_pathDelete_success.toString() + ',刪除路徑失敗:'+total_pathDelete_fail.toString());
+                if ((total_pathDelete_success + total_pathDelete_fail) === total_pathToDelete) {
+                    alert('刪除路徑:' + total_pathDelete_success.toString() + ',刪除路徑失敗:' + total_pathDelete_fail.toString());
                     process_deletePaths_selectList_Shed_Paths_cur.innerHTML = '';
                     process_deletePaths_selectList_Shed_Paths_cur.style.backgroundColor = 'gray';
                 }

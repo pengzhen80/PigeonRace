@@ -303,6 +303,40 @@ class DBManagement ():
         self.shedsMapToPaths.pop(shedId)
         return result
 
+    def renameShed(self,shedIdOld,shedIdNew):
+        #step1: send request to server to rename
+        #step2: if success, update local
+        #step3: local update include : shedsMapToPaths, shedAndPathMapToPathId
+
+        url_head = ''
+        if(self.server == 'test'):
+            url_head = 'http://vmskyracingdev.chinanorth.cloudapp.chinacloudapi.cn:8000/'
+        else:
+            url_head = 'http://www.skyracing.com.cn:8000/'
+        url = url_head+'cloudNfz'
+
+        myobj = {'querytype': 'updateOrg', 'nfzOrgOld': shedIdOld,'nfzOrgNew':shedIdNew}
+
+        x = requests.post(url, data=myobj)
+        # print(type(x.text))
+        res = json.loads(x.text)
+        result = res['results']
+        print('renameShed result:',result)
+        if(result == 0):
+            print("rename shed failed")
+            return 0
+        
+        ### renameShed local
+        self.shedsMapToPaths[shedIdNew] = self.shedsMapToPaths[shedIdOld]
+        self.shedsMapToPaths.pop(shedIdOld)
+        paths = self.shedsMapToPaths[shedIdNew]
+
+        for path in paths:
+            self.shedAndPathMapToPathId[shedIdNew+path] = self.shedAndPathMapToPathId[shedIdOld+path]
+            self.shedAndPathMapToPathId.pop(shedIdOld+path)
+
+        return result
+
 if __name__ == '__main__':
     dbManager = DBManagement()
     # dbManager.getAllShedWithPaths()

@@ -172,4 +172,8 @@ def updatePathName(request,option,shedId,oldPathName,newPathName,note):
             return JsonResponse({'result':'success','oldpathname': oldPathName,'newpathname':newPathName})
         return JsonResponse({'result':'fail','oldpathname': oldPathName,'newpathname':newPathName})
     
+    if option == 'updateShedName':
+        if dbManager.renameShed(oldPathName,newPathName):
+            return JsonResponse({'result':'success','oldshedname': oldPathName,'newshedname':newPathName})
+        return JsonResponse({'result':'fail','oldshedname': oldPathName,'newshedname':newPathName})
     return JsonResponse({'result':'fail'})
