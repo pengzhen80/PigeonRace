@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<gpx version="1.1"
+creator="Viking 1.9 -- http://viking.sf.net/"
+xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:wptx1="http://www.garmin.com/xmlschemas/WaypointExtension/v1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v2" xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www8.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/WaypointExtension/v1 http://www8.garmin.com/xmlschemas/WaypointExtensionv1.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v2 http://www.garmin.com/xmlschemas/TrackPointExtensionv2.xsd http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd">
+  <name>Skyracing</name>
+          <trk>
+            <name>10522</name>
+            <trkseg>
+                
+            <trkpt lat="40.7902214154042" lon="120.80691002162">
+                <fix>3d</fix>
+                <time>2021-09-28T22:43:00Z</time>
+                <ele>109.0</ele>
+                <speed>25.0</speed>
+                <heading>223</heading>
+                <distance>0.0</distance>
+                <hdop>144</hdop>
+                <sat>7</sat>
+            </trkpt>
+            <trkpt lat="40.7898555415236" lon="120.806521692058">
+                <fix>3d</fix>
+                <time>2021-09-28T22:43:02Z</time>
+                <ele>108.0</ele>
+                <speed>25.0</speed>
+                <heading>210</heading>
+                <distance>52.2724949716137</distance>
+                <hdop>74</hdop>
+                <sat>15</sat>
+            </trkpt>
+            </trkseg>
+          </trk>
+        </gpx>
+        
