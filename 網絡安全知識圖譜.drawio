@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-04T02:29:24.798Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="5go6vgyf0Xe2ZROF6Grc" version="20.2.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-08-04T02:30:36.839Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="4PAxTo9ZNFxZA6J1KhZB" version="20.2.2" type="github">
   <diagram id="54uESskxdxZRvFl4LkZj" name="層級圖">
     <mxGraphModel dx="1590" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -18,6 +18,15 @@
         </mxCell>
         <mxCell id="-k-0D2QzpojkwivL61-l-20" value="base" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="50" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-k-0D2QzpojkwivL61-l-27" value="和網絡拓撲圖一樣：&lt;span style=&quot;font-family: arial, sans-serif; color: rgb(77, 81, 86); background-color: transparent; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;星狀系統&lt;/font&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="310" width="240" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="-k-0D2QzpojkwivL61-l-28" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="-k-0D2QzpojkwivL61-l-18" target="-k-0D2QzpojkwivL61-l-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="550" as="sourcePoint" />
+            <mxPoint x="530" y="500" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
