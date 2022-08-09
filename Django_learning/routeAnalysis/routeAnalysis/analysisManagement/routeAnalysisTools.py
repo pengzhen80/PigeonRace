@@ -70,10 +70,10 @@ class RouteAnalysisManagement():
                 route_points.append((points[i+2],points[i+3]))
         result_min = self.analysis_singleRoute_timeSpeed_datas_min(timeSpeedList)
         result_max = self.analysis_singleRoute_timeSpeed_datas_max(timeSpeedList)
-        result_routeEfficiency = self.Analysis_multiPigeon_sameSession_routeEfficiency(route_points,total_distance)
+        result_routeEfficiency = self.Analysis_multiPigeon_sameSession_routeEfficiency_single(route_points,total_distance)
         return float(total_distance)/float(timeSpan),result_min,result_max,result_routeEfficiency
 
-    def Analysis_multiPigeon_sameSession_routeEfficiency(self,points,total_distance):
+    def Analysis_multiPigeon_sameSession_routeEfficiency_single(self,points,total_distance):
         start_point = points[0]
         end_point = points[len(points)-1]
         bee_distance = distance.distance(start_point,end_point).meters
