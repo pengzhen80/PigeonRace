@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T09:04:29.735Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="FoQkjZ1I_XJY5oA4D9dV" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T09:05:23.696Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="WggtLsZ8ZngQhU3bG6jY" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2035,9 +2035,6 @@
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-76" value="Api：反饋訓練失敗" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="80" y="1180" width="500" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=24;" edge="1" parent="1" source="PFJv9Y-P-HBdMzl0SrrX-77" target="PFJv9Y-P-HBdMzl0SrrX-1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-77" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-940" y="1310" width="1770" height="490" as="geometry" />
         </mxCell>
@@ -2358,9 +2355,6 @@
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-151" value="User：導航能力的展示（參數：鴿子號碼）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="100" y="1640" width="480" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-152" value="導航能力的更新（參數：鴿子號碼，放飛數據）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="100" y="1710" width="540" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
