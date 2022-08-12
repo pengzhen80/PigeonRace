@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T09:07:42.916Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="hem25w4Zpn0NqGVjKTxo" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T09:10:02.931Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="QI37N6MVOEwBTv-R5j2R" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2042,7 +2042,7 @@
           <mxGeometry x="-140" y="1310" width="400" height="70" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-80" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-633" y="1880" width="1460" height="530" as="geometry" />
+          <mxGeometry x="-633" y="1880" width="1460" height="510" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-81" value="一次放飛的管理" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-100" y="1880" width="400" height="70" as="geometry" />
@@ -2357,7 +2357,13 @@
           <mxGeometry x="100" y="1640" width="480" height="60" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-159" value="Api：訓練結果回饋：成功 or 失敗" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="100" y="1710" width="480" height="60" as="geometry" />
+          <mxGeometry x="80" y="1710" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-160" value="Api：放飛結果回饋：成功（回饋放飛內容） or 失敗" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-570" y="2170" width="590" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-161" value="Api：根據放飛結果進行更新" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1710" width="320" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
