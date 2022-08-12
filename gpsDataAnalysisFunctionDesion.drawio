@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T07:34:11.895Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="VchP5fPqxO4S58sM_nNA" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T07:38:03.381Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="E6KXy7cBuXVk32h-8g8G" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1732,12 +1732,12 @@
     </mxGraphModel>
   </diagram>
   <diagram id="e1xYMgHZixG7jLk5aDEa" name="訓練系統">
-    <mxGraphModel dx="2617" dy="2014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3444" dy="2014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-8" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-760" y="-880" width="2390" height="1450" as="geometry" />
+          <mxGeometry x="-960" y="-880" width="2590" height="1450" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-5" value="&lt;h1 style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;一次放飛&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;text-align: left;&quot;&gt;制定依次放飛的計劃：記錄風速和空氣濕度等。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;結果：未達成，達成。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-80" y="160" width="670" height="380" as="geometry" />
@@ -1848,7 +1848,7 @@
           <mxGeometry x="-90" y="-510" width="700" height="480" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-31" value="未達成：反饋給計劃管理（重新制定計劃（修改計劃方案） or 修改計劃（修改後續代數和沒代的周期））。&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-678" y="-510" width="530" height="250" as="geometry" />
+          <mxGeometry x="-790" y="-690" width="530" height="250" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-32" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="PFJv9Y-P-HBdMzl0SrrX-30" target="PFJv9Y-P-HBdMzl0SrrX-5">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -1903,8 +1903,35 @@
             <mxPoint x="670" y="150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-43" value="達成：更新整體的訓練進度以及整體的指標。" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-610" y="120" width="300" height="140" as="geometry" />
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-43" value="達成：更新訓練計劃進度。" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="-270" width="300" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-45" value="達成" style="rhombus;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="-335" width="120" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-46" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PFJv9Y-P-HBdMzl0SrrX-30" target="PFJv9Y-P-HBdMzl0SrrX-45">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="-340" as="sourcePoint" />
+            <mxPoint x="230" y="-390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-47" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="PFJv9Y-P-HBdMzl0SrrX-45" target="PFJv9Y-P-HBdMzl0SrrX-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-190" y="-260" as="sourcePoint" />
+            <mxPoint x="-140" y="-310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-48" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PFJv9Y-P-HBdMzl0SrrX-45" target="PFJv9Y-P-HBdMzl0SrrX-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-190" y="-260" as="sourcePoint" />
+            <mxPoint x="-140" y="-310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-49" value="No" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="-410" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-50" value="Yes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-413" y="-280" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
