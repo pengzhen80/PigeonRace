@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T08:15:26.212Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="AB_9ScAgDy4TPVdteuzN" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T08:15:42.427Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="i6SwexbfD8iK9fVW1TF3" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1748,8 +1748,8 @@
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-5" value="&lt;h1 style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;一次放飛&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;text-align: left;&quot;&gt;制定依次放飛的計劃：記錄風速和空氣濕度等。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;結果：未達成，達成。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-80" y="160" width="670" height="380" as="geometry" />
         </mxCell>
-        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-2" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;訓練系統設計：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-150" y="650" width="290" height="30" as="geometry" />
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-2" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;訓練系統設計&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="680" width="290" height="30" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-6" value="未達成：重新or放棄執行本代 or 重新制定本代的放飛時間表。&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="860" y="-335" width="350" height="130" as="geometry" />
