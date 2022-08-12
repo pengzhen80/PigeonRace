@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T07:52:32.478Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="do9bl-dqwPMRm3AT5vr2" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T07:55:46.045Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="SsMERAPgJ1rr1-yX4-jN" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1737,7 +1737,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-700" y="740" width="1590" height="870" as="geometry" />
+          <mxGeometry x="-700" y="740" width="1590" height="1340" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-71" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-630" y="780" width="1460" height="490" as="geometry" />
@@ -2034,6 +2034,12 @@
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-76" value="Api：反饋訓練失敗" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="80" y="1180" width="500" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-77" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-630" y="1310" width="1460" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-78" value="一代訓練管理" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="1310" width="400" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
