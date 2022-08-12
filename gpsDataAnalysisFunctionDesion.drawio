@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T02:56:53.686Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="Uk3OSZFrO9E7tMCD9Nmm" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T02:57:07.136Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="4YBhK51z4WyN5G1ZkfbZ" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1851,7 +1851,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-30" value="&lt;h1 style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;一代的訓練：&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;text-align: left;&quot;&gt;制定一代的訓練計劃：放飛時間表，放飛對象管理（鴿環號，體重，腳蹼長度，飛行數據（記錄和調用每次飛行的數據），導航能力管理（展示和動態更新）），環境管理（環境記錄，環境波動判斷）。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;結果：未達成，達成（超額完成）。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-40" y="-510" width="660" height="480" as="geometry" />
+          <mxGeometry x="-90" y="-510" width="710" height="480" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-31" value="未達成：重新執行本次的訓練 or 重新制定整個的訓練計劃。&lt;br&gt;達成：更新整體的訓練進度以及整體的指標。&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="25" y="230" width="530" height="250" as="geometry" />
