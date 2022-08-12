@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T08:19:11.644Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="kopSAq_gxSXLrax0XYLu" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T08:57:48.633Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="v_pt7Pi5OC16ncwNgzPp" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1732,7 +1732,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="e1xYMgHZixG7jLk5aDEa" name="訓練系統">
-    <mxGraphModel dx="3444" dy="2014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3444" dy="1953" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2267,6 +2267,66 @@
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-130" value="訓練系統流程圖" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-130" y="-960" width="330" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-131" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1420" width="536" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-132" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-131">
+          <mxGeometry width="536" height="67" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-145" value="鴿子號碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-132">
+          <mxGeometry width="139" height="67" as="geometry">
+            <mxRectangle width="139" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-142" value="體重（g）" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-132">
+          <mxGeometry x="139" width="139" height="67" as="geometry">
+            <mxRectangle width="139" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-134" value="放飛數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-132">
+          <mxGeometry x="278" width="258" height="67" as="geometry">
+            <mxRectangle width="258" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-135" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-131">
+          <mxGeometry y="67" width="536" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-146" value="鴿A" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-135">
+          <mxGeometry width="139" height="66" as="geometry">
+            <mxRectangle width="139" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-143" value="460" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-135">
+          <mxGeometry x="139" width="139" height="66" as="geometry">
+            <mxRectangle width="139" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-137" value="{放飛編號：結果}" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-135">
+          <mxGeometry x="278" width="258" height="66" as="geometry">
+            <mxRectangle width="258" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-138" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-131">
+          <mxGeometry y="133" width="536" height="67" as="geometry" />
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-147" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 24px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 249, 250); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;鴿B&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-138">
+          <mxGeometry width="139" height="67" as="geometry">
+            <mxRectangle width="139" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-144" value="460" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-138">
+          <mxGeometry x="139" width="139" height="67" as="geometry">
+            <mxRectangle width="139" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-140" value="{放飛編號：結果}" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="PFJv9Y-P-HBdMzl0SrrX-138">
+          <mxGeometry x="278" width="258" height="67" as="geometry">
+            <mxRectangle width="258" height="67" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-141" value="放飛對象管理" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1390" width="240" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
