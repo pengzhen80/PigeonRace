@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T07:38:03.381Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="E6KXy7cBuXVk32h-8g8G" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-12T07:45:18.441Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="gqQpzwA7ykFhGL2mv-sq" version="20.2.3" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1844,8 +1844,8 @@
             <mxRectangle width="440" height="70" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-30" value="&lt;h1 style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;一代的訓練：&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;text-align: left;&quot;&gt;制定一代的訓練計劃：放飛時間表，放飛對象管理（鴿環號，體重，腳蹼長度，飛行數據（記錄和調用每次飛行的數據），導航能力管理（展示和動態更新）），環境管理（環境記錄，環境波動判斷）。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;結果：未達成代目標，達成代目標（超額完成）。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-90" y="-510" width="700" height="480" as="geometry" />
+        <mxCell id="PFJv9Y-P-HBdMzl0SrrX-30" value="&lt;h1 style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;一代的訓練：&lt;/font&gt;&lt;/h1&gt;&lt;p style=&quot;text-align: left;&quot;&gt;制定一代的訓練計劃：放飛時間表，放飛對象管理（鴿環號，體重，腳蹼長度，飛行數據（記錄和調用每次飛行的數據），導航能力管理（展示和動態更新）），環境管理（環境記錄，環境波動判斷）。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;放飛次數達到設定次數，或者當前時間達到了時間表的設定時間，進行結果判斷。&lt;/p&gt;&lt;p style=&quot;text-align: left;&quot;&gt;結果：未達成代目標，達成代目標（超額完成）。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="-560" width="700" height="620" as="geometry" />
         </mxCell>
         <mxCell id="PFJv9Y-P-HBdMzl0SrrX-31" value="未達成：反饋給計劃管理（重新制定計劃（修改計劃方案） or 修改計劃（修改後續代數和沒代的周期））。&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-790" y="-690" width="530" height="250" as="geometry" />
