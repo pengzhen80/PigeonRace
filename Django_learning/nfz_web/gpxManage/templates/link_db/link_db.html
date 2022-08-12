@@ -326,6 +326,9 @@
 
             //alter path to polygons
             filter_pathByOneKilo(path) {
+                if(path.length == 0)
+                    return;
+
                 var result = [];
                 var reference = [parseFloat(path[0]['lat']), parseFloat(path[0]['lon'])];
                 result.push(reference)
@@ -345,6 +348,8 @@
             }
 
             make_polygon(path) {
+                if(!path)
+                    return;
                 var polygon = [];
                 for (var i = 0; i < path.length - 1; i++) {
                     var firstPoint = turf.point(path[i]);

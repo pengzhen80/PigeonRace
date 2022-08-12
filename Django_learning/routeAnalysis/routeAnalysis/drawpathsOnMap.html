@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>軌跡地圖</title>
+    <script>  src = 'https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.0.8/fxparser.js'</script>
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+</head>
+
+<body>
+    <div id="Map_showPaths"></div>
+    <!-- <canvas id="myChart_PigeonInfos" width="200" height="100"></canvas> -->
+    <input id="fileUploader" type="file" multiple="multiple" accept=".gpx" />
+    <!-- <div>數據預覽：</div> -->
+    <!-- <div id="fileList"></div> -->
+
+    <script>
+        let div_smallMap = document.getElementById('Map_showPaths');
+        div_smallMap.setAttribute('style', 'width:100%;height:90%;');
+        // canvas.setAttribute("width", 400);
+        // canvas.setAttribute("height", 100);
+        div_smallMap.style.left = "0px";
+        div_smallMap.style.top = "10%";
+        div_smallMap.style.position = "absolute";
+        div_smallMap.style.zIndex = "1";
+        let map_handler = L.map('Map_showPaths', {preferCanvas: true }).setView([0,0], 8);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }).addTo(map_handler);
+
+        class PathMangement {
+            //paths: [{name: '', data: ''}]
+            constructor() {
+                //parse gpx files
+                this.paths = [];
+                this.originalPaths = [];
+                this.originPolygon = [];
+                // var bbox = turf.bbox(features);
+                //alter path to polygons
+            }
+            decodePath(paths) {
+                //decode path to polygon
+                // console.log(paths[0]['data']);
+                var parser = new DOMParser();
+                for (var index = 0; index < paths.length; index++) {
+                    var xmlDoc = parser.parseFromString(paths[index]['data'], 'text/xml');
+                    // console.log(xmlDoc.getElementsByTagName("title"));
+                    // console.log(xmlDoc.getElementsByTagName("trkpt"));
+                    var path = [];
+                    var trkpts = xmlDoc.getElementsByTagName("trkpt");
+                    for (var i = 0; i < trkpts.length; i++) {
+                        var cell = {};
+                        var lat = trkpts[i].getAttribute("lat");
+                        var lon = trkpts[i].getAttribute("lon");
+                        cell['lat'] = lat;
+                        cell['lon'] = lon;
+                        path.push(cell);
+                        // console.log(i,'lat: '+lat+' lon: '+lon);
+                    }
+                    ///filter path by one kilometer
+                    var path_line = this.filter_pathByOneKilo(path);
+                    /// make path_polygon by path_line
+                    var polygon = this.make_polygon(path_line);
+
+                    this.paths.push({ name: paths[index]['name'], data: polygon });
+                    this.originalPaths.push({ name: paths[index]['name'], data: path });
+                }
+                console.log(this.paths.length);
+                // return this.paths;
+            }
+
+            GetOringinalPaths() {
+                return this.originalPaths;
+            }
+            GetOringinalPathsByPathNames(pathNames) {
+                var result = [];
+                for (var i = 0; i < this.originalPaths.length; i++) {
+                    if (pathNames.includes(this.originalPaths[i]['name'])) {
+                        result.push(this.originalPaths[i]);
+                    }
+                }
+                return result;
+            }
+
+            Rename_path(oldname, newname) {
+                for (var index = 0; index < this.paths.length; index++) {
+                    if (this.paths[index]['name'] == oldname) {
+                        this.paths[index]['name'] = newname;
+                    }
+                }
+            }
+
+            GetPathByName(name) {
+                for (var index = 0; index < this.paths.length; index++) {
+                    if (this.paths[index]['name'] == name) {
+                        return this.paths[index]['data'];
+                    }
+                }
+            }
+
+            //alter path to polygons
+            filter_pathByOneKilo(path) {
+                if (path.length == 0)
+                    return;
+
+                var result = [];
+                var reference = [parseFloat(path[0]['lat']), parseFloat(path[0]['lon'])];
+                result.push(reference)
+                for (var i = 0; i < path.length; i++) {
+                    var cur_point = [parseFloat(path[i]['lat']), parseFloat(path[i]['lon'])];
+                    var distance = turf.distance(turf.point(reference), turf.point(cur_point), { units: 'meters' });
+
+                    if (distance >= 1000) {
+                        reference = cur_point;
+                        result.push(reference);
+                    }
+                }
+                var last_point = [parseFloat(path[path.length - 1]['lat']), parseFloat(path[path.length - 1]['lon'])];
+                result.push(last_point);
+                // console.log(result.length);
+                return result;
+            }
+
+            make_polygon(path) {
+                if (!path)
+                    return;
+                var polygon = [];
+                for (var i = 0; i < path.length - 1; i++) {
+                    var firstPoint = turf.point(path[i]);
+                    var secondPoint = turf.point(path[i + 1]);
+                    var bearing = turf.bearing(firstPoint, secondPoint);
+                    // console.log(bearing);
+                    var makePoint_first_bearing = bearing + 90;
+                    var makePoint_second_bearing = bearing - 90;
+                    var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+                    var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+                    // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+                    polygon.unshift(makePoint_first.geometry.coordinates);
+                    polygon.push(makePoint_second.geometry.coordinates);
+                }
+
+                var firstPoint = turf.point(path[path.length - 2]);
+                var secondPoint = turf.point(path[path.length - 1]);
+                var bearing = turf.bearing(firstPoint, secondPoint);
+                // console.log(bearing);
+                var makePoint_first_bearing = bearing + 90;
+                var makePoint_second_bearing = bearing - 90;
+                var makePoint_first = turf.destination(firstPoint, 1000, makePoint_first_bearing, { units: 'meters' });
+                var makePoint_second = turf.destination(firstPoint, 1000, makePoint_second_bearing, { units: 'meters' });
+                // console.log(makePoint_first.geometry.coordinates,makePoint_second.geometry.coordinates)
+                polygon.unshift(makePoint_second.geometry.coordinates);
+                polygon.push(makePoint_first.geometry.coordinates);
+
+                // console.log(path.length,polygon.length);
+                return polygon;
+            }
+
+            AddOriginPolygon(pathName, polygon) {
+                this.originPolygon.push({ name: pathName, data: polygon });
+            }
+
+            GetOriginPolygon(pathName) {
+                for (var index = 0; index < this.originPolygon.length; index++) {
+                    if (this.originPolygon[index]['name'] == pathName) {
+                        return this.originPolygon[index]['data'];
+                    }
+                }
+                console.log('no such path');
+            }
+            GetAllPathNames() {
+                var result = [];
+                for (var i = 0; i < this.paths.length; i++) {
+                    result.push(this.paths[i]['name']);
+                }
+                return result;
+            }
+            RemovePathByNames(pathNames) {
+                console.log('delete path:', pathNames);
+                for (var i = 0; i < this.paths.length; i++) {
+                    console.log(this.paths[i]['name']);
+                    if (pathNames.includes(this.paths[i]['name'])) {
+                        this.paths.splice(i, 1);
+                        this.originalPaths.splice(i, 1);
+                        this.originPolygon.splice(i, 1);
+                        // console.log(this.paths);
+                        i--;
+                    }
+                }
+                // console.log(this.paths);
+
+            }
+        }
+
+        ////load gpx files and show them in the page
+        let pathManger = new PathMangement();
+        var fileUploader = document.getElementById("fileUploader");
+        fileUploader.style['position'] = 'absolute';;
+        fileUploader.style['top'] = '0%';
+        fileUploader.style['left'] = '0%';
+        // fileUploader.innerHTML = '選擇文件';
+        // var fileList = document.getElementById("fileList");
+
+
+        //store data in the form of array : element[0] = file name, element[1] = file content
+        // let gpxFileDatas = [];
+
+        //用來讀取file資料的FileReader
+        var fileReader = new FileReader();
+
+        //監控#fileUploader的值變化
+        fileUploader.addEventListener("change", function (event) {
+            if (this.files.length > 0) {
+                //有選取file時，使用fileReader讀取file資料
+                // console.log(fileReader.readAsText(this.files[0]));
+                //讀取完成後，將資料轉成text
+                console.log(this.files.length);
+                readmultifiles(this.files)
+            } else {
+                //沒有選取file時，例如選擇取消，
+                //將<img>的src設成""
+            }
+        }, false);
+
+        function readmultifiles(files) {
+            var gpxFileDatas = [];
+            function readFile(index) {
+                //when all files loaded , start to decode datas
+                if (index >= files.length) {
+                    var old_pathNames = pathManger.GetAllPathNames();
+                    var filtered_gpxFileDatas = [];
+                    var newPathNames = [];
+                    var repeatedPathNames_str = '';
+                    console.log(gpxFileDatas);
+                    for (var index_gpxData = 0; index_gpxData < gpxFileDatas.length; index_gpxData++) {
+                        if (old_pathNames.includes(gpxFileDatas[index_gpxData]['name'])) {
+                            console.log('repeated path:', gpxFileDatas[index_gpxData]['name']);
+                            repeatedPathNames_str += gpxFileDatas[index_gpxData]['name'] + ',';
+                            continue;
+                        }
+                        else {
+                            filtered_gpxFileDatas.push(gpxFileDatas[index_gpxData]);
+                            newPathNames.push(gpxFileDatas[index_gpxData]['name']);
+                        }
+                    }
+                    if (repeatedPathNames_str.length > 0) {
+                        alert('重複載入的路徑:' + repeatedPathNames_str);
+                    }
+
+                    pathManger.decodePath(filtered_gpxFileDatas);
+                    showInMap(pathManger.GetOringinalPathsByPathNames(newPathNames));
+                    // console.log(gpxFileDatas);
+                    // pathManger.decodePath(gpxFileDatas);
+                    // func_sendRequest_makePolygonByOldCalculater(pathManger.GetOringinalPaths());
+                    return;
+                }
+
+                // store file name and file content to gpxFileDatas
+                var gpxFileDatas_ele = {};
+                /// path name init from file name
+                gpxFileDatas_ele['name'] = files[index].name.split('.')[0];
+                // /// add path name to pathNameList
+                // var opt = document.createElement('option');
+                // opt.value = gpxFileDatas_ele['name'];
+                // opt.innerHTML = gpxFileDatas_ele['name'];
+                // pathNameList.appendChild(opt);
+
+                // fileList.innerHTML += "<br>" + files[index].name.split('.')[0] + "</br>";
+
+                var file = files[index];
+                fileReader.onload = function (e) {
+                    // get file content  
+                    var data = e.target.result;
+                    // console.log(data);
+                    gpxFileDatas_ele['data'] = data;
+                    gpxFileDatas.push(gpxFileDatas_ele);
+                    // do sth with bin
+                    readFile(index + 1)
+                }
+                fileReader.readAsText(file);
+            }
+            readFile(0);
+        }
+
+        function showInMap(paths) {
+            //make paths to str
+            // console.log('origin paths', paths);
+            var total_pathToLoad = paths.length;
+            var total_pathLoaded = 0;
+
+            for (var i = 0; i < paths.length; i++) {
+                var pathname = paths[i]['name'];
+                // if(old_pathNames.includes(pathname))
+                // {
+                //     continue;
+                // }
+
+                var path = paths[i]['data'];
+                var path_normalize = [];
+                for (var j = 0; j < path.length; j++) {
+                    var cell = [];
+                    cell.push(path[j]['lat']);
+                    cell.push(path[j]['lon']);
+                    path_normalize.push(cell);
+                }
+                if(i==0)
+                {
+                    map_handler.setView(path_normalize[Math.floor(path_normalize.length/4)], 10)
+                    // map_handler.setView(path_normalize[0], 10)
+                }
+                else if(i == paths.length-1)
+                {
+                    map.fitBounds(path_normalize.getBounds());
+                }
+                drawPath(path_normalize);
+                //send to servers
+            }
+
+            function drawPath(pathLine_origin) {
+                // let pathName = '{{ pathName|safe }}';
+                // let pathLine_origin = '{{ pathLine_origin|safe }}'
+
+                console.log(typeof (pathLine_origin));
+                // console.log(pathLine_origin);
+                var pathLine_origin_normalized = pathLine_origin;
+                // console.log(typeof (pathLine_origin_normalized));
+                // console.log(pathLine_origin_normalized);
+
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: 'red' }).addTo(map_handler);
+                // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
+                // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
