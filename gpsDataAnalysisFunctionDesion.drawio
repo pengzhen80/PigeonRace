@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T09:16:15.034Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="fyTvH3rlfYiZob-oFZBx" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-15T05:44:31.170Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="SFdIiuGNsBJLTED7evr7" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1732,7 +1732,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="e1xYMgHZixG7jLk5aDEa" name="訓練系統">
-    <mxGraphModel dx="3444" dy="1953" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3372" dy="2014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2378,6 +2378,91 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="100" y="2020" as="sourcePoint" />
             <mxPoint x="150" y="1970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="ASYAtzRPoqP2_Z0K4sf3" name="Garmin案例分析">
+    <mxGraphModel dx="2545" dy="845" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="30" width="190" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-2">
+          <mxGeometry width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-4" value="Find a Traning" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-3">
+          <mxGeometry width="190" height="80" as="geometry">
+            <mxRectangle width="190" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-2">
+          <mxGeometry y="80" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-6" value="Running" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-5">
+          <mxGeometry width="190" height="80" as="geometry">
+            <mxRectangle width="190" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-2">
+          <mxGeometry y="160" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-8" value="Cycling" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-7">
+          <mxGeometry width="190" height="80" as="geometry">
+            <mxRectangle width="190" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-9" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="230" as="sourcePoint" />
+            <mxPoint x="200" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-10" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="220" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-11" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-10">
+          <mxGeometry width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-12" value="Select a runing plan" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-11">
+          <mxGeometry width="220" height="80" as="geometry">
+            <mxRectangle width="220" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-13" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-10">
+          <mxGeometry y="80" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-14" value="Garmin Coach 5k" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-13">
+          <mxGeometry width="220" height="80" as="geometry">
+            <mxRectangle width="220" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-15" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-10">
+          <mxGeometry y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-16" value="Garmin Coach 10k" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-15">
+          <mxGeometry width="220" height="80" as="geometry">
+            <mxRectangle width="220" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-17" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-10">
+          <mxGeometry y="240" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-18" value="Garmin Coach Half Marathon" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-17">
+          <mxGeometry width="220" height="80" as="geometry">
+            <mxRectangle width="220" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-19" value="課程介紹：&lt;br&gt;1 特點介紹。&lt;br&gt;2 細節描述。" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="550" y="93.75" width="200" height="112.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-20" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-13" target="pBMm2NUzZmVeChfEa4rt-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="290" as="sourcePoint" />
+            <mxPoint x="440" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
