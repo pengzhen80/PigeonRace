@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-15T06:00:37.774Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="3D8yGLAIrBedbejChy8C" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-15T06:23:33.235Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="8xJElSRuPQt5tRbaEZcK" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2595,6 +2595,21 @@
         </mxCell>
         <mxCell id="pBMm2NUzZmVeChfEa4rt-54" value="自定義清單：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="-70" y="460" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-55" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="520" y="500" width="490" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-56" value="訓練主頁：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="550" y="510" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-57" value="總訓練進度" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="575" y="585" width="315" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-58" value="當前課程介紹：視頻+文章" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="575" y="690" width="315" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-59" value="運動行程管理" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="575" y="810" width="325" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
