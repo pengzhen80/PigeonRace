@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-15T10:36:49.490Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="2sPsxRFBS6DZ6sAadeQF" version="20.2.3" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-08-15T10:41:59.126Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="9ZRHMomkmhC1ogsIlvC-" version="20.2.3" type="github" pages="5">
   <diagram id="7HiGV6OWuosXOLhOXsS8" name="訓練模型選擇">
     <mxGraphModel dx="1790" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -900,7 +900,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="320" y="190" width="2180" height="870" as="geometry" />
+          <mxGeometry x="320" y="190" width="2180" height="990" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="500" y="350" width="1720" height="160" as="geometry" />
@@ -1011,7 +1011,7 @@
           <mxGeometry x="1545" y="910" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-24" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1240" y="670" width="930" height="330" as="geometry" />
+          <mxGeometry x="1230" y="770" width="930" height="330" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-25" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-24">
           <mxGeometry width="930" height="66" as="geometry" />
@@ -1179,7 +1179,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-60" value="放飛排程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="1488.5" y="620" width="433" height="30" as="geometry" />
+          <mxGeometry x="1080" y="710" width="433" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-61" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -1189,6 +1189,9 @@
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-62" value="每代目標" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="360" y="780" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GWzCZFXz8O4bF922CRk-1" value="當前訓練：目標鴿solo飛行。" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="620" width="830" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
