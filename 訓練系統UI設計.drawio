@@ -1,11 +1,29 @@
-<mxfile host="app.diagrams.net" modified="2022-08-12T09:24:38.045Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="6kxfF1XG-emLsBhl3guk" version="20.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-08-15T09:40:05.690Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="1c61faMAiq0dGyGXEaJA" version="20.2.3" type="github">
   <diagram id="7HiGV6OWuosXOLhOXsS8" name="第 1 页">
-    <mxGraphModel dx="1790" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1790" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="iPEw-ZQhXxYZATJUESGD-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry y="40" width="900" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-6" value="訓練模型選擇" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="310" y="60" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-7" value="傳統模型（目標鴿從0飛到穩定）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="140" y="140" width="610" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-8" value="Pair模型-2-1（材料鴿迭代+目標鴿，訓練目標鴿）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="52.5" y="360" width="815" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-9" value="Pair模型-2-2（目標鴿迭代+材料鴿，訓練目標鴿）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="50" y="480" width="820" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-10" value="團體模型（領飛鴿+跟飛鴿，訓練團體）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="150" y="590" width="655" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-11" value="Pair模型-1（教練鴿+目標鴿，訓練目標鴿）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="770" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
