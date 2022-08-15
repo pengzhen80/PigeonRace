@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-15T05:44:31.170Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="SFdIiuGNsBJLTED7evr7" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-15T05:59:59.842Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="om3zr1i0_FQAYlq5Hk8X" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2463,6 +2463,131 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="390" y="290" as="sourcePoint" />
             <mxPoint x="440" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-21" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="290" as="sourcePoint" />
+            <mxPoint x="820" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-22" value="責任條款" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="820" y="111.88" width="120" height="76.25" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-24" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="450" width="1140" height="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-26" value="每周距離（當前情況）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="20" y="500" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-27" value="5公里目標（設定目標）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="20" y="620" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-28" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-26" target="pBMm2NUzZmVeChfEa4rt-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="790" as="sourcePoint" />
+            <mxPoint x="440" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-29" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-5" y="750" width="330" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-30" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-29">
+          <mxGeometry width="330" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-31" value="教練" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-30">
+          <mxGeometry width="165" height="63" as="geometry">
+            <mxRectangle width="165" height="63" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-32" value="視頻" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-30">
+          <mxGeometry x="165" width="165" height="63" as="geometry">
+            <mxRectangle width="165" height="63" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-33" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-29">
+          <mxGeometry y="63" width="330" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-34" value="A" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-33">
+          <mxGeometry width="165" height="62" as="geometry">
+            <mxRectangle width="165" height="62" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-35" value="教練介紹和課程介紹" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-33">
+          <mxGeometry x="165" width="165" height="62" as="geometry">
+            <mxRectangle width="165" height="62" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-36" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-29">
+          <mxGeometry y="125" width="330" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-37" value="B" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-36">
+          <mxGeometry width="165" height="63" as="geometry">
+            <mxRectangle width="165" height="63" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-38" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-36">
+          <mxGeometry x="165" width="165" height="63" as="geometry">
+            <mxRectangle width="165" height="63" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-39" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-29">
+          <mxGeometry y="188" width="330" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-40" value="C" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-39">
+          <mxGeometry width="165" height="62" as="geometry">
+            <mxRectangle width="165" height="62" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-41" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="pBMm2NUzZmVeChfEa4rt-39">
+          <mxGeometry x="165" width="165" height="62" as="geometry">
+            <mxRectangle width="165" height="62" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-42" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-27" target="pBMm2NUzZmVeChfEa4rt-30">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="790" as="sourcePoint" />
+            <mxPoint x="440" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-43" value="教練選擇" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-5" y="720" width="115" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-44" value="一周星期幾可以（時間選擇）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="10" y="1090" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-45" value="一周星期幾可以長跑（長跑時間選擇）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="1230" width="470" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-47" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-39" target="pBMm2NUzZmVeChfEa4rt-44">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="720" as="sourcePoint" />
+            <mxPoint x="440" y="670" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-48" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-44" target="pBMm2NUzZmVeChfEa4rt-45">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="1330" as="sourcePoint" />
+            <mxPoint x="-50" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-49" value="自動生成的5k公里的比賽日期" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="1350" width="430" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-50" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-45" target="pBMm2NUzZmVeChfEa4rt-49">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="1330" as="sourcePoint" />
+            <mxPoint x="-50" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-51" value="複查/修改頁面" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1470" width="290" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-52" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-49" target="pBMm2NUzZmVeChfEa4rt-51">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-100" y="1540" as="sourcePoint" />
+            <mxPoint x="-50" y="1490" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
