@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-15T08:31:16.640Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="M2R0GAJbXHsFlb9cMySS" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-15T09:12:40.319Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="BzyfZ0ik4vTfY36KDU4t" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2384,7 +2384,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="ASYAtzRPoqP2_Z0K4sf3" name="Garmin案例分析">
-    <mxGraphModel dx="2545" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2617" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2627,6 +2627,15 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="370" y="930" as="sourcePoint" />
             <mxPoint x="420" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nUj1ZZv0m9RBceYAbr1r-6" value="放飛時間表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-290" y="1095" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="nUj1ZZv0m9RBceYAbr1r-7" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="nUj1ZZv0m9RBceYAbr1r-6" target="pBMm2NUzZmVeChfEa4rt-44">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="1050" as="sourcePoint" />
+            <mxPoint x="260" y="1000" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
