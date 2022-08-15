@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-15T07:43:59.044Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="PCJz8scY9ZGtUNyUAYwB" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-15T08:21:09.761Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="sCZJL68rSyA0vVEsjtup" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2395,7 +2395,7 @@
           <mxGeometry x="-80" y="450" width="1140" height="1140" as="geometry" />
         </mxCell>
         <mxCell id="pBMm2NUzZmVeChfEa4rt-53" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-70" y="460" width="490" height="1110" as="geometry" />
+          <mxGeometry x="-70" y="460" width="550" height="1110" as="geometry" />
         </mxCell>
         <mxCell id="pBMm2NUzZmVeChfEa4rt-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="-170" y="30" width="190" height="240" as="geometry" />
@@ -2578,8 +2578,8 @@
             <mxPoint x="-50" y="1280" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="pBMm2NUzZmVeChfEa4rt-49" value="自動生成的5k公里的比賽日期" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-40" y="1350" width="430" height="60" as="geometry" />
+        <mxCell id="pBMm2NUzZmVeChfEa4rt-49" value="自動生成的5k公里的比賽日期（比賽目標）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="1350" width="480" height="60" as="geometry" />
         </mxCell>
         <mxCell id="pBMm2NUzZmVeChfEa4rt-50" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="pBMm2NUzZmVeChfEa4rt-45" target="pBMm2NUzZmVeChfEa4rt-49">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -2613,6 +2613,9 @@
         </mxCell>
         <mxCell id="pBMm2NUzZmVeChfEa4rt-59" value="運動行程管理" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="575" y="810" width="325" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nUj1ZZv0m9RBceYAbr1r-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-360" y="1350" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
