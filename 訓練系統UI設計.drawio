@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-16T02:41:14.869Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="1Fq4Az-LsSiiLG7UKaQY" version="20.2.3" type="github" pages="10">
+<mxfile host="app.diagrams.net" modified="2022-08-16T02:41:52.611Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="gyvjboQdDbB1dW_E8gF6" version="20.2.3" type="github" pages="10">
   <diagram id="7HiGV6OWuosXOLhOXsS8" name="訓練模型選擇">
     <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -15,12 +15,12 @@
             <mxGeometry x="140" y="140" width="610" height="60" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="Pair模型-2-1（材料鴿迭代+目標鴿，訓練目標鴿）" link="data:page/id,4MsKUe_uf6U4QKOAG8qB" id="iPEw-ZQhXxYZATJUESGD-8">
+        <UserObject label="Pair模型2-1（材料鴿迭代+目標鴿，訓練目標鴿）" link="data:page/id,4MsKUe_uf6U4QKOAG8qB" id="iPEw-ZQhXxYZATJUESGD-8">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
             <mxGeometry x="52.5" y="360" width="815" height="60" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="Pair模型-2-2（目標鴿迭代+材料鴿，訓練目標鴿）" link="data:page/id,jqYvt-NrKALiINXg5nS2" id="iPEw-ZQhXxYZATJUESGD-9">
+        <UserObject label="Pair模型2-2（目標鴿迭代+材料鴿，訓練目標鴿）" link="data:page/id,jqYvt-NrKALiINXg5nS2" id="iPEw-ZQhXxYZATJUESGD-9">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
             <mxGeometry x="50" y="480" width="820" height="60" as="geometry" />
           </mxCell>
@@ -28,7 +28,7 @@
         <mxCell id="iPEw-ZQhXxYZATJUESGD-10" value="團體模型（領飛鴿+跟飛鴿，訓練團體）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="150" y="590" width="655" height="60" as="geometry" />
         </mxCell>
-        <UserObject label="Pair模型-1（教練鴿+目標鴿，訓練目標鴿）" link="data:page/id,MqBVWOqvA6p1u019oPmL" id="iPEw-ZQhXxYZATJUESGD-11">
+        <UserObject label="Pair模型1（教練鴿+目標鴿，訓練目標鴿）" link="data:page/id,MqBVWOqvA6p1u019oPmL" id="iPEw-ZQhXxYZATJUESGD-11">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
             <mxGeometry x="60" y="240" width="770" height="60" as="geometry" />
           </mxCell>
