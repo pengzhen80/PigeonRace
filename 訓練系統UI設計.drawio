@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-16T07:36:18.726Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="_0xnkpCvwwTQGkLxw5y_" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-16T07:37:04.032Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="JZVWXzkFjxsqPqvVdMPA" version="20.2.3" type="github" pages="12">
   <diagram id="xCjRzEmzV3mcHKele815" name="訓練計劃列表">
     <mxGraphModel dx="2489" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -173,7 +173,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="6moyrDJCRKRMXy2OcYWx" name="傳統訓練模型">
-    <mxGraphModel dx="2489" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -360,7 +360,7 @@
             <mxRectangle width="110" height="58" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-47" value="&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-42">
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-47" value="&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-42">
           <mxGeometry x="540" width="231" height="58" as="geometry">
             <mxRectangle width="231" height="58" as="alternateBounds" />
           </mxGeometry>
@@ -465,7 +465,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="4qSCKEcveGKfaot14LWD" name="Pair模型-1">
-    <mxGraphModel dx="2489" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -770,7 +770,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="aAcVIMmhRl6TgQ5awBkK" name="Pair模型2-1">
-    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -967,7 +967,7 @@
             <mxRectangle width="110" height="66" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-44" value="&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-39">
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-44" value="&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-39">
           <mxGeometry x="540" width="231" height="66" as="geometry">
             <mxRectangle width="231" height="66" as="alternateBounds" />
           </mxGeometry>
@@ -1075,7 +1075,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="X5g1XwkkAR8lF6pnk-ga" name="Pair模型2-2">
-    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1282,7 +1282,7 @@
             <mxRectangle width="110" height="66" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="KmC_2L7aQ-DuErxlcqaj-44" value="&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;color: rgb(112, 117, 122); font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-39">
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-44" value="&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-39">
           <mxGeometry x="540" width="231" height="66" as="geometry">
             <mxRectangle width="231" height="66" as="alternateBounds" />
           </mxGeometry>
@@ -1390,7 +1390,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="r4kHTq8Mq_CIbOY9aqRD" name="傳統訓練模型-介紹">
-    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
