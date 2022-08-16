@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-08-16T06:52:10.782Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="YD89xqT3CVsvyZLRiQPA" version="20.2.3" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-08-16T07:36:18.726Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="_0xnkpCvwwTQGkLxw5y_" version="20.2.3" type="github" pages="12">
   <diagram id="xCjRzEmzV3mcHKele815" name="訓練計劃列表">
-    <mxGraphModel dx="2489" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2489" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -131,7 +131,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7HiGV6OWuosXOLhOXsS8" name="訓練模型選擇">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -173,7 +173,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="6moyrDJCRKRMXy2OcYWx" name="傳統訓練模型">
-    <mxGraphModel dx="2489" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2489" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -465,7 +465,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="4qSCKEcveGKfaot14LWD" name="Pair模型-1">
-    <mxGraphModel dx="2489" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2489" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -763,11 +763,14 @@
             <mxGeometry x="1597" y="630" width="160" height="60" as="geometry" />
           </mxCell>
         </UserObject>
+        <mxCell id="0fFsMC1nSnB-ZkoncMNr-1" value="代數選擇" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="827" y="640" width="233" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="aAcVIMmhRl6TgQ5awBkK" name="Pair模型2-1">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -873,7 +876,7 @@
           <mxGeometry x="1365" y="870" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="6y5QyfdtYz4dnIrnp9Y0-24" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1050" y="740" width="930" height="330" as="geometry" />
+          <mxGeometry x="1030" y="780" width="930" height="330" as="geometry" />
         </mxCell>
         <mxCell id="6y5QyfdtYz4dnIrnp9Y0-25" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-24">
           <mxGeometry width="930" height="66" as="geometry" />
@@ -1041,7 +1044,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="6y5QyfdtYz4dnIrnp9Y0-60" value="放飛排程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="900" y="700" width="433" height="30" as="geometry" />
+          <mxGeometry x="890" y="650" width="433" height="30" as="geometry" />
         </mxCell>
         <mxCell id="6y5QyfdtYz4dnIrnp9Y0-61" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -1065,11 +1068,14 @@
             <mxGeometry x="1820" y="660" width="160" height="60" as="geometry" />
           </mxCell>
         </UserObject>
+        <mxCell id="UGD7nhL8FLnGt1M-G2gT-1" value="代數選擇" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="700" width="233" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="X5g1XwkkAR8lF6pnk-ga" name="Pair模型2-2">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1185,7 +1191,7 @@
           <mxGeometry x="1545" y="910" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-24" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1230" y="770" width="930" height="330" as="geometry" />
+          <mxGeometry x="1220" y="830" width="930" height="330" as="geometry" />
         </mxCell>
         <mxCell id="KmC_2L7aQ-DuErxlcqaj-25" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-24">
           <mxGeometry width="930" height="66" as="geometry" />
@@ -1377,11 +1383,14 @@
             <mxGeometry x="2000" y="690" width="160" height="60" as="geometry" />
           </mxCell>
         </UserObject>
+        <mxCell id="BgQvFCX7YcKmaRshdLZj-1" value="代數選擇" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="760" width="233" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="r4kHTq8Mq_CIbOY9aqRD" name="傳統訓練模型-介紹">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1403,7 +1412,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="MqBVWOqvA6p1u019oPmL" name="Pair模型1介紹">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1425,7 +1434,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="4MsKUe_uf6U4QKOAG8qB" name="Pair模型2-1介紹">
-    <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1447,7 +1456,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="jqYvt-NrKALiINXg5nS2" name="Pair模型2-2介紹">
-    <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1469,7 +1478,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="R4Tvp-FQjeuJFBHFMp8C" name="免責條款">
-    <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1496,7 +1505,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="_qEbfh_Zs5-BKNutQ03N" name="導入路徑">
-    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
