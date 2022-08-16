@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-16T02:41:52.611Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="gyvjboQdDbB1dW_E8gF6" version="20.2.3" type="github" pages="10">
+<mxfile host="app.diagrams.net" modified="2022-08-16T02:42:49.790Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="hPJ6sINbnqGcnPVhkjib" version="20.2.3" type="github" pages="10">
   <diagram id="7HiGV6OWuosXOLhOXsS8" name="訓練模型選擇">
     <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1318,7 +1318,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="R4Tvp-FQjeuJFBHFMp8C" name="免責條款">
-    <mxGraphModel dx="1662" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1331,12 +1331,12 @@
         <mxCell id="Bw2DS7w5ToH1zrWq2kOm-3" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: start; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Garmin connect上面的免責條款：&lt;br&gt;網站和移動app上面的信息，裝置，和訓練計劃都只是教育作用。在改變你的鍛煉習慣之前，和使用Garmin的移動app或者網站上面的任何信息或者訓練計劃之前，你應該諮詢你的醫師。如果你採用了網站或者移動app上面的建議或者訓練計劃，那摩你自己承擔使用的風險。Garmin不會為，你因為採用網站或者移動app上面的建議或者訓練計劃，而導致的受傷或者其他的健康問題承擔責任。&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="130" y="150" width="620" height="420" as="geometry" />
         </mxCell>
-        <UserObject label="接受" id="Wamx_Mpz4DvyWvKPOVOt-1">
+        <UserObject label="接受" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="Wamx_Mpz4DvyWvKPOVOt-1">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
             <mxGeometry x="290" y="590" width="220" height="60" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="不接受" id="Wamx_Mpz4DvyWvKPOVOt-2">
+        <UserObject label="不接受" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="Wamx_Mpz4DvyWvKPOVOt-2">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
             <mxGeometry x="290" y="690" width="220" height="60" as="geometry" />
           </mxCell>
