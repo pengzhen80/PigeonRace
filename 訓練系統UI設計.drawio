@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-17T02:22:10.058Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="iY02osVeVEgs_NpcF8RN" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-17T02:23:20.290Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="Yn05oFsbaSv-lnDTng9m" version="20.2.3" type="github" pages="13">
   <diagram id="xCjRzEmzV3mcHKele815" name="訓練計劃列表">
     <mxGraphModel dx="2489" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -178,7 +178,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="9i3LHm-Xf40zaqWzmHpZ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="-280" y="-70" width="1920" height="1020" as="geometry" />
+          <mxGeometry x="-280" y="-60" width="1920" height="1020" as="geometry" />
         </mxCell>
         <mxCell id="9i3LHm-Xf40zaqWzmHpZ-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="-200" y="90" width="1120" height="160" as="geometry" />
@@ -241,7 +241,7 @@
           </mxCell>
         </UserObject>
         <mxCell id="QHWRSK0-d8YVdHYatj-U-1" value="提示：&lt;span style=&quot;font-size: 24px;&quot;&gt;鴿子數量：1只目標鴿 = 1只，請問是否已經準備好鴿子？&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="-100" y="330" width="1330" height="150" as="geometry" />
+          <mxGeometry x="-200" y="330" width="1330" height="150" as="geometry" />
         </mxCell>
         <mxCell id="QHWRSK0-d8YVdHYatj-U-2" value="鴿子已備好" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1320" y="375" width="230" height="60" as="geometry" />
