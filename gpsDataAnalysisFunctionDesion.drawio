@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-17T01:47:55.788Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="fpSSQoZMTToFU5Z86j2o" version="20.2.3" type="github" pages="13">
+<mxfile host="app.diagrams.net" modified="2022-08-17T01:52:07.504Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="nsCgfxruyZlja03zMIWX" version="20.2.3" type="github" pages="13">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1478" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1732,7 +1732,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="e1xYMgHZixG7jLk5aDEa" name="訓練系統">
-    <mxGraphModel dx="3316" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4970" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2808,6 +2808,75 @@
         </mxCell>
         <mxCell id="Cc9-aCdH-2-jEisd_iCB-31" value="模型會根據代數自動生成鴿子數量。" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="-1410" y="940" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-32" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-2890" y="930" width="1410" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-33" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-32">
+          <mxGeometry width="1410" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-34" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry width="166" height="68" as="geometry">
+            <mxRectangle width="166" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-35" value="路徑效率目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry x="166" width="283" height="68" as="geometry">
+            <mxRectangle width="283" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-36" value="代數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry x="449" width="109" height="68" as="geometry">
+            <mxRectangle width="109" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-37" value="每代的放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry x="558" width="326" height="68" as="geometry">
+            <mxRectangle width="326" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-38" value="每代目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry x="884" width="296" height="68" as="geometry">
+            <mxRectangle width="296" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-45" value="是否有教練鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-33">
+          <mxGeometry x="1180" width="230" height="68" as="geometry">
+            <mxRectangle width="230" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-39" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-32">
+          <mxGeometry y="68" width="1410" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-40" value="Pair模型2-1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry width="166" height="92" as="geometry">
+            <mxRectangle width="166" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-41" value="0.95" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry x="166" width="283" height="92" as="geometry">
+            <mxRectangle width="283" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-42" value="4" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry x="449" width="109" height="92" as="geometry">
+            <mxRectangle width="109" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-43" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry x="558" width="326" height="92" as="geometry">
+            <mxRectangle width="326" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-44" value="[0.8,0.85,0.9,0.95]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry x="884" width="296" height="92" as="geometry">
+            <mxRectangle width="296" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Cc9-aCdH-2-jEisd_iCB-46" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="Cc9-aCdH-2-jEisd_iCB-39">
+          <mxGeometry x="1180" width="230" height="92" as="geometry">
+            <mxRectangle width="230" height="92" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
