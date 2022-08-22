@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-22T03:56:59.417Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="Zh264WTIxmFlDje-uAGg" version="20.2.5" type="github" pages="15">
+<mxfile host="app.diagrams.net" modified="2022-08-22T03:58:40.980Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="nRbfumYLPS6orlNcWxek" version="20.2.5" type="github" pages="15">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1790" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3399,10 +3399,13 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="BScbw6-CmnwipRdidnJA-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="70" width="1220" height="1430" as="geometry" />
+          <mxGeometry x="1100" y="20" width="1220" height="1480" as="geometry" />
+        </mxCell>
+        <mxCell id="HuKrOTWCfkknvo2ka51l-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1770" y="130" width="530" height="1290" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-28" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1121" y="210" width="609" height="1250" as="geometry" />
+          <mxGeometry x="1121" y="130" width="609" height="1330" as="geometry" />
         </mxCell>
         <mxCell id="r667rsIoaVcNRZ4Kmsd4-1" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;1 路徑&lt;/span&gt;&lt;br style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;2 acc數據&amp;nbsp;&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="-230" y="110" width="220" height="220" as="geometry" />
@@ -3503,7 +3506,7 @@
           <mxGeometry x="1144" y="325" width="510" height="355" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-3" value="分析平台系統設計" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="1540" y="120" width="410" height="30" as="geometry" />
+          <mxGeometry x="1575" y="50" width="410" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-4" value="服務器api管理：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="1140" y="340" width="320" height="30" as="geometry" />
@@ -3553,8 +3556,8 @@
         <mxCell id="BScbw6-CmnwipRdidnJA-23" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1144" y="1169" width="526" height="260" as="geometry" />
         </mxCell>
-        <mxCell id="BScbw6-CmnwipRdidnJA-24" value="圖表管理：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1157" y="1179" width="168" height="30" as="geometry" />
+        <mxCell id="BScbw6-CmnwipRdidnJA-24" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;圖表管理：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1157" y="1179" width="233" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-25" value="入口：輸入數據" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1165" y="1239" width="410" height="60" as="geometry" />
@@ -3562,14 +3565,14 @@
         <mxCell id="BScbw6-CmnwipRdidnJA-26" value="出口：生成圖表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1165" y="1329" width="410" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="BScbw6-CmnwipRdidnJA-29" value="後端：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1126" y="230" width="230" height="30" as="geometry" />
+        <mxCell id="BScbw6-CmnwipRdidnJA-29" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;後端&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="160" width="230" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-30" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1800" y="215" width="480" height="185" as="geometry" />
         </mxCell>
-        <mxCell id="BScbw6-CmnwipRdidnJA-31" value="主頁（後續設計）：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1820" y="230" width="260" height="30" as="geometry" />
+        <mxCell id="BScbw6-CmnwipRdidnJA-31" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;主頁（後續設計）：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1820" y="230" width="350" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-32" value="活動簡報：活動名+特徵值+地圖" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1860" y="290" width="350" height="60" as="geometry" />
@@ -3577,8 +3580,8 @@
         <mxCell id="BScbw6-CmnwipRdidnJA-35" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1800" y="430" width="480" height="530" as="geometry" />
         </mxCell>
-        <mxCell id="BScbw6-CmnwipRdidnJA-36" value="活動頁面：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1800" y="430" width="140" height="30" as="geometry" />
+        <mxCell id="BScbw6-CmnwipRdidnJA-36" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;活動頁面：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="440" width="230" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BScbw6-CmnwipRdidnJA-37" value="活動列表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1860" y="490" width="360" height="60" as="geometry" />
@@ -3598,7 +3601,7 @@
         <mxCell id="HuKrOTWCfkknvo2ka51l-5" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1800" y="1000" width="480" height="380" as="geometry" />
         </mxCell>
-        <mxCell id="HuKrOTWCfkknvo2ka51l-6" value="報告頁面：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="HuKrOTWCfkknvo2ka51l-6" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;報告頁面：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1810" y="1010" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="HuKrOTWCfkknvo2ka51l-7" value="報告欄" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
@@ -3609,6 +3612,9 @@
         </mxCell>
         <mxCell id="HuKrOTWCfkknvo2ka51l-9" value="匯出報告" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1860" y="1269" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HuKrOTWCfkknvo2ka51l-11" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;前端&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1910" y="150" width="230" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
