@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-22T03:21:14.947Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="ugjkZMOckZm48R1XXnFG" version="20.2.5" type="github" pages="15">
+<mxfile host="app.diagrams.net" modified="2022-08-22T03:22:52.826Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="REk8N_mb43qKWWUpK5Yn" version="20.2.5" type="github" pages="15">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1790" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3608,7 +3608,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-31" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="840" y="130" width="1090" height="550" as="geometry" />
+          <mxGeometry x="840" y="130" width="980" height="550" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-32" value="詳情頁面" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1160" y="100" width="160" height="30" as="geometry" />
@@ -3632,10 +3632,10 @@
           <mxGeometry x="1280" y="160" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-40" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1320" y="210" width="590" height="250" as="geometry" />
+          <mxGeometry x="1320" y="210" width="428" height="250" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-41" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-40">
-          <mxGeometry width="590" height="63" as="geometry" />
+          <mxGeometry width="428" height="63" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-42" value="特徵值" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-41">
           <mxGeometry width="142" height="63" as="geometry">
@@ -3652,13 +3652,8 @@
             <mxRectangle width="142" height="63" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="49NSoTfHfpIgqYgSJjLL-57" value="統計說明點擊" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-41">
-          <mxGeometry x="428" width="162" height="63" as="geometry">
-            <mxRectangle width="162" height="63" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-44" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-40">
-          <mxGeometry y="63" width="590" height="62" as="geometry" />
+          <mxGeometry y="63" width="428" height="62" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-45" value="距離" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-44">
           <mxGeometry width="142" height="62" as="geometry">
@@ -3675,13 +3670,8 @@
             <mxRectangle width="142" height="62" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="49NSoTfHfpIgqYgSJjLL-58" value="0" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-44">
-          <mxGeometry x="428" width="162" height="62" as="geometry">
-            <mxRectangle width="162" height="62" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-47" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-40">
-          <mxGeometry y="125" width="590" height="63" as="geometry" />
+          <mxGeometry y="125" width="428" height="63" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-48" value="速度" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-47">
           <mxGeometry width="142" height="63" as="geometry">
@@ -3698,13 +3688,8 @@
             <mxRectangle width="142" height="63" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="49NSoTfHfpIgqYgSJjLL-59" value="0" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-47">
-          <mxGeometry x="428" width="162" height="63" as="geometry">
-            <mxRectangle width="162" height="63" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-50" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-40">
-          <mxGeometry y="188" width="590" height="62" as="geometry" />
+          <mxGeometry y="188" width="428" height="62" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-51" value="路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-50">
           <mxGeometry width="142" height="62" as="geometry">
@@ -3721,10 +3706,20 @@
             <mxRectangle width="142" height="62" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="49NSoTfHfpIgqYgSJjLL-60" value="N次" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="49NSoTfHfpIgqYgSJjLL-50">
-          <mxGeometry x="428" width="162" height="62" as="geometry">
-            <mxRectangle width="162" height="62" as="alternateBounds" />
+        <mxCell id="49NSoTfHfpIgqYgSJjLL-61" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1908" y="280" width="320" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="49NSoTfHfpIgqYgSJjLL-62" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.006;entryY=0.469;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="49NSoTfHfpIgqYgSJjLL-50" target="49NSoTfHfpIgqYgSJjLL-61">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1490" y="440" as="sourcePoint" />
+            <mxPoint x="1900" y="280" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="49NSoTfHfpIgqYgSJjLL-63" value="說明彈窗" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1983" y="280" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="49NSoTfHfpIgqYgSJjLL-64" value="點擊" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1820" y="400" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
