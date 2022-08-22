@@ -1508,9 +1508,9 @@ function showData(flightData) {
     var total_point_count = flightData.length;
     // update_loading(total_point_count);
 
-    for (var i = 0; i < flightData.length; i++) {
-        flightData[i] = flightData_singleNearPoints(flightData[i]);
-    }
+    // for (var i = 0; i < flightData.length; i++) {
+    //     flightData[i] = flightData_singleNearPoints(flightData[i]);
+    // }
 
     //init pigeon rank's total distance
     //make number distance data
