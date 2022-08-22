@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-22T03:30:35.076Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="GI7qUQn53e7iyF0cBOmQ" version="20.2.5" type="github" pages="15">
+<mxfile host="app.diagrams.net" modified="2022-08-22T03:39:37.981Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="F-DJSt_Ly9lhY9Qddjzu" version="20.2.5" type="github" pages="15">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1790" dy="872" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3492,6 +3492,24 @@
             <mxPoint x="60" y="601" as="sourcePoint" />
             <mxPoint x="440" y="560" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="240" width="1220" height="810" as="geometry" />
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-2" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="330" width="510" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-3" value="分析平台系統設計" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="250" width="410" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-4" value="服務器api管理：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="340" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-6" value="賬號登陸" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="400" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BScbw6-CmnwipRdidnJA-7" value="請求賬號下所有的路徑數據" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="480" width="450" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
