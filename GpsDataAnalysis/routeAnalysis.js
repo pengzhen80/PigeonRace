@@ -12,13 +12,11 @@ console.log(demo_singleRoute.length);
 let div_smallMap = document.getElementById('Map_showPaths');
 div_smallMap.setAttribute('style', 'width:40%;height:40%;');
 // div_smallMap.setAttribute('style', 'width:800px;height:400px;');
-// canvas.setAttribute("width", 400);
-// canvas.setAttribute("height", 100);
-div_smallMap.style.left = "10%";
+div_smallMap.style.left = "50%";
 div_smallMap.style.top = "5%";
 div_smallMap.style.position = "absolute";
 div_smallMap.style.zIndex = "1";
-let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 7);
+let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 20,
@@ -37,18 +35,17 @@ function showInMap(path) {
     path_normalize.push(cell);
   }
   console.log(path_normalize.length);
-  for(var i=0;i<path_normalize.length;i++)
-  {
+  for (var i = 0; i < path_normalize.length; i++) {
     if (i == 0) {
-      map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 7)
+      map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 9)
       // map_handler.setView(path_normalize[0], 10)
     }
     drawPath(path_normalize);
   }
-  var baseLine = [path_normalize[0],path_normalize[path_normalize.length-1]];
+  var baseLine = [path_normalize[0], path_normalize[path_normalize.length - 1]];
   console.log(baseLine.length);
   L.polyline(baseLine, { color: 'blue', weight: '1' }).addTo(map_handler);
-  
+
   function drawPath(pathLine_origin) {
     // let pathName = '{{ pathName|safe }}';
     // let pathLine_origin = '{{ pathLine_origin|safe }}'
@@ -66,7 +63,112 @@ function showInMap(path) {
   }
 }
 
+func_createTable_soloRoute_summary();
+function func_createTable_soloRoute_summary() {
+  //get summarys:total distance,routeEffciency,speed/min,elevation/mean
+  var totalDistance = 0; // km
+  var elevation_mean = 0;
+  var speed = 0;
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    totalDistance += demo_singleRoute[i]['distance'] / 1000;
+    elevation_mean += demo_singleRoute[i]['elevation'];
+    speed += demo_singleRoute[i]['speed'] * 60 / 1000;
+  }
+  elevation_mean = elevation_mean / demo_singleRoute.length;
 
+  var routeEffciency;
+  var startPoint = turf.point([demo_singleRoute[0]['latitude'], demo_singleRoute[0]['longitude']]);
+  var endPoint = turf.point([demo_singleRoute[demo_singleRoute.length - 1]['latitude'], demo_singleRoute[demo_singleRoute.length - 1]['longitude']]);
+  var beeLineDistance = turf.distance(startPoint, endPoint, { units: 'kilometers' });
+  routeEffciency = beeLineDistance / totalDistance;
+
+
+  var date_start = new Date(demo_singleRoute[0]['time']);
+  var date_end = new Date(demo_singleRoute[demo_singleRoute.length - 1]['time']);
+  var time_total = date_end.getTime() - date_start.getTime();
+  console.log(date_start, date_end, time_total);
+  var total_hour = (time_total / 1000) / 3600;
+  var speed_mean = speed / total_hour;
+
+
+  var tbl = document.createElement('table');
+  tbl.style.width = '40%';
+  tbl.style.border = '1px solid black';
+  tbl.style.left = "5%";
+  tbl.style.top = "5%";
+  tbl.style.position = "absolute";
+  tbl.setAttribute("border", "2");
+  document.body.appendChild(tbl);
+
+  var data_table = [{ 'distance/km': totalDistance }, { 'route effciency': routeEffciency }, { 'mean speed': speed_mean }, { 'mean elevation': elevation_mean }];
+
+
+  // Creating and adding data to first row of the table
+  // 總距離，路徑效率，平均速度，平均海拔
+  function func_init_table_result_head() {
+    let row_1 = document.createElement('tr');
+    let heading_1 = document.createElement('th');
+    heading_1.innerHTML = "總距離(km)";
+    let heading_2 = document.createElement('th');
+    heading_2.innerHTML = "路徑效率";
+    let heading_3 = document.createElement('th');
+    heading_3.innerHTML = "平均速度(km/h)";
+    let heading_4 = document.createElement('th');
+    heading_4.innerHTML = "平均海拔(m)";
+
+    row_1.appendChild(heading_1);
+    row_1.appendChild(heading_2);
+    row_1.appendChild(heading_3);
+    row_1.appendChild(heading_4);
+    tbl.appendChild(row_1);
+  }
+  func_init_table_result_head();
+
+  function func_table_result_addData(distance, routeEff, speed_mean, elevation_mean) {
+    var row = document.createElement('tr');
+    var row_data_1 = document.createElement('td');
+    row_data_1.innerHTML = distance.toString();
+    row_data_1.style.textAlign = "center";
+    var row_data_2 = document.createElement('td');
+    row_data_2.innerHTML = routeEff.toString();
+    row_data_2.style.textAlign = "center";
+    var row_data_3 = document.createElement('td');
+    row_data_3.innerHTML = speed_mean.toString();
+    row_data_3.style.textAlign = "center";
+    var row_data_4 = document.createElement('td');
+    row_data_4.innerHTML = elevation_mean.toString();
+    row_data_4.style.textAlign = "center";
+
+    row.appendChild(row_data_1);
+    row.appendChild(row_data_2);
+    row.appendChild(row_data_3);
+    row.appendChild(row_data_4);
+    tbl.appendChild(row);
+  }
+  func_table_result_addData(totalDistance.toFixed(2), routeEffciency.toFixed(3), speed_mean.toFixed(2), elevation_mean.toFixed(2));
+
+}
+
+func_label_routeEffciency_realTime();
+//draw a label for route accuracy
+function func_label_routeEffciency_realTime() {
+  const newLabel = document.createElement("label");
+  newLabel.style.width = '100%';
+  newLabel.style.height = '5%';
+  newLabel.style.left = "0%";
+  newLabel.style.top = "45%";
+  newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+  newLabel.style.position = "absolute";
+  newLabel.style.zIndex = "1";
+  newLabel.innerHTML = "即時路徑效率";
+  newLabel.style.textAlign = "left";
+  newLabel.style.fontSize = '36px';
+
+  document.body.appendChild(newLabel);
+}
+
+
+func_solo_route_routeAccuracy_byProjectionDistance();
 ///functions for solo route's solo figure analysis
 // 即時路徑效率圖：
 // 做法1：切線距離/實際距離
@@ -77,7 +179,7 @@ function showInMap(path) {
 // 計算當前路徑效率：
 // step4：計算實際距離；
 // step5：當前的路徑效率 = 投影距離/實際距離；
-function func_solo_route_routeAccuracy() {
+function func_solo_route_routeAccuracy_byProjectionDistance() {
   var data_normalized = []
 
   for (var i = 0; i < demo_singleRoute.length; i++) {
@@ -103,7 +205,7 @@ function func_solo_route_routeAccuracy() {
     //distance of line 
     var distance_atMakebaseline = Math.sqrt(Math.pow(distance_toStartPoint, 2) - Math.pow(distance_toMakebaseline, 2));
     //actual distance 
-    total_distance += (demo_singleRoute[i]['distance']/1000);
+    total_distance += (demo_singleRoute[i]['distance'] / 1000);
     //cur route efficiency
     var cur_routeEff = distance_atMakebaseline / total_distance;
 
@@ -114,10 +216,10 @@ function func_solo_route_routeAccuracy() {
 
   //draw in chart
   let canvas_RoutePlot = document.createElement('canvas');
-  canvas_RoutePlot.setAttribute("width", '800px');
-  canvas_RoutePlot.setAttribute("height", '400px');
+  canvas_RoutePlot.setAttribute("width", window.innerWidth / 2);
+  canvas_RoutePlot.setAttribute("height", window.innerHeight / 2);
   canvas_RoutePlot.setAttribute("id", "canvas_RoutePlot");
-  canvas_RoutePlot.style.left = "10%";
+  canvas_RoutePlot.style.left = "0%";
   canvas_RoutePlot.style.top = "50%";
   canvas_RoutePlot.style.position = "absolute";
   // canvas.style['margin-left'] = '-200px';
@@ -191,6 +293,1085 @@ function func_solo_route_routeAccuracy() {
 }
 
 func_solo_route_routeAccuracy();
+
+// 算法：
+// step1：計算θ：根據（上一次的點，當前點）計算飛行方向的bearing和（當前點，終點）的bearing計算θ；
+// step2：計算cosine（θ），計算d*cosine(θ); 
+// step3：計算實際的距離sum（D），並計算最終結果；
+// step4：按照point的個數，進行循環計算。
+
+function func_solo_route_routeAccuracy() {
+  var data_normalized = []
+
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    data_normalized.push([demo_singleRoute[i]['latitude'], demo_singleRoute[i]['longitude']]);
+  }
+
+  if (data_normalized.length < 1) {
+    console.log("no data");
+    //todo: raise a warning;
+    return;
+  }
+  // var startPoint = data_normalized[0];
+  var endPoint = turf.point(data_normalized[data_normalized.length - 1]);
+  // var make_baseline = turf.lineString([startPoint, endPoint]);
+  var routeAccuracy_list = [];
+  var total_distance = 0;
+  var sum_accuracy_distance = 0;
+  var count_point_good = 0;//if distance =0 ,then kick out this point 
+  var last_point = turf.point(data_normalized[0]);
+  for (var i = 1; i < data_normalized.length; i++) {
+    var pt = turf.point(data_normalized[i]);
+    var bearing_from_lastPoint = turf.bearing(last_point, pt);
+    var bearing_to_endPoint = turf.bearing(pt, endPoint);
+    //reset last point
+    last_point = pt;
+    //calculate included angle
+    var includedAngle = bearing_to_endPoint - bearing_from_lastPoint;
+    //normalize angle to (0~180)
+    // var normalized_includedAngle = includedAngle+360;
+    //convert bearing to angle of degree
+    var normalized_includedAngle_degree = turf.bearingToAzimuth(includedAngle);
+    //convert degree to Radian
+    var normalized_includedAngle_Radian = turf.degreesToRadians(normalized_includedAngle_degree);
+    //calculate cosine of angle
+    var cosine_radian = Math.cos(normalized_includedAngle_Radian);
+
+    // console.log(bearing_to_endPoint, bearing_from_lastPoint, includedAngle, normalized_includedAngle_degree, normalized_includedAngle_Radian, cosine_radian);
+    //distance of point 
+    if (demo_singleRoute[i]['distance'] == 0) {
+      continue;
+    }
+    count_point_good++;
+    var distance_point = demo_singleRoute[i]['distance'] / 1000;
+    //sum accuracy distance 
+    sum_accuracy_distance += distance_point * cosine_radian;
+    //actual distance 
+    total_distance += (demo_singleRoute[i]['distance'] / 1000);
+
+    // console.log(sum_accuracy_distance, total_distance);
+    //cur route accuracy
+    var cur_routeAccuracy = sum_accuracy_distance / total_distance;
+
+    // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
+
+    routeAccuracy_list.push(cur_routeAccuracy);
+  }
+
+  //draw in chart
+  let canvas_RoutePlot = document.createElement('canvas');
+  canvas_RoutePlot.setAttribute("width", window.innerWidth / 2);
+  canvas_RoutePlot.setAttribute("height", window.innerHeight / 2);
+  canvas_RoutePlot.setAttribute("id", "canvas_RoutePlot");
+  canvas_RoutePlot.style.left = "50%";
+  canvas_RoutePlot.style.top = "50%";
+  canvas_RoutePlot.style.position = "absolute";
+  // canvas.style['margin-left'] = '-200px';
+  // canvas.style.border   = "1px solid";
+  // canvas.style.backgroundColor = 'transparent';
+  document.body.appendChild(canvas_RoutePlot);
+
+  var make_x = []
+  for (var i = 0; i < count_point_good; i++) {
+    make_x.push(i);
+  }
+
+  const myChart_RoutePlot = new Chart(canvas_RoutePlot, {
+    type: 'line',
+    data: {
+      labels: make_x,
+      datasets: [
+        //route accuracy 
+        {
+          type: 'line',
+          label: '路徑準確度',
+          data: routeAccuracy_list,
+          // backgroundColor: 'transparent',
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+        },
+      ]
+    },
+    options: {
+      responsive: false,
+      legend: { display: true },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      scales: {
+        yAxes: [{
+          beginAtZero: true,
+          fontSize: 0,
+          padding: 1,
+          gridLines: {
+            display: false
+          },
+        }],
+        xAxes: [{
+          // beginAtZero: true,
+          // fontSize: 0,
+          // ticks: {
+          //   fontColor: "#000",
+          //   fontSize: 0
+          // },
+          gridLines: {
+            display: false
+          },
+          padding: 1,
+          // display:false,
+          // position:'bottom',
+        }],
+      },
+    }
+  });
+
+  // function updateChart_changeRoute(data_time, data_speed) {
+  //   if (myChart_SpeedPlot) {
+  //     myChart_SpeedPlot.data.labels = data_time;
+  //     myChart_SpeedPlot.data.datasets[0].data = data_speed;
+  //     myChart_SpeedPlot.update();
+  //   }
+  // }
+}
+
+
+func_label_solo_route_elevation();
+//draw a label for route accuracy
+function func_label_solo_route_elevation() {
+  const newLabel = document.createElement("label");
+  newLabel.style.width = '100%';
+  newLabel.style.height = '5%';
+  newLabel.style.left = "0%";
+  newLabel.style.top = "180%";
+  newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+  newLabel.style.position = "absolute";
+  newLabel.style.zIndex = "1";
+  newLabel.innerHTML = "海拔區域柱狀圖";
+  newLabel.style.textAlign = "left";
+  newLabel.style.fontSize = '36px';
+
+  document.body.appendChild(newLabel);
+}
+
+func_solo_route_elevation();
+///functions for elevation as bar chart and splited by zone
+// quatile做法：按照從小到大的方式排列成有序的list，然後25%是指位置在25%的數值，50%就是指中位數，75%是位置在75%的值；
+// 圖表做法：
+// step1：設定zone；
+// step2：計算每個zone的數量；（elevate中使用的是時間）
+// ascent計算: 上升了多少，只要有上升的部分，就累加；
+// desent計算與ascent計算相同；
+function func_solo_route_elevation() {
+  //set zone
+  var zone = [];
+  var zone_count = [];
+  for (var i = 0; i < 17; i++) {
+    zone.push([0 + i * 100, 100 + i * 100]);
+    zone_count.push(0);
+  }
+
+  var data_normalized = [];
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    data_normalized.push(demo_singleRoute[i]['elevation']);
+  }
+
+  //calculate count in zones
+  for (var i = 0; i < data_normalized.length; i++) {
+    for (var j = 0; j < zone.length; j++) {
+      if (zone[j][0] <= data_normalized[i] && zone[j][1] > data_normalized[i]) {
+        zone_count[j]++;
+        break;
+      }
+    }
+  }
+  console.log(zone_count);
+  //calculate ascent and descent
+  var sum_ascent = 0;
+  var sum_descent = 0;
+  var last_elevation = data_normalized[0];
+  for (var i = 1; i < data_normalized.length; i++) {
+    var cur_elevation = data_normalized[i];
+
+    if (cur_elevation > last_elevation) {
+      sum_ascent += cur_elevation - last_elevation;
+    }
+    else if (cur_elevation < last_elevation) {
+      sum_descent += last_elevation - cur_elevation;
+    }
+
+    last_elevation = cur_elevation;
+  }
+  console.log(sum_ascent, sum_descent);
+
+
+  //draw labels
+  function drawLabels() {
+    //draw average elevation
+    var sum_ele = 0;
+    for (var i = 0; i < data_normalized.length; i++) {
+      sum_ele += data_normalized[i];
+    }
+    var average_ele = sum_ele / data_normalized.length;
+    var btn_average_elevation = document.createElement("button");
+    btn_average_elevation.innerHTML = average_ele.toFixed(1).toString() + " M" + '\n' + "Average";
+    btn_average_elevation.style.width = '8%';
+    btn_average_elevation.style.height = '8%';
+    btn_average_elevation.style.background = 'transparent';
+    btn_average_elevation.style.border = 'transparent';
+    btn_average_elevation.style.color = 'black';
+    btn_average_elevation.setAttribute("id", "btn_average_elevation");
+    btn_average_elevation.style.left = "0%";
+    btn_average_elevation.style.top = "200%";
+    btn_average_elevation.style.position = "absolute";
+    document.body.appendChild(btn_average_elevation);
+
+    //draw ascent and descent 
+    var btn_ascent_elevation = document.createElement("button");
+    btn_ascent_elevation.innerHTML = sum_ascent.toFixed(1).toString() + " M" + '\n' + "Ascent";
+    btn_ascent_elevation.style.width = '8%';
+    btn_ascent_elevation.style.height = '8%';
+    btn_ascent_elevation.style.background = 'transparent';
+    btn_ascent_elevation.style.border = 'transparent';
+    btn_ascent_elevation.style.color = 'black';
+    btn_ascent_elevation.setAttribute("id", "btn_ascent_elevation");
+    btn_ascent_elevation.style.left = "8%";
+    btn_ascent_elevation.style.top = "200%";
+    btn_ascent_elevation.style.position = "absolute";
+    document.body.appendChild(btn_ascent_elevation);
+
+    var btn_descent_elevation = document.createElement("button");
+    btn_descent_elevation.innerHTML = sum_descent.toFixed(1).toString() + " M" + '\n' + "Descent";
+    btn_descent_elevation.style.width = '8%';
+    btn_descent_elevation.style.height = '8%';
+    btn_descent_elevation.style.background = 'transparent';
+    btn_descent_elevation.style.border = 'transparent';
+    btn_descent_elevation.style.color = 'black';
+    btn_descent_elevation.setAttribute("id", "btn_descent_elevation");
+    btn_descent_elevation.style.left = "16%";
+    btn_descent_elevation.style.top = "200%";
+    btn_descent_elevation.style.position = "absolute";
+    document.body.appendChild(btn_descent_elevation);
+
+    //draw quartile elevation
+    var sorted_elevation = data_normalized.sort(function (a, b) { return a - b });
+    console.log(sorted_elevation);
+    var index = Math.floor(sorted_elevation.length / 4);
+    var btn_quartile_elevation_1 = document.createElement("button");
+    btn_quartile_elevation_1.innerHTML = sorted_elevation[index].toFixed(1).toString() + " M" + '\n' + "25% Quartile";
+    btn_quartile_elevation_1.style.width = '8%';
+    btn_quartile_elevation_1.style.height = '8%';
+    btn_quartile_elevation_1.style.background = 'transparent';
+    btn_quartile_elevation_1.style.border = 'transparent';
+    btn_quartile_elevation_1.style.color = 'black';
+    btn_quartile_elevation_1.setAttribute("id", "btn_quartile_elevation_1");
+    btn_quartile_elevation_1.style.left = "0%";
+    btn_quartile_elevation_1.style.top = "210%";
+    btn_quartile_elevation_1.style.position = "absolute";
+    document.body.appendChild(btn_quartile_elevation_1);
+
+    index = Math.floor(sorted_elevation.length / 2);
+    var btn_quartile_elevation_2 = document.createElement("button");
+    btn_quartile_elevation_2.innerHTML = sorted_elevation[index].toFixed(1).toString() + " M" + '\n' + "50% Quartile";
+    btn_quartile_elevation_2.style.width = '8%';
+    btn_quartile_elevation_2.style.height = '8%';
+    btn_quartile_elevation_2.style.background = 'transparent';
+    btn_quartile_elevation_2.style.border = 'transparent';
+    btn_quartile_elevation_2.style.color = 'black';
+    btn_quartile_elevation_2.setAttribute("id", "btn_quartile_elevation_2");
+    btn_quartile_elevation_2.style.left = "8%";
+    btn_quartile_elevation_2.style.top = "210%";
+    btn_quartile_elevation_2.style.position = "absolute";
+    document.body.appendChild(btn_quartile_elevation_2);
+
+    index = Math.floor((sorted_elevation.length * 3) / 4);
+    var btn_quartile_elevation_3 = document.createElement("button");
+    btn_quartile_elevation_3.innerHTML = sorted_elevation[index].toFixed(1).toString() + " M" + '\n' + "75% Quartile";
+    btn_quartile_elevation_3.style.width = '8%';
+    btn_quartile_elevation_3.style.height = '8%';
+    btn_quartile_elevation_3.style.background = 'transparent';
+    btn_quartile_elevation_3.style.border = 'transparent';
+    btn_quartile_elevation_3.style.color = 'black';
+    btn_quartile_elevation_3.setAttribute("id", "btn_quartile_elevation_3");
+    btn_quartile_elevation_3.style.left = "16%";
+    btn_quartile_elevation_3.style.top = "210%";
+    btn_quartile_elevation_3.style.position = "absolute";
+    document.body.appendChild(btn_quartile_elevation_3);
+
+  }
+  drawLabels();
+
+  //draw in chart
+  let canvas_bar_elevation = document.createElement('canvas');
+  canvas_bar_elevation.setAttribute("width", window.innerWidth / 2);
+  canvas_bar_elevation.setAttribute("height", window.innerHeight / 2);
+  canvas_bar_elevation.setAttribute("id", "canvas_bar_elevation");
+  canvas_bar_elevation.style.left = "30%";
+  canvas_bar_elevation.style.top = "190%";
+  canvas_bar_elevation.style.position = "absolute";
+  // canvas.style['margin-left'] = '-200px';
+  // canvas.style.border   = "1px solid";
+  // canvas.style.backgroundColor = 'transparent';
+  document.body.appendChild(canvas_bar_elevation);
+
+  const myChart_elevation = new Chart(canvas_bar_elevation, {
+    type: 'bar',
+    data: {
+      labels: zone,
+      datasets: [
+        //route accuracy 
+        {
+          type: 'bar',
+          label: '海拔區域柱狀圖',
+          data: zone_count,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        },
+      ]
+    },
+    options: {
+      responsive: false,
+      legend: { display: true },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      scales: {
+        // yAxes: [{
+        //   beginAtZero: true,
+        //   fontSize: 0,
+        //   padding: 1,
+        //   gridLines: {
+        //     display: false
+        //   },
+        // }],
+        xAxes: [{
+          gridLines: {
+            display: false
+          },
+          padding: 1,
+        }],
+      },
+    }
+  });
+}
+
+
+
+func_label_solo_route_routeAccuracySpeedElevation();
+//draw a label for route accuracy
+function func_label_solo_route_routeAccuracySpeedElevation() {
+  const newLabel = document.createElement("label");
+  newLabel.style.width = '100%';
+  newLabel.style.height = '5%';
+  newLabel.style.left = "0%";
+  newLabel.style.top = "115%";
+  newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+  newLabel.style.position = "absolute";
+  newLabel.style.zIndex = "1";
+  newLabel.innerHTML = "即時路徑效率.速度.海拔的對比圖";
+  newLabel.style.textAlign = "left";
+  newLabel.style.fontSize = '36px';
+
+  document.body.appendChild(newLabel);
+}
+
+
 ///functions for solo route's figures analysis
+function func_solo_route_routeAccuracySpeedElevation() {
+  var data_normalized = []
+
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    data_normalized.push([demo_singleRoute[i]['latitude'], demo_singleRoute[i]['longitude']]);
+  }
+
+  if (data_normalized.length < 1) {
+    console.log("no data");
+    //todo: raise a warning;
+    return;
+  }
+  var startPoint = data_normalized[0];
+  var endPoint = data_normalized[data_normalized.length - 1];
+  var make_baseline = turf.lineString([startPoint, endPoint]);
+  var routeEff_list = [];
+  var total_distance = 0;
+  for (var i = 0; i < data_normalized.length; i++) {
+    var pt = turf.point(data_normalized[i]);
+    //distance to start point
+    var distance_toStartPoint = turf.distance(startPoint, pt, { units: 'kilometers' });
+    //distance to line 
+    var distance_toMakebaseline = turf.pointToLineDistance(pt, make_baseline, { units: 'kilometers' });
+    //distance of line 
+    var distance_atMakebaseline = Math.sqrt(Math.pow(distance_toStartPoint, 2) - Math.pow(distance_toMakebaseline, 2));
+    //actual distance 
+    total_distance += (demo_singleRoute[i]['distance'] / 1000);
+    //cur route efficiency
+    var cur_routeEff = distance_atMakebaseline / total_distance;
+
+    // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
+
+    routeEff_list.push(cur_routeEff);
+  }
+
+  function makeYData_speed() {
+    var result = []
+    for (var i = 0; i < demo_singleRoute.length; i++) {
+      result.push(demo_singleRoute[i]['speed'] * 60 / 1000);
+    }
+    return result;
+  }
+  var dataY_speed = makeYData_speed();
+
+  function makeYData_elevation() {
+    var result = []
+    for (var i = 0; i < demo_singleRoute.length; i++) {
+      result.push(demo_singleRoute[i]['elevation'] / 1000)
+    }
+    return result;
+  }
+  var dataY_elevation = makeYData_elevation();
+
+  //draw in chart
+  let canvas_routeEff_speed_elevation = document.createElement('canvas');
+  canvas_routeEff_speed_elevation.setAttribute("width", window.innerWidth/2);
+  canvas_routeEff_speed_elevation.setAttribute("height", window.innerHeight/2);
+  canvas_routeEff_speed_elevation.setAttribute("id", "canvas_routeEff_speed_elevation");
+  canvas_routeEff_speed_elevation.style.left = "10%";
+  canvas_routeEff_speed_elevation.style.top = "120%";
+  canvas_routeEff_speed_elevation.style.position = "absolute";
+  // canvas.style['margin-left'] = '-200px';
+  // canvas.style.border   = "1px solid";
+  // canvas.style.backgroundColor = 'transparent';
+  document.body.appendChild(canvas_routeEff_speed_elevation);
+
+  var make_x = []
+  for (var i = 0; i < data_normalized.length; i++) {
+    make_x.push(i);
+  }
+
+  const myChart_RoutePlot = new Chart(canvas_routeEff_speed_elevation, {
+    type: 'line',
+    data: {
+      labels: make_x,
+      datasets: [
+        //route accuracy 
+        {
+          type: 'line',
+          label: '即時路徑效率',
+          data: routeEff_list,
+          // backgroundColor: 'transparent',
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+        },
+        {
+          type: 'line',
+          label: '速度(km/min)',
+          data: dataY_speed,
+          // backgroundColor: 'transparent',
+          fill: false,
+          borderColor: 'blue',
+        },
+        {
+          type: 'line',
+          label: '海拔(km)',
+          data: dataY_elevation,
+          // backgroundColor: 'transparent',
+          fill: false,
+          borderColor: 'red',
+        },
+      ]
+    },
+    options: {
+      responsive: false,
+      legend: { display: true },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      scales: {
+        yAxes: [{
+          beginAtZero: true,
+          fontSize: 0,
+          padding: 1,
+          gridLines: {
+            display: false
+          },
+        }],
+        xAxes: [{
+          // beginAtZero: true,
+          // fontSize: 0,
+          // ticks: {
+          //   fontColor: "#000",
+          //   fontSize: 0
+          // },
+          gridLines: {
+            display: false
+          },
+          padding: 1,
+          // display:false,
+          // position:'bottom',
+        }],
+      },
+    }
+  });
+
+  function draw_earthElevation(elevations) {
+    var normalized_elevations = [];
+    for (var i = 0; i < elevations.length; i++) {
+      normalized_elevations.push(elevations[i] / 1000);
+    }
+    var make_data = {
+      type: 'line',
+      label: '地面海拔(km)',
+      data: normalized_elevations,
+      // backgroundColor: 'transparent',
+      fill: false,
+      borderColor: 'yellow',
+    }
+    myChart_RoutePlot.data.datasets.push(make_data);
+    myChart_RoutePlot.update();
+  }
+
+  function draw_elevationFromEarth(elevations) {
+    var normalized_elevations = [];
+    for (var i = 0; i < elevations.length; i++) {
+      normalized_elevations.push(dataY_elevation[i] - elevations[i] / 1000);
+    }
+    var make_data = {
+      type: 'line',
+      label: '離地高度(km)',
+      data: normalized_elevations,
+      // backgroundColor: 'transparent',
+      fill: false,
+      borderColor: 'green',
+    }
+    myChart_RoutePlot.data.datasets.push(make_data);
+    myChart_RoutePlot.update();
+  }
+
+  makeYData_earthElevation();
+  function makeYData_earthElevation() {
+    var result = [];
+    var dataToSend = "";
+    var dataToSend_json = [];
+    for (var i_earthEle = 0; i_earthEle < data_normalized.length; i_earthEle++) {
+      var lat = data_normalized[i_earthEle][0];
+      var lon = data_normalized[i_earthEle][1];
+
+      dataToSend_json.push({ "latitude": lat, "longitude": lon });
+    }
+
+    const url = 'https://api.open-elevation.com/api/v1/lookup?';
+    var oReq = new XMLHttpRequest();
+    function reqListener() {
+      // console.log(typeof (this.responseText), typeof (this.response));
+      // console.log(this);
+
+      var response = JSON.parse(this.responseText);
+      console.log(response.results);
+      for (var i_res = 0; i_res < response.results.length; i_res++) {
+        result.push(response.results[i_res]['elevation']);
+      }
+      console.log(result);
+      //todo draw in chart
+      // draw_earthElevation(result);
+      draw_elevationFromEarth(result);
+    }
+
+    oReq.addEventListener("load", reqListener);
+    // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+    oReq.open("post", url);
+    // oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+    oReq.setRequestHeader("Accept", "application/json");
+    oReq.setRequestHeader("Content-Type", "application/json");
+    oReq.send(JSON.stringify({ "locations": dataToSend_json }));
+  }
+
+}
+
+func_solo_route_routeAccuracySpeedElevation();
 
 ///functions for multi routes analysis
+let demo_data_multiroutes = [];
+
+
+func_label_multiRoutes_routeSimilarity();
+//draw a label for route accuracy
+function func_label_multiRoutes_routeSimilarity() {
+  const newLabel = document.createElement("label");
+  newLabel.style.width = '100%';
+  newLabel.style.height = '5%';
+  newLabel.style.left = "0%";
+  newLabel.style.top = "245%";
+  newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+  newLabel.style.position = "absolute";
+  newLabel.style.zIndex = "1";
+  newLabel.innerHTML = "路徑相似度對比圖";
+  newLabel.style.textAlign = "left";
+  newLabel.style.fontSize = '36px';
+
+  document.body.appendChild(newLabel);
+}
+
+// 路徑相似度公式：計算所有點到參考路線的距離（點到線的距離的算法是：到最近的點的距離），然後計算平均距離，平均距離越小，相似度越高；
+// 算法：平均路徑距離：
+// step1：計算每個點與基準線的距離的和；
+// step2：step1的和/點的個數；
+// 
+func_multiRoutes_routeSimilarity();
+function func_multiRoutes_routeSimilarity() {
+  //normalize routes
+  var normalized_multiroutes = [];
+  for (var i = 0; i < test_demo_data.length; i++) {
+    var normalized_route = [];
+    for (var j = 0; j < test_demo_data[i].length; j++) {
+      normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+    }
+    normalized_multiroutes.push(normalized_route);
+  }
+
+
+  func_multiRoutes_routeSimilarity_map_twolines();
+  function func_multiRoutes_routeSimilarity_map_twolines() {
+    //make two lines
+    var two_routes = [normalized_multiroutes[0], normalized_multiroutes[1]];
+    ///draw path in map
+    let div_smallMap = document.getElementById('Map_showPaths_routeSimilarity');
+    div_smallMap.setAttribute('style', 'width:50%;height:50%;');
+    // div_smallMap.setAttribute('style', 'width:800px;height:400px;');
+    // canvas.setAttribute("width", 400);
+    // canvas.setAttribute("height", 100);
+    div_smallMap.style.left = "0%";
+    div_smallMap.style.top = "250%";
+    div_smallMap.style.position = "absolute";
+    div_smallMap.style.zIndex = "1";
+    var map_handler = L.map('Map_showPaths_routeSimilarity', { preferCanvas: true }).setView([0, 0], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map_handler);
+
+    var colors = ['purple', 'blue'];
+    for (var i = 0; i < two_routes.length; i++) {
+      showInMap(two_routes[i], colors[i]);
+    }
+
+    function showInMap(path, color) {
+      var path_normalize = [];
+      for (var i = 0; i < path.length; i++) {
+        var cell = [];
+        cell.push(path[i][0]);
+        cell.push(path[i][1]);
+        path_normalize.push(cell);
+      }
+      console.log(path_normalize.length);
+
+      map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 9)
+      // map_handler.setView(path_normalize[0], 10)
+
+      var baseLine = [path_normalize[0], path_normalize[path_normalize.length - 1]];
+      console.log(baseLine.length);
+      L.polyline(baseLine, { color: 'green', weight: '1' }).addTo(map_handler);
+      var polyline_origin = L.polyline(path_normalize, { color: color, weight: '1' }).addTo(map_handler);
+    }
+  }
+
+  func_multiRoutes_routeSimilarity_similaritylineplot();
+  function func_multiRoutes_routeSimilarity_similaritylineplot() {
+    //set baseline 
+    var baseLine = turf.lineString(normalized_multiroutes[0]);
+    for (var i = 1; i < 2; i++) {
+      var point_distances = [];
+      for (var j = 0; j < normalized_multiroutes[i].length; j++) {
+        var pt = turf.point(normalized_multiroutes[i][j]);
+        var distance = turf.pointToLineDistance(pt, baseLine, { units: 'kilometers' });
+        point_distances.push(distance.toFixed(4));
+      }
+      // console.log(baseLine);
+      console.log(point_distances);
+
+      //draw in chart
+      // var canvas_routeSimilarity_similaritylineplot = document.createElement('canvas');
+      // canvas_routeSimilarity_similaritylineplot.style.width = '50%';
+      // canvas_routeSimilarity_similaritylineplot.style.height = '50%';
+      // // canvas_routeSimilarity_similaritylineplot.setAttribute("id", "canvas_routeSimilarity_similaritylineplot");
+      // canvas_routeSimilarity_similaritylineplot.style.left = "50%";
+      // // console.log((250+(i-1)*50).toString(10));
+      // canvas_routeSimilarity_similaritylineplot.style.top = "250%";
+      // canvas_routeSimilarity_similaritylineplot.style.position = "absolute";
+      // document.body.appendChild(canvas_routeSimilarity_similaritylineplot);
+
+      // var make_x = []
+      // for (var i = 0; i < point_distances.length; i++) {
+      //   make_x.push(i);
+      // }
+
+      // const myChart_RoutePlot = new Chart(canvas_routeSimilarity_similaritylineplot, {
+      //   type: 'line',
+      //   data: {
+      //     labels: make_x,
+      //     datasets: [
+      //       //route accuracy 
+      //       {
+      //         type: 'line',
+      //         label: '路徑相似度',
+      //         data: point_distances,
+      //         // backgroundColor: 'transparent',
+      //         fill: false,
+      //         borderColor: 'rgb(75, 192, 192)',
+      //       },
+      //     ]
+      //   },
+      //   options: {
+      //     responsive: false,
+      //     legend: { display: true },
+      //     elements: {
+      //       point: {
+      //         radius: 0
+      //       }
+      //     },
+      //     scales: {
+      //       yAxes: [{
+      //         beginAtZero: true,
+      //         fontSize: 0,
+      //         padding: 1,
+      //         gridLines: {
+      //           display: false
+      //         },
+      //       }],
+      //       xAxes: [{
+      //         // beginAtZero: true,
+      //         // fontSize: 0,
+      //         // ticks: {
+      //         //   fontColor: "#000",
+      //         //   fontSize: 0
+      //         // },
+      //         gridLines: {
+      //           display: false
+      //         },
+      //         padding: 1,
+      //         // display:false,
+      //         // position:'bottom',
+      //       }],
+      //     },
+      //   }
+      // });
+      //draw in plot
+      func_draw_line();
+      function func_draw_line() {
+        //set chart
+        var canvas_routeSimilarity_similaritylineplot = document.createElement('div');
+        canvas_routeSimilarity_similaritylineplot.style.width = '50%';
+        canvas_routeSimilarity_similaritylineplot.style.height = '50%';
+        canvas_routeSimilarity_similaritylineplot.setAttribute("id", "canvas_routeSimilarity_similaritylineplot");
+        canvas_routeSimilarity_similaritylineplot.style.left = "50%";
+        // console.log((250+(i-1)*50).toString(10));
+        canvas_routeSimilarity_similaritylineplot.style.top = "250%";
+        canvas_routeSimilarity_similaritylineplot.style.position = "absolute";
+        document.body.appendChild(canvas_routeSimilarity_similaritylineplot);
+
+        //set options
+        var options = {
+          series: [{
+            name: "路徑相似度(km)",
+            data: point_distances
+          }],
+          chart: {
+            // height: 350,
+            type: 'line',
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'straight'
+          },
+          title: {
+            text: '路徑相似度(km)',
+            align: 'middle'
+          },
+          grid: {
+            row: {
+              colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+              opacity: 0.5
+            },
+          },
+          // xaxis: {
+          //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          // }
+        };
+
+        var chart = new ApexCharts(canvas_routeSimilarity_similaritylineplot, options);
+        chart.render();
+      }
+
+    }
+  }
+
+  func_multiRoutes_routeSimilarity_averageSimilarity();
+  /// multi routes 
+  //  用法2：計算多條路徑的，平均路徑距離：
+  // step1：計算相鄰兩條的距離的和；
+  // step2：step1的和/點的個數；
+  function func_multiRoutes_routeSimilarity_averageSimilarity() {
+    //set baseline 
+    var baseLine = turf.lineString(normalized_multiroutes[0]);
+    //calculate distances 
+    var multi_routes_distances = [];
+    for (var i = 1; i < normalized_multiroutes.length; i++) {
+      var point_distances = [];
+      for (var j = 0; j < normalized_multiroutes[i].length; j++) {
+        var pt = turf.point(normalized_multiroutes[i][j]);
+        var distance = turf.pointToLineDistance(pt, baseLine, { units: 'kilometers' });
+        point_distances.push((distance * 1000).toFixed(1));
+      }
+      multi_routes_distances.push(point_distances);
+      //reset baseLine 
+      baseLine = turf.lineString(normalized_multiroutes[i]);
+    }
+    // console.log(baseLine);
+    console.log(multi_routes_distances[5]);
+
+    //sort distances
+    var multi_routes_distances_sorted = [];
+    for (var i = 0; i < multi_routes_distances.length; i++) {
+      multi_routes_distances_sorted.push(multi_routes_distances[i].sort(function (a, b) { return a - b }));
+    }
+    console.log(multi_routes_distances_sorted);
+    //draw in plot
+    func_draw_boxplot();
+    function func_draw_boxplot() {
+      //set chart
+      var canvas_routeSimilarity_averageSimilaritybarplot = document.createElement('div');
+      canvas_routeSimilarity_averageSimilaritybarplot.style.width = '100%';
+      canvas_routeSimilarity_averageSimilaritybarplot.style.height = '80%';
+      canvas_routeSimilarity_averageSimilaritybarplot.setAttribute("id", "canvas_routeSimilarity_averageSimilaritybarplot");
+      canvas_routeSimilarity_averageSimilaritybarplot.style.left = "0%";
+      // console.log((250+(i-1)*50).toString(10));
+      canvas_routeSimilarity_averageSimilaritybarplot.style.top = "330%";
+      canvas_routeSimilarity_averageSimilaritybarplot.style.position = "absolute";
+      document.body.appendChild(canvas_routeSimilarity_averageSimilaritybarplot);
+
+      //set options
+      var options = {
+        series: [
+          {
+            name: 'box',
+            type: 'boxPlot',
+            data: [
+              // {
+              //   x: new Date('2017-01-01').getTime(),
+              //   y: [54, 66, 69, 75, 88]
+              // },
+            ]
+          },
+        ],
+        chart: {
+          type: 'boxPlot',
+          height: 800,
+        },
+        colors: ['#008FFB', '#FEB019'],
+        title: {
+          text: '平均路徑距離',
+          align: 'middle'
+        },
+        tooltip: {
+          shared: false,
+          intersect: true
+        },
+        yaxis: {
+          // min: 0,
+          // max: 1000,
+          type: 'numeric',
+        }
+      };
+      // console.log(options.series);
+      // console.log(options.series[0].data);
+      // options.series[0].data = [{'x':0,'y':multi_routes_distances[0]}];
+      for (var i = 0; i < multi_routes_distances_sorted.length; i++) {
+        var data = multi_routes_distances_sorted[i];
+        var min = data[0];
+        var q1 = data[Math.floor(data.length / 4)];
+        var median = data[Math.floor(data.length / 2)];
+        var q3 = data[Math.floor(data.length * 3 / 4)];
+        var max = data[data.length - 1];
+
+        options.series[0].data.push({ 'x': i, 'y': [min, q1, median, q3, max] });
+      }
+      console.log(options.series[0].data);
+      var chart = new ApexCharts(canvas_routeSimilarity_averageSimilaritybarplot, options);
+
+      chart.render();
+    }
+
+    // //draw three lines in map
+    // var three_routes = [normalized_multiroutes[0],normalized_multiroutes[6]];
+    // ///draw path in map
+    // let div_smallMap_routeSimilarity_threeroutes = document.getElementById('div_smallMap_routeSimilarity_threeroutes');
+    // div_smallMap_routeSimilarity_threeroutes.setAttribute('style', 'width:100%;height:100%;');
+    // // div_smallMap.setAttribute('style', 'width:800px;height:400px;');
+    // // canvas.setAttribute("width", 400);
+    // // canvas.setAttribute("height", 100);
+    // div_smallMap_routeSimilarity_threeroutes.style.left = "0%";
+    // div_smallMap_routeSimilarity_threeroutes.style.top = "520%";
+    // div_smallMap_routeSimilarity_threeroutes.style.position = "absolute";
+    // div_smallMap_routeSimilarity_threeroutes.style.zIndex = "1";
+    // var map_handler = L.map('div_smallMap_routeSimilarity_threeroutes', { preferCanvas: true }).setView([0, 0], 11);
+
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 20,
+    //   // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    // }).addTo(map_handler);
+
+    // var colors = ['red', 'blue','yellow'];
+    // for (var i = 0; i < three_routes.length; i++) {
+    //   showInMap(three_routes[i], colors[i]);
+    // }
+
+    // function showInMap(path, color) {
+    //   var path_normalize = [];
+    //   for (var i = 0; i < path.length; i++) {
+    //     var cell = [];
+    //     cell.push(path[i][0]);
+    //     cell.push(path[i][1]);
+    //     path_normalize.push(cell);
+    //   }
+    //   console.log(path_normalize.length);
+
+    //   map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 9)
+    //   // map_handler.setView(path_normalize[0], 10)
+
+    //   var baseLine = [path_normalize[0], path_normalize[path_normalize.length - 1]];
+    //   console.log(baseLine.length);
+    //   L.polyline(baseLine, { color: 'green', weight: '1' }).addTo(map_handler);
+    //   var polyline_origin = L.polyline(path_normalize, { color: color, weight: '3' }).addTo(map_handler);
+    // } 
+  }
+}
+
+func_label_multiRoutes_routeEff_process();
+//draw a label for route accuracy
+function func_label_multiRoutes_routeEff_process() {
+  const newLabel = document.createElement("label");
+  newLabel.style.width = '100%';
+  newLabel.style.height = '5%';
+  newLabel.style.left = "0%";
+  newLabel.style.top = "425%";
+  newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+  newLabel.style.position = "absolute";
+  newLabel.style.zIndex = "1";
+  newLabel.innerHTML = "路徑效率process圖";
+  newLabel.style.textAlign = "left";
+  newLabel.style.fontSize = '36px';
+
+  document.body.appendChild(newLabel);
+}
+
+func_multiRoutes_routeEff_process();
+function func_multiRoutes_routeEff_process() {
+  //normalize routes
+  var normalized_multiroutes = [];
+  for (var i = 0; i < test_demo_data.length; i++) {
+    var normalized_route = [];
+    for (var j = 0; j < test_demo_data[i].length; j++) {
+      normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+    }
+    normalized_multiroutes.push(normalized_route);
+  }
+
+  //calculate route effs
+  var routes_effs = [];
+  for (var i = 0; i < normalized_multiroutes.length; i++) {
+    var cur_route = normalized_multiroutes[i];
+    var start_point = turf.point(cur_route[0]);
+    var end_Point = turf.point(cur_route[cur_route.length - 1]);
+    var baselineDistance = turf.distance(start_point, end_Point, { units: 'kilometers' }) * 1000;
+
+    var realDistance = 0;
+    for (var j = 0; j < cur_route.length; j++) {
+      realDistance += test_demo_data[i][j]['distance'];
+    }
+    var routeEff = baselineDistance / realDistance;
+    routes_effs.push(routeEff.toFixed(4));
+  }
+
+  var data_x = [];
+  for (var i = 0; i < routes_effs.length; i++) {
+    data_x.push(i);
+  }
+
+  draw_line_routeEffs();
+  function draw_line_routeEffs() {
+    var options = {
+      series: [{
+        name: "路徑效率",
+        data: routes_effs
+      }],
+      chart: {
+        height: 800,
+        type: 'line',
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: '路徑效率process圖',
+        align: 'middle'
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      xaxis: {
+        numeric: data_x,
+      }
+    };
+
+
+    //set chart
+    var canvas_routeEffs_process = document.createElement('div');
+    canvas_routeEffs_process.style.width = '100%';
+    canvas_routeEffs_process.style.height = '80%';
+    canvas_routeEffs_process.setAttribute("id", "canvas_routeEffs_process");
+    canvas_routeEffs_process.style.left = "0%";
+    // console.log((250+(i-1)*50).toString(10));
+    canvas_routeEffs_process.style.top = "430%";
+    canvas_routeEffs_process.style.position = "absolute";
+    document.body.appendChild(canvas_routeEffs_process);
+    var chart = new ApexCharts(canvas_routeEffs_process, options);
+    chart.render();
+  }
+
+}

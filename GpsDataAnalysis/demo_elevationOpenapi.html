@@ -1,0 +1,39 @@
+<head>
+</head>
+
+<body>
+    <script>
+        var oReq = new XMLHttpRequest();
+        function reqListener() {
+                    console.log(typeof (this.responseText), typeof (this.response));
+                    console.log(this);
+
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+
+                }
+
+        oReq.addEventListener("load", reqListener);
+        // oReq.open("GET", 'decodePathLine_toPolygon' + '/' + pathname + '/' + str_paths);
+        oReq.open("get", 'https://api.open-elevation.com/api/v1/lookup?locations=10,10|20,20|41.161758,-8.583933');
+        oReq.send();
+
+
+        // $.ajax({
+        //     url: 'https://api.open-elevation.com/api/v1/lookup?locations=10,10|20,20|41.161758,-8.583933',
+        //     // beforeSend: function (xhr) {
+        //     //     xhr.setRequestHeader("Authorization", "Bearer 6QXNMEMFHNY4FJ5ELNFMP5KRW52WFXN5")
+        //     // },
+        //     success: function (data) {
+        //         alert(data);
+        //         //process the JSON data etc
+        //     }
+        // })
+
+        // const url = 'https://api.open-elevation.com/api/v1/lookup?locations=25.4067268371582,121.992256164551';
+
+        // fetch(url, {})
+        //     .then(res => res.json())
+        //     .then(data => console.log(data));
+    </script>
+</body>
