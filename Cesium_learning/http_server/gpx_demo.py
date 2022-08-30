@@ -108,8 +108,13 @@ if __name__ == '__main__':
     filenames = os.listdir('./gpxfiles/sub_lines')
     file_paths = []
     for name in filenames:
+<<<<<<< HEAD
         file_paths.append('./gpxfiles/sub_lines/'+name)
     # file_paths.append('./gpxfiles/sub_lines/'+filenames[0])
+=======
+        file_paths.append('./gpxfiles/gpx_tw/'+name)
+    # file_paths.append('./gpxfiles/gpx_tw/'+filenames[0])
+>>>>>>> 16d523cbdc91a3d080a2ce7379fb1c3a3d66ba09
     print(file_paths)
     # filenames.append('./gpxfiles/sub_lines/'+filenames_subline[0])
     # print(filenames)

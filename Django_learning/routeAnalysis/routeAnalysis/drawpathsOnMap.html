@@ -313,12 +313,13 @@
                 }
                 if(i==0)
                 {
-                    map_handler.setView(path_normalize[Math.floor(path_normalize.length/4)], 10)
+                    map_handler.setView(path_normalize[Math.floor(path_normalize.length/2)], 8)
                     // map_handler.setView(path_normalize[0], 10)
                 }
                 else if(i == paths.length-1)
                 {
-                    map.fitBounds(path_normalize.getBounds());
+                    var beeline = [path_normalize[0],path_normalize[path_normalize.length-1]]
+                    L.polyline(beeline, { color: 'blue' ,weight:'1'}).addTo(map_handler);
                 }
                 drawPath(path_normalize);
                 //send to servers
@@ -334,7 +335,7 @@
                 // console.log(typeof (pathLine_origin_normalized));
                 // console.log(pathLine_origin_normalized);
 
-                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: 'red' }).addTo(map_handler);
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: 'red' ,weight:'0.1'}).addTo(map_handler);
                 // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
                 // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
 
