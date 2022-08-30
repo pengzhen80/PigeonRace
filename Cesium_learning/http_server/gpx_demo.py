@@ -105,11 +105,11 @@ import os
 #     gpx_data = gpx_reader_multiFiles(filenames)
     # print(len(gpx_data))
 if __name__ == '__main__':
-    filenames = os.listdir('./gpxfiles/gpx_tw')
+    filenames = os.listdir('./gpxfiles/sub_lines')
     file_paths = []
-    # for name in filenames:
-    #     file_paths.append('./gpxfiles/gpx_tw/'+name)
-    file_paths.append('./gpxfiles/gpx_tw/'+filenames[0])
+    for name in filenames:
+        file_paths.append('./gpxfiles/sub_lines/'+name)
+    # file_paths.append('./gpxfiles/sub_lines/'+filenames[0])
     print(file_paths)
     # filenames.append('./gpxfiles/sub_lines/'+filenames_subline[0])
     # print(filenames)

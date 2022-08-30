@@ -1,0 +1,1463 @@
+<mxfile host="app.diagrams.net" modified="2022-08-17T02:51:19.167Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="G3N9JBBMmGZvqxnjNSBo" version="20.2.4" type="github" pages="13">
+  <diagram id="xCjRzEmzV3mcHKele815" name="訓練計劃列表">
+    <mxGraphModel dx="2489" dy="1908" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gzVYgX7fTKixUownXr0R-22" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="-100" width="1610" height="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-1" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="40" y="60" width="1200" height="535" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-1" vertex="1">
+          <mxGeometry width="1200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-3" value="訓練計劃名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-2" vertex="1">
+          <mxGeometry width="260" height="100" as="geometry">
+            <mxRectangle width="260" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-4" value="模型名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-2" vertex="1">
+          <mxGeometry x="260" width="220" height="100" as="geometry">
+            <mxRectangle width="220" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-5" value="時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-2" vertex="1">
+          <mxGeometry x="480" width="242" height="100" as="geometry">
+            <mxRectangle width="242" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-6" value="進度" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-2" vertex="1">
+          <mxGeometry x="722" width="147" height="100" as="geometry">
+            <mxRectangle width="147" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-23" value="參與的鴿子數量" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-2" vertex="1">
+          <mxGeometry x="869" width="331" height="100" as="geometry">
+            <mxRectangle width="331" height="100" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-1" vertex="1">
+          <mxGeometry y="100" width="1200" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-8" value="某個賽事資格賽" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;strokeColor=#6c8ebf;" parent="gzVYgX7fTKixUownXr0R-7" vertex="1">
+          <mxGeometry width="260" height="145" as="geometry">
+            <mxRectangle width="260" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-9" value="傳統模型" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-7" vertex="1">
+          <mxGeometry x="260" width="220" height="145" as="geometry">
+            <mxRectangle width="220" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-10" value="2022/08/16～2022/09/16" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-7" vertex="1">
+          <mxGeometry x="480" width="242" height="145" as="geometry">
+            <mxRectangle width="242" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-11" value="0%" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-7" vertex="1">
+          <mxGeometry x="722" width="147" height="145" as="geometry">
+            <mxRectangle width="147" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-24" value="1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-7" vertex="1">
+          <mxGeometry x="869" width="331" height="145" as="geometry">
+            <mxRectangle width="331" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-12" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-1" vertex="1">
+          <mxGeometry y="245" width="1200" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-13" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-12" vertex="1">
+          <mxGeometry width="260" height="145" as="geometry">
+            <mxRectangle width="260" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-14" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-12" vertex="1">
+          <mxGeometry x="260" width="220" height="145" as="geometry">
+            <mxRectangle width="220" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-15" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-12" vertex="1">
+          <mxGeometry x="480" width="242" height="145" as="geometry">
+            <mxRectangle width="242" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-16" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-12" vertex="1">
+          <mxGeometry x="722" width="147" height="145" as="geometry">
+            <mxRectangle width="147" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-25" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-12" vertex="1">
+          <mxGeometry x="869" width="331" height="145" as="geometry">
+            <mxRectangle width="331" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-17" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-1" vertex="1">
+          <mxGeometry y="390" width="1200" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-18" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-17" vertex="1">
+          <mxGeometry width="260" height="145" as="geometry">
+            <mxRectangle width="260" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-19" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-17" vertex="1">
+          <mxGeometry x="260" width="220" height="145" as="geometry">
+            <mxRectangle width="220" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-20" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-17" vertex="1">
+          <mxGeometry x="480" width="242" height="145" as="geometry">
+            <mxRectangle width="242" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-21" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-17" vertex="1">
+          <mxGeometry x="722" width="147" height="145" as="geometry">
+            <mxRectangle width="147" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gzVYgX7fTKixUownXr0R-26" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="gzVYgX7fTKixUownXr0R-17" vertex="1">
+          <mxGeometry x="869" width="331" height="145" as="geometry">
+            <mxRectangle width="331" height="145" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="創建計劃" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="gzVYgX7fTKixUownXr0R-32">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+            <mxGeometry x="40" width="240" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7HiGV6OWuosXOLhOXsS8" name="訓練模型選擇">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="40" width="900" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-6" value="訓練模型選擇" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="310" y="60" width="250" height="50" as="geometry" />
+        </mxCell>
+        <UserObject label="傳統模型（目標鴿從0飛到穩定）" link="data:page/id,r4kHTq8Mq_CIbOY9aqRD" id="iPEw-ZQhXxYZATJUESGD-7">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+            <mxGeometry x="140" y="140" width="610" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Pair模型2-1（材料鴿迭代+目標鴿，訓練目標鴿）" link="data:page/id,4MsKUe_uf6U4QKOAG8qB" id="iPEw-ZQhXxYZATJUESGD-8">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+            <mxGeometry x="52.5" y="360" width="815" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Pair模型2-2（目標鴿迭代+材料鴿，訓練目標鴿）" link="data:page/id,jqYvt-NrKALiINXg5nS2" id="iPEw-ZQhXxYZATJUESGD-9">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+            <mxGeometry x="50" y="480" width="820" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="iPEw-ZQhXxYZATJUESGD-10" value="團體模型（領飛鴿+跟飛鴿，訓練團體）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="150" y="590" width="655" height="60" as="geometry" />
+        </mxCell>
+        <UserObject label="Pair模型1（教練鴿+目標鴿，訓練目標鴿）" link="data:page/id,MqBVWOqvA6p1u019oPmL" id="iPEw-ZQhXxYZATJUESGD-11">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+            <mxGeometry x="60" y="240" width="770" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;font style=&quot;font-size: 36px;&quot;&gt;查看免責條款&lt;/font&gt;" link="data:page/id,R4Tvp-FQjeuJFBHFMp8C" id="iS_LgKz-zweJpdJLWdok-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="160" y="710" width="610" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6moyrDJCRKRMXy2OcYWx" name="傳統訓練模型">
+    <mxGraphModel dx="2489" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="-60" width="1920" height="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="90" width="1120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-2">
+          <mxGeometry width="1120" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-4" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-3">
+          <mxGeometry width="310" height="68" as="geometry">
+            <mxRectangle width="310" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-5" value="目標路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-3">
+          <mxGeometry x="310" width="250" height="68" as="geometry">
+            <mxRectangle width="250" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-6" value="當前路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-3">
+          <mxGeometry x="560" width="281" height="68" as="geometry">
+            <mxRectangle width="281" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-7" value="放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-3">
+          <mxGeometry x="841" width="279" height="68" as="geometry">
+            <mxRectangle width="279" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-2">
+          <mxGeometry y="68" width="1120" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-10" value="傳統訓練模型" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-9">
+          <mxGeometry width="310" height="92" as="geometry">
+            <mxRectangle width="310" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-11" value="0.85" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-9">
+          <mxGeometry x="310" width="250" height="92" as="geometry">
+            <mxRectangle width="250" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-12" value="0" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-9">
+          <mxGeometry x="560" width="281" height="92" as="geometry">
+            <mxRectangle width="281" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-13" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="9i3LHm-Xf40zaqWzmHpZ-9">
+          <mxGeometry x="841" width="279" height="92" as="geometry">
+            <mxRectangle width="279" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-15" value="導入比賽指標" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="110" y="10" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9i3LHm-Xf40zaqWzmHpZ-16" value="制定計劃" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1001" y="170" width="240" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="回到首頁" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="_Sftwit88SCDwSx03tcC-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="1450" y="-50" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-1" value="提示：&lt;span style=&quot;font-size: 24px;&quot;&gt;鴿子數量：1只目標鴿 = 1只，請問是否已經準備好鴿子？&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="-200" y="330" width="1330" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-2" value="鴿子已備好" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="375" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-3" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="40" y="635" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-3">
+          <mxGeometry width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-5" value="鴿子" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-4">
+          <mxGeometry width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-6" value="綁定鴿名" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-4">
+          <mxGeometry x="120" width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-3">
+          <mxGeometry y="50" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-8" value="目標鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-7">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-9" value="目標G" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="QHWRSK0-d8YVdHYatj-U-7">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QHWRSK0-d8YVdHYatj-U-22" value="確認名稱" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="377" y="650" width="150" height="60" as="geometry" />
+        </mxCell>
+        <UserObject label="確認訓練計劃" link="data:page/id,DbTVLy5jWbvfDIJEIflf" id="QHWRSK0-d8YVdHYatj-U-23">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+            <mxGeometry x="1268" y="740" width="282" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="4qSCKEcveGKfaot14LWD" name="Pair模型-1">
+    <mxGraphModel dx="2489" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="110" width="1920" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="100" y="270" width="1370" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-2" vertex="1">
+          <mxGeometry width="1370" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-4" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-3" vertex="1">
+          <mxGeometry width="212" height="68" as="geometry">
+            <mxRectangle width="212" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-5" value="路徑效率目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-3" vertex="1">
+          <mxGeometry x="212" width="247" height="68" as="geometry">
+            <mxRectangle width="247" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-6" value="教練鴿路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-3" vertex="1">
+          <mxGeometry x="459" width="291" height="68" as="geometry">
+            <mxRectangle width="291" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-7" value="目標當前路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-3" vertex="1">
+          <mxGeometry x="750" width="350" height="68" as="geometry">
+            <mxRectangle width="350" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-61" value="放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-3" vertex="1">
+          <mxGeometry x="1100" width="270" height="68" as="geometry">
+            <mxRectangle width="270" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-2" vertex="1">
+          <mxGeometry y="68" width="1370" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-9" value="Pair模型1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-8" vertex="1">
+          <mxGeometry width="212" height="92" as="geometry">
+            <mxRectangle width="212" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-10" value="0.9" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-8" vertex="1">
+          <mxGeometry x="212" width="247" height="92" as="geometry">
+            <mxRectangle width="247" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-11" value="0.9" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-8" vertex="1">
+          <mxGeometry x="459" width="291" height="92" as="geometry">
+            <mxRectangle width="291" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-12" value="0" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-8" vertex="1">
+          <mxGeometry x="750" width="350" height="92" as="geometry">
+            <mxRectangle width="350" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-62" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" parent="wuBsxjrVPwB5NXe2TyuW-8" vertex="1">
+          <mxGeometry x="1100" width="270" height="92" as="geometry">
+            <mxRectangle width="270" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-13" value="導入比賽指標" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="310" y="190" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wuBsxjrVPwB5NXe2TyuW-14" value="制定計劃" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="1570" y="350" width="240" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="回到首頁" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="vGdENk1yeXcMlNwA6L7Y-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
+            <mxGeometry x="1760" y="130" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-1" value="提示：&lt;span style=&quot;font-size: 24px;&quot;&gt;鴿子數量：1只教練鴿+1只目標鴿 = 2只，請問是否已經準備好鴿子？&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="110" y="540" width="1330" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-2" value="鴿子已備好" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1530" y="585" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-3" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="280" y="827.5" width="240" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-3" vertex="1">
+          <mxGeometry width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-5" value="鴿子" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-4" vertex="1">
+          <mxGeometry width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-6" value="綁定鴿名" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-4" vertex="1">
+          <mxGeometry x="120" width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-3" vertex="1">
+          <mxGeometry y="50" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-8" value="教練鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-7" vertex="1">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-9" value="教鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-7" vertex="1">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-3" vertex="1">
+          <mxGeometry y="90" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-11" value="目標鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-10" vertex="1">
+          <mxGeometry width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-12" value="目標G" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="Q2EJFwaWkF9lJwiHu4Dp-10" vertex="1">
+          <mxGeometry x="120" width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2EJFwaWkF9lJwiHu4Dp-22" value="確認名稱" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="587" y="860" width="150" height="60" as="geometry" />
+        </mxCell>
+        <UserObject label="確認訓練計劃" link="data:page/id,DbTVLy5jWbvfDIJEIflf" id="Q2EJFwaWkF9lJwiHu4Dp-23">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+            <mxGeometry x="1549" y="990" width="282" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="aAcVIMmhRl6TgQ5awBkK" name="Pair模型2-1">
+    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="140" y="150" width="2200" height="980" as="geometry" />
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="290" y="310" width="1640" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-2">
+          <mxGeometry width="1640" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-4" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry width="194" height="68" as="geometry">
+            <mxRectangle width="194" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-5" value="路徑效率目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry x="194" width="225" height="68" as="geometry">
+            <mxRectangle width="225" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-6" value="代數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry x="419" width="127" height="68" as="geometry">
+            <mxRectangle width="127" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-7" value="每代的放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry x="546" width="311" height="68" as="geometry">
+            <mxRectangle width="311" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-8" value="每代目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry x="857" width="392" height="68" as="geometry">
+            <mxRectangle width="392" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-2" value="是否有教練鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-3">
+          <mxGeometry x="1249" width="391" height="68" as="geometry">
+            <mxRectangle width="391" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-2">
+          <mxGeometry y="68" width="1640" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-10" value="Pair模型2-1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry width="194" height="92" as="geometry">
+            <mxRectangle width="194" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-11" value="0.95" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry x="194" width="225" height="92" as="geometry">
+            <mxRectangle width="225" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-12" value="4" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry x="419" width="127" height="92" as="geometry">
+            <mxRectangle width="127" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-13" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry x="546" width="311" height="92" as="geometry">
+            <mxRectangle width="311" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-14" value="[0.8,0.85,0.9,0.95]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry x="857" width="392" height="92" as="geometry">
+            <mxRectangle width="392" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-3" value="是" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="6y5QyfdtYz4dnIrnp9Y0-9">
+          <mxGeometry x="1249" width="391" height="92" as="geometry">
+            <mxRectangle width="391" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-15" value="導入比賽指標" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="530" y="230" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6y5QyfdtYz4dnIrnp9Y0-16" value="設定模型參數" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="1990" y="350" width="240" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="回到首頁" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="2b1y4RI0oxkF46vnH-io-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="2130" y="170" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-1" value="提示：&lt;span style=&quot;font-size: 24px;&quot;&gt;鴿子數量：1只教練鴿+3只新手材料鴿+1只目標鴿 = 5只，請問是否已經準備好鴿子？&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="350" y="570" width="1330" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-4" value="鴿子已備好" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1770" y="615" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-24" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="490" y="810" width="240" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-25" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-26" value="鴿子" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-25">
+          <mxGeometry width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-27" value="綁定鴿名" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-25">
+          <mxGeometry x="120" width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-28" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry y="50" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-29" value="教練鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-28">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-30" value="教鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-28">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-31" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry y="90" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-32" value="材料鴿1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-31">
+          <mxGeometry width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-33" value="材鴿A" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-31">
+          <mxGeometry x="120" width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-34" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry y="125" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-35" value="材料鴿2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-34">
+          <mxGeometry width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-36" value="材鴿B" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-34">
+          <mxGeometry x="120" width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-37" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry y="160" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-38" value="材料鴿3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-37">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-39" value="材鴿C" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-37">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-40" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-24">
+          <mxGeometry y="200" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-41" value="目標鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-40">
+          <mxGeometry width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-42" value="目標G" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="o7EZNz9uoM0UBDFMCpi7-40">
+          <mxGeometry x="120" width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7EZNz9uoM0UBDFMCpi7-43" value="確認名稱" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="827" y="890" width="150" height="60" as="geometry" />
+        </mxCell>
+        <UserObject label="確認訓練計劃" link="data:page/id,DbTVLy5jWbvfDIJEIflf" id="o7EZNz9uoM0UBDFMCpi7-44">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+            <mxGeometry x="1948" y="940" width="282" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="X5g1XwkkAR8lF6pnk-ga" name="Pair模型2-2">
+    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="320" y="190" width="2180" height="990" as="geometry" />
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="500" y="350" width="1720" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-2">
+          <mxGeometry width="1720" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-4" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry width="206" height="68" as="geometry">
+            <mxRectangle width="206" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-5" value="路徑效率目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry x="206" width="240" height="68" as="geometry">
+            <mxRectangle width="240" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-6" value="代數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry x="446" width="136" height="68" as="geometry">
+            <mxRectangle width="136" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-7" value="每代的放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry x="582" width="331" height="68" as="geometry">
+            <mxRectangle width="331" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-8" value="每代目標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry x="913" width="317" height="68" as="geometry">
+            <mxRectangle width="317" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-63" value="目標鴿子當前路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-3">
+          <mxGeometry x="1230" width="490" height="68" as="geometry">
+            <mxRectangle width="490" height="68" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-2">
+          <mxGeometry y="68" width="1720" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-10" value="Pair模型2-2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry width="206" height="92" as="geometry">
+            <mxRectangle width="206" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-11" value="0.95" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry x="206" width="240" height="92" as="geometry">
+            <mxRectangle width="240" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-12" value="3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry x="446" width="136" height="92" as="geometry">
+            <mxRectangle width="136" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-13" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry x="582" width="331" height="92" as="geometry">
+            <mxRectangle width="331" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-14" value="[0.85,0.9,0.95]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry x="913" width="317" height="92" as="geometry">
+            <mxRectangle width="317" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-64" value="0.8" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="KmC_2L7aQ-DuErxlcqaj-9">
+          <mxGeometry x="1230" width="490" height="92" as="geometry">
+            <mxRectangle width="490" height="92" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-15" value="導入比賽指標" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="710" y="270" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KmC_2L7aQ-DuErxlcqaj-16" value="制定計劃" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="2241" y="420" width="240" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="回到首頁" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="NZvsTlj6629LPctabTFq-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="2361" y="220" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-1" value="提示：&lt;span style=&quot;font-size: 24px;&quot;&gt;鴿子數量：3只新手材料鴿+1只目標鴿 = 4只，請問是否已經準備好鴿子？&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="500" y="570" width="1180" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-2" value="鴿子已備好" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1770" y="615" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-3" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="490" y="810" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-3">
+          <mxGeometry width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-5" value="鴿子" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-4">
+          <mxGeometry width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-6" value="綁定鴿名" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-4">
+          <mxGeometry x="120" width="120" height="50" as="geometry">
+            <mxRectangle width="120" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-3">
+          <mxGeometry y="50" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-8" value="材料鴿1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-7">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-9" value="材鴿A" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-7">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-3">
+          <mxGeometry y="90" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-11" value="材料鴿2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-10">
+          <mxGeometry width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-12" value="材鴿B" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-10">
+          <mxGeometry x="120" width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-13" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-3">
+          <mxGeometry y="125" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-14" value="材料鴿3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-13">
+          <mxGeometry width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-15" value="材鴿C" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-13">
+          <mxGeometry x="120" width="120" height="35" as="geometry">
+            <mxRectangle width="120" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-16" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-3">
+          <mxGeometry y="160" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-17" value="目標鴿" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-16">
+          <mxGeometry width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-18" value="目標G" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="bUI-7epWQPiPyRRl6tCN-16">
+          <mxGeometry x="120" width="120" height="40" as="geometry">
+            <mxRectangle width="120" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bUI-7epWQPiPyRRl6tCN-22" value="確認名稱" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="827" y="890" width="150" height="60" as="geometry" />
+        </mxCell>
+        <UserObject label="確認訓練計劃" link="data:page/id,DbTVLy5jWbvfDIJEIflf" id="bUI-7epWQPiPyRRl6tCN-23">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+            <mxGeometry x="1948" y="940" width="282" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="r4kHTq8Mq_CIbOY9aqRD" name="傳統訓練模型-介紹">
+    <mxGraphModel dx="1662" dy="834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uSmJPbsIEU7ObT3EP3QW-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="730" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uSmJPbsIEU7ObT3EP3QW-2" value="傳統訓練模型介紹" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="280" y="60" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="uSmJPbsIEU7ObT3EP3QW-3" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 24px; letter-spacing: 0.35px;&quot;&gt;操作步驟：選擇一隻鴿子，重複飛行同一條路徑。&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 24px; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;font style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;量化：為了更好的量化訓練的效果，我們使用路徑效率，對多次飛行的導航能力的提升，進行量化。&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font face=&quot;-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Helvetica, Roboto, Arial, PingFang TC, Microsoft JhengHei, 微軟正黑, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol&quot; color=&quot;#333333&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;特點：&lt;/span&gt;&lt;span style=&quot;font-size: 36px; letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;這個訓練方法的優點是便於操作，缺點是：飛到一定次數之後，鴿子的導航能力就不會提升了。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="130" y="150" width="620" height="420" as="geometry" />
+        </mxCell>
+        <UserObject label="確認" link="data:page/id,6moyrDJCRKRMXy2OcYWx" id="HZ-mjXUdEaYVXXOmHaD0-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="290" y="570" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="MqBVWOqvA6p1u019oPmL" name="Pair模型1介紹">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9pjxj764uS2cnWp-lxnH-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="210" y="200" width="730" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="9pjxj764uS2cnWp-lxnH-2" value="Pair模型1介紹" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="430" y="210" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9pjxj764uS2cnWp-lxnH-3" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;操作步驟：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;1 選擇飛行路徑效率高的鴿子，作為教練。&lt;/span&gt;&lt;/div&gt;&lt;font style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;2 訓練新鴿子。&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;量化：為了更好的量化訓練的效果，我們使用路徑效率，對多次飛行的導航能力的提升，進行量化。&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;理論：&lt;/span&gt;&lt;span style=&quot;letter-spacing: 0.35px; font-size: 36px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;鴿子的既有的飛行經驗是會進行傳遞的。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px; font-size: 36px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;特點：&lt;/span&gt;&lt;span style=&quot;font-size: 36px; letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;如果有導航表現好的教練鴿，可以快速訓練新手鴿。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="260" y="300" width="640" height="420" as="geometry" />
+        </mxCell>
+        <UserObject label="確認" link="data:page/id,4qSCKEcveGKfaot14LWD" id="aVvdFckfbVijeNnORHMf-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="480" y="770" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="4MsKUe_uf6U4QKOAG8qB" name="Pair模型2-1介紹">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gaCgbyE5o8aMS5xpA_M_-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="110" y="10" width="730" height="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="gaCgbyE5o8aMS5xpA_M_-2" value="Pair模型2-1介紹" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="320" y="70" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gaCgbyE5o8aMS5xpA_M_-3" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;操作步驟：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;1&lt;/span&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;找一只路徑效率高的鴿子A（也可以是新手鴿，如果是新手鴿），3（自定義）隻新手材料鴿子BCD，一隻目標鴿子G&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;。&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;2 訓練出教練鴿，最後訓練目標鴿G：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;第零代：A單飛到路徑效率的穩定峰值。（A是新手鴿）&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;21&quot; data-position=&quot;4683&quot;&gt;第一代：A和B一起飛到路徑效率的穩定峰值。&lt;/span&gt;&lt;br style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;21&quot; data-position=&quot;4705&quot;&gt;第二代：B和C一起飛到路徑效率的穩定峰值。&lt;/span&gt;&lt;br style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;21&quot; data-position=&quot;4727&quot;&gt;第三代：C和D一起飛到路徑效率的穩定峰值。&lt;/span&gt;&lt;br style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;21&quot; data-position=&quot;4749&quot;&gt;第四代：D和G一起飛到路徑效率的穩定峰值。&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;量化：為了更好的量化訓練的效果，我們使用路徑效率，對多次飛行的導航能力的提升，進行量化。&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;理論：&lt;/span&gt;&lt;span style=&quot;letter-spacing: 0.35px; font-size: 36px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;鴿子的既有的飛行經驗是會進行傳遞的。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: start;&quot; data-size=&quot;0&quot; data-position=&quot;2818&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000;&quot; data-size=&quot;34&quot; data-position=&quot;2820&quot;&gt;鴿子的飛行路徑 = 既有的飛行經驗 + 本次的額外探索信息&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: start;&quot; data-size=&quot;1&quot; data-position=&quot;2856&quot;&gt;；&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px; font-size: 36px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;特點：&lt;/span&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;可以匹配鴿主想要的指標，增加代數，訓練出優秀的教練鴿和目標鴿&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 36px; letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="140" y="130" width="650" height="770" as="geometry" />
+        </mxCell>
+        <UserObject label="確認" link="data:page/id,aAcVIMmhRl6TgQ5awBkK" id="ZRypbgzBX9Bi6up_C9UL-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="370" y="940" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="jqYvt-NrKALiINXg5nS2" name="Pair模型2-2介紹">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tP4DUiFZAGGB5uNn2Vvq-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="160" y="90" width="730" height="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="tP4DUiFZAGGB5uNn2Vvq-2" value="Pair模型2-2介紹" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="370" y="150" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tP4DUiFZAGGB5uNn2Vvq-3" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;操作步驟：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;1&lt;/span&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;一隻目標鴿子G&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;，3（自定義）隻新手材料鴿子BCD&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;。&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;2 迭代訓練目標鴿G：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;第零代：&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 24px; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;G&lt;/span&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;單飛到路徑效率的穩定峰值。（&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; font-size: 24px; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;G&lt;/span&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;是新手鴿）&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;31&quot; data-position=&quot;5044&quot;&gt;第一代：目標鴿子+新手鴿子，一起飛行到路徑效率趨於最高點。&lt;/span&gt;&lt;br style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; background-color: rgb(255, 255, 255);&quot; data-size=&quot;13&quot; data-position=&quot;5076&quot;&gt;第N代：重複第一代的操作。&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;量化：為了更好的量化訓練的效果，我們使用路徑效率，對多次飛行的導航能力的提升，進行量化。&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;理論：&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: start;&quot; data-size=&quot;0&quot; data-position=&quot;2818&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000;&quot; data-size=&quot;34&quot; data-position=&quot;2820&quot;&gt;鴿子的飛行路徑 = 既有的飛行經驗 + 本次的額外探索信息&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot; data-size=&quot;1&quot; data-position=&quot;2856&quot;&gt;；&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;使用新手鴿子增加&quot;本次的額外探索信息&quot;。&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; font-size: 24px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;letter-spacing: 0.35px; font-size: 36px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 24px; letter-spacing: 0.35px;&quot;&gt;特點：&lt;/span&gt;&lt;span style=&quot;letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;可以匹配鴿主想要的指標，增加代數，訓練出優秀的目標鴿&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 36px; letter-spacing: 0.35px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;。&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="190" y="210" width="650" height="770" as="geometry" />
+        </mxCell>
+        <UserObject label="確認" link="data:page/id,X5g1XwkkAR8lF6pnk-ga" id="2aDgFivVMCVLM5FgfdUm-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="420" y="1030" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="R4Tvp-FQjeuJFBHFMp8C" name="免責條款">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Bw2DS7w5ToH1zrWq2kOm-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="730" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="Bw2DS7w5ToH1zrWq2kOm-2" value="免責條款" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="280" y="100" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Bw2DS7w5ToH1zrWq2kOm-3" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;box-sizing: border-box; --tw-border-opacity: 1; border-color: rgba(231, 231, 231, var(--tw-border-opacity)); --tw-shadow: 0 0 #0000; --tw-ring-inset: var(--tw-empty, ); --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(59, 130, 246, 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Roboto, Arial, &amp;quot;PingFang TC&amp;quot;, &amp;quot;Microsoft JhengHei&amp;quot;, 微軟正黑, sans-serif, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;; letter-spacing: 0.35px; text-align: start; background-color: rgb(255, 255, 255);&quot; data-size=&quot;46&quot; data-position=&quot;1811&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Garmin connect上面的免責條款：&lt;br&gt;網站和移動app上面的信息，裝置，和訓練計劃都只是教育作用。在改變你的鍛煉習慣之前，和使用Garmin的移動app或者網站上面的任何信息或者訓練計劃之前，你應該諮詢你的醫師。如果你採用了網站或者移動app上面的建議或者訓練計劃，那摩你自己承擔使用的風險。Garmin不會為，你因為採用網站或者移動app上面的建議或者訓練計劃，而導致的受傷或者其他的健康問題承擔責任。&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="130" y="150" width="620" height="420" as="geometry" />
+        </mxCell>
+        <UserObject label="接受" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="Wamx_Mpz4DvyWvKPOVOt-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+            <mxGeometry x="290" y="590" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="不接受" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="Wamx_Mpz4DvyWvKPOVOt-2">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+            <mxGeometry x="290" y="690" width="220" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="_qEbfh_Zs5-BKNutQ03N" name="導入路徑">
+    <mxGraphModel dx="1662" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="1085" height="710" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-2" value="導入路徑：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="297.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-3" value="根據時間查詢路徑" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="90" y="200" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-4" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="90" y="290" width="420" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-4">
+          <mxGeometry width="420" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-6" value="軌跡名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-5">
+          <mxGeometry width="140" height="53" as="geometry">
+            <mxRectangle width="140" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-7" value="放飛時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-5">
+          <mxGeometry x="140" width="280" height="53" as="geometry">
+            <mxRectangle width="280" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-4">
+          <mxGeometry y="53" width="420" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-9" value="R1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;strokeColor=#6c8ebf;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-8">
+          <mxGeometry width="140" height="52" as="geometry">
+            <mxRectangle width="140" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-10" value="2022/08/16 14：08：00" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;strokeColor=#6c8ebf;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-8">
+          <mxGeometry x="140" width="280" height="52" as="geometry">
+            <mxRectangle width="280" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-11" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-4">
+          <mxGeometry y="105" width="420" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-12" value="R2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-11">
+          <mxGeometry width="140" height="53" as="geometry">
+            <mxRectangle width="140" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-13" value="2022/08/16 14：08：00" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-11">
+          <mxGeometry x="140" width="280" height="53" as="geometry">
+            <mxRectangle width="280" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-14" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-4">
+          <mxGeometry y="158" width="420" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-15" value="R3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-14">
+          <mxGeometry width="140" height="52" as="geometry">
+            <mxRectangle width="140" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-16" value="2022/08/16 14：08：00" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-14">
+          <mxGeometry x="140" width="280" height="52" as="geometry">
+            <mxRectangle width="280" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-17" value="訓練計劃-鴿子下拉列表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="680" y="200" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-18" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="680" y="280" width="390" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-19" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-20" value="放飛次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-19">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-21" value="放飛時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-19">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-22" value="導入與否" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-19">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-23" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="40" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-24" value="1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-23">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-25" value="2022/08/15" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-23">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-26" value="否" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-23">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-27" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="80" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-28" value="2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;strokeColor=#6c8ebf;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-27">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-29" value="2022/08/16" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;strokeColor=#6c8ebf;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-27">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-30" value="否" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=#dae8fc;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;strokeColor=#6c8ebf;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-27">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-31" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="120" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-32" value="3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-31">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-33" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-31">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-34" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-31">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-35" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="160" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-36" value="4" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-35">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-37" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-35">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-38" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-35">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-39" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="200" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-40" value="5" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-39">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-41" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-39">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-42" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-39">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-43" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="240" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-44" value="6" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-43">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-45" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-43">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-46" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-43">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-47" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="280" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-48" value="7" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-47">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-49" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-47">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-50" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-47">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-51" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="320" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-52" value="8" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-51">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-53" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-51">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-54" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-51">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-55" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="360" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-56" value="9" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-55">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-57" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-55">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-58" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-55">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-59" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="400" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-60" value="10" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-59">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-61" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-59">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-62" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-59">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-63" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="440" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-64" value="11" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-63">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-65" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-63">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-66" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-63">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-67" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-18">
+          <mxGeometry y="480" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-68" value="12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-67">
+          <mxGeometry width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-69" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-67">
+          <mxGeometry x="130" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-70" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="yMW4fOkL8fHexqgJDvoF-67">
+          <mxGeometry x="260" width="130" height="40" as="geometry">
+            <mxRectangle width="130" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="導入" link="data:page/id,7HiGV6OWuosXOLhOXsS8" id="yMW4fOkL8fHexqgJDvoF-71">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="532.5" y="450" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="yMW4fOkL8fHexqgJDvoF-72" value="代數下拉列表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="950" y="200" width="160" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DbTVLy5jWbvfDIJEIflf" name="訓練計劃追蹤">
+    <mxGraphModel dx="1662" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-50" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="220" y="40" width="1970" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-1" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="574" as="sourcePoint" />
+            <mxPoint x="810" y="574" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-2" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;" parent="1" target="sL7Wm-qKJg2suKXKUK_w-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="574" as="sourcePoint" />
+            <mxPoint x="450" y="374" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-3" value="" style="endArrow=none;html=1;rounded=0;fontSize=36;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="575" as="sourcePoint" />
+            <mxPoint x="800" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="630" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-4" value="代數|放飛次數" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="810" y="590" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-5" value="路徑效率" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="320" y="350" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-6" value="總體進度：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="370" y="260" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-7" value="放飛時間表管理" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="1475" y="570" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-8" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="480" width="930" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-8" vertex="1">
+          <mxGeometry width="930" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-10" value="次數" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry width="90" height="66" as="geometry">
+            <mxRectangle width="90" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-11" value="時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry x="90" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-12" value="鴿子號碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry x="260" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-13" value="狀態" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry x="430" width="110" height="66" as="geometry">
+            <mxRectangle width="110" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-14" value="環境" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry x="540" width="231" height="66" as="geometry">
+            <mxRectangle width="231" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-15" value="編號" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-9" vertex="1">
+          <mxGeometry x="771" width="159" height="66" as="geometry">
+            <mxRectangle width="159" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-16" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-8" vertex="1">
+          <mxGeometry y="66" width="930" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-17" value="1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry width="90" height="66" as="geometry">
+            <mxRectangle width="90" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-18" value="2022/8/11" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry x="90" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-19" value="[鴿A，鴿B]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry x="260" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-20" value="失敗" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry x="430" width="110" height="66" as="geometry">
+            <mxRectangle width="110" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-21" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry x="540" width="231" height="66" as="geometry">
+            <mxRectangle width="231" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-22" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-16" vertex="1">
+          <mxGeometry x="771" width="159" height="66" as="geometry">
+            <mxRectangle width="159" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-23" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-8" vertex="1">
+          <mxGeometry y="132" width="930" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-24" value="2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry width="90" height="66" as="geometry">
+            <mxRectangle width="90" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-25" value="2022/8/12" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry x="90" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-26" value="[鴿A，鴿B]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry x="260" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-27" value="完成" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry x="430" width="110" height="66" as="geometry">
+            <mxRectangle width="110" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-28" value="&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;濕度：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_hm&quot;&gt;82%，&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;風速：&lt;/span&gt;&lt;span style=&quot;font-family: arial, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot; id=&quot;wob_ws&quot; class=&quot;wob_t&quot;&gt;13 公里/時&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry x="540" width="231" height="66" as="geometry">
+            <mxRectangle width="231" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-29" value="202208121" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-23" vertex="1">
+          <mxGeometry x="771" width="159" height="66" as="geometry">
+            <mxRectangle width="159" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-30" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-8" vertex="1">
+          <mxGeometry y="198" width="930" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-31" value="3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry width="90" height="66" as="geometry">
+            <mxRectangle width="90" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-32" value="2022/8/13" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry x="90" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-33" value="[鴿A，鴿B]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry x="260" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-34" value="未開始" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry x="430" width="110" height="66" as="geometry">
+            <mxRectangle width="110" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-35" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry x="540" width="231" height="66" as="geometry">
+            <mxRectangle width="231" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-36" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-30" vertex="1">
+          <mxGeometry x="771" width="159" height="66" as="geometry">
+            <mxRectangle width="159" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-37" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-8" vertex="1">
+          <mxGeometry y="264" width="930" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-38" value="w" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry width="90" height="66" as="geometry">
+            <mxRectangle width="90" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-39" value="2022/8/14" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry x="90" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-40" value="[鴿A，鴿B]" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry x="260" width="170" height="66" as="geometry">
+            <mxRectangle width="170" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-41" value="未開始" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry x="430" width="110" height="66" as="geometry">
+            <mxRectangle width="110" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-42" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry x="540" width="231" height="66" as="geometry">
+            <mxRectangle width="231" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-43" value="無" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" parent="sL7Wm-qKJg2suKXKUK_w-37" vertex="1">
+          <mxGeometry x="771" width="159" height="66" as="geometry">
+            <mxRectangle width="159" height="66" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-44" value="放飛排程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="350" width="433" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-45" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=36;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="450" as="sourcePoint" />
+            <mxPoint x="740" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-46" value="每代目標" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="290" y="440" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-47" value="當前訓練：教練鴿子+材料鴿子pair飛行。" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" parent="1" vertex="1">
+          <mxGeometry x="1060" y="270" width="830" height="30" as="geometry" />
+        </mxCell>
+        <UserObject label="導入路徑" link="data:page/id,_qEbfh_Zs5-BKNutQ03N" id="sL7Wm-qKJg2suKXKUK_w-48">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+            <mxGeometry x="1930" y="360" width="160" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-49" value="代數選擇" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="400" width="233" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sL7Wm-qKJg2suKXKUK_w-51" value="計劃名稱：Pair模型2-1-台中資格賽訓練" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="290" y="90" width="790" height="30" as="geometry" />
+        </mxCell>
+        <UserObject label="回到首頁" link="data:page/id,xCjRzEmzV3mcHKele815" id="ZXhuDFHt0-ziOuPASbmD-1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+            <mxGeometry x="2040" y="60" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

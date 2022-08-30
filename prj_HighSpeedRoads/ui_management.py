@@ -13,7 +13,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
-from turtle import width
+from turtle import color, width
 # from tkinterhtml import HtmlFrame
 import tkintermapview
 import urllib.request
@@ -212,13 +212,18 @@ class StartPage_GpxDataManagePg(tk.Frame):
             #     listbox_gpxDatas.insert(tk.END, str(
             #         count_listbox_gpxDatas)+' '+gpxData['name'])
                 # count_listbox_gpxDatas = count_listbox_gpxDatas+1
-            for gpxData in gpxDatas:
+            colorList = ['#FFFFFF','#000000','#696969','#6495ED','#00CED1','#20B2AA','#FF0000','#FF00FF','#8A2BE2','#FF1493']
+            for i in range(len(gpxDatas)):
+                gpxData = gpxDatas[i]
                 listbox_gpxDatas.insert(tk.END, gpxData['name'])
                 pathName = gpxData['name']
                 filedata = gpxDataManager.getDataByName_toPath(pathName)
                 polygon = gpxDataManager.gpxPolygonByName(pathName)
-                map_widget.set_path(filedata)
-                map_widget.set_polygon(polygon, fill_color='red', outline_color='red')
+                # if i == 6:
+                map_widget.set_path(filedata,color = colorList[i])
+                # else:
+                #     map_widget.set_path(filedata)
+                # map_widget.set_polygon(polygon, fill_color='red', outline_color='red')
             
 
         button_func_setGpxData = tk.Button(
