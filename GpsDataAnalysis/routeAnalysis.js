@@ -63,6 +63,14 @@ function showInMap(path) {
   }
 }
 
+//draw a point in map
+let soloRoute_routeAccuracy_realTime_movingPoint = L.circle([0,0], {radius: 1600}).addTo(map_handler);;
+function showInMap_movepoint(point)
+{
+  soloRoute_routeAccuracy_realTime_movingPoint.setLatLng(L.latLng(point[0],point[1]));
+  map_handler.setView(point);
+}
+
 func_createTable_soloRoute_summary();
 function func_createTable_soloRoute_summary() {
   //get summarys:total distance,routeEffciency,speed/min,elevation/mean
@@ -162,7 +170,7 @@ function func_label_routeEffciency_realTime() {
   newLabel.style.zIndex = "1";
   newLabel.innerHTML = "即時路徑效率";
   newLabel.style.textAlign = "left";
-  newLabel.style.fontSize = '36px';
+  // newLabel.style.fontSize = '150%';
 
   document.body.appendChild(newLabel);
 }
@@ -320,7 +328,12 @@ function func_solo_route_routeAccuracy() {
   var sum_accuracy_distance = 0;
   var count_point_good = 0;//if distance =0 ,then kick out this point 
   var last_point = turf.point(data_normalized[0]);
-  for (var i = 1; i < data_normalized.length; i++) {
+  var test_set_bearing_from_lastPoint = [];
+  var test_set_bearing_to_endPoint = [];
+  var test_set_includedAngle = [];
+  var test_set_cosine_radian = [];
+
+  for (var i = 0; i < data_normalized.length; i++) {
     var pt = turf.point(data_normalized[i]);
     var bearing_from_lastPoint = turf.bearing(last_point, pt);
     var bearing_to_endPoint = turf.bearing(pt, endPoint);
@@ -337,7 +350,7 @@ function func_solo_route_routeAccuracy() {
     //calculate cosine of angle
     var cosine_radian = Math.cos(normalized_includedAngle_Radian);
 
-    // console.log(bearing_to_endPoint, bearing_from_lastPoint, includedAngle, normalized_includedAngle_degree, normalized_includedAngle_Radian, cosine_radian);
+    console.log(bearing_from_lastPoint, bearing_from_lastPoint, includedAngle, normalized_includedAngle_degree, normalized_includedAngle_Radian, cosine_radian);
     //distance of point 
     if (demo_singleRoute[i]['distance'] == 0) {
       continue;
@@ -355,85 +368,113 @@ function func_solo_route_routeAccuracy() {
 
     // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
 
-    routeAccuracy_list.push(cur_routeAccuracy);
+    routeAccuracy_list.push(cur_routeAccuracy.toFixed(3));
+    test_set_bearing_from_lastPoint.push(bearing_from_lastPoint);
+    test_set_bearing_to_endPoint.push(bearing_to_endPoint);
+    test_set_includedAngle.push(includedAngle);
+    test_set_cosine_radian.push(cosine_radian);
   }
+  // var next_point = turf.point(data_normalized[2]);
+  // for (var i = 1; i < data_normalized.length-1; i++) {
+  //   var pt = turf.point(data_normalized[i]);
+  //   var bearing_to_nextPoint = turf.bearing(next_point, pt);
+  //   var bearing_to_endPoint = turf.bearing(pt, endPoint);
+  //   //reset next point
+  //   last_point = pt;
+  //   //calculate included angle
+  //   var includedAngle = bearing_to_nextPoint - bearing_to_endPoint;
+  //   //normalize angle to (0~180)
+  //   // var normalized_includedAngle = includedAngle+360;
+  //   //convert bearing to angle of degree
+  //   var normalized_includedAngle_degree = turf.bearingToAzimuth(includedAngle);
+  //   //convert degree to Radian
+  //   var normalized_includedAngle_Radian = turf.degreesToRadians(normalized_includedAngle_degree);
+  //   //calculate cosine of angle
+  //   var cosine_radian = Math.cos(normalized_includedAngle_Radian);
 
-  //draw in chart
-  let canvas_RoutePlot = document.createElement('canvas');
-  canvas_RoutePlot.setAttribute("width", window.innerWidth / 2);
-  canvas_RoutePlot.setAttribute("height", window.innerHeight / 2);
-  canvas_RoutePlot.setAttribute("id", "canvas_RoutePlot");
-  canvas_RoutePlot.style.left = "50%";
-  canvas_RoutePlot.style.top = "50%";
-  canvas_RoutePlot.style.position = "absolute";
-  // canvas.style['margin-left'] = '-200px';
-  // canvas.style.border   = "1px solid";
-  // canvas.style.backgroundColor = 'transparent';
-  document.body.appendChild(canvas_RoutePlot);
+  //   console.log(bearing_to_nextPoint, bearing_to_endPoint, includedAngle, normalized_includedAngle_degree, normalized_includedAngle_Radian, cosine_radian);
+  //   //distance of point 
+  //   if (demo_singleRoute[i]['distance'] == 0) {
+  //     continue;
+  //   }
+  //   count_point_good++;
+  //   var distance_point = demo_singleRoute[i]['distance'] / 1000;
+  //   //sum accuracy distance 
+  //   sum_accuracy_distance += distance_point * cosine_radian;
+  //   //actual distance 
+  //   total_distance += (demo_singleRoute[i]['distance'] / 1000);
 
-  var make_x = []
-  for (var i = 0; i < count_point_good; i++) {
-    make_x.push(i);
-  }
+  //   // console.log(sum_accuracy_distance, total_distance);
+  //   //cur route accuracy
+  //   var cur_routeAccuracy = sum_accuracy_distance / total_distance;
 
-  const myChart_RoutePlot = new Chart(canvas_RoutePlot, {
-    type: 'line',
-    data: {
-      labels: make_x,
-      datasets: [
-        //route accuracy 
-        {
-          type: 'line',
-          label: '路徑準確度',
-          data: routeAccuracy_list,
-          // backgroundColor: 'transparent',
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
+  //   // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
+
+  //   routeAccuracy_list.push(cur_routeAccuracy.toFixed(3));
+  // }
+
+  //draw in plot
+  func_draw_line();
+  function func_draw_line() {
+    //set chart
+    var canvas_soloRoute_routeAccuracy_realtime_line = document.createElement('div');
+    canvas_soloRoute_routeAccuracy_realtime_line.style.width = '50%';
+    canvas_soloRoute_routeAccuracy_realtime_line.style.height = '50%';
+    canvas_soloRoute_routeAccuracy_realtime_line.setAttribute("id", "canvas_soloRoute_routeAccuracy_realtime_line");
+    canvas_soloRoute_routeAccuracy_realtime_line.style.left = "50%";
+    // console.log((250+(i-1)*50).toString(10));
+    canvas_soloRoute_routeAccuracy_realtime_line.style.top = "50%";
+    canvas_soloRoute_routeAccuracy_realtime_line.style.position = "absolute";
+    document.body.appendChild(canvas_soloRoute_routeAccuracy_realtime_line);
+
+    //set options
+    var options = {
+      series: [{
+        name: "路徑準確度",
+        data: routeAccuracy_list
+      }],
+      chart: {
+        // height: 350,
+        type: 'line',
+        zoom: {
+          enabled: false
         },
-      ]
-    },
-    options: {
-      responsive: false,
-      legend: { display: true },
-      elements: {
-        point: {
-          radius: 0
+        events: {
+          mouseMove: function(event, chartContext, config) {
+            // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts.
+            // console.log(config['dataPointIndex']);
+            console.log(test_set_bearing_from_lastPoint[config['dataPointIndex']],
+            test_set_bearing_to_endPoint[config['dataPointIndex']],
+            test_set_includedAngle[config['dataPointIndex']],
+            test_set_cosine_radian[config['dataPointIndex']]);
+            showInMap_movepoint(data_normalized[config['dataPointIndex']+1]);
+          }
         }
       },
-      scales: {
-        yAxes: [{
-          beginAtZero: true,
-          fontSize: 0,
-          padding: 1,
-          gridLines: {
-            display: false
-          },
-        }],
-        xAxes: [{
-          // beginAtZero: true,
-          // fontSize: 0,
-          // ticks: {
-          //   fontColor: "#000",
-          //   fontSize: 0
-          // },
-          gridLines: {
-            display: false
-          },
-          padding: 1,
-          // display:false,
-          // position:'bottom',
-        }],
+      dataLabels: {
+        enabled: false
       },
-    }
-  });
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: '路徑準確度',
+        align: 'middle'
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
+      // xaxis: {
+      //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      // }
+    };
 
-  // function updateChart_changeRoute(data_time, data_speed) {
-  //   if (myChart_SpeedPlot) {
-  //     myChart_SpeedPlot.data.labels = data_time;
-  //     myChart_SpeedPlot.data.datasets[0].data = data_speed;
-  //     myChart_SpeedPlot.update();
-  //   }
-  // }
+    var chart = new ApexCharts(canvas_soloRoute_routeAccuracy_realtime_line, options);
+    chart.render();
+  }
 }
 
 
@@ -450,7 +491,7 @@ function func_label_solo_route_elevation() {
   newLabel.style.zIndex = "1";
   newLabel.innerHTML = "海拔區域柱狀圖";
   newLabel.style.textAlign = "left";
-  newLabel.style.fontSize = '36px';
+  // newLabel.style.fontSize = '150%';
 
   document.body.appendChild(newLabel);
 }
@@ -688,9 +729,9 @@ function func_label_solo_route_routeAccuracySpeedElevation() {
   newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
   newLabel.style.position = "absolute";
   newLabel.style.zIndex = "1";
-  newLabel.innerHTML = "即時路徑效率.速度.海拔的對比圖";
+  newLabel.innerHTML = "即時路徑效率.速度.海拔.離地高度的對比圖";
   newLabel.style.textAlign = "left";
-  newLabel.style.fontSize = '36px';
+  // newLabel.style.fontSize = '100%';
 
   document.body.appendChild(newLabel);
 }
@@ -928,7 +969,7 @@ function func_label_multiRoutes_routeSimilarity() {
   newLabel.style.zIndex = "1";
   newLabel.innerHTML = "路徑相似度對比圖";
   newLabel.style.textAlign = "left";
-  newLabel.style.fontSize = '36px';
+  // newLabel.style.fontSize = '150%';
 
   document.body.appendChild(newLabel);
 }
@@ -1010,73 +1051,6 @@ function func_multiRoutes_routeSimilarity() {
       }
       // console.log(baseLine);
       console.log(point_distances);
-
-      //draw in chart
-      // var canvas_routeSimilarity_similaritylineplot = document.createElement('canvas');
-      // canvas_routeSimilarity_similaritylineplot.style.width = '50%';
-      // canvas_routeSimilarity_similaritylineplot.style.height = '50%';
-      // // canvas_routeSimilarity_similaritylineplot.setAttribute("id", "canvas_routeSimilarity_similaritylineplot");
-      // canvas_routeSimilarity_similaritylineplot.style.left = "50%";
-      // // console.log((250+(i-1)*50).toString(10));
-      // canvas_routeSimilarity_similaritylineplot.style.top = "250%";
-      // canvas_routeSimilarity_similaritylineplot.style.position = "absolute";
-      // document.body.appendChild(canvas_routeSimilarity_similaritylineplot);
-
-      // var make_x = []
-      // for (var i = 0; i < point_distances.length; i++) {
-      //   make_x.push(i);
-      // }
-
-      // const myChart_RoutePlot = new Chart(canvas_routeSimilarity_similaritylineplot, {
-      //   type: 'line',
-      //   data: {
-      //     labels: make_x,
-      //     datasets: [
-      //       //route accuracy 
-      //       {
-      //         type: 'line',
-      //         label: '路徑相似度',
-      //         data: point_distances,
-      //         // backgroundColor: 'transparent',
-      //         fill: false,
-      //         borderColor: 'rgb(75, 192, 192)',
-      //       },
-      //     ]
-      //   },
-      //   options: {
-      //     responsive: false,
-      //     legend: { display: true },
-      //     elements: {
-      //       point: {
-      //         radius: 0
-      //       }
-      //     },
-      //     scales: {
-      //       yAxes: [{
-      //         beginAtZero: true,
-      //         fontSize: 0,
-      //         padding: 1,
-      //         gridLines: {
-      //           display: false
-      //         },
-      //       }],
-      //       xAxes: [{
-      //         // beginAtZero: true,
-      //         // fontSize: 0,
-      //         // ticks: {
-      //         //   fontColor: "#000",
-      //         //   fontSize: 0
-      //         // },
-      //         gridLines: {
-      //           display: false
-      //         },
-      //         padding: 1,
-      //         // display:false,
-      //         // position:'bottom',
-      //       }],
-      //     },
-      //   }
-      // });
       //draw in plot
       func_draw_line();
       function func_draw_line() {
@@ -1286,7 +1260,7 @@ function func_label_multiRoutes_routeEff_process() {
   newLabel.style.zIndex = "1";
   newLabel.innerHTML = "路徑效率process圖";
   newLabel.style.textAlign = "left";
-  newLabel.style.fontSize = '36px';
+  // newLabel.style.fontSize = '150%';
 
   document.body.appendChild(newLabel);
 }
