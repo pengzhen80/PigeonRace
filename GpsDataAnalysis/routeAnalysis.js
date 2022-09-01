@@ -271,9 +271,9 @@ function func_solo_route_routeAccuracy_byProjectionDistance() {
     //actual distance 
     total_distance += (demo_singleRoute[i]['distance'] / 1000);
     //cur route efficiency
-    if(wholeDistance-total_distance == 0)
-    {
-      routeEff_list_realtime_1_3.push(routeEff_list_realtime[routeEff_list_realtime.length-1]);
+    if (wholeDistance - total_distance == 0) {
+      routeEff_list_realtime_1_3.push(routeEff_list_realtime_1_3[routeEff_list_realtime_1_3.length - 1]);
+      continue;
     }
     var cur_routeEff = distance_toEndPoint / (wholeDistance - total_distance);
 
@@ -295,9 +295,8 @@ function func_solo_route_routeAccuracy_byProjectionDistance() {
     //actual distance 
     var section_distance = (demo_singleRoute[i]['distance'] / 1000);
     //normalize
-    if(((section_distance == 0)||(distance_toEndPoint==0)))
-    {
-      routeEff_list_realtime_1_4.push(routeEff_list_realtime_1_4[routeEff_list_realtime_1_4.length-1]);
+    if (((section_distance == 0) || (distance_toEndPoint == 0))) {
+      routeEff_list_realtime_1_4.push(routeEff_list_realtime_1_4[routeEff_list_realtime_1_4.length - 1]);
     }
     //cur route efficiency
     var cur_routeEff = distance_lastPointToEndPoint / (section_distance + distance_toEndPoint);
@@ -349,23 +348,23 @@ function func_solo_route_routeAccuracy_byProjectionDistance() {
     //set options
     var options = {
       series: [
-      // {
-      //   name: "即時路徑效率1-2",
-      //   data: routeEff_list_realtime
-      // }, 
-      {
-        name: "即時路徑效率1-3",
-        data: routeEff_list_realtime_1_3
-      },
-      // {
-      //   name: "即時路徑效率1-4",
-      //   data: routeEff_list_realtime_1_4
-      // }
-      // {
-      //   name: "即時路徑效率1-5",
-      //   data: routeEff_list_realtime_1_5
-      // }
-    ],
+        // {
+        //   name: "即時路徑效率1-2",
+        //   data: routeEff_list_realtime
+        // }, 
+        {
+          name: "即時路徑效率1-3",
+          data: routeEff_list_realtime_1_3
+        },
+        // {
+        //   name: "即時路徑效率1-4",
+        //   data: routeEff_list_realtime_1_4
+        // }
+        // {
+        //   name: "即時路徑效率1-5",
+        //   data: routeEff_list_realtime_1_5
+        // }
+      ],
       chart: {
         // height: 350,
         type: 'line',
@@ -383,14 +382,18 @@ function func_solo_route_routeAccuracy_byProjectionDistance() {
             //     test_set_di[config['dataPointIndex']],
             //     test_set_distance_flown[config['dataPointIndex']]
             // );
-            showInMap_movepoint(data_normalized[config['dataPointIndex']]);
+            try {   
+              showInMap_movepoint(data_normalized[config['dataPointIndex']]);
+            }catch(e){
+              console.log(e); // Error: hi
+            }
           }
         },
         toolbar: {
           show: false
         },
       },
-      colors: ['#77B6EA', '#545454','#7CFC00'],
+      colors: ['#77B6EA', '#545454', '#7CFC00'],
       dataLabels: {
         enabled: false
       },
@@ -533,7 +536,7 @@ function func_solo_route_routeAccuracy() {
     sun_accuracy_list_2_1 += cosine_radian;
     // console.log(sum_accuracy_distance, total_distance);
     //cur route accuracy
-    var cur_routeAccuracy = sun_accuracy_list_2_1 / (route_accuracy_list_2_1.length+1);
+    var cur_routeAccuracy = sun_accuracy_list_2_1 / (route_accuracy_list_2_1.length + 1);
     // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
     // routeAccuracy_list.push(cur_routeAccuracy.toFixed(3));
     route_accuracy_list_2_1.push(cur_routeAccuracy.toFixed(3));
@@ -542,7 +545,7 @@ function func_solo_route_routeAccuracy() {
 
   //2-2
   var route_accuracy_list_2_2 = [];
-  var sum_accuracy_list_2_2 =0;
+  var sum_accuracy_list_2_2 = 0;
   var start_point = turf.point(data_normalized[0]);
   for (var i = 0; i < data_normalized.length; i++) {
     var pt = turf.point(data_normalized[i]);
@@ -559,13 +562,13 @@ function func_solo_route_routeAccuracy() {
     var normalized_includedAngle_Radian = turf.degreesToRadians(normalized_includedAngle_degree);
     //calculate cosine of angle
     var cosine_radian = Math.cos(normalized_includedAngle_Radian);
- 
+
     // console.log(bearing_from_lastPoint, bearing_from_lastPoint, includedAngle, normalized_includedAngle_degree, normalized_includedAngle_Radian, cosine_radian);
     //sum accuracy distance 
-    sum_accuracy_list_2_2 +=  cosine_radian;
+    sum_accuracy_list_2_2 += cosine_radian;
     // console.log(sum_accuracy_distance, total_distance);
     //cur route accuracy
-    var cur_routeAccuracy = sum_accuracy_list_2_2 / (route_accuracy_list_2_2.length+1);
+    var cur_routeAccuracy = sum_accuracy_list_2_2 / (route_accuracy_list_2_2.length + 1);
 
     // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
 
@@ -577,9 +580,8 @@ function func_solo_route_routeAccuracy() {
   var routeAccuracy_list_2_3 = [];
   sum_accuracy_distance = 0;
   var wholeDistance = 0;
-  for(var i=0;i<demo_singleRoute.length;i++)
-  {
-    wholeDistance+=demo_singleRoute[i]['distance'];
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    wholeDistance += demo_singleRoute[i]['distance'];
   }
   // console.log(wholeDistance);
   last_point = data_normalized[0];
@@ -642,19 +644,19 @@ function func_solo_route_routeAccuracy() {
       series: [{
         name: "路徑準確度",
         data: routeAccuracy_list
-      },{
+      }, {
         name: "路徑準確度2-1",
         data: route_accuracy_list_2_1
       },
-      // {
-      //   name: "路徑準確度2-2",
-      //   data: route_accuracy_list_2_2
-      // }
-      // {
-      //   name: "路徑準確度2-3",
-      //   data: routeAccuracy_list_2_3
-      // },
-    ],
+        // {
+        //   name: "路徑準確度2-2",
+        //   data: route_accuracy_list_2_2
+        // }
+        // {
+        //   name: "路徑準確度2-3",
+        //   data: routeAccuracy_list_2_3
+        // },
+      ],
       chart: {
         // height: 350,
         type: 'line',
@@ -665,18 +667,22 @@ function func_solo_route_routeAccuracy() {
           mouseMove: function (event, chartContext, config) {
             // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts.
             // console.log(config['dataPointIndex']);
-            console.log(test_set_bearing_from_lastPoint[config['dataPointIndex']],
+            try {   
+              console.log(test_set_bearing_from_lastPoint[config['dataPointIndex']],
               test_set_bearing_to_endPoint[config['dataPointIndex']],
               test_set_includedAngle[config['dataPointIndex']],
               test_set_cosine_radian[config['dataPointIndex']],
               test_set_di[config['dataPointIndex']],
               test_set_distance_flown[config['dataPointIndex']]
-            );
-            showInMap_movepoint(data_normalized[config['dataPointIndex'] + 1]);
+              );
+              showInMap_movepoint(data_normalized[config['dataPointIndex'] + 1]);
+            }catch(e){
+              console.log(e); // Error: hi
+            }
           }
         }
       },
-      colors: ['#77B6EA', '#545454','#7CFC00'],
+      colors: ['#77B6EA', '#545454', '#7CFC00'],
       dataLabels: {
         enabled: false
       },
@@ -961,7 +967,7 @@ function func_label_solo_route_routeAccuracySpeedElevation() {
   newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
   newLabel.style.position = "absolute";
   newLabel.style.zIndex = "1";
-  newLabel.innerHTML = "即時路徑效率.速度.海拔.離地高度的對比圖";
+  newLabel.innerHTML = "即時路徑效率.速度.海拔.地面海拔的對比圖";
   newLabel.style.textAlign = "left";
   // newLabel.style.fontSize = '100%';
 
@@ -982,28 +988,37 @@ function func_solo_route_routeAccuracySpeedElevation() {
     //todo: raise a warning;
     return;
   }
-  var startPoint = data_normalized[0];
+  // var startPoint = data_normalized[0];
   var endPoint = data_normalized[data_normalized.length - 1];
-  var make_baseline = turf.lineString([startPoint, endPoint]);
-  var routeEff_list = [];
+  // var make_baseline = turf.lineString([startPoint, endPoint]);
+  var routeEff_list_realtime_1_3 = [];
   var total_distance = 0;
+  var wholeDistance = 0;
+  for (var i = 0; i < demo_singleRoute.length; i++) {
+    wholeDistance += (demo_singleRoute[i]['distance'] / 1000);
+  }
+  console.log(wholeDistance);
+
   for (var i = 0; i < data_normalized.length; i++) {
     var pt = turf.point(data_normalized[i]);
-    //distance to start point
-    var distance_toStartPoint = turf.distance(startPoint, pt, { units: 'kilometers' });
-    //distance to line 
-    var distance_toMakebaseline = turf.pointToLineDistance(pt, make_baseline, { units: 'kilometers' });
-    //distance of line 
-    var distance_atMakebaseline = Math.sqrt(Math.pow(distance_toStartPoint, 2) - Math.pow(distance_toMakebaseline, 2));
+    //distance to end point
+    var distance_toEndPoint = turf.distance(pt, endPoint, { units: 'kilometers' });
     //actual distance 
     total_distance += (demo_singleRoute[i]['distance'] / 1000);
     //cur route efficiency
-    var cur_routeEff = distance_atMakebaseline / total_distance;
+    if (wholeDistance - total_distance == 0) {
+      console.log("arrive endPoint");
+      var last_value = routeEff_list_realtime_1_3[routeEff_list_realtime_1_3.length - 1];
+      routeEff_list_realtime_1_3.push(last_value);
+      continue;
+    }
+    var cur_routeEff = distance_toEndPoint / (wholeDistance - total_distance);
 
     // console.log(distance_toStartPoint,distance_toMakebaseline,distance_atMakebaseline,total_distance);
-
-    routeEff_list.push(cur_routeEff);
+    // console.log(wholeDistance, total_distance);
+    routeEff_list_realtime_1_3.push(cur_routeEff.toFixed(3));
   }
+  console.log(routeEff_list_realtime_1_3);
 
   function makeYData_speed() {
     var result = []
@@ -1023,106 +1038,190 @@ function func_solo_route_routeAccuracySpeedElevation() {
   }
   var dataY_elevation = makeYData_elevation();
 
-  //draw in chart
-  let canvas_routeEff_speed_elevation = document.createElement('canvas');
-  canvas_routeEff_speed_elevation.setAttribute("width", window.innerWidth / 2);
-  canvas_routeEff_speed_elevation.setAttribute("height", window.innerHeight / 2);
+  // //draw in chart
+  // let canvas_routeEff_speed_elevation = document.createElement('canvas');
+  // canvas_routeEff_speed_elevation.setAttribute("width", window.innerWidth / 2);
+  // canvas_routeEff_speed_elevation.setAttribute("height", window.innerHeight / 2);
+  // canvas_routeEff_speed_elevation.setAttribute("id", "canvas_routeEff_speed_elevation");
+  // canvas_routeEff_speed_elevation.style.left = "10%";
+  // canvas_routeEff_speed_elevation.style.top = "120%";
+  // canvas_routeEff_speed_elevation.style.position = "absolute";
+  // // canvas.style['margin-left'] = '-200px';
+  // // canvas.style.border   = "1px solid";
+  // // canvas.style.backgroundColor = 'transparent';
+  // document.body.appendChild(canvas_routeEff_speed_elevation);
+
+  // var make_x = []
+  // for (var i = 0; i < data_normalized.length; i++) {
+  //   make_x.push(i);
+  // }
+
+  // const myChart_RoutePlot = new Chart(canvas_routeEff_speed_elevation, {
+  //   type: 'line',
+  //   data: {
+  //     labels: make_x,
+  //     datasets: [
+  //       //route accuracy 
+  //       {
+  //         type: 'line',
+  //         label: '即時路徑效率',
+  //         data: routeEff_list,
+  //         // backgroundColor: 'transparent',
+  //         fill: false,
+  //         borderColor: 'rgb(75, 192, 192)',
+  //       },
+  //       {
+  //         type: 'line',
+  //         label: '速度(km/min)',
+  //         data: dataY_speed,
+  //         // backgroundColor: 'transparent',
+  //         fill: false,
+  //         borderColor: 'blue',
+  //       },
+  //       {
+  //         type: 'line',
+  //         label: '海拔(km)',
+  //         data: dataY_elevation,
+  //         // backgroundColor: 'transparent',
+  //         fill: false,
+  //         borderColor: 'red',
+  //       },
+  //     ]
+  //   },
+  //   options: {
+  //     responsive: false,
+  //     legend: { display: true },
+  //     elements: {
+  //       point: {
+  //         radius: 0
+  //       }
+  //     },
+  //     scales: {
+  //       yAxes: [{
+  //         beginAtZero: true,
+  //         fontSize: 0,
+  //         padding: 1,
+  //         gridLines: {
+  //           display: false
+  //         },
+  //       }],
+  //       xAxes: [{
+  //         // beginAtZero: true,
+  //         // fontSize: 0,
+  //         // ticks: {
+  //         //   fontColor: "#000",
+  //         //   fontSize: 0
+  //         // },
+  //         gridLines: {
+  //           display: false
+  //         },
+  //         padding: 1,
+  //         // display:false,
+  //         // position:'bottom',
+  //       }],
+  //     },
+  //   }
+  // });
+
+  //draw in plot
+
+  //set chart
+  var canvas_routeEff_speed_elevation = document.createElement('div');
+  canvas_routeEff_speed_elevation.style.width = '50%';
+  canvas_routeEff_speed_elevation.style.height = '50%';
   canvas_routeEff_speed_elevation.setAttribute("id", "canvas_routeEff_speed_elevation");
-  canvas_routeEff_speed_elevation.style.left = "10%";
+  canvas_routeEff_speed_elevation.style.left = "25%";
+  // console.log((250+(i-1)*50).toString(10));
   canvas_routeEff_speed_elevation.style.top = "120%";
   canvas_routeEff_speed_elevation.style.position = "absolute";
-  // canvas.style['margin-left'] = '-200px';
-  // canvas.style.border   = "1px solid";
-  // canvas.style.backgroundColor = 'transparent';
   document.body.appendChild(canvas_routeEff_speed_elevation);
 
-  var make_x = []
-  for (var i = 0; i < data_normalized.length; i++) {
-    make_x.push(i);
-  }
-
-  const myChart_RoutePlot = new Chart(canvas_routeEff_speed_elevation, {
-    type: 'line',
-    data: {
-      labels: make_x,
-      datasets: [
-        //route accuracy 
-        {
-          type: 'line',
-          label: '即時路徑效率',
-          data: routeEff_list,
-          // backgroundColor: 'transparent',
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-        },
-        {
-          type: 'line',
-          label: '速度(km/min)',
-          data: dataY_speed,
-          // backgroundColor: 'transparent',
-          fill: false,
-          borderColor: 'blue',
-        },
-        {
-          type: 'line',
-          label: '海拔(km)',
-          data: dataY_elevation,
-          // backgroundColor: 'transparent',
-          fill: false,
-          borderColor: 'red',
-        },
-      ]
+  //set options
+  var options = {
+    series: [
+      // {
+      //   name:"test",
+      //   data:[0],
+      // },
+      {
+        name: '即時路徑效率',
+        data: routeEff_list_realtime_1_3,
+      },
+      {
+        name: '速度(km/min)',
+        data: dataY_speed,
+      },
+      {
+        name: '海拔(km)',
+        data: dataY_elevation,
+      },
+    ],
+    chart: {
+      // height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      }
     },
-    options: {
-      responsive: false,
-      legend: { display: true },
-      elements: {
-        point: {
-          radius: 0
-        }
+    colors: ['#77B6EA', '#545454', '#7CFC00','#b84644', '#4576b5'],
+    // colors: ['#545454', '#7CFC00','#b84644', '#4576b5'],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    title: {
+      text: '即時路徑效率.速度.海拔.地面海拔的對比圖',
+      align: 'left'
+    },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
       },
-      scales: {
-        yAxes: [{
-          beginAtZero: true,
-          fontSize: 0,
-          padding: 1,
-          gridLines: {
-            display: false
-          },
-        }],
-        xAxes: [{
-          // beginAtZero: true,
-          // fontSize: 0,
-          // ticks: {
-          //   fontColor: "#000",
-          //   fontSize: 0
-          // },
-          gridLines: {
-            display: false
-          },
-          padding: 1,
-          // display:false,
-          // position:'bottom',
-        }],
-      },
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'right',
+      floating: true,
+      offsetY: -25,
+      offsetX: -5
     }
-  });
+  };
 
+  var chart = new ApexCharts(canvas_routeEff_speed_elevation, options);
+  chart.render();
+
+
+  // function draw_earthElevation(elevations) {
+  //   var normalized_elevations = [];
+  //   for (var i = 0; i < elevations.length; i++) {
+  //     normalized_elevations.push(elevations[i] / 1000);
+  //   }
+  //   var make_data = {
+  //     name: '地面海拔(km)',
+  //     data: normalized_elevations,
+  //     // backgroundColor: 'transparent',
+  //     fill: false,
+  //     borderColor: 'green',
+  //   }
+  //   myChart_RoutePlot.data.datasets.push(make_data);
+  //   myChart_RoutePlot.update();
+  // }
   function draw_earthElevation(elevations) {
     var normalized_elevations = [];
     for (var i = 0; i < elevations.length; i++) {
       normalized_elevations.push(elevations[i] / 1000);
     }
     var make_data = {
-      type: 'line',
-      label: '地面海拔(km)',
+      name: '地面海拔(km)',
       data: normalized_elevations,
-      // backgroundColor: 'transparent',
-      fill: false,
-      borderColor: 'yellow',
     }
-    myChart_RoutePlot.data.datasets.push(make_data);
-    myChart_RoutePlot.update();
+    console.log(chart);
+    chart.opts.series.push(make_data);
+    // chart.opts.colors.push();
+    chart.update();
   }
 
   function draw_elevationFromEarth(elevations) {
@@ -1169,8 +1268,8 @@ function func_solo_route_routeAccuracySpeedElevation() {
       }
       console.log(result);
       //todo draw in chart
-      // draw_earthElevation(result);
-      draw_elevationFromEarth(result);
+      draw_earthElevation(result);
+      // draw_elevationFromEarth(result);
     }
 
     oReq.addEventListener("load", reqListener);
