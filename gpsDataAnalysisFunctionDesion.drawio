@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-01T03:06:43.670Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="mtWSE6qE6DLRFw-cGVfj" version="20.2.7" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-09-01T03:09:01.778Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="D9qHvjktrRPnexvbu-PR" version="20.2.7" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="1422" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3202,6 +3202,15 @@
         </mxCell>
         <mxCell id="QB9hWkQ4RjpzyJrvkbOB-8" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;多個特徵點&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
           <mxGeometry x="462.5" y="100" width="185" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QB9hWkQ4RjpzyJrvkbOB-10" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;即時路徑效率分佈&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="60" y="190" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QB9hWkQ4RjpzyJrvkbOB-11" value="海拔區域柱狀圖" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="60" y="290" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QB9hWkQ4RjpzyJrvkbOB-13" value="即時路徑效率，速度，海拔對比" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="380" y="190" width="350" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
