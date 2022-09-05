@@ -13,12 +13,104 @@
   crossorigin=""></script>
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+      .anybutton {
+        bottom: 5%;
+        left: 45%;
+        /* width:100px;
+        height:40px; */
+        position: relative;
+        z-index: 2;
+        /* background: orange;  */
+    }
+  </style>
 </head>
 
 <body>
   <div id="Map_showPaths"></div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
+  <dialog id="dialog_routeEfficiency">
+    <form method="dialog">
+        <p style="font-size:30px"><label>路徑效率:</label>
+        </p>
+        <p><label>“路徑效率”是量化鴿子導航能力的一個方式。通過量化鴿子導航能力，能夠追蹤鴿子導航能力的水平和變化，並進行針對性訓練。</label>
+        </p>
+        <p><label>目前，鴿鐘的做法：只能提供直線分速（直線距離/時間）作爲成績判斷的標準。但是這項數據如果要用來呈現訓練以及比賽歷程，甚至要進行科學化的訓練分析來提升飛行效率，是不夠的。</label>
+        </p>
+        <p><label>爲了進行科學量化分析，衡量訓練是否有效，參考了多篇論文，引用論文中判斷訓練模型是否有效所採用的路徑效率，來進行分析跟參考：</label>
+        </p>
+        <p><label>量化導航能力的方式是：比較飛行的路經的效率。把導航能力量化為，“路徑效率”：</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：路徑效率 = 直線距離 / 飛行距離。</label>
+        </p>
+        <p><label>驗證：比賽成績 = 分速 = 直線距離/實際飛行時間 = （實際飛行距離*路徑效率）/實際飛行時間=（實際飛行距離/實際飛行時間）*路徑效率=實際飛行分速*路徑效率。。</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_routeEfficiency_realtime">
+    <form method="dialog">
+        <p style="font-size:30px"><label>即時路徑效率:</label>
+        </p>
+        <p><label>“路徑效率”是量化鴿子導航能力的一個方式。通過量化鴿子導航能力，能夠追蹤鴿子導航能力的水平和變化，並進行針對性訓練。</label>
+        </p>
+        <p><label>利用路徑效率的公式，計算即時的路徑效率：</p>
+        <p><label>查看軌跡中，每個軌跡點到終點這段區間的路徑效率：即時路徑效率高，說明接下來的飛行比較直，如果低，說明接下來的飛行比較彎曲。</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：即時路徑效率 = D當前點到終點/（D全部距離-D已飛行）；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_altitudeFromEarth">
+    <form method="dialog">
+        <p style="font-size:30px"><label>離地高度:</label>
+        <p style="font-size:24px;font-weight:bold"><label>公式：離地高度 = 海拔 - 地面海拔；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_elevationZoneBar">
+    <form method="dialog">
+        <p style="font-size:30px"><label>quatile做法:</label>
+        <p style="font-size:24px"><label>按照從小到大的方式排列成有序的list，然後25%是指位置在25%的數值，50%就是指中位數，75%是位置在75%的值；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_realTimeDistance">
+    <form method="dialog">
+        <p style="font-size:30px"><label>即時距離:</label>
+        <p><label>論文中用這個公式來判斷鴿子是否是pair飛行的，可以作為pair飛行的驗證工具；</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：即時距離 = D點到點的距離（timestamp）；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_routeSimilarity">
+    <form method="dialog">
+        <p style="font-size:30px"><label>路徑相似度:</label>
+        <p><label>論文中計算所有點到參考路線的距離，計算平均距離，平均距離越小，相似度越高；</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：相似度 = {D點到參考路徑}；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
   <script src="./routeAnalysis.js" type="module">
   </script>
 </body>
