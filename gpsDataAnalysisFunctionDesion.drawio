@@ -1,10 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2022-09-05T03:15:39.554Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="pZsaCPlB9yUk4EDuQfnE" version="20.2.7" type="github" pages="12">
+<mxfile host="app.diagrams.net" modified="2022-09-05T08:16:02.858Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="K1c22_ckbRAAmQYdjXDr" version="20.2.8" type="github" pages="12">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="3055" dy="2302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="iouzHtwSMmpwOoyQT_25-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="qnyFYlG-kqedWmLfxszu-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="-710" width="2360" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="iouzHtwSMmpwOoyQT_25-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1280" y="-80" width="1060" height="570" as="geometry" />
         </mxCell>
         <mxCell id="O6gf3C7hR73hfjt86JTx-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -450,125 +453,128 @@
         <mxCell id="O6gf3C7hR73hfjt86JTx-11" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;路徑準確度&lt;/font&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;公式的bug&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2805" y="-60" width="445" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-3" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;比賽成績&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-3" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;比賽成績&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-10" y="-500" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-4" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-4" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="120" y="-485" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-7" value="分速" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-7" value="分速" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="180" y="-500" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-8" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-8" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="310" y="-485" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-9" value="直線距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-9" value="直線距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="370" y="-515" width="200" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-10" value="" style="endArrow=none;html=1;rounded=0;fontSize=24;" edge="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-10" value="" style="endArrow=none;html=1;rounded=0;fontSize=24;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="390" y="-470" as="sourcePoint" />
             <mxPoint x="550" y="-470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-11" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-11" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="397" y="-455" width="146" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-12" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-12" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="90" y="-630" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-13" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-13" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="230" y="-615" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=24;" edge="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=24;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="310" y="-600" as="sourcePoint" />
             <mxPoint x="520" y="-600" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-17" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-17" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;flipH=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="610" y="-605" width="20" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-20" value="分速" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-20" value="分速" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="860" y="-575" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-21" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;比賽成績&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-21" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;比賽成績&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="650" y="-575" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-22" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-22" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="790" y="-560" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-23" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-23" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1000" y="-560" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-24" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-24" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1100" y="-590" width="153" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-28" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-28" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1290" y="-605" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-29" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;（&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-29" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;（&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1040" y="-590" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-30" value="&lt;span style=&quot;font-size: 48px;&quot;&gt;）&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-30" value="&lt;span style=&quot;font-size: 48px;&quot;&gt;）&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1410" y="-590" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-31" value="" style="endArrow=none;html=1;rounded=0;fontSize=48;" edge="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-31" value="" style="endArrow=none;html=1;rounded=0;fontSize=48;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1090" y="-540" as="sourcePoint" />
             <mxPoint x="1430" y="-540" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-32" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-32" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1191" y="-500" width="146" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-33" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-33" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1445" y="-554.5" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-34" value="直線距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-34" value="直線距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="344" y="-645" width="146" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-35" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-35" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="337" y="-585" width="153" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-37" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-37" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" parent="1" vertex="1">
           <mxGeometry x="1240" y="-590" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-38" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-38" value="實際飛行距離" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1550" y="-575" width="153" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-39" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-39" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1780" y="-560" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-40" value="" style="endArrow=none;html=1;rounded=0;fontSize=48;" edge="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-40" value="" style="endArrow=none;html=1;rounded=0;fontSize=48;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1540" y="-525" as="sourcePoint" />
             <mxPoint x="1720" y="-525" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-41" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-41" value="實際飛行時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1557" y="-500" width="146" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-42" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-42" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" parent="1" vertex="1">
           <mxGeometry x="1730" y="-545" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-43" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;（&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-43" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;（&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1481.5" y="-545" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-44" value="&lt;span style=&quot;font-size: 48px;&quot;&gt;）&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-44" value="&lt;span style=&quot;font-size: 48px;&quot;&gt;）&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1715" y="-545" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-45" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-45" value="=" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1910" y="-545" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-47" value="實際分速" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-47" value="實際分速" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1990" y="-545" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-51" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-51" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;*&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=48;" parent="1" vertex="1">
           <mxGeometry x="2100" y="-545" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="iouzHtwSMmpwOoyQT_25-52" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="iouzHtwSMmpwOoyQT_25-52" value="路徑效率" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="2150" y="-560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qnyFYlG-kqedWmLfxszu-2" value="&lt;span style=&quot;font-size: 48px;&quot;&gt;路徑效率驗證：&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="801" y="-700" width="440" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
