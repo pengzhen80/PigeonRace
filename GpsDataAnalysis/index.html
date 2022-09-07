@@ -53,14 +53,11 @@
   </dialog>
   <dialog id="dialog_routeEfficiency_realtime">
     <form method="dialog">
-        <p style="font-size:30px"><label>即時路徑效率:</label>
+        <p style="font-size:30px"><label>即時路徑偏移量:</label>
         </p>
-        <p><label>“路徑效率”是量化鴿子導航能力的一個方式。通過量化鴿子導航能力，能夠追蹤鴿子導航能力的水平和變化，並進行針對性訓練。</label>
+        <p style="font-size:24px;font-weight:bold"><label>公式：偏離距離=D點到直線</label>
         </p>
-        <p><label>利用路徑效率的公式，計算即時的路徑效率：</p>
-        <p><label>查看軌跡中，每個軌跡點到終點這段區間的路徑效率：即時路徑效率高，說明接下來的飛行比較直，如果低，說明接下來的飛行比較彎曲。</label>
-        </p>
-        <p style="font-size:24px;font-weight:bold"><label>公式：即時路徑效率 = D當前點到終點/（D全部距離-D已飛行）；</label>
+        <p><label>用途：量化當前點的偏離直線的情況，偏離的越多，說明當前的路徑準確度越低；</label>
         </p>
         <div>
             <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
@@ -104,7 +101,25 @@
         <p style="font-size:30px"><label>路徑相似度:</label>
         <p><label>論文中計算所有點到參考路線的距離，計算平均距離，平均距離越小，相似度越高；</label>
         </p>
+        <p><label>用法：輔佐路徑效率，判斷鴿子是否對熟悉了某個定點飛行的路線；</label>
+        </p>
         <p style="font-size:24px;font-weight:bold"><label>公式：相似度 = {D點到參考路徑}；</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
+  <dialog id="dialog_leaderOfGroup">
+    <form method="dialog">
+        <p style="font-size:30px"><label>羣體飛行的領航者:</label>
+        <p><label>不論是pair飛行，還是group飛行，我們都希望能夠找到誰是飛行的leader。</label>
+        </p>
+        <p><label>引用論文中的理論：判斷誰的位置更靠前，來判斷誰是leader。</label>
+        </p>
+        <p><label>使用從“出發點”到“當前點”的“投影距離”（投影到起始點和終點的直線），來判斷位置，投影距離越大位置越更靠前。</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：D投影距離 = 開方（平方（D起點到當前點）-平方（D當前點到直線））</label>
         </p>
         <div>
             <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
