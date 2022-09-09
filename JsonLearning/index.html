@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 
 <body>
 
@@ -18,4 +19,68 @@
 
 </body>
 
+=======
+<style>
+    .anybutton {
+        bottom: 5%;
+        left: 45%;
+        /* width:100px;
+        height:40px; */
+        position: relative;
+        z-index: 2;
+        /* background: orange;  */
+    }
+
+    .button_circle {
+        background-color: transparent;
+        /* Green */
+        border-color: black;
+        /* color: white; */
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    .button_circle:hover
+    {
+        background-color: yellow;
+    }
+</style>
+
+<!-- Simple modal dialog containing a form -->
+<dialog id="dialog_routeEfficiency">
+    <form method="dialog">
+        <p style="font-size:30px"><label>路徑效率:</label>
+        </p>
+        <p><label>“路徑效率”是量化鴿子導航能力的一個方式。通過量化鴿子導航能力，能夠追蹤鴿子導航能力的水平和變化，並進行針對性訓練。</label>
+        </p>
+        <p><label>目前，鴿鐘的做法：只能提供直線分速（直線距離/時間）作爲成績判斷的標準。但是這項數據如果要用來呈現訓練以及比賽歷程，甚至要進行科學化的訓練分析來提升飛行效率，是不夠的。</label>
+        </p>
+        <p><label>爲了進行科學量化分析，衡量訓練是否有效，參考了多篇論文，引用論文中判斷訓練模型是否有效所採用的路徑效率，來進行分析跟參考：</label>
+        </p>
+        <p><label>量化導航能力的方式是：比較飛行的路經的效率。把導航能力量化為，“路徑效率”：</label>
+        </p>
+        <p style="font-size:24px;font-weight:bold"><label>公式：路徑效率 = 直線距離 / 飛行距離。</label>
+        </p>
+        <p><label>驗證：比賽成績 = 分速 = 直線距離/實際飛行時間 = （實際飛行距離*路徑效率）/實際飛行時間=（實際飛行距離/實際飛行時間）*路徑效率=實際飛行分速*路徑效率。。</label>
+        </p>
+        <div>
+            <button id="confirmBtn" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+
+    </form>
+</dialog>
+<p>
+    <button class="button_circle">?</button>
+    <button id=" updateDetails">Update details</button>
+            </p>
+            <output></output>
+            <script src="./demo_dialog.js">
+            </script>
+
+>>>>>>> 2112186da9c918834af115fb11f7011b68369c17
 </html>
