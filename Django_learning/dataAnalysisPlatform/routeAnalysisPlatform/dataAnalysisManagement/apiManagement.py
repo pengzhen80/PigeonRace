@@ -17,11 +17,11 @@ class DBManagement ():
         self.shedAndPathMapToPathId = None
         # self.activitys = [{"activity_id":"","activity_name":"","release_date":"","release_time":""}]
         self.activitys=[]
-        
-    def logIn(self):
+    
+    def logIn(self,username,password):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
 
-        myobj = {"account": "pengzhenguo2021@gmail.com","password": "www1339"}
+        myobj = {"account": username,"password": password}
         # myobj = {"account": "mx01","password": "80443914"}
 
         x = requests.post(url, data=myobj)

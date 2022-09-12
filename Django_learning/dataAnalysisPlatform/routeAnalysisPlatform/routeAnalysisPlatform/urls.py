@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 
 urlpatterns = [
-    path('dataAnalysisManagement/', include('dataAnalysisManagement.urls')),
+    path('', include('dataAnalysisManagement.urls')),
     path('admin/', admin.site.urls),
 ]
 
