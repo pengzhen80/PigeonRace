@@ -963,7 +963,7 @@ function func_label_solo_route_routeAccuracySpeedElevation() {
     newLabel.style.width = '100%';
     newLabel.style.height = '48px';
     newLabel.style.left = "0%";
-    newLabel.style.top = "105%";
+    newLabel.style.top = "120%";
     newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
     newLabel.style.position = "absolute";
     newLabel.style.zIndex = "1";
@@ -1008,7 +1008,7 @@ function func_solo_route_routeAccuracySpeedElevation() {
     canvas_routeEff_speed_elevation.setAttribute("id", "canvas_routeEff_speed_elevation");
     canvas_routeEff_speed_elevation.style.left = "25%";
     // console.log((250+(i-1)*50).toString(10));
-    canvas_routeEff_speed_elevation.style.top = "170%";
+    canvas_routeEff_speed_elevation.style.top = "150%";
     canvas_routeEff_speed_elevation.style.position = "absolute";
     document.body.appendChild(canvas_routeEff_speed_elevation);
 
