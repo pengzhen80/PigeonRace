@@ -11,5 +11,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
     # path('/redirect/', views.loged,name='loged'),
-    path('login/activities', views.view_loged, name='view_loged'),
+    # path('login/activities', views.view_loged, name='view_loged'),
     ]

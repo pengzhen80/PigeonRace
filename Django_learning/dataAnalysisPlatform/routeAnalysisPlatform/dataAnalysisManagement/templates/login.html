@@ -152,65 +152,18 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
-        <!-- <h3>Login Here</h3> -->
-
+    <form action="login" method="post">
+        {% csrf_token %}
         <label for="username">用戶名</label>
-        <input type="text" placeholder="Email or Phone" id="username">
+        <input type="text" placeholder="Email or Phone" id="username" name="username">
 
         <label for="password">密碼</label>
-        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="Password" id="password" name="password">
 
-        <button id="logIn">登 陸</button>
-        <!-- <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div> -->
+        <!-- <button id="logIn">登 陸</button> -->
+        <input type="submit" value="Submit">
     </form>
     <script>
-        function func_button_logIn() {
-            console.log('login:');
-            var div_userName = document.getElementById('username');
-            console.log(div_userName.value);
-            var username = div_userName.value;
-            var div_password = document.getElementById('password');
-            var password = div_password.value;
-            var obj = {'username':username,'password':password}
-            //send to servers
-            function reqListener() {
-                console.log(typeof (this.responseText), typeof (this.response));
-                // console.log(this.responseText);
-
-                // var response = JSON.parse(this.responseText);
-                // console.log(response);
-                window.open('login/activities');
-
-                // var pathName = decodeURI(response['pathname']);
-                // var polygon = response['polygon'];
-                // console.log('pathName', pathName);
-
-                // //add polygon to gpxmanager
-                // pathManger.AddOriginPolygon(pathName, polygon);
-
-                // /// add path name to pathNameList
-                // var opt = document.createElement('option');
-                // opt.value = pathName;
-                // opt.innerHTML = pathName;
-                // pathNameList.appendChild(opt);
-            }
-
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", reqListener);
-            // oReq.open("post", 'logIn');
-            oReq.open("post", 'login');
-            // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-            oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
-            oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
-            oReq.send(JSON.stringify(obj));
-        }
-
-        let button_logIn = document.getElementById('logIn');
-        button_logIn.addEventListener('click',func_button_logIn);
     </script>
 </body>
 
