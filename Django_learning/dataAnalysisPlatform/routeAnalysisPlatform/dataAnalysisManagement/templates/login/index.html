@@ -8,6 +8,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{% static 'css/table.css' %}" />>
     <style>
+        body {
+            background-color: #080710;
+        }
         .input {
             background-color: white;
             border: none;
@@ -79,8 +82,8 @@
                 var row = document.createElement('tr');
                 var row_data_0 = document.createElement("INPUT");
                 row_data_0.setAttribute("type", "checkbox");
-                row_data_0.style.position = 'absolute';
-                row_data_0.style.top = '30%';
+                {% comment %} row_data_0.style.position = 'absolute';
+                row_data_0.style.top = '30%'; {% endcomment %}
                 var row_data_1 = document.createElement('td');
                 row_data_1.innerHTML = name;
                 // row_data_1.style.textAlign = "center";

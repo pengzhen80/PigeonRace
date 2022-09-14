@@ -61,32 +61,26 @@ table th.r {
     table {
         display: block;
     }
-
     table>*,
     table tr,
     table td,
     table th {
         display: block;
     }
-
     table thead {
         display: none;
     }
-
     table tbody tr {
         height: auto;
         padding: 8px 0;
     }
-
     table tbody tr td {
         padding-left: 45%;
         margin-bottom: 12px;
     }
-
     table tbody tr td:last-child {
         margin-bottom: 0;
     }
-
     table tbody tr td:before {
         position: absolute;
         font-weight: 700;
@@ -94,30 +88,26 @@ table th.r {
         left: 10px;
         top: 0;
     }
-
-    table tbody tr td:nth-child(1):before {
+    /* table tbody tr td:nth-child(1):before {
         content: "Code";
     }
-
     table tbody tr td:nth-child(2):before {
         content: "Stock";
     }
-
     table tbody tr td:nth-child(3):before {
         content: "Cap";
     }
-
     table tbody tr td:nth-child(4):before {
         content: "Inch";
     }
-
     table tbody tr td:nth-child(5):before {
         content: "Box Type";
-    }
+    } */
 }
 
 body {
-    background: #9BC86A;
+    /* background: #9BC86A; */
+    background-color: #080710;
     font: 400 14px 'Calibri', 'Arial';
     padding: 20px;
 }
