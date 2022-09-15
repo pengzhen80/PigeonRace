@@ -70,8 +70,8 @@
         let normalized_activities = JSON.parse(activities)
         console.log('activities:', typeof (normalized_activities), normalized_activities.length);
 
-        activity_showInTable(normalized_activities);
-        activity_showInTable(normalized_activities);
+        // activity_showInTable(normalized_activities);
+        // activity_showInTable(normalized_activities);
         activity_showInTable(normalized_activities);
         function activity_showInTable(param_activities) {
             let table_activityPage_activity_body = document.getElementById('table_activityPage_activity_body');
@@ -82,8 +82,8 @@
                 var row = document.createElement('tr');
                 var row_data_0 = document.createElement("INPUT");
                 row_data_0.setAttribute("type", "checkbox");
-                {% comment %} row_data_0.style.position = 'absolute';
-                row_data_0.style.top = '30%'; {% endcomment %}
+                row_data_0.style.position = 'absolute';
+                row_data_0.style.top = '30%';
                 var row_data_1 = document.createElement('td');
                 row_data_1.innerHTML = name;
                 // row_data_1.style.textAlign = "center";

@@ -28,7 +28,7 @@ def login(request):
         if(res['status'] == 'ok'):
             context['status'] = 'ok'
             context['activities'] = json.dumps(dbManager.getActivities())
-            print(context['activities'])
+            # print(context['activities'])
     # print(context['activities'] )
             return render(request, 'login/index.html', context=context)   
 
