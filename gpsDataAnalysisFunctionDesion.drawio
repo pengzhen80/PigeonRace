@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-16T04:41:28.969Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="nG2XvBxKjRB9geeOIrJJ" version="20.3.0" type="github" pages="14">
+<mxfile host="app.diagrams.net" modified="2022-09-16T04:47:16.128Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="zX_zViZhX1LyqBvDT-sP" version="20.3.0" type="github" pages="14">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="2815" dy="2302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3687,6 +3687,15 @@
               <mxPoint x="2210" y="10" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="1n4DWVVprQROSqtoKEK4-14" value="100km" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1840" y="-60" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1n4DWVVprQROSqtoKEK4-15" value="B：141km/60=2.35h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="2250" y="150" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1n4DWVVprQROSqtoKEK4-16" value="A：113km/40=2.825h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1810" y="70" width="270" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
