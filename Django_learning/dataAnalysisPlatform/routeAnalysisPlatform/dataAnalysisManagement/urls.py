@@ -10,6 +10,8 @@ urlpatterns = [
 urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
-    # path('/redirect/', views.loged,name='loged'),
-    # path('login/activities', views.view_loged, name='view_loged'),
+    path('login/tracks/<str:activityIds>', views.view_tracks, name='view_tracks'),
+    path('login/tracks/activityIds/askTracksSummary', views.tracksSummary, name='tracksSummary'),
+    path('login/tracks/activityIds/TracksSummary/<str:routeIds>', views.showFigures, name='showFigures'),
+    path('login/tracks/activityIds/TracksSummary/figures/askTracksData', views.tracksData, name='tracksData'),
     ]

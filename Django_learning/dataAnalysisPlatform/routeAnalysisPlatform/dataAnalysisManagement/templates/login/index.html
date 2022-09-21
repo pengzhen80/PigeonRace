@@ -82,8 +82,8 @@
                 var row = document.createElement('tr');
                 var row_data_0 = document.createElement("INPUT");
                 row_data_0.setAttribute("type", "checkbox");
-                row_data_0.style.position = 'absolute';
-                row_data_0.style.top = '30%';
+                // row_data_0.style.position = 'absolute';
+                // row_data_0.style.top = '30%';
                 var row_data_1 = document.createElement('td');
                 row_data_1.innerHTML = name;
                 // row_data_1.style.textAlign = "center";
@@ -118,6 +118,14 @@
                 }
             }
             console.log(index_checked);
+            
+            var activity_checked_list = [];
+            for(i =0;i<index_checked.length;i++)
+            {
+                activity_checked_list.push(normalized_activities[i]['activity_id']);
+            }
+
+            window.open('login/tracks/'+activity_checked_list.toString(),name='view_tracks');
         }
         let btn_activityPage_acitivity_detail = document.getElementById('btn_activityPage_acitivity_detail');
         btn_activityPage_acitivity_detail.addEventListener('click',func_cb_btn_activityPage_acitivity_detail);

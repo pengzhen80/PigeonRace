@@ -1,5 +1,6 @@
 from asyncio import shield
 from cgi import test
+from locale import normalize
 from operator import mod
 from re import T
 from unittest import result
@@ -18,6 +19,9 @@ class DBManagement ():
         self.mxid = ''
         # self.activitys = [{"activity_id":"","activity_name":"","release_date":"","release_time":""}]
         self.activities = []
+        self.routes = {}
+        self.routes_summarydata = {}
+        self.modules ={}
 
     def logIn(self, username, password):
         # Init
@@ -84,10 +88,11 @@ class DBManagement ():
 
         x = requests.post(url, data=myobj)
         res = x.json()
-        # print(res,type(res))
+        print(res,type(res))
         res = json.loads(res)
         for trainRecord in res:
-            print(trainRecord['trainrecordid'])
+            self.data_routes_summaryData_add(activity_id,module_id,trainRecord['trainrecordid'],trainRecord)
+            # print(trainRecord['trainrecordid'])
             self.api_readCloudLocusText(
                 activity_id, module_id, trainRecord['trainrecordid'])
         return res
@@ -106,7 +111,7 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        print('activity:', res)
+        # print('activity:', res)
         # self.activitys.append(res)
         # self.activitys += self.activitys+res
         # print(self.activitys)
@@ -124,10 +129,26 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        print('routes', res)
-        # self.activitys.append(res)
-        # self.activitys += self.activitys+res
-        # print(self.activitys)
+        # print('routes', res)
+
+        def normalize_data(data):
+            data = data[1:]
+            data = data[:-1]
+            data_list = data.split(',')
+            return data_list
+
+        for route in res:
+            # print(route.keys())
+            # print(route['locusid'])
+            latitude_list = normalize_data(route['latitude'])
+            longitude_list = normalize_data(route['longitude'])
+            distance_list = normalize_data(route['realdistance'])
+            elevation_list = normalize_data(route['gpsheight'])
+            speed_list = normalize_data(route['gpsspeed'])
+            heading_list = normalize_data(route['direction'])
+            time_list = normalize_data(route['utc'])
+
+            self.data_routes_addRoute(activity_id,module_id,trainRecord_id,latitude_list,longitude_list,elevation_list,distance_list,speed_list,heading_list,time_list)
         return res
 
     def api_readModule(self, activity_id):
@@ -162,13 +183,50 @@ class DBManagement ():
             # print('module:', res)
             for module in res:
                 # print('module_id',module['modlueid'])
-                # print(module)
-                print('module_id:', module['moduleid'])
+                print(module)
+                self.modules[module['moduleid']] = module
+                # print('module_id:', module['moduleid'])
                 self.api_readTrainRecord(activity_id, module['moduleid'])
         return
 
+    def data_routes_addRoute(self,activity_id,module_id,trainRecord_id,latitudes,longitudes,elevations,distances,speeds,headings,times):
+        route_key = activity_id+module_id+trainRecord_id
+        route_data = []
+        for i in range(len(latitudes)):
+            cell = {}
+            cell['latitude'] = latitudes[i]
+            cell['longitude']= longitudes[i]
+            cell['elevation']= elevations[i]
+            cell['distance']= distances[i]
+            cell['speed']= speeds[i]
+            cell['heading']= headings[i]
+            cell['time']= times[i]
+            route_data.append(cell)
+        # print(len(route_data))
+        self.routes[route_key] = route_data
+        print('route_key',route_key)
+    
+    def data_routes_summaryData_add(self,activity_id,module_id,trainrecord_id,data):
+        normalized_data = data
+        normalized_data['gps_id'] = self.modules[module_id]['laserid']
+        self.routes_summarydata[activity_id+module_id+trainrecord_id] = normalized_data
+
+    def read_routes_summaryData(self,activity_id):
+        keys = self.routes_summarydata.keys()
+        results = []
+        for key in keys:
+            if activity_id in key:
+                results.append(self.routes_summarydata[key])
+        return results
+    
+    def read_routes_by_routeId(self,routeId):
+        print('route_key read:',routeId)
+        return self.routes[routeId]
+
     def getActivities(self):
         return self.activities
+
+    # def getTrainRecordBy
 
 
 if __name__ == '__main__':

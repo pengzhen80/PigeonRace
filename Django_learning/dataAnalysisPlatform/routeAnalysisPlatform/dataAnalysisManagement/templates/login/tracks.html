@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <!-- <meta charset="utf-8"> -->
+    <title>軌跡頁面</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}" />>
+    <style>
+        body {
+            background-color: #080710;
+        }
+
+        .input {
+            background-color: white;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
+        }
+
+
+        .button {
+            background-color: #FFED86;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn_trackPage_showPlot" class="button">查看特徵圖</button>
+    <br><br>
+    <table id="table_trackPage_tracks">
+        <thead>
+            <tr>
+                <th></th>
+                <th>公環號碼</th>
+                <th>gps腳環號碼</th>
+                <th>飛行時間</th>
+                <th>點數</th>
+                <th>直線距離</th>
+                <th>直線速度</th>
+                <th>總距離</th>
+                <th>實際速度</th>
+            </tr>
+        </thead>
+        <tbody id="table_trackPage_tracks_body">
+            <!-- <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+
+            </tr> -->
+        </tbody>
+    </table>
+    <!-- <script type="module" src="{% static 'js/activity.js' %}"></script> -->
+    <script>
+        let activityIds = '{{ activityIds|safe }}';
+        let activityId_list = activityIds.split(',');
+        console.log(activityId_list);
+        //when add a track to table, push the trackID=activityId+moduleId+trainRecordId
+        let list_trackId = []; 
+        // let activities = '{{ activities|safe }}';
+        // console.log('status:', status);
+        // let normalized_activities = JSON.parse(activities)
+        // console.log('activities:', typeof (normalized_activities), normalized_activities.length);
+        request_askTracksSummaryData()
+        function request_askTracksSummaryData() {
+            // for (var i = 0; i < activityId_list.length; i++) {
+                
+            // }
+
+            function reqListener() {
+                // console.log(typeof (this.responseText), typeof (this.response));
+                // console.log(this.responseText)
+
+                var response = JSON.parse(this.responseText);
+                // console.log(Object.values(response));
+                var tracks_list= Object.values(response)
+                for(var i=0;i<tracks_list.length;i++)
+                {
+                    for(var j=0;j<tracks_list[i].length;j++)
+                    {
+                        console.log(tracks_list[i][j]);
+                        var activity_id = tracks_list[i][j]['activity_id'];
+                        var module_id = tracks_list[i][j]['moduleid'];
+                        var trainRecord_id = tracks_list[i][j]['trainrecordid'];
+                        list_trackId.push(activity_id+module_id+trainRecord_id);
+                        tracks_showInTable([tracks_list[i][j]]);
+                    }
+                }
+                
+                // var pathName = decodeURI(response['pathname']);
+                // var polygon = response['polygon'];
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("post", 'activityIds/askTracksSummary');
+            oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+            // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+            oReq.send(activityId_list.toString());
+        }
+
+        function tracks_showInTable(param_tracks) {
+            let table_trackPage_tracks_body = document.getElementById('table_trackPage_tracks_body');
+            for (var i = 0; i < param_tracks.length; i++) {
+                func_table_track_addData(param_tracks[i]);
+            }
+            // <th>公環號碼</th>
+            //     <th>gps腳環號碼</th>
+            //     <th>飛行時間</th>
+            //     <th>點數</th>
+            //     <th>直線距離</th>
+            //     <th>直線速度</th>
+            //     <th>總距離</th>
+            //     <th>實際速度</th>
+            function func_table_track_addData(param_track) {
+                var row = document.createElement('tr');
+                var row_data_0 = document.createElement("INPUT");
+                row_data_0.setAttribute("type", "checkbox");
+                // row_data_0.style.position = 'absolute';
+                // row_data_0.style.top = '30%';
+                var row_data_1 = document.createElement('td');
+                row_data_1.innerHTML = param_track['recordname'];
+                // row_data_1.style.textAlign = "center";
+                var row_data_2 = document.createElement('td');
+                row_data_2.innerHTML = param_track['gps_id'];
+                // row_data_2.style.textAlign = "center";
+                var row_data_3 = document.createElement('td');
+                row_data_3.innerHTML = param_track['settingtime'];
+                var row_data_4 = document.createElement('td');
+                row_data_4.innerHTML = param_track['fix_3d'];
+                var row_data_5 = document.createElement('td');
+                row_data_5.innerHTML = parseFloat(param_track['straightdistance']).toFixed(2).toString();
+                var row_data_6 = document.createElement('td');
+                row_data_6.innerHTML = parseFloat(param_track['straightspeed']).toFixed(2).toString();
+                var row_data_7 = document.createElement('td');
+                row_data_7.innerHTML = parseFloat(param_track['realdistance']).toFixed(2).toString();
+                var row_data_8 = document.createElement('td');
+                row_data_8.innerHTML = parseFloat(param_track['realspeed']).toFixed(2).toString();
+                // row_data_3.style.textAlign = "center";
+
+                row.appendChild(row_data_0);
+                row.appendChild(row_data_1);
+                row.appendChild(row_data_2);
+                row.appendChild(row_data_3);
+                row.appendChild(row_data_4);
+                row.appendChild(row_data_5);
+                row.appendChild(row_data_6);
+                row.appendChild(row_data_7);
+                row.appendChild(row_data_8);
+                table_trackPage_tracks_body.appendChild(row);
+            }
+        }
+
+        function func_cb_btn_trackPage_showPlot() {
+            //get selected index of table
+            var index_checked = [];
+            var rows = document.getElementById("table_trackPage_tracks_body").rows;
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                console.log(rows[i]);
+                var checkbox = rows[i].getElementsByTagName("input")[0];
+                // console.log(checkbox);
+                console.log(checkbox.checked);
+                if (checkbox.checked == true) {
+                    index_checked.push(i);
+                }
+            }
+            console.log(index_checked);
+
+            var list_trackId_checked_list = [];
+            for (i = 0; i < index_checked.length; i++) {
+                list_trackId_checked_list.push(list_trackId[i]);
+            }
+
+            window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
+        }
+        let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
+        btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
+    </script>
+</body>
