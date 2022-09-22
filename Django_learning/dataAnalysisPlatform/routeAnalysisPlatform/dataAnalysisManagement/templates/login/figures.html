@@ -31,21 +31,28 @@
     let routeIds = '{{ routeIds|safe }}';
     let routeId_list = routeIds.split(',');
     console.log(routeId_list);
+
     request_askRoutesData()
     function request_askRoutesData() {
       function reqListener() {
-        console.log('response:');
-        console.log(typeof (this.responseText), typeof (this.response));
+        // console.log(typeof (this.responseText), typeof (this.response));
         console.log(this.responseText)
+
+        var response = JSON.parse(this.responseText);
+        // console.log(Object.values(response));
+
+        // var pathName = decodeURI(response['pathname']);
+        // var polygon = response['polygon'];
       }
 
       var oReq = new XMLHttpRequest();
-      oReq.addEventListener(" load", reqListener); 
+      oReq.addEventListener("load", reqListener);
       oReq.open("post", 'figures/askTracksData');
       oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+      // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
       oReq.send(routeId_list.toString());
     }
-    </script>
+  </script>
 </body>
 
 </html>

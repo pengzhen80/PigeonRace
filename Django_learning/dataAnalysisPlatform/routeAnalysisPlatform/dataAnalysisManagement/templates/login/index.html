@@ -125,7 +125,8 @@
                 activity_checked_list.push(normalized_activities[i]['activity_id']);
             }
 
-            window.open('login/tracks/'+activity_checked_list.toString(),name='view_tracks');
+            window.open('login/tracks/'+activity_checked_list.toString());
+            // window.open('login/tracks/'+activity_checked_list.toString(),name='view_tracks');
         }
         let btn_activityPage_acitivity_detail = document.getElementById('btn_activityPage_acitivity_detail');
         btn_activityPage_acitivity_detail.addEventListener('click',func_cb_btn_activityPage_acitivity_detail);
