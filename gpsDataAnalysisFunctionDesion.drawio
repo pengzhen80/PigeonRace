@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-22T02:23:56.270Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="CJ50APLbXuShb72ZAGmb" version="20.3.3" type="github" pages="14">
+<mxfile host="app.diagrams.net" modified="2022-09-22T02:25:44.619Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="xH5sRBuIIcBDIjK2mo2q" version="20.3.3" type="github" pages="14">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="2489" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -4076,11 +4076,41 @@
             <mxPoint x="880" y="1620" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-64" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;說明：取每隻鴿子的路徑相似度的平均值&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-64" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;說明：取每隻鴿子的路徑相似度的平均值，10只的最大，最小和中位數&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="1550" y="1300" width="210" height="70" as="geometry" />
         </mxCell>
         <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-65" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;說明：路徑相似度的最大，最小，和中位數&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="1580" y="760" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-66" value="" style="endArrow=none;html=1;rounded=0;fontSize=14;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="aHjUQ-_Ncjg9PkkS-qI5-23" target="aHjUQ-_Ncjg9PkkS-qI5-25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="970" y="960" as="sourcePoint" />
+            <mxPoint x="1180" y="990" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1160" y="990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-67" value="" style="endArrow=none;html=1;rounded=0;fontSize=14;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="aHjUQ-_Ncjg9PkkS-qI5-23" target="aHjUQ-_Ncjg9PkkS-qI5-23">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="970" y="960" as="sourcePoint" />
+            <mxPoint x="1020" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-68" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="aHjUQ-_Ncjg9PkkS-qI5-23" target="aHjUQ-_Ncjg9PkkS-qI5-65">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="970" y="960" as="sourcePoint" />
+            <mxPoint x="1020" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-69" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;說明：10只的路徑效率的最大，最小和中位數&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="590" y="1290" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="aHjUQ-_Ncjg9PkkS-qI5-70" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.005;entryY=0.4;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="aHjUQ-_Ncjg9PkkS-qI5-43" target="aHjUQ-_Ncjg9PkkS-qI5-69">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="1440" as="sourcePoint" />
+            <mxPoint x="430" y="1390" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
