@@ -139,7 +139,8 @@ class DBManagement ():
 
         for route in res:
             # print(route.keys())
-            # print(route['locusid'])
+            # print(route['fix'])
+            fixed_list = normalize_data(route['fix']);
             latitude_list = normalize_data(route['latitude'])
             longitude_list = normalize_data(route['longitude'])
             distance_list = normalize_data(route['realdistance'])
@@ -148,7 +149,7 @@ class DBManagement ():
             heading_list = normalize_data(route['direction'])
             time_list = normalize_data(route['utc'])
 
-            self.data_routes_addRoute(activity_id,module_id,trainRecord_id,latitude_list,longitude_list,elevation_list,distance_list,speed_list,heading_list,time_list)
+            self.data_routes_addRoute(fixed_list,activity_id,module_id,trainRecord_id,latitude_list,longitude_list,elevation_list,distance_list,speed_list,heading_list,time_list)
         return res
 
     def api_readModule(self, activity_id):
@@ -189,19 +190,21 @@ class DBManagement ():
                 self.api_readTrainRecord(activity_id, module['moduleid'])
         return
 
-    def data_routes_addRoute(self,activity_id,module_id,trainRecord_id,latitudes,longitudes,elevations,distances,speeds,headings,times):
+    def data_routes_addRoute(self,fixed_list,activity_id,module_id,trainRecord_id,latitudes,longitudes,elevations,distances,speeds,headings,times):
         route_key = activity_id+module_id+trainRecord_id
         route_data = []
-        for i in range(len(latitudes)):
-            cell = {}
-            cell['latitude'] = latitudes[i]
-            cell['longitude']= longitudes[i]
-            cell['elevation']= elevations[i]
-            cell['distance']= distances[i]
-            cell['speed']= speeds[i]
-            cell['heading']= headings[i]
-            cell['time']= times[i]
-            route_data.append(cell)
+        for i in range(len(fixed_list)):
+            # print(fixed_list[i])
+            if(fixed_list[i]=='3D'):
+                cell = {}
+                cell['latitude'] = latitudes[i]
+                cell['longitude']= longitudes[i]
+                cell['elevation']= elevations[i]
+                cell['distance']= distances[i]
+                cell['speed']= speeds[i]
+                cell['heading']= headings[i]
+                cell['time']= times[i]
+                route_data.append(cell)
         # print(len(route_data))
         self.routes[route_key] = route_data
         print('route_key',route_key)
@@ -218,6 +221,9 @@ class DBManagement ():
             if activity_id in key:
                 results.append(self.routes_summarydata[key])
         return results
+    
+    def read_routes_summaryData_byId(self,id):
+        return self.routes_summarydata[id]
     
     def read_routes_by_routeId(self,routeId):
         print('route_key read:',routeId)

@@ -13,53 +13,6 @@ const test_demo_data = [
 
 console.log(test_demo_data.length);
 
-//get routes
-let routeIds = '{{ routeIds|safe }}';
-let routeId_list = routeIds.split(',');
-console.log(routeId_list);
-//when add a track to table, push the trackID=activityId+moduleId+trainRecordId
-// let activities = '{{ activities|safe }}';
-// console.log('status:', status);
-// let normalized_activities = JSON.parse(activities)
-// console.log('activities:', typeof (normalized_activities), normalized_activities.length);
-request_askRoutesData()
-function request_askRoutesData() {
-    // for (var i = 0; i < activityId_list.length; i++) {
-        
-    // }
-
-    function reqListener() {
-        // console.log(typeof (this.responseText), typeof (this.response));
-        // console.log(this.responseText)
-
-        var response = JSON.parse(this.responseText);
-        // console.log(Object.values(response));
-        // var tracks_list= Object.values(response)
-        // for(var i=0;i<tracks_list.length;i++)
-        // {
-        //     for(var j=0;j<tracks_list[i].length;j++)
-        //     {
-        //         console.log(tracks_list[i][j]);
-        //         var activity_id = tracks_list[i][j]['activity_id'];
-        //         var module_id = tracks_list[i][j]['moduleid'];
-        //         var trainRecord_id = tracks_list[i][j]['trainrecordid'];
-        //         list_trackId.push(activity_id+module_id+trainRecord_id);
-        //         tracks_showInTable([tracks_list[i][j]]);
-        //     }
-        // }
-        
-        // var pathName = decodeURI(response['pathname']);
-        // var polygon = response['polygon'];
-    }
-
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
-    oReq.open("post", 'figures/askTracksData');
-    oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
-    // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
-    oReq.send(routeId_list.toString());
-}
-
 ////functions for solo route analysis
 
 ///set source data
@@ -93,13 +46,9 @@ function showInMap(path) {
         path_normalize.push(cell);
     }
     console.log(path_normalize.length);
-    for (var i = 0; i < path_normalize.length; i++) {
-        if (i == 0) {
-            map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 9)
-            // map_handler.setView(path_normalize[0], 10)
-        }
-        drawPath(path_normalize);
-    }
+
+    map_handler.setView(path_normalize[Math.floor(path_normalize.length / 2)], 9)
+    drawPath(path_normalize);
     var baseLine = [path_normalize[0], path_normalize[path_normalize.length - 1]];
     console.log(baseLine.length);
     L.polyline(baseLine, { color: 'blue', weight: '1' }).addTo(map_handler);
