@@ -23,6 +23,21 @@
       z-index: 2;
       /* background: orange;  */
     }
+    table {
+        border-collapse: collapse;
+        width: 20%;
+        cursor: pointer;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: coral;
+    }
   </style>
 </head>
 
@@ -31,9 +46,9 @@
     <thead>
         <tr>
             <th></th>
-            <th>勾選</th>
             <th>公環號碼</th>
-            <th>gps腳環</th>
+            <!-- <th>gps腳環</th> -->
+            <th>放飛時間</th>
         </tr>
     </thead>
     <tbody id="table_pigeonNumber_body">
@@ -42,6 +57,7 @@
   <div id="Map_showPaths"></div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
+  <div id="canvas_speed_elevation_forFilterRoutes"></div>
   <dialog id="dialog_routeEfficiency">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑效率:</label>
@@ -141,10 +157,117 @@
   <script>
     let routeIds = '{{ routeIds|safe }}';
     let routeId_list = routeIds.split(',');
-    let map_pigeonGps_routeIndex = {};
-    let pigeonNumbers_gpsNumbers = [];
+    let map_pigeonNumberReleaseTime_routeIndex = [];
+    let map_routeIndex_pigeonNumberReleaseTime = {};
+    let pigeonNumbers_releaseTime = [];
     let routes_origin = [];
     console.log(routeId_list);
+    //for Map_showPaths
+    let lineObjects_in_Map_showPaths = [];
+
+    let div_smallMap_head = document.getElementById('Map_showPaths');
+    div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
+    div_smallMap_head.style.left = "20%";
+    // div_smallMap_head.style.top = "5%";
+    div_smallMap_head.style.position = "absolute";
+    div_smallMap_head.style.zIndex = "1";
+    let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map_handler);
+    //for table_pigeonNumber_body checkbox list
+    // let table_pigeonNumber_body_checkbox_object_list = [];
+
+    //for canvas_speed_elevation_forFilterRoutes
+    func_label_solo_route_SpeedElevation('70%');
+    //draw a label for route accuracy
+    function func_label_solo_route_SpeedElevation(top) {
+            const newLabel = document.createElement("label");
+            newLabel.style.width = '100%';
+            newLabel.style.height = '48px';
+            newLabel.style.left = "0%";
+            newLabel.style.top = top;
+            newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
+            newLabel.style.position = "absolute";
+            newLabel.style.zIndex = "1";
+            newLabel.innerHTML = "速度.海拔.地面海拔的對比圖";
+            newLabel.style.textAlign = "left";
+            newLabel.style.fontSize = '36px';
+            newLabel.style.cursor = "url('cursor url with protocol'), help";
+
+            document.body.appendChild(newLabel);
+
+            var dialog = document.getElementById('dialog_altitudeFromEarth');
+            newLabel.addEventListener('click', () => {
+                if (typeof dialog.showModal === "function") {
+                    dialog.showModal();
+                } else {
+                    alert("Sorry, the <dialog> API is not supported by this browser.");
+                }
+            });
+    }
+    //set chart
+    var canvas_speed_elevation_forFilterRoutes = document.getElementById('canvas_speed_elevation_forFilterRoutes');
+    canvas_speed_elevation_forFilterRoutes.style.width = '99%';
+    canvas_speed_elevation_forFilterRoutes.style.height = '30%';
+    // canvas_routeEff_speed_elevation.setAttribute("id", "canvas_speed_elevation_forFilterRoutes");
+    canvas_speed_elevation_forFilterRoutes.style.left = "0%";
+    // console.log((250+(i-1)*50).toString(10));
+    canvas_speed_elevation_forFilterRoutes.style.top = '80%';
+    canvas_speed_elevation_forFilterRoutes.style.position = "absolute";
+    document.body.appendChild(canvas_speed_elevation_forFilterRoutes);
+
+    let chart_canvas_speed_elevation_forFilterRoutes = null;
+    let chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = -1;
+    function func_update_chart_canvas_speed_elevation_forFilterRoutes(demo_singleRoute)
+    {
+        var data_normalized = []
+
+        for (var i = 0; i < demo_singleRoute.length; i++) {
+            data_normalized.push([demo_singleRoute[i]['latitude'], demo_singleRoute[i]['longitude']]);
+        }
+
+        function makeYData_elevation() {
+            var result = []
+            for (var i = 0; i < demo_singleRoute.length; i++) {
+                result.push(demo_singleRoute[i]['elevation'] / 1000)
+            }
+            return result;
+        }
+        var dataY_elevation = makeYData_elevation();
+        //draw in plot
+
+        function makeYData_speed() {
+            var result = []
+            for (var i = 0; i < demo_singleRoute.length; i++) {
+                result.push(demo_singleRoute[i]['speed'] * 60 / 1000);
+            }
+            return result;
+        }
+        var dataY_speed = makeYData_speed();
+
+        function makeYData_elevation() {
+            var result = []
+            for (var i = 0; i < demo_singleRoute.length; i++) {
+                result.push(demo_singleRoute[i]['elevation'] / 1000)
+            }
+            return result;
+        }
+        var dataY_elevation = makeYData_elevation();
+        chart_canvas_speed_elevation_forFilterRoutes.updateSeries([
+                    {
+                        name: '速度(km/min)',
+                        data: dataY_speed,
+                    },
+                    {
+                        name: '海拔(km)',
+                        data: dataY_elevation,
+                    },
+        ]);
+    }
+
 
     request_askRoutesData()
     function request_askRoutesData() {
@@ -159,12 +282,15 @@
           var route = response[routeId];
           routes_origin.push(route);
           var summary = response[routeId+'pigeonNumber'];
-          pigeonNumbers_gpsNumbers.push({'pigeonNumber':summary['recordname'],'gps_id':summary['gps_id']});
-          console.log(pigeonNumbers_gpsNumbers);
-          // pigeonNumbers.push(pigeonNumber);
-          // map_pigeonNumber_routeIndex[pigeonNumber] = routes_origin.length-1;
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime']};
+          pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
+        //   console.log(pigeonNumbers_releaseTime);
+
+          map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
+          console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
+          map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
         }
-        // tracks_showInTable(pigeonNumbers)
+        tracks_showInTable(pigeonNumbers_releaseTime)
         show_figures(routes_origin);
 
         // var routes =  Object.values(response);
@@ -182,23 +308,93 @@
       oReq.send(routeId_list.toString());
     }
 
-    function tracks_showInTable(routeId_list) {
+    function tracks_showInTable(pigeonReleaseTime_list) {
             let table_pigeonNumber_body = document.getElementById('table_pigeonNumber_body');
-            for (var i = 0; i < routeId_list.length; i++) {
-                func_table_track_addData(routeId_list[i]);
+            for (var i = 0; i < pigeonReleaseTime_list.length; i++) {
+                func_table_track_addData(pigeonReleaseTime_list[i]);
             }
-            function func_table_track_addData(routeId) {
+            function func_table_track_addData(pigeonNumGps) {
                 var row = document.createElement('tr');
                 var row_data_0 = document.createElement("INPUT");
                 row_data_0.setAttribute("type", "checkbox");
+                // row_data_0.setAttribute('id','table_pigeonNumber_body_checkbox');
+                function func_cb_checbox()
+                {
+                    // console.log('click');
+                    //todo
+                    //1 if checked show path in map ,not remove from map
+                    //2 if checked show path in speed_elevation_plot ,not remove from map
+                    if(row_data_0.checked)
+                    {
+                        var pigeonNumber = row_data_1.innerHTML;
+                        var release_time = row_data_2.innerHTML;
+                        console.log(pigeonNumber,release_time,release_time.length,typeof(release_time));
+                        for(var i_lineObject=0;i_lineObject<lineObjects_in_Map_showPaths.length;i_lineObject++)
+                        {
+                           if(lineObjects_in_Map_showPaths[i_lineObject]['pigeonNumber']==pigeonNumber&&lineObjects_in_Map_showPaths[i_lineObject]['releaseTime']== release_time)
+                            {
+                                console.log('remove polyline');
+                                map_handler.addLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var pigeonNumber = row_data_1.innerHTML;
+                        var release_time = row_data_2.innerHTML;
+                        console.log(pigeonNumber,release_time,release_time.length,typeof(release_time));
+                        for(var i_lineObject=0;i_lineObject<lineObjects_in_Map_showPaths.length;i_lineObject++)
+                        {
+                           if(lineObjects_in_Map_showPaths[i_lineObject]['pigeonNumber']==pigeonNumber&&lineObjects_in_Map_showPaths[i_lineObject]['releaseTime']== release_time)
+                            {
+                                console.log('remove polyline');
+                                map_handler.removeLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
+                            }
+                        }
+                    }
+                }
+                row_data_0.checked = true;
+                row_data_0.addEventListener('click',func_cb_checbox);
                 // row_data_0.style.position = 'absolute';
                 // row_data_0.style.top = '30%';
                 var row_data_1 = document.createElement('td');
-                row_data_1.innerHTML = routeId;
-             // row_data_1.style.textAlign = "center";
+                row_data_1.innerHTML = pigeonNumGps['pigeonNumber'];
+                row_data_1.style.textAlign = "center";
+                var row_data_2 = document.createElement('td');
+                row_data_2.innerHTML = pigeonNumGps['release_time'];
+                row_data_2.style.textAlign = "center";
 
                 row.appendChild(row_data_0);
                 row.appendChild(row_data_1);
+                row.appendChild(row_data_2);
+
+                function func_cb_row()
+                {
+                    console.log('click');
+                    //todo
+                    //1 if checked show path in map ,not remove from map
+                    //2 if checked show path in speed_elevation_plot ,not remove from map
+
+                    var pigeonNumber = row_data_1.innerHTML;
+                    var release_time = row_data_2.innerHTML;
+                    
+                    var route_index = -1;
+                    for(var i=0;i<map_pigeonNumberReleaseTime_routeIndex.length;i++)
+                    {
+                        if(map_pigeonNumberReleaseTime_routeIndex[i]['pigeonNumber']==pigeonNumber&&map_pigeonNumberReleaseTime_routeIndex[i]['release_time']==release_time)
+                        {
+                            route_index=map_pigeonNumberReleaseTime_routeIndex[i]['index'];
+                        }
+                    }
+                    if(route_index>=0)
+                    {
+                        func_update_chart_canvas_speed_elevation_forFilterRoutes(routes_origin[route_index]);
+                        chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = route_index;
+                    }
+                //     console.log(pigeonNumber,release_time,route_index);
+                //    
+                }
+                row.addEventListener('dblclick',func_cb_row);
                 table_pigeonNumber_body.appendChild(row);
             }
     }
@@ -212,22 +408,22 @@
         const demo_singleRoute = test_demo_data[0];
         console.log(demo_singleRoute.length);
         ///draw path in map
-        let div_smallMap_head = document.getElementById('Map_showPaths');
-        div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
-        div_smallMap_head.style.left = "20%";
-        // div_smallMap_head.style.top = "5%";
-        div_smallMap_head.style.position = "absolute";
-        div_smallMap_head.style.zIndex = "1";
-        let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
+        // let div_smallMap_head = document.getElementById('Map_showPaths');
+        // div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
+        // div_smallMap_head.style.left = "20%";
+        // // div_smallMap_head.style.top = "5%";
+        // div_smallMap_head.style.position = "absolute";
+        // div_smallMap_head.style.zIndex = "1";
+        // let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        }).addTo(map_handler);
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     maxZoom: 20,
+        //     // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        // }).addTo(map_handler);
 
-        showInMap(demo_singleRoute);
+        // showInMap(demo_singleRoute);
 
-        function showInMap(path,filtered_route =false) {
+        function showInMap(path,pigeonNumber,release_time,filtered_route =false) {
 
             var path_normalize = [];
             for (var i = 0; i < path.length; i++) {
@@ -245,11 +441,13 @@
 
             if(filtered_route)
             {
-              drawPath(path_normalize,'red','3');
+                var lineObject = drawPath(path_normalize,'blue','3');
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber,'releaseTime':release_time,'filtered':'true','object':lineObject});
             }
             else
             {
-              drawPath(path_normalize,'blue','1');
+                var lineObject =drawPath(path_normalize,'red','1');
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber,'releaseTime':release_time,'filtered':'false','object':lineObject});
             }
             
             function drawPath(pathLine_origin,color,weight) {
@@ -262,7 +460,52 @@
                 var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
                 // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
                 // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+                return polyline_origin;
+            }
+        }
 
+        showInMap_multi_init(test_demo_data);
+        function showInMap_multi_init(paths) {
+
+            var path_normalize_list = [];
+            for( var i=0;i<paths.length;i++)
+            {
+                var path = paths[i];
+                var path_normalize=[];
+                for (var j = 0; j < path.length; j++) {
+                    var cell = [];
+                    cell.push(parseFloat(path[j]['latitude']));
+                    cell.push(parseFloat(path[j]['longitude']));
+                    path_normalize.push(cell);
+                }
+                path_normalize_list.push(path_normalize);
+            }
+
+            console.log(path_normalize_list);
+
+            map_handler.setView(path_normalize_list[0][0], 10);
+
+            for(var i=0;i<path_normalize_list.length;i++)
+            {
+                var lineObject = drawPath(path_normalize_list[i],'red','3');
+                var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
+                console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
+                console.log(pigeonNumber_releaseTime['pigeonNumber']);
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':lineObject});
+                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);
+            }
+            
+            function drawPath(pathLine_origin,color,weight) {
+                console.log(typeof (pathLine_origin));
+                // console.log(pathLine_origin);
+                var pathLine_origin_normalized = pathLine_origin;
+                // console.log(typeof (pathLine_origin_normalized));
+                // console.log(pathLine_origin_normalized);
+
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
+                // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+                return polyline_origin;
             }
         }
 
@@ -270,7 +513,7 @@
         let soloRoute_routeAccuracy_realTime_movingPoint = L.circle([0, 0], { radius: 1600 }).addTo(map_handler);;
 
         function showInMap_movepoint(point) {
-            soloRoute_routeAccuracy_realTime_movingPoint.setLatLng(L.latLng(point[0], point[1]));
+            soloRoute_routeAccuracy_realTime_movingPoint.setLatLng(L.latLng(point['latitude'], point['longitude']));
             var zoomLevel = map_handler.getZoom();
             console.log(zoomLevel);
             if((zoomLevel-10)>0)
@@ -287,6 +530,9 @@
             this.filter_end = false;
             this.route_index = -1;
             this.startIndex = -1;
+
+            //save only filtered_route for each route
+            this.filtered_routes = {};
           }
 
           getStatus_filter()
@@ -304,6 +550,7 @@
                 this.route_index = index_inDemoRoutes;
                 this.startIndex = index_startToFilter;
 
+                
                 return true;
               }
             }
@@ -317,7 +564,11 @@
               {
                 {
                   this.filter_start = false;
-                  return test_demo_data[this.route_index].slice(this.startIndex,index_endFilter);
+                  var filted_route = test_demo_data[this.route_index].slice(this.startIndex,index_endFilter);
+
+                  this.filtered_routes[this.route_index]= filted_route;
+                  return filted_route;
+                //   return test_demo_data[this.route_index].slice(this.startIndex,index_endFilter);
                 }
               }
             }
@@ -326,36 +577,9 @@
 
         let route_filter_handler = new Route_Filter();
 
-        func_label_solo_route_SpeedElevation('70%');
-        //draw a label for route accuracy
-        function func_label_solo_route_SpeedElevation(top) {
-            const newLabel = document.createElement("label");
-            newLabel.style.width = '100%';
-            newLabel.style.height = '48px';
-            newLabel.style.left = "0%";
-            newLabel.style.top = top;
-            newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
-            newLabel.style.position = "absolute";
-            newLabel.style.zIndex = "1";
-            newLabel.innerHTML = "速度.海拔.地面海拔的對比圖";
-            newLabel.style.textAlign = "left";
-            newLabel.style.fontSize = '36px';
-
-            document.body.appendChild(newLabel);
-
-            var dialog = document.getElementById('dialog_altitudeFromEarth');
-            newLabel.addEventListener('click', () => {
-                if (typeof dialog.showModal === "function") {
-                    dialog.showModal();
-                } else {
-                    alert("Sorry, the <dialog> API is not supported by this browser.");
-                }
-            });
-        }
-
-        func_solo_route_SpeedElevation("80%");
+        func_solo_route_SpeedElevation(test_demo_data[0]);
         ///functions for solo route's figures analysis
-        function func_solo_route_SpeedElevation(top) {
+        function func_solo_route_SpeedElevation(demo_singleRoute) {
             var data_normalized = []
 
             for (var i = 0; i < demo_singleRoute.length; i++) {
@@ -371,16 +595,6 @@
             }
             var dataY_elevation = makeYData_elevation();
             //draw in plot
-            //set chart
-            var canvas_routeEff_speed_elevation = document.createElement('div');
-            canvas_routeEff_speed_elevation.style.width = '99%';
-            canvas_routeEff_speed_elevation.style.height = '30%';
-            canvas_routeEff_speed_elevation.setAttribute("id", "canvas_routeEff_speed_elevation");
-            canvas_routeEff_speed_elevation.style.left = "0%";
-            // console.log((250+(i-1)*50).toString(10));
-            canvas_routeEff_speed_elevation.style.top = top;
-            canvas_routeEff_speed_elevation.style.position = "absolute";
-            document.body.appendChild(canvas_routeEff_speed_elevation);
 
             function makeYData_speed() {
                 var result = []
@@ -421,7 +635,7 @@
                     events: {
                       mouseMove: function (event, chartContext, config) {
                           try {
-                              showInMap_movepoint(data_normalized[config['dataPointIndex']]);
+                              showInMap_movepoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);
                           } catch (e) {
                               console.log(e); // Error: hi
                           }
@@ -432,12 +646,15 @@
                               if(route_filter_handler.getStatus_filter() == false)
                               {
                                 console.log(config['dataPointIndex']);
-                                route_filter_handler.start_filter(0, config['dataPointIndex']);
+                                route_filter_handler.start_filter(chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex, config['dataPointIndex']);
                               }
                               else
                               {
                                 var filtered_route =  route_filter_handler.endFilter_GetFilteredRoutes(config['dataPointIndex']);
-                                showInMap(filtered_route,true);
+                                var cur_routeIndex = chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex;
+                                var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['pigeonNumber'];
+                                var release_time = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['release_time'];
+                                showInMap(filtered_route,pigeonNumber,release_time,true);
                                 show_figures_byFilteredRoutes_soloPigeon_routeEffProcess([filtered_route]);
                               }
                             } catch (e) {
@@ -470,11 +687,16 @@
                     floating: true,
                     offsetY: -25,
                     offsetX: -5
+                },
+                xaxis:{
+
                 }
             };
 
-            var chart = new ApexCharts(canvas_routeEff_speed_elevation, options);
-            chart.render();
+            chart_canvas_speed_elevation_forFilterRoutes = new ApexCharts(canvas_speed_elevation_forFilterRoutes, options);
+            chart_canvas_speed_elevation_forFilterRoutes.render();
+            chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = 0;
+
 
             function draw_earthElevation(elevations) {
                 var normalized_elevations = [];

@@ -68,13 +68,12 @@ class DBManagement ():
         res = json.loads(res)
         # print(res,type(res))
         # self.activitys.append(res)
-        self.activities += self.activities+res
-        # print(self.activitys)
-        for activity in self.activities:
-            self.api_getActivitity(activity['activity_id'], self.mxid, activity['activity_name'],
-                                   activity['release_date'], activity['release_time'])
-            self.api_readModule(activity['activity_id'])
-
+        # self.activities = self.activities+res
+        # print(self.activities)
+        for activity in res:
+            if(self.api_getActivitity(activity['activity_id'], self.mxid, activity['activity_name'],activity['release_date'], activity['release_time'])):          
+                self.activities = self.activities + [activity]
+                self.api_readModule(activity['activity_id'])
         return res
 
     def api_readTrainRecord(self, activity_id, module_id):
@@ -88,7 +87,7 @@ class DBManagement ():
 
         x = requests.post(url, data=myobj)
         res = x.json()
-        print(res,type(res))
+        # print(res,type(res))
         res = json.loads(res)
         for trainRecord in res:
             self.data_routes_summaryData_add(activity_id,module_id,trainRecord['trainrecordid'],trainRecord)
@@ -111,10 +110,8 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        # print('activity:', res)
-        # self.activitys.append(res)
-        # self.activitys += self.activitys+res
-        # print(self.activitys)
+        print('activity:', res)
+
         return res
 
     def api_readCloudLocusText(self, activity_id, module_id, trainRecord_id):
@@ -154,7 +151,7 @@ class DBManagement ():
 
     def api_readModule(self, activity_id):
         dataList = []
-        with open('csvfiles/gpsId_ringId.csv', newline='') as csvfile:
+        with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
 
             for row in spamreader:
@@ -168,7 +165,7 @@ class DBManagement ():
                 dataList.append(cell)
 
         for data in dataList:
-            print(data)
+            # print(data)
             url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule'
 
             myobj = {
@@ -184,7 +181,7 @@ class DBManagement ():
             # print('module:', res)
             for module in res:
                 # print('module_id',module['modlueid'])
-                print(module)
+                # print(module)
                 self.modules[module['moduleid']] = module
                 # print('module_id:', module['moduleid'])
                 self.api_readTrainRecord(activity_id, module['moduleid'])
@@ -207,7 +204,7 @@ class DBManagement ():
                 route_data.append(cell)
         # print(len(route_data))
         self.routes[route_key] = route_data
-        print('route_key',route_key)
+        # print('route_key',route_key)
     
     def data_routes_summaryData_add(self,activity_id,module_id,trainrecord_id,data):
         normalized_data = data
@@ -226,7 +223,7 @@ class DBManagement ():
         return self.routes_summarydata[id]
     
     def read_routes_by_routeId(self,routeId):
-        print('route_key read:',routeId)
+        # print('route_key read:',routeId)
         return self.routes[routeId]
 
     def getActivities(self):

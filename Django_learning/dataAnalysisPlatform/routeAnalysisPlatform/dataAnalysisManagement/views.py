@@ -79,6 +79,6 @@ def tracksData(request):
         for routeId in routeId_list:
             context[routeId] = dbManager.read_routes_by_routeId(routeId)
             context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
-            print(context[routeId+'pigeonNumber'])
+            # print(context[routeId+'pigeonNumber'])
     # print(context)
     return JsonResponse(context)
