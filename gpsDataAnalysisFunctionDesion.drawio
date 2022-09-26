@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-22T02:25:44.619Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="xH5sRBuIIcBDIjK2mo2q" version="20.3.3" type="github" pages="14">
+<mxfile host="app.diagrams.net" modified="2022-09-26T01:36:25.736Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="J8pKKsSDaA76MH8I0Rcn" version="20.3.3" type="github" pages="14">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="2489" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2667,7 +2667,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Pf9R8zVPO51nir5uivdm" name="數據分析平台-系統設計">
-    <mxGraphModel dx="2815" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2489" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2898,11 +2898,29 @@
         <mxCell id="Ulj-ZewbeDp9gI6r730D-1" value="可做：特徵值點擊次數統計" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1180" y="920" width="340" height="50" as="geometry" />
         </mxCell>
+        <mxCell id="YGeXDqFC6O6l-8Eru0EW-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2380" y="450" width="570" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="YGeXDqFC6O6l-8Eru0EW-2" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="HuKrOTWCfkknvo2ka51l-2" target="YGeXDqFC6O6l-8Eru0EW-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2540" y="810" as="sourcePoint" />
+            <mxPoint x="2590" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YGeXDqFC6O6l-8Eru0EW-3" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;路線裁減（使用速度，海拔圖）&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2430" y="595" width="420" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YGeXDqFC6O6l-8Eru0EW-4" value="路線列表" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="2430" y="510" width="420" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YGeXDqFC6O6l-8Eru0EW-5" value="生成特徵圖（裁減後的路線）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="2430" y="690" width="420" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="CeGPMkI28dLQCA-LZsuS" name="數據分析平台-流程圖">
-    <mxGraphModel dx="1348" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
