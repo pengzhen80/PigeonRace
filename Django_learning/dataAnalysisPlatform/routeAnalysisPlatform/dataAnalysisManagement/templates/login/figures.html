@@ -54,10 +54,11 @@
     <tbody id="table_pigeonNumber_body">
     </tbody>
   </table>
+  <button id="button_showFigures_FilteredRoutes"></button>
   <div id="Map_showPaths"></div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
-  <div id="canvas_speed_elevation_forFilterRoutes"></div>
+  <div id="canvas_speed_elevation_forFilterRoutes">顯示特徵圖</div>
   <dialog id="dialog_routeEfficiency">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑效率:</label>
@@ -266,6 +267,26 @@
                         data: dataY_elevation,
                     },
         ]);
+    }
+
+    //show figures 
+    let button_showFigures_FilteredRoutes = document.getElementById('button_showFigures_FilteredRoutes');
+    function func_cb_button_showFigures_FilteredRoutes()
+    {
+        // var index_checked = [];
+        // var rows = document.getElementById("table_pigeonNumber_body").rows;
+        // console.log(rows);
+        // for (var i = 0; i < rows.length; i++) {
+        //         console.log(rows[i]);
+        //         var checkbox = rows[i].getElementsByTagName("input")[0];
+        //         // console.log(checkbox);
+        //         console.log(checkbox.checked);
+        //         if (checkbox.checked == true) {
+        //             index_checked.push(i);
+        //         }
+        // }
+        // console.log(index_checked);
+        // show_figures_byFilteredRoutes_soloPigeon_routeEffProcess();
     }
 
 
@@ -655,7 +676,7 @@
                                 var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['pigeonNumber'];
                                 var release_time = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['release_time'];
                                 showInMap(filtered_route,pigeonNumber,release_time,true);
-                                show_figures_byFilteredRoutes_soloPigeon_routeEffProcess([filtered_route]);
+                                // show_figures_byFilteredRoutes_soloPigeon_routeEffProcess([filtered_route]);
                               }
                             } catch (e) {
                                 console.log(e); // Error: hi
