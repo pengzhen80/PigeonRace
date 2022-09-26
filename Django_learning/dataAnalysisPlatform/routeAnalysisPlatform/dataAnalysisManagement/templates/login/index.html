@@ -122,7 +122,7 @@
             var activity_checked_list = [];
             for(i =0;i<index_checked.length;i++)
             {
-                activity_checked_list.push(normalized_activities[i]['activity_id']);
+                activity_checked_list.push(normalized_activities[index_checked[i]]['activity_id']);
             }
 
             window.open('login/tracks/'+activity_checked_list.toString());

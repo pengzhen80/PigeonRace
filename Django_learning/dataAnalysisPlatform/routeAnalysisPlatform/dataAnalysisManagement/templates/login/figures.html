@@ -14,14 +14,16 @@
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <style>
-    .anybutton {
-      bottom: 5%;
-      left: 45%;
-      /* width:100px;
-        height:40px; */
-      position: relative;
-      z-index: 2;
-      /* background: orange;  */
+    .button {
+            background-color: #FFED86;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
     }
     table {
         border-collapse: collapse;
@@ -54,11 +56,13 @@
     <tbody id="table_pigeonNumber_body">
     </tbody>
   </table>
-  <button id="button_showFigures_FilteredRoutes"></button>
+  <br>
+  </br>
+  <button id="button_showFigures_FilteredRoutes" class="button">顯示特徵圖</button>
   <div id="Map_showPaths"></div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
-  <div id="canvas_speed_elevation_forFilterRoutes">顯示特徵圖</div>
+  <div id="canvas_speed_elevation_forFilterRoutes"></div>
   <dialog id="dialog_routeEfficiency">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑效率:</label>
@@ -267,26 +271,6 @@
                         data: dataY_elevation,
                     },
         ]);
-    }
-
-    //show figures 
-    let button_showFigures_FilteredRoutes = document.getElementById('button_showFigures_FilteredRoutes');
-    function func_cb_button_showFigures_FilteredRoutes()
-    {
-        // var index_checked = [];
-        // var rows = document.getElementById("table_pigeonNumber_body").rows;
-        // console.log(rows);
-        // for (var i = 0; i < rows.length; i++) {
-        //         console.log(rows[i]);
-        //         var checkbox = rows[i].getElementsByTagName("input")[0];
-        //         // console.log(checkbox);
-        //         console.log(checkbox.checked);
-        //         if (checkbox.checked == true) {
-        //             index_checked.push(i);
-        //         }
-        // }
-        // console.log(index_checked);
-        // show_figures_byFilteredRoutes_soloPigeon_routeEffProcess();
     }
 
 
@@ -597,6 +581,26 @@
         }
 
         let route_filter_handler = new Route_Filter();
+            //show figures 
+        let button_showFigures_FilteredRoutes = document.getElementById('button_showFigures_FilteredRoutes');
+        function func_cb_button_showFigures_FilteredRoutes()
+        {
+            //show figures by filtered routes
+            var pigeonNumbers =[];
+            var release_time_list = [];
+            var filtered_route_list =[];
+            for (const [routeIndex, filtered_route] of Object.entries(route_filter_handler.filtered_routes)) {
+                var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['pigeonNumber'];
+                var ReleaseTime = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['release_time'];
+
+                pigeonNumbers.push(pigeonNumber);
+                release_time_list.push(ReleaseTime);
+                filtered_route_list.push(filtered_route);
+            }
+            //todo:show in figures
+            show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,filtered_route_list);
+        }
+        button_showFigures_FilteredRoutes.addEventListener('click',func_cb_button_showFigures_FilteredRoutes);
 
         func_solo_route_SpeedElevation(test_demo_data[0]);
         ///functions for solo route's figures analysis
@@ -794,7 +798,7 @@
         }
     }
     
-    function show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(test_demo_data)
+    function show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,test_demo_data)
     {
       var pre_label = document.getElementById('label_soloPigeon_routeEffProcess');
       if(pre_label)
@@ -857,17 +861,34 @@
               var baselineDistance = turf.distance(start_point, end_Point, { units: 'kilometers' }) * 1000;
 
               var realDistance = 0;
-              for (var j = 0; j < cur_route.length; j++) {
-                  realDistance += parseFloat(test_demo_data[i][j]['distance']);
+              var realDistance_turf = 0;
+              for (var j = 0; j < cur_route.length-1; j++) {
+                // console.log(test_demo_data[i][j]['distance']);
+                realDistance += parseFloat(test_demo_data[i][j]['distance']);
+
+                var start_point = turf.point(cur_route[j]);
+                var end_Point =turf.point(cur_route[j+1]);
+                // console.log(turf.distance(start_point, end_Point, { units: 'kilometers' }) * 1000);
+                realDistance_turf += turf.distance(start_point, end_Point, { units: 'kilometers' }) * 1000;
               }
-              var routeEff = baselineDistance / realDistance;
+              console.log(baselineDistance,realDistance,realDistance_turf);
+              var routeEff = baselineDistance / realDistance_turf;
               routes_effs.push(routeEff.toFixed(4));
           }
 
           var data_x = [];
-          for (var i = 0; i < routes_effs.length; i++) {
-              data_x.push(i);
+          for (var i = 0; i < pigeonNumbers.length; i++) {
+            //   console.log(pigeonNumbers[i],release_time_list[i]);
+              data_x.push(pigeonNumbers[i]+' '+release_time_list[i]);
           }
+          console.log(data_x);
+
+          var make_data = [];
+          for(var i=0;i<routes_effs.length;i++)
+          {
+            make_data.push([data_x[i],routes_effs[i]]);
+          }
+          console.log(make_data);
 
           draw_line_routeEffs();
 
@@ -876,6 +897,7 @@
                   series: [{
                       name: "路徑效率",
                       data: routes_effs
+                    // data:make_data
                   }],
                   chart: {
                       // height: 800,
@@ -901,7 +923,8 @@
                       },
                   },
                   xaxis: {
-                      numeric: data_x,
+                    type: 'category',
+                    categories: data_x,
                   }
               };
 
