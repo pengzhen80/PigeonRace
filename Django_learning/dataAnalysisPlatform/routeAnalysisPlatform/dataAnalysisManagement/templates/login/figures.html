@@ -24,6 +24,7 @@
             display: inline-block;
             font-size: 16px;
             position: relative;
+            cursor: pointer;
     }
     table {
         border-collapse: collapse;
@@ -45,10 +46,10 @@
         display: block;
         /* width: 130px; */
         width : 100%;
-        height: '48px';
+        height: 48px;
         background-color : rgba(106,90,205,0.5);
         text-align: "left";
-        font-size : '36px';
+        font-size : 36px;
         cursor : help;
     }
     .myDiv_map {
@@ -67,7 +68,7 @@
     }
     .myDiv_chart {
         width:100%;
-        height: 80%;
+        height: 40%;
     }
   </style>
 </head>
@@ -97,6 +98,21 @@
     <label id="label_solo_route_SpeedElevation" class="label_plots">速度.海拔</label>
     <br></br>
     <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
+  </div>
+  <div id ='routeEff_Polyline_plot' class = 'myDiv_plots' >
+    <label id="label_routeEff_Polyline_plot" class="label_plots">路徑效率折線圖</label>
+    <br></br>
+    <div id="canvas_routeEff_Polyline_plot" class="myDiv_chart"></div>
+  </div>
+  <!-- <div id ='distancefrombeeline_realtime_boxplot' class = 'myDiv_plots' >
+    <label id="label_distancefrombeeline_realtime_boxplot" class="label_plots">即時路徑偏移量箱圖</label>
+    <br></br>
+    <div id="canvas_distancefrombeeline_realtime_boxplot" class="myDiv_chart"></div>
+  </div> -->
+  <div id ='multiRoutes_routeSimilarity' class = 'myDiv_plots' >
+    <label id="label_multiRoutes_routeSimilarity" class="label_plots">路徑相似度</label>
+    <br></br>
+    <div id="canvas_multiRoutes_routeSimilarity" class="myDiv_chart"></div>
   </div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
@@ -268,15 +284,12 @@
             return result;
         }
         var dataY_speed = makeYData_speed();
-
-        function makeYData_elevation() {
-            var result = []
-            for (var i = 0; i < demo_singleRoute.length; i++) {
-                result.push(demo_singleRoute[i]['elevation'] / 1000)
-            }
-            return result;
+        // console.log(dataY_elevation,dataY_speed);
+        var data_x = [];
+        for (var i = 0; i < demo_singleRoute.length; i++) {
+                data_x.push(demo_singleRoute[i]['time']);
         }
-        var dataY_elevation = makeYData_elevation();
+
         chart_canvas_speed_elevation_forFilterRoutes.updateSeries([
                     {
                         name: '速度(km/min)',
@@ -287,6 +300,13 @@
                         data: dataY_elevation,
                     },
         ]);
+
+        chart_canvas_speed_elevation_forFilterRoutes.updateOptions({
+            xaxis: {
+                    type: 'category',
+                    categories: data_x,
+            }
+        });
     }
 
 
@@ -409,10 +429,11 @@
                     }
                     if(route_index>=0)
                     {
+                        // console.log(routes_origin[route_index]);
                         func_update_chart_canvas_speed_elevation_forFilterRoutes(routes_origin[route_index]);
                         chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = route_index;
                     }
-                //     console.log(pigeonNumber,release_time,route_index);
+                    console.log(pigeonNumber,release_time,route_index);
                 //    
                 }
                 row.addEventListener('dblclick',func_cb_row);
@@ -428,21 +449,6 @@
         ///set source data
         const demo_singleRoute = test_demo_data[0];
         console.log(demo_singleRoute.length);
-        ///draw path in map
-        // let div_smallMap_head = document.getElementById('Map_showPaths');
-        // div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
-        // div_smallMap_head.style.left = "20%";
-        // // div_smallMap_head.style.top = "5%";
-        // div_smallMap_head.style.position = "absolute";
-        // div_smallMap_head.style.zIndex = "1";
-        // let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
-
-        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     maxZoom: 20,
-        //     // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        // }).addTo(map_handler);
-
-        // showInMap(demo_singleRoute);
 
         function showInMap(path,pigeonNumber,release_time,filtered_route =false) {
 
@@ -536,7 +542,7 @@
         function showInMap_movepoint(point) {
             soloRoute_routeAccuracy_realTime_movingPoint.setLatLng(L.latLng(point['latitude'], point['longitude']));
             var zoomLevel = map_handler.getZoom();
-            console.log(zoomLevel);
+            // console.log(zoomLevel);
             if((zoomLevel-10)>0)
             {
               soloRoute_routeAccuracy_realTime_movingPoint.setRadius(300/(zoomLevel-10));
@@ -615,6 +621,8 @@
             }
             //todo:show in figures
             show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,filtered_route_list);
+            // show_figures_byFilteredRoutes_distancefrombeeline_realtime_boxplot(pigeonNumbers,release_time_list,filtered_route_list);
+            show_figures_byFilteredRoutes_multiRoutes_routeSimilarity(pigeonNumbers,release_time_list,filtered_route_list);
         }
         button_showFigures_FilteredRoutes.addEventListener('click',func_cb_button_showFigures_FilteredRoutes);
 
@@ -823,31 +831,18 @@
     
     function show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,test_demo_data)
     {
-      var pre_label = document.getElementById('label_soloPigeon_routeEffProcess');
-      if(pre_label)
-      {
-        pre_label.remove();
-      }
-      func_label_soloPigeon_routeEff_process('150%');
+    //   var pre_label = document.getElementById('label_soloPigeon_routeEffProcess');
+    //   if(pre_label)
+    //   {
+    //     pre_label.remove();
+    //   }
+      func_label_soloPigeon_routeEff_process();
       //draw a label for route accuracy
-      function func_label_soloPigeon_routeEff_process(top) {
-          const newLabel = document.createElement("label");
-          newLabel.setAttribute('id','label_soloPigeon_routeEffProcess')
-          newLabel.style.width = '100%';
-          newLabel.style.height = '48px';
-          newLabel.style.left = "0%";
-          newLabel.style.top = top;
-          newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
-          newLabel.style.position = "absolute";
-          newLabel.style.zIndex = "1";
-          newLabel.innerHTML = "單鴿路徑效率process圖";
-          newLabel.style.textAlign = "left";
-          newLabel.style.fontSize = '36px';
+      function func_label_soloPigeon_routeEff_process() {
 
-          document.body.appendChild(newLabel);
-
-          var dialog = document.getElementById('dialog_routeEfficiency');
-          newLabel.addEventListener('click', () => {
+        var label = document.getElementById('label_routeEff_Polyline_plot');
+        var dialog = document.getElementById('dialog_routeEfficiency');
+        label.addEventListener('click', () => {
               if (typeof dialog.showModal === "function") {
                   dialog.showModal();
               } else {
@@ -856,14 +851,14 @@
           });
       }
 
-      func_multiRoutes_routeEff_process('170%');
+      func_multiRoutes_routeEff_process();
 
-      function func_multiRoutes_routeEff_process(top) {    
-          var pre_canvas = document.getElementById('canvas_soloPigeon_routeEffProcess');
-          if(pre_canvas)
-          {
-            pre_canvas.remove();
-          }
+      function func_multiRoutes_routeEff_process() {    
+        //   var pre_canvas = document.getElementById('canvas_routeEff_Polyline_plot');
+        //   if(pre_canvas)
+        //   {
+        //     pre_canvas.remove();
+        //   }
           //normalize routes
           var normalized_multiroutes = [];
           for (var i = 0; i < test_demo_data.length; i++) {
@@ -896,6 +891,7 @@
               }
               console.log(baselineDistance,realDistance,realDistance_turf);
               var routeEff = baselineDistance / realDistance_turf;
+            //   var routeEff = baselineDistance / realDistance;
               routes_effs.push(routeEff.toFixed(4));
           }
 
@@ -923,7 +919,7 @@
                     // data:make_data
                   }],
                   chart: {
-                      // height: 800,
+                      height: 350,
                       type: 'line',
                       zoom: {
                           enabled: false
@@ -936,7 +932,7 @@
                       curve: 'straight'
                   },
                   title: {
-                      text: '路徑效率process圖:路徑效率/放飛次數',
+                      text: '路徑效率process圖:路徑效率/放飛時間',
                       align: 'middle'
                   },
                   grid: {
@@ -951,23 +947,253 @@
                   }
               };
 
-
-              //set chart
-              var canvas_routeEffs_process = document.createElement('div');
-              canvas_routeEffs_process.style.width = '50%';
-              canvas_routeEffs_process.style.height = '50%';
-              canvas_routeEffs_process.setAttribute("id", "canvas_soloPigeon_routeEffProcess");
-              canvas_routeEffs_process.style.left = "30%";
-              // console.log((250+(i-1)*50).toString(10));
-              canvas_routeEffs_process.style.top = top;
-              canvas_routeEffs_process.style.position = "absolute";
-              document.body.appendChild(canvas_routeEffs_process);
-              var chart = new ApexCharts(canvas_routeEffs_process, options);
-              chart.render();
+            var canvas_routeEff_Polyline_plot = document.getElementById('canvas_routeEff_Polyline_plot');
+            var chart = new ApexCharts(canvas_routeEff_Polyline_plot, options);
+            chart.render();
           }
 
       }
     }
+
+    function show_figures_byFilteredRoutes_distancefrombeeline_realtime_boxplot(pigeonNumbers,release_time_list,test_demo_data)
+    {
+
+      func_label_distancefrombeeline_realtime_boxplot();
+      //draw a label for route accuracy
+      function func_label_distancefrombeeline_realtime_boxplot() {
+
+        var label = document.getElementById('label_distancefrombeeline_realtime_boxplot');
+        var dialog = document.getElementById('dialog_routeEfficiency');
+        label.addEventListener('click', () => {
+              if (typeof dialog.showModal === "function") {
+                  dialog.showModal();
+              } else {
+                  alert("Sorry, the <dialog> API is not supported by this browser.");
+              }
+          });
+      }
+
+      func_multiRoutes_distancefrombeeline_realtime_boxplot();
+
+      function func_multiRoutes_distancefrombeeline_realtime_boxplot() {    
+          var normalized_multiroutes = [];
+          for (var i = 0; i < test_demo_data.length; i++) {
+              var normalized_route = [];
+              for (var j = 0; j < test_demo_data[i].length; j++) {
+                  normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+              }
+              normalized_multiroutes.push(normalized_route);
+          }
+          console.log(normalized_multiroutes);
+
+          //calculate route effs
+          var routeEff_list_realtime_multi = [];
+          for (var i = 0; i < normalized_multiroutes.length; i++) {
+
+            var cur_route = normalized_multiroutes[i];
+            var baseLine = turf.lineString([cur_route[0], cur_route[cur_route.length - 1]]);
+            console.log(cur_route.join());
+            var routeEff_list_realtime = [];
+            var total_distance = 0;
+            for (var j = 0; j < cur_route.length; j++) {
+                var pt = turf.point(cur_route[j]);
+                // console.log(cur_route[j]);
+                //distance to baseline
+                var distanceToLine = turf.pointToLineDistance(pt, baseLine, {units: 'kilometers'});
+                console.log(j,cur_route[j],distanceToLine);
+                routeEff_list_realtime.push(distanceToLine.toFixed(3));
+            }
+            routeEff_list_realtime_multi.push(routeEff_list_realtime);
+          }
+          console.log(routeEff_list_realtime_multi);
+
+          var data_x = [];
+          for (var i = 0; i < pigeonNumbers.length; i++) {
+            //   console.log(pigeonNumbers[i],release_time_list[i]);
+              data_x.push(pigeonNumbers[i]+' '+release_time_list[i]);
+          }
+          console.log(data_x);
+
+
+        func_draw_boxplot();
+
+        function func_draw_boxplot() {
+            //set options
+            var options = {
+                series: [{
+                    name: 'box',
+                    type: 'boxPlot',
+                    data: [
+                    ]
+                },],
+                chart: {
+                    type: 'boxPlot',
+                    height: 350,
+                },
+                colors: ['#008FFB', '#FEB019'],
+                title: {
+                    text: '平均路徑距離',
+                    align: 'middle'
+                },
+                tooltip: {
+                    shared: false,
+                    intersect: true
+                },
+                yaxis: {
+                    // min: 0,
+                    // max: 1000,
+                    type: 'numeric',
+                }
+            }; 
+
+            //sort distances
+            var routeEff_list_realtime_multi_sorted = [];
+            for (var i = 0; i < routeEff_list_realtime_multi.length; i++) {
+                routeEff_list_realtime_multi_sorted.push(routeEff_list_realtime_multi[i].sort(function (a, b) { return a - b }));
+            }
+            console.log(routeEff_list_realtime_multi_sorted);
+
+            for (var i = 0; i < routeEff_list_realtime_multi_sorted.length; i++) {
+                var data = routeEff_list_realtime_multi_sorted[i];
+                var min = data[0];
+                var q1 = data[Math.floor(data.length / 4)];
+                var median = data[Math.floor(data.length / 2)];
+                var q3 = data[Math.floor(data.length * 3 / 4)];
+                var max = data[data.length - 1];
+
+                options.series[0].data.push({ 'x': i, 'y': [min, q1, median, q3, max] });
+            }
+            console.log(options.series[0].data);
+            var canvas_distancefrombeeline_realtime_boxplot = document.getElementById('canvas_distancefrombeeline_realtime_boxplot');
+            var chart = new ApexCharts(canvas_distancefrombeeline_realtime_boxplot, options);
+
+            chart.render();
+        }
+      }
+    }
+
+    function show_figures_byFilteredRoutes_multiRoutes_routeSimilarity(pigeonNumbers,release_time_list,test_demo_data)
+    {
+
+      func_label_multiRoutes_routeSimilarity();
+      //draw a label for route accuracy
+      function func_label_multiRoutes_routeSimilarity() {
+
+        var label = document.getElementById('label_multiRoutes_routeSimilarity');
+        var dialog = document.getElementById('dialog_routeSimilarity');
+        label.addEventListener('click', () => {
+              if (typeof dialog.showModal === "function") {
+                  dialog.showModal();
+              } else {
+                  alert("Sorry, the <dialog> API is not supported by this browser.");
+              }
+          });
+      }
+
+      func_multiRoutes_routeSimilarity();
+
+      function func_multiRoutes_routeSimilarity() {    
+          var normalized_multiroutes = [];
+          for (var i = 0; i < test_demo_data.length; i++) {
+              var normalized_route = [];
+              for (var j = 0; j < test_demo_data[i].length; j++) {
+                  normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+              }
+              normalized_multiroutes.push(normalized_route);
+          }
+          console.log(normalized_multiroutes);
+
+          //calculate route effs
+          var distance_point_toBaseLine_multi = [];
+          for (var i = 0; i < normalized_multiroutes.length-1; i++) {
+            var base_route = normalized_multiroutes[i];
+            var cur_route = normalized_multiroutes[i+1];
+            var baseLine = turf.lineString(base_route);
+            // console.log(cur_route.join());
+            var distance_point_toBaseLine = [];
+            for (var j = 0; j < cur_route.length; j++) {
+                var pt = turf.point(cur_route[j]);
+                // console.log(cur_route[j]);
+                //distance to baseline
+                var distanceToLine = turf.pointToLineDistance(pt, baseLine, {units: 'kilometers'});
+                console.log(j,cur_route[j],distanceToLine);
+                distance_point_toBaseLine.push(distanceToLine.toFixed(3));
+            }
+            distance_point_toBaseLine_multi.push(distance_point_toBaseLine);
+          }
+          console.log(distance_point_toBaseLine_multi);
+
+          var data_x = [];
+          for (var i = 0; i < pigeonNumbers.length-1; i++) {
+            //   console.log(pigeonNumbers[i],release_time_list[i]);
+              data_x.push(pigeonNumbers[i]+' '+release_time_list[i]+'   vs  '+pigeonNumbers[i+1]+' '+release_time_list[i+1]);
+          }
+          console.log(data_x);
+
+
+        func_draw_boxplot();
+
+        function func_draw_boxplot() {
+            //set options
+            var options = {
+                series: [{
+                    name: 'box',
+                    type: 'boxPlot',
+                    data: [
+                    ]
+                },],
+                chart: {
+                    type: 'boxPlot',
+                    height: 350,
+                },
+                colors: ['#008FFB', '#FEB019'],
+                title: {
+                    text: '平均路徑距離(km)',
+                    align: 'middle'
+                },
+                tooltip: {
+                    shared: false,
+                    intersect: true
+                },
+                yaxis: {
+                    // min: 0,
+                    // max: 1000,
+                    type: 'numeric',
+                },
+                // xaxis: {
+                //     type: 'category',
+                //     categories: data_x,
+                // }
+            }; 
+
+            //sort distances
+            var distance_point_toBaseLine_multi_sorted = [];
+            for (var i = 0; i < distance_point_toBaseLine_multi.length; i++) {
+                distance_point_toBaseLine_multi_sorted.push(distance_point_toBaseLine_multi[i].sort(function (a, b) { return a - b }));
+            }
+            console.log(distance_point_toBaseLine_multi_sorted);
+
+            for (var i = 0; i < distance_point_toBaseLine_multi_sorted.length; i++) {
+                var data = distance_point_toBaseLine_multi_sorted[i];
+                var min = data[0];
+                var q1 = data[Math.floor(data.length / 4)];
+                var median = data[Math.floor(data.length / 2)];
+                var q3 = data[Math.floor(data.length * 3 / 4)];
+                var max = data[data.length - 1];
+
+                // options.series[0].data.push({ 'x': i, 'y': [min, q1, median, q3, max] });
+                options.series[0].data.push({ 'x': data_x[i], 'y': [min, q1, median, q3, max] });
+            }
+            console.log(options.series[0].data);
+            var canvas_multiRoutes_routeSimilarity = document.getElementById('canvas_multiRoutes_routeSimilarity');
+            var chart = new ApexCharts(canvas_multiRoutes_routeSimilarity, options);
+
+            chart.render();
+        }
+      }
+    }
+
+    
   </script>
 </body>
 
