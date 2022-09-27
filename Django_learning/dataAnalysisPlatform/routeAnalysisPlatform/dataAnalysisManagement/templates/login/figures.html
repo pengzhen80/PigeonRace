@@ -40,6 +40,35 @@
     tr:hover {
         background-color: coral;
     }
+
+    .label_plots {
+        display: block;
+        /* width: 130px; */
+        width : 100%;
+        height: '48px';
+        background-color : rgba(106,90,205,0.5);
+        text-align: "left";
+        font-size : '36px';
+        cursor : help;
+    }
+    .myDiv_map {
+        border: 1px outset black;
+        background-color: lightblue;    
+        text-align: center;
+        width:70%;
+        height: 500px;
+    }
+    .myDiv_plots {
+        border: 1px outset black;
+        background-color: transparent;    
+        text-align: center;
+        width:100%;
+        height: 500px;
+    }
+    .myDiv_chart {
+        width:100%;
+        height: 80%;
+    }
   </style>
 </head>
 
@@ -59,10 +88,19 @@
   <br>
   </br>
   <button id="button_showFigures_FilteredRoutes" class="button">顯示特徵圖</button>
-  <div id="Map_showPaths"></div>
+  <br>
+  </br>
+  <div id="Map_showPaths" class="myDiv_map"></div>
+  <br>
+  </br>
+  <div id ='solo_route_SpeedElevation' class = 'myDiv_plots' >
+    <label id="label_solo_route_SpeedElevation" class="label_plots">速度.海拔</label>
+    <br></br>
+    <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
+  </div>
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
-  <div id="canvas_speed_elevation_forFilterRoutes"></div>
+  <!-- <div id="canvas_speed_elevation_forFilterRoutes"></div> -->
   <dialog id="dialog_routeEfficiency">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑效率:</label>
@@ -170,12 +208,12 @@
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
 
-    let div_smallMap_head = document.getElementById('Map_showPaths');
-    div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
-    div_smallMap_head.style.left = "20%";
+    // let div_smallMap_head = document.getElementById('Map_showPaths');
+    // div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
+    // div_smallMap_head.style.left = "20%";
     // div_smallMap_head.style.top = "5%";
-    div_smallMap_head.style.position = "absolute";
-    div_smallMap_head.style.zIndex = "1";
+    // div_smallMap_head.style.position = "absolute";
+    // div_smallMap_head.style.zIndex = "1";
     let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -186,26 +224,12 @@
     // let table_pigeonNumber_body_checkbox_object_list = [];
 
     //for canvas_speed_elevation_forFilterRoutes
-    func_label_solo_route_SpeedElevation('70%');
+    func_label_solo_route_SpeedElevation();
     //draw a label for route accuracy
-    function func_label_solo_route_SpeedElevation(top) {
-            const newLabel = document.createElement("label");
-            newLabel.style.width = '100%';
-            newLabel.style.height = '48px';
-            newLabel.style.left = "0%";
-            newLabel.style.top = top;
-            newLabel.style.backgroundColor = "rgba(106,90,205,0.5)";
-            newLabel.style.position = "absolute";
-            newLabel.style.zIndex = "1";
-            newLabel.innerHTML = "速度.海拔.地面海拔的對比圖";
-            newLabel.style.textAlign = "left";
-            newLabel.style.fontSize = '36px';
-            newLabel.style.cursor = "url('cursor url with protocol'), help";
-
-            document.body.appendChild(newLabel);
-
+    function func_label_solo_route_SpeedElevation() {
+            var label = document.getElementById('label_solo_route_SpeedElevation');
             var dialog = document.getElementById('dialog_altitudeFromEarth');
-            newLabel.addEventListener('click', () => {
+            label.addEventListener('click', () => {
                 if (typeof dialog.showModal === "function") {
                     dialog.showModal();
                 } else {
@@ -215,14 +239,6 @@
     }
     //set chart
     var canvas_speed_elevation_forFilterRoutes = document.getElementById('canvas_speed_elevation_forFilterRoutes');
-    canvas_speed_elevation_forFilterRoutes.style.width = '99%';
-    canvas_speed_elevation_forFilterRoutes.style.height = '30%';
-    // canvas_routeEff_speed_elevation.setAttribute("id", "canvas_speed_elevation_forFilterRoutes");
-    canvas_speed_elevation_forFilterRoutes.style.left = "0%";
-    // console.log((250+(i-1)*50).toString(10));
-    canvas_speed_elevation_forFilterRoutes.style.top = '80%';
-    canvas_speed_elevation_forFilterRoutes.style.position = "absolute";
-    document.body.appendChild(canvas_speed_elevation_forFilterRoutes);
 
     let chart_canvas_speed_elevation_forFilterRoutes = null;
     let chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = -1;
@@ -639,6 +655,12 @@
             }
             var dataY_elevation = makeYData_elevation();
 
+            var data_x = [];
+            for (var i = 0; i < demo_singleRoute.length; i++) {
+                data_x.push(demo_singleRoute[i]['time']);
+            }
+            // console.log(data_x);
+
             //set options
             var options = {
                 series: [
@@ -713,8 +735,9 @@
                     offsetY: -25,
                     offsetX: -5
                 },
-                xaxis:{
-
+                xaxis: {
+                    type: 'category',
+                    categories: data_x,
                 }
             };
 
