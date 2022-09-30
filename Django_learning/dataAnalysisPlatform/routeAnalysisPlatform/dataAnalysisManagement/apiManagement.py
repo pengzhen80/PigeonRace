@@ -191,8 +191,8 @@ class DBManagement ():
         route_key = activity_id+module_id+trainRecord_id
         route_data = []
         for i in range(len(fixed_list)):
-            # print(fixed_list[i])
-            if(fixed_list[i]=='3D'):
+            print(fixed_list[i])
+            if(fixed_list[i]!='No-Fixed'):
                 cell = {}
                 cell['latitude'] = latitudes[i]
                 cell['longitude']= longitudes[i]
