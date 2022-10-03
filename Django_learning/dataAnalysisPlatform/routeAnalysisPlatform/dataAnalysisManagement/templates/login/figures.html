@@ -100,15 +100,15 @@
   <button id="button_showFigures_FilteredRoutes" class="button">顯示特徵圖</button>
   <br>
   </br>
-  <div id="Map_showPaths" class="myDiv_map"></div>
+  <!-- <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
-  </br>
+  </br> -->
   <div id="windy"></div>
   <br>
   </br>
-  <!-- <button id="button_windy_showPath">show path</button>
+  <button id="button_windy_showPath" class="button">顯示路徑</button>
   <br>
-  </br> -->
+  </br>
   <div id ='solo_route_SpeedElevation' class = 'myDiv_plots' >
     <label id="label_solo_route_SpeedElevation" class="label_plots">速度.海拔</label>
     <br></br>
@@ -238,19 +238,12 @@
     console.log(routeId_list);
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
+    // let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
 
-    // let div_smallMap_head = document.getElementById('Map_showPaths');
-    // div_smallMap_head.setAttribute('style', 'width:70%;height:50%;');
-    // div_smallMap_head.style.left = "20%";
-    // div_smallMap_head.style.top = "5%";
-    // div_smallMap_head.style.position = "absolute";
-    // div_smallMap_head.style.zIndex = "1";
-    let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    }).addTo(map_handler);
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //         maxZoom: 20,
+    //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    // }).addTo(map_handler);
 
     //for windy
     function getRandomColor() {
@@ -261,46 +254,61 @@
         }
         return color;
     }
-    
+
+    let lineObjects_in_windy = [];
     let windy_map_handler = null;
     let windy_map_handler_layer = null;
-    // const options_windy_init = {
-    //     // Required: API key
-    //     key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
+    let map_handler = null;
+    let map_layer_windy = null;
+    let func_point_showRoutesInMap = null;
+    
+    const options_windy_init = {
+                // Required: API key
+                key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
 
-    //     // Put additional console output
-    //     verbose: true,
+                // Put additional console output
+                verbose: true,
 
-    //     // Optional: Initial state of the map
-    //     lat: 50.4,
-    //     lon: 14.3,
-    //     zoom: 10,
-    // };
+                // Optional: Initial state of the map
+                lat: 0,
+                lon: 0,
+                zoom: 10,
+            };
 
+            // Initialize Windy API
+    windyInit(options_windy_init, windyAPI => {
+                // windyAPI is ready, and contain 'map', 'store',
+                // 'picker' and other usefull stuff
 
+                const { map } = windyAPI;
+                // .map is instance of Leaflet map
+                // map.setView(path_normalize_list[0][0],10);
+                map_handler = map;
 
-    // // Initialize Windy API
-    // windyInit(options_windy_init, windyAPI => {
-    //     // windyAPI is ready, and contain 'map', 'store',
-    //     // 'picker' and other usefull stuff
+        L.popup()
+            .setLatLng([0,0])
+            .setContent('begin')
+            .openOn(map);
+                
+        map_layer_windy = L;
 
-    //     const { map } = windyAPI;
-    //     // .map is instance of Leaflet map
+        // windy_movingPoint = windy_map_handler_layer.circle(path_normalize_list[0][0], { radius: 1600 }).addTo(windy_map_handler);
 
-    //     var latlngs = [
-    //         [45.51, -122.68],
-    //         [37.77, -122.43],
-    //         [34.04, -118.2]
-    //     ];
+    });
 
-    //     L.popup()
-    //         .setLatLng(latlngs[0])
-    //         .setContent('Hello World')
-    //         .openOn(map);
-        
-    //     L.polyline(latlngs, { color: getRandomColor()}).addTo(map);
+    let windy_movingPoint = null;
 
-    // });
+    function windy_map_movePoint(point) {
+        console.log(point);
+        // windy_movingPoint.setLatLng(windy_map_handler_layer.latLng(point['latitude'], point['longitude']));
+        // var zoomLevel = windy_map_handler.getZoom();
+        // // console.log(zoomLevel);
+        // if((zoomLevel-10)>0)
+        // {
+        //     windy_movingPoint.setRadius(300/(zoomLevel-10));
+        // }
+        // windy_map_handler.setView(point);
+    }
 
     //for canvas_speed_elevation_forFilterRoutes
     func_label_solo_route_SpeedElevation();
@@ -439,6 +447,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.addLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
+                                // windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -453,6 +462,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.removeLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
+                                // windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -554,7 +564,12 @@
             }
         }
 
-        showInMap_multi_init(test_demo_data);
+        var button_showPaths = document.getElementById('button_windy_showPath');
+        button_showPaths.addEventListener('click',function(){
+            showInMap_multi_init(test_demo_data);
+        });
+
+        // showInMap_multi_init(test_demo_data);
         function showInMap_multi_init(paths) {
 
             var path_normalize_list = [];
@@ -581,7 +596,7 @@
                 var color  = getRandomColor();
                 color_list_routes.push(color);
                 // var lineObject = drawPath(path_normalize_list[i],'red','3');
-                var lineObject = drawPath(path_normalize_list[i],color,'1');
+                var lineObject = drawPath(path_normalize_list[i],color,'3');
                 var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
                 console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
                 console.log(pigeonNumber_releaseTime['pigeonNumber']);
@@ -602,69 +617,29 @@
                 return polyline_origin;
             }
 
-            const options_windy_init = {
-                // Required: API key
-                key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
+            function drawPath_windy(pathLine_origin,color,weight) {
+                console.log(typeof (pathLine_origin));
+                // console.log(pathLine_origin);
+                var pathLine_origin_normalized = pathLine_origin;
+                // console.log(typeof (pathLine_origin_normalized));
+                // console.log(pathLine_origin_normalized);
 
-                // Put additional console output
-                verbose: true,
+                var polyline_origin = map_layer_windy.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
+                // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+                return polyline_origin;
+            }
 
-                // Optional: Initial state of the map
-                lat: 45.51,
-                lon: -122.68,
-                zoom: 10,
-            };
-
-
-            // var btn = document.getElementById('button_windy_showPath');
-
-            // Initialize Windy API
-            windyInit(options_windy_init, windyAPI => {
-                // windyAPI is ready, and contain 'map', 'store',
-                // 'picker' and other usefull stuff
-
-                const { map } = windyAPI;
-                // .map is instance of Leaflet map
-                map.setView(path_normalize_list[0][0],10);
-
-                var latlngs = [
-                    [45.51, -122.68],
-                    [37.77, -122.43],
-                    [34.04, -118.2]
-                ];
-
-                L.popup()
-                    .setLatLng(latlngs[0])
-                    .setContent('Hello World')
-                    .openOn(map);
-                
-                L.polyline(path_normalize_list[0], { color: getRandomColor()}).addTo(map);
-
-            });
-
-            // function func_cb_button_windy_showPath()
-            // {
-            //         console.log(path_normalize_list,windy_map_handler_layer);
-            //         for(var i=0;i<path_normalize_list.length;i++)
-            //         {
-            //             windy_map_handler_layer.polyline(path_normalize_list[i], { color: color_list_routes[i],weight : '1'}).addTo(windy_map_handler);
-            //         }
-            // }
-
-            // btn.addEventListener('click',func_cb_button_windy_showPath);
-           
+            windy_movingPoint = map_layer_windy.circle([0, 0], { radius: 1600 ,color:'white'}).addTo(map_handler);
         }
 
-        //draw a point in map
-        let soloRoute_routeAccuracy_realTime_movingPoint = L.circle([0, 0], { radius: 1600 }).addTo(map_handler);;
-
         function showInMap_movepoint(point) {
-            soloRoute_routeAccuracy_realTime_movingPoint.setLatLng(L.latLng(point['latitude'], point['longitude']));
+            windy_movingPoint.setLatLng(L.latLng(point['latitude'], point['longitude']));
             var zoomLevel = map_handler.getZoom();
             // console.log(zoomLevel);
             if((zoomLevel-10)>0)
             {
-              soloRoute_routeAccuracy_realTime_movingPoint.setRadius(300/(zoomLevel-10));
+                windy_movingPoint.setRadius(300/(zoomLevel-10));
             }
             map_handler.setView(point);
         }
@@ -810,6 +785,7 @@
                       mouseMove: function (event, chartContext, config) {
                           try {
                               showInMap_movepoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);
+                              windy_map_movePoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);  
                           } catch (e) {
                               console.log(e); // Error: hi
                           }
