@@ -11,6 +11,8 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <style>
@@ -56,8 +58,8 @@
         border: 1px outset black;
         background-color: lightblue;    
         text-align: center;
-        width:70%;
-        height: 500px;
+        width:100%;
+        height: 400px;
     }
     .myDiv_plots {
         border: 1px outset black;
@@ -70,6 +72,12 @@
         width:100%;
         height: 40%;
     }
+
+    #windy {
+        width: 100%;
+        height: 400px;
+    }
+
   </style>
 </head>
 
@@ -81,6 +89,7 @@
             <th>公環號碼</th>
             <!-- <th>gps腳環</th> -->
             <th>放飛時間</th>
+
         </tr>
     </thead>
     <tbody id="table_pigeonNumber_body">
@@ -94,6 +103,12 @@
   <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
   </br>
+  <div id="windy"></div>
+  <br>
+  </br>
+  <!-- <button id="button_windy_showPath">show path</button>
+  <br>
+  </br> -->
   <div id ='solo_route_SpeedElevation' class = 'myDiv_plots' >
     <label id="label_solo_route_SpeedElevation" class="label_plots">速度.海拔</label>
     <br></br>
@@ -236,8 +251,56 @@
             maxZoom: 20,
             // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(map_handler);
-    //for table_pigeonNumber_body checkbox list
-    // let table_pigeonNumber_body_checkbox_object_list = [];
+
+    //for windy
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    
+    let windy_map_handler = null;
+    let windy_map_handler_layer = null;
+    // const options_windy_init = {
+    //     // Required: API key
+    //     key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
+
+    //     // Put additional console output
+    //     verbose: true,
+
+    //     // Optional: Initial state of the map
+    //     lat: 50.4,
+    //     lon: 14.3,
+    //     zoom: 10,
+    // };
+
+
+
+    // // Initialize Windy API
+    // windyInit(options_windy_init, windyAPI => {
+    //     // windyAPI is ready, and contain 'map', 'store',
+    //     // 'picker' and other usefull stuff
+
+    //     const { map } = windyAPI;
+    //     // .map is instance of Leaflet map
+
+    //     var latlngs = [
+    //         [45.51, -122.68],
+    //         [37.77, -122.43],
+    //         [34.04, -118.2]
+    //     ];
+
+    //     L.popup()
+    //         .setLatLng(latlngs[0])
+    //         .setContent('Hello World')
+    //         .openOn(map);
+        
+    //     L.polyline(latlngs, { color: getRandomColor()}).addTo(map);
+
+    // });
 
     //for canvas_speed_elevation_forFilterRoutes
     func_label_solo_route_SpeedElevation();
@@ -512,9 +575,13 @@
 
             map_handler.setView(path_normalize_list[0][0], 10);
 
+            var color_list_routes = [];
             for(var i=0;i<path_normalize_list.length;i++)
             {
-                var lineObject = drawPath(path_normalize_list[i],'red','3');
+                var color  = getRandomColor();
+                color_list_routes.push(color);
+                // var lineObject = drawPath(path_normalize_list[i],'red','3');
+                var lineObject = drawPath(path_normalize_list[i],color,'1');
                 var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
                 console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
                 console.log(pigeonNumber_releaseTime['pigeonNumber']);
@@ -534,6 +601,58 @@
                 // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
                 return polyline_origin;
             }
+
+            const options_windy_init = {
+                // Required: API key
+                key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
+
+                // Put additional console output
+                verbose: true,
+
+                // Optional: Initial state of the map
+                lat: 45.51,
+                lon: -122.68,
+                zoom: 10,
+            };
+
+
+            // var btn = document.getElementById('button_windy_showPath');
+
+            // Initialize Windy API
+            windyInit(options_windy_init, windyAPI => {
+                // windyAPI is ready, and contain 'map', 'store',
+                // 'picker' and other usefull stuff
+
+                const { map } = windyAPI;
+                // .map is instance of Leaflet map
+                map.setView(path_normalize_list[0][0],10);
+
+                var latlngs = [
+                    [45.51, -122.68],
+                    [37.77, -122.43],
+                    [34.04, -118.2]
+                ];
+
+                L.popup()
+                    .setLatLng(latlngs[0])
+                    .setContent('Hello World')
+                    .openOn(map);
+                
+                L.polyline(path_normalize_list[0], { color: getRandomColor()}).addTo(map);
+
+            });
+
+            // function func_cb_button_windy_showPath()
+            // {
+            //         console.log(path_normalize_list,windy_map_handler_layer);
+            //         for(var i=0;i<path_normalize_list.length;i++)
+            //         {
+            //             windy_map_handler_layer.polyline(path_normalize_list[i], { color: color_list_routes[i],weight : '1'}).addTo(windy_map_handler);
+            //         }
+            // }
+
+            // btn.addEventListener('click',func_cb_button_windy_showPath);
+           
         }
 
         //draw a point in map
