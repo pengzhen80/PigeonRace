@@ -44,6 +44,24 @@
         background-color: coral;
     }
 
+    .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+
+    th:hover .tooltiptext {
+        visibility: visible;
+    }
+
     .label_plots {
         display: block;
         /* width: 130px; */
@@ -84,12 +102,12 @@
 <body>
   <table id="table_pigeonNumber">
     <thead>
+        <span class="tooltiptext">Tooltip text</span>
         <tr>
             <th></th>
             <th>公環號碼</th>
             <!-- <th>gps腳環</th> -->
             <th>放飛時間</th>
-
         </tr>
     </thead>
     <tbody id="table_pigeonNumber_body">
