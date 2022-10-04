@@ -1187,7 +1187,8 @@
           for (var i = 0; i < test_demo_data.length; i++) {
               var normalized_route = [];
               for (var j = 0; j < test_demo_data[i].length; j++) {
-                  normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+                //   normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+                normalized_route.push([test_demo_data[i][j]['longitude'], test_demo_data[i][j]['latitude']]);
               }
               normalized_multiroutes.push(normalized_route);
           }
