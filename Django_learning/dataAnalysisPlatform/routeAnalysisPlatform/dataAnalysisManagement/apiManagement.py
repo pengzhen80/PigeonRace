@@ -110,7 +110,7 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        print('activity:', res)
+        # print('activity:', res)
 
         return res
 
@@ -135,8 +135,9 @@ class DBManagement ():
             return data_list
 
         for route in res:
-            # print(route.keys())
-            # print(route['fix'])
+            print(route.keys())
+            # print(route['updatetimestamp'])
+            # print(route['utc'])
             fixed_list = normalize_data(route['fix']);
             latitude_list = normalize_data(route['latitude'])
             longitude_list = normalize_data(route['longitude'])
@@ -191,7 +192,7 @@ class DBManagement ():
         route_key = activity_id+module_id+trainRecord_id
         route_data = []
         for i in range(len(fixed_list)):
-            print(fixed_list[i])
+            # print(fixed_list[i])
             if(fixed_list[i]!='No-Fixed'):
                 cell = {}
                 cell['latitude'] = latitudes[i]

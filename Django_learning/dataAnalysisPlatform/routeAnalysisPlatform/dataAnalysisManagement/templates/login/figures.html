@@ -28,9 +28,32 @@
             position: relative;
             cursor: pointer;
     }
+
+    .button:hover{
+    /* border: 1px solid #888; */
+    background-color: #ddd;
+    }
+
+    /* .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        position: absolute;
+        z-index: 1;
+    }
+
+    .button:hover .tooltiptext {
+        visibility: visible;
+    } */
+
     table {
         border-collapse: collapse;
-        width: 20%;
+        /* width: 20%; */
         cursor: pointer;
     }
 
@@ -42,24 +65,6 @@
 
     tr:hover {
         background-color: coral;
-    }
-
-    .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: black;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-
-        /* Position the tooltip */
-        position: absolute;
-        z-index: 1;
-    }
-
-    th:hover .tooltiptext {
-        visibility: visible;
     }
 
     .label_plots {
@@ -92,6 +97,7 @@
     }
 
     #windy {
+        /* float:right; */
         width: 100%;
         height: 400px;
     }
@@ -100,35 +106,40 @@
 </head>
 
 <body>
-  <table id="table_pigeonNumber">
-    <thead>
-        <span class="tooltiptext">Tooltip text</span>
-        <tr>
-            <th></th>
-            <th>公環號碼</th>
-            <!-- <th>gps腳環</th> -->
-            <th>放飛時間</th>
-        </tr>
-    </thead>
-    <tbody id="table_pigeonNumber_body">
-    </tbody>
-  </table>
-  <br>
-  </br>
-  <button id="button_showFigures_FilteredRoutes" class="button">顯示特徵圖</button>
-  <br>
-  </br>
+
   <!-- <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
   </br> -->
+  <table id="table_pigeonNumber">
+    <thead>
+        <tr>
+            <th></th>
+            <th>公環號碼</th>
+            <th>放飛時間</th>
+            <th>實際飛行距離(m)</th>
+            <!-- <th>時間</th> -->
+            <th>速度(m/min)</th>
+            <th>直線距離(m)</th>
+            <th>路徑效率</th>
+            <th>是否裁減</th>
+        </tr>
+    </thead>
+    <tbody id="table_pigeonNumber_body" title="雙擊查看速度海拔並進行裁減">
+    </tbody>
+  </table>
+  <!-- <br>
+  </br> -->
+  <button id="button_showFigures_FilteredRoutes" class="button" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
+  <br>
+  </br>
+  <button id="button_windy_showPath" class="button" title="點擊查看軌跡">顯示路徑</button>
+  <br>
+  </br>
   <div id="windy"></div>
   <br>
   </br>
-  <button id="button_windy_showPath" class="button">顯示路徑</button>
-  <br>
-  </br>
   <div id ='solo_route_SpeedElevation' class = 'myDiv_plots' >
-    <label id="label_solo_route_SpeedElevation" class="label_plots">速度.海拔</label>
+    <label id="label_solo_route_SpeedElevation" class="label_plots">裁減：點擊圖表進行裁減</label>
     <br></br>
     <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
   </div>
@@ -150,6 +161,16 @@
   <div id="Map_showPaths_routeSimilarity"></div>
   <div id="div_smallMap_routeSimilarity_threeroutes"></div>
   <!-- <div id="canvas_speed_elevation_forFilterRoutes"></div> -->
+  <dialog id="dialog_routefilter">
+    <form method="dialog">
+        <p style="font-size:30px"><label>裁減:</label>
+        <p style="font-size:24px;font-weight:bold"><label>點擊兩次圖表進行裁減，第一次點擊左側起始點，第二次點擊右側終點</label>
+        </p>
+        <div>
+            <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+        </div>
+    </form>
+  </dialog>
   <dialog id="dialog_routeEfficiency">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑效率:</label>
@@ -333,7 +354,7 @@
     //draw a label for route accuracy
     function func_label_solo_route_SpeedElevation() {
             var label = document.getElementById('label_solo_route_SpeedElevation');
-            var dialog = document.getElementById('dialog_altitudeFromEarth');
+            var dialog = document.getElementById('dialog_routefilter');
             label.addEventListener('click', () => {
                 if (typeof dialog.showModal === "function") {
                     dialog.showModal();
@@ -412,7 +433,9 @@
           var route = response[routeId];
           routes_origin.push(route);
           var summary = response[routeId+'pigeonNumber'];
-          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime']};
+          console.log('summary',summary);
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance']};
+          cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
           pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
         //   console.log(pigeonNumbers_releaseTime);
 
@@ -495,10 +518,30 @@
                 var row_data_2 = document.createElement('td');
                 row_data_2.innerHTML = pigeonNumGps['release_time'];
                 row_data_2.style.textAlign = "center";
+                var row_data_3 = document.createElement('td');
+                row_data_3.innerHTML = pigeonNumGps['real_distance'].toFixed(3);
+                row_data_3.style.textAlign = "center";
+                var row_data_4 = document.createElement('td');
+                row_data_4.innerHTML = pigeonNumGps['speed'].toFixed(3);
+                row_data_4.style.textAlign = "center";
+                var row_data_5 = document.createElement('td');
+                row_data_5.innerHTML = pigeonNumGps['straightdistance'].toFixed(3);
+                row_data_5.style.textAlign = "center";
+                var row_data_6 = document.createElement('td');
+                row_data_6.innerHTML = pigeonNumGps['routeEfficiency'].toFixed(3);
+                row_data_6.style.textAlign = "center";
+                var row_data_7 = document.createElement('td');
+                row_data_7.innerHTML = '未';
+                row_data_7.style.textAlign = "center";
 
                 row.appendChild(row_data_0);
                 row.appendChild(row_data_1);
                 row.appendChild(row_data_2);
+                row.appendChild(row_data_3);
+                row.appendChild(row_data_4);
+                row.appendChild(row_data_5);
+                row.appendChild(row_data_6);
+                row.appendChild(row_data_7);
 
                 function func_cb_row()
                 {
@@ -532,7 +575,46 @@
             }
     }
 
+    function table_pigeonNumber_body_updateByFilteredRoute(routeIndex,filted_route)
+    {
+        var real_distance = 0;
+        for(var i=0;i<filted_route.length;i++)
+        {
+            real_distance+=parseFloat(filted_route[i]['distance']);
+        }
+        console.log('real_distance',real_distance);
 
+        var startPoint = [filted_route[0]['longitude'],filted_route[0]['latitude']];
+        var endPoint = [filted_route[filted_route.length-1]['longitude'],filted_route[filted_route.length-1]['latitude']];
+        var from = turf.point(startPoint);
+        var to = turf.point(endPoint);
+        var options = {units: 'kilometers'};
+        var straightdistance = turf.distance(from, to, options)*1000;
+
+        var routeEfficiency = straightdistance/real_distance;
+        console.log('routeEfficiency',routeEfficiency);
+
+        var start_time = new Date(filted_route[0]['time']);
+        var end_time = new Date(filted_route[filted_route.length-1]['time']);
+        var elapsed = (end_time.getTime() - start_time.getTime())/1000;
+        
+        var speed = real_distance/(elapsed/60);
+        console.log('speed',speed);
+
+        var rows = document.getElementById("table_pigeonNumber_body").rows;
+        console.log(rows);
+        var td_realditance = rows[routeIndex].getElementsByTagName("td")[2];
+        var td_speed = rows[routeIndex].getElementsByTagName("td")[3];
+        var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[4];
+        var td_routeEfficiency = rows[routeIndex].getElementsByTagName("td")[5];
+        var td_filter = rows[routeIndex].getElementsByTagName("td")[6];
+            
+        td_realditance.innerHTML = real_distance.toFixed(3);
+        td_speed.innerHTML = speed.toFixed(3);
+        td_straightdistance.innerHTML = straightdistance.toFixed(3);
+        td_routeEfficiency.innerHTML = routeEfficiency.toFixed(3);
+        td_filter.innerHTML = '是';
+    }
 
     function show_figures(test_demo_data)
     {
@@ -540,6 +622,10 @@
         ///set source data
         const demo_singleRoute = test_demo_data[0];
         console.log(demo_singleRoute.length);
+        for(var i=0;i<demo_singleRoute.length;i++)
+        {
+            console.log('time',demo_singleRoute[i]['time']);
+        }
 
         function showInMap(path,pigeonNumber,release_time,filtered_route =false) {
 
@@ -814,7 +900,11 @@
                               if(route_filter_handler.getStatus_filter() == false)
                               {
                                 console.log(config['dataPointIndex']);
-                                route_filter_handler.start_filter(chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex, config['dataPointIndex']);
+                                if(route_filter_handler.start_filter(chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex, config['dataPointIndex']))
+                                {
+                                    var label_filter = document.getElementById('label_solo_route_SpeedElevation');
+                                    label_filter.innerHTML = '裁減中，請點擊右側終點以完成裁減';
+                                }
                               }
                               else
                               {
@@ -822,8 +912,12 @@
                                 var cur_routeIndex = chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex;
                                 var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['pigeonNumber'];
                                 var release_time = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['release_time'];
-                                showInMap(filtered_route,pigeonNumber,release_time,true);
-                                // show_figures_byFilteredRoutes_soloPigeon_routeEffProcess([filtered_route]);
+                                // showInMap(filtered_route,pigeonNumber,release_time,true);
+ 
+                                var label_filter = document.getElementById('label_solo_route_SpeedElevation');
+                                label_filter.innerHTML = '裁減：點擊圖表進行裁減';
+
+                                table_pigeonNumber_body_updateByFilteredRoute(cur_routeIndex,filtered_route);
                               }
                             } catch (e) {
                                 console.log(e); // Error: hi
