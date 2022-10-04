@@ -12,6 +12,9 @@ from datetime import datetime
 import hashlib
 import copy
 import csv
+from datetime import datetime, tzinfo
+from dateutil import tz
+import pytz
 
 
 class DBManagement ():
@@ -191,6 +194,7 @@ class DBManagement ():
     def data_routes_addRoute(self,fixed_list,activity_id,module_id,trainRecord_id,latitudes,longitudes,elevations,distances,speeds,headings,times):
         route_key = activity_id+module_id+trainRecord_id
         route_data = []
+        
         for i in range(len(fixed_list)):
             # print(fixed_list[i])
             if(fixed_list[i]!='No-Fixed'):

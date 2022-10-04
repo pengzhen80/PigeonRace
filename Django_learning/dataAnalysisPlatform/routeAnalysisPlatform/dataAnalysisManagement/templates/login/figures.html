@@ -431,6 +431,10 @@
         {
           routeId = routeId_list[i];
           var route = response[routeId];
+          for(var j=0;j<route.length;j++)
+          {
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString();
+          }
           routes_origin.push(route);
           var summary = response[routeId+'pigeonNumber'];
           console.log('summary',summary);
@@ -1200,7 +1204,7 @@
 
             var cur_route = normalized_multiroutes[i];
             var baseLine = turf.lineString([cur_route[0], cur_route[cur_route.length - 1]]);
-            console.log(cur_route.join());
+            // console.log(cur_route.join());
             var routeEff_list_realtime = [];
             var total_distance = 0;
             for (var j = 0; j < cur_route.length; j++) {
@@ -1381,11 +1385,13 @@
             }
             console.log(distance_point_toBaseLine_multi_sorted);
 
+            var median_list = [];
             for (var i = 0; i < distance_point_toBaseLine_multi_sorted.length; i++) {
                 var data = distance_point_toBaseLine_multi_sorted[i];
                 var min = data[0];
                 var q1 = data[Math.floor(data.length / 4)];
                 var median = data[Math.floor(data.length / 2)];
+                median_list.push(median);
                 var q3 = data[Math.floor(data.length * 3 / 4)];
                 var max = data[data.length - 1];
 
@@ -1393,6 +1399,10 @@
                 options.series[0].data.push({ 'x': data_x[i], 'y': [min, q1, median, q3, max] });
             }
             console.log(options.series[0].data);
+
+            // var line_data = {type: 'line',data: median_list};
+            // options.series.push(line_data);
+
             var canvas_multiRoutes_routeSimilarity = document.getElementById('canvas_multiRoutes_routeSimilarity');
             var chart = new ApexCharts(canvas_multiRoutes_routeSimilarity, options);
 
