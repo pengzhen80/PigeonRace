@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-04T01:34:04.128Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="A5vpngz2zN-LExF5_zEl" version="20.3.7" type="github" pages="15">
+<mxfile host="app.diagrams.net" modified="2022-10-04T01:35:51.523Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="JFt0n9kzp7mx0ldjUut6" version="20.3.7" type="github" pages="15">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency">
     <mxGraphModel dx="2815" dy="2302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3277,9 +3277,6 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="XI76xfZJAWxSpDtaMS1M-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="60" width="1140" height="660" as="geometry" />
-        </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" vertex="1" parent="1">
           <mxGeometry x="80" y="90" width="380" height="130" as="geometry" />
         </mxCell>
@@ -3342,6 +3339,21 @@
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-16" value="顯示路徑" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="80" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XI76xfZJAWxSpDtaMS1M-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="820" as="sourcePoint" />
+            <mxPoint x="860" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XI76xfZJAWxSpDtaMS1M-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="820" as="sourcePoint" />
+            <mxPoint x="110" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XI76xfZJAWxSpDtaMS1M-19" value="速度，海拔分佈圖" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="270" y="600" width="346" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
