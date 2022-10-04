@@ -46,7 +46,7 @@ def view_tracks(request, activityIds):
 
     # activityId_list = activityIds.split(',')
     # for activityId in activityId_list:
-    #     context[activityId] = dbManager.read_routes_summaryData(activityId)
+    #     dbManager.api_readModule(activityId)
 
     return render(request, 'login/tracks.html', context=context)
 

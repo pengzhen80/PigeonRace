@@ -36,6 +36,10 @@
             font-size: 16px;
             position: relative;
         }
+
+        th:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -43,10 +47,10 @@
     <button id="btn_trackPage_showPlot" class="button">查看特徵圖</button>
     <br><br>
     <table id="table_trackPage_tracks">
-        <thead>
+        <thead title="點擊按照公環號碼排序">
             <tr>
                 <th></th>
-                <th>公環號碼</th>
+                <th onclick="sortTable()">公環號碼</th>
                 <th>gps腳環號碼</th>
                 <th>飛行時間</th>
                 <th>點數</th>
@@ -72,6 +76,7 @@
         console.log(activityId_list);
         //when add a track to table, push the trackID=activityId+moduleId+trainRecordId
         let list_trackId = []; 
+        let dict_pigeonNumReleaseTime_to_trackId = {};
         // let activities = '{{ activities|safe }}';
         // console.log('status:', status);
         // let normalized_activities = JSON.parse(activities)
@@ -89,6 +94,7 @@
                 var response = JSON.parse(this.responseText);
                 // console.log(Object.values(response));
                 var tracks_list= Object.values(response)
+
                 for(var i=0;i<tracks_list.length;i++)
                 {
                     for(var j=0;j<tracks_list[i].length;j++)
@@ -98,6 +104,7 @@
                         var module_id = tracks_list[i][j]['moduleid'];
                         var trainRecord_id = tracks_list[i][j]['trainrecordid'];
                         list_trackId.push(activity_id+module_id+trainRecord_id);
+                        dict_pigeonNumReleaseTime_to_trackId[tracks_list[i][j]['recordname']+tracks_list[i][j]['settingtime']] = activity_id+module_id+trainRecord_id;
                         tracks_showInTable([tracks_list[i][j]]);
                     }
                 }
@@ -169,22 +176,31 @@
         function func_cb_btn_trackPage_showPlot() {
             //get selected index of table
             var index_checked = [];
+            var pigeonNumber_releaseTime = [];
             var rows = document.getElementById("table_trackPage_tracks_body").rows;
             console.log(rows);
             for (var i = 0; i < rows.length; i++) {
                 console.log(rows[i]);
                 var checkbox = rows[i].getElementsByTagName("input")[0];
+                var pigeonNumber = rows[i].getElementsByTagName("td")[0].innerHTML;
+                var releaseTime = rows[i].getElementsByTagName("td")[2].innerHTML;
                 // console.log(checkbox);
                 console.log(checkbox.checked);
                 if (checkbox.checked == true) {
                     index_checked.push(i);
+                    pigeonNumber_releaseTime.push(pigeonNumber+releaseTime);
                 }
             }
             console.log(index_checked);
+            console.log(pigeonNumber_releaseTime);
 
+            // var list_trackId_checked_list = [];
+            // for (i = 0; i < index_checked.length; i++) {
+            //     list_trackId_checked_list.push(list_trackId[index_checked[i]]);
+            // }
             var list_trackId_checked_list = [];
-            for (i = 0; i < index_checked.length; i++) {
-                list_trackId_checked_list.push(list_trackId[index_checked[i]]);
+            for (i = 0; i < pigeonNumber_releaseTime.length; i++) {
+                list_trackId_checked_list.push(dict_pigeonNumReleaseTime_to_trackId[pigeonNumber_releaseTime[i]]);
             }
 
             window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
@@ -192,5 +208,40 @@
         }
         let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
         btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
+
+        function sortTable() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("table_trackPage_tracks_body");
+            switching = true;
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[0];
+                y = rows[i + 1].getElementsByTagName("TD")[0];
+                //check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+                }
+                if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                }
+            }
+        }
     </script>
 </body>
