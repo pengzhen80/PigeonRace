@@ -1356,6 +1356,7 @@ function func_solo_route_routeAccuracySpeedElevation() {
         oReq.setRequestHeader("Accept", "application/json");
         oReq.setRequestHeader("Content-Type", "application/json");
         oReq.send(JSON.stringify({ "locations": dataToSend_json }));
+        console.log(dataToSend_json);
     }
 
 }
