@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <!-- Include 2d map tools -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
+    crossorigin=""></script> -->
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
@@ -33,23 +33,6 @@
     /* border: 1px solid #888; */
     background-color: #ddd;
     }
-
-    /* .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: black;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-
-        position: absolute;
-        z-index: 1;
-    }
-
-    .button:hover .tooltiptext {
-        visibility: visible;
-    } */
 
     table {
         border-collapse: collapse;
@@ -97,7 +80,6 @@
     }
 
     #windy {
-        /* float:right; */
         width: 100%;
         height: 400px;
     }
@@ -251,8 +233,8 @@
         <p style="font-size:24px;font-weight:bold"><label>公式：相似度 = {D點到參考路徑}；</label>
         </p>
         <p><label>箱圖和quatile做法說明:</label>
-            <p><label>上下的黑線表示最大和最小值；
-                箱子：按照從小到大的方式排列成有序的list，然後Q1是指位置在25%的數值，median是指中位數，Q3是位置在75%的值；藍色表示Q1～median，綠色表示median～Q3。</label>
+            <p><label>上下的黑線表示最大和最小值；</label> </p>
+            <p><label>箱子：按照從小到大的方式排列成有序的list，然後Q1是指位置在25%的數值，median是指中位數，Q3是位置在75%的值；藍色表示Q1～median，綠色表示median～Q3。</label>
             </p>
         <div>
             <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
@@ -320,7 +302,7 @@
                 lat: 0,
                 lon: 0,
                 zoom: 10,
-            };
+    };
 
             // Initialize Windy API
     windyInit(options_windy_init, windyAPI => {
@@ -334,7 +316,7 @@
 
         L.popup()
             .setLatLng([0,0])
-            .setContent('begin')
+            // .setContent('begin')
             .openOn(map);
                 
         map_layer_windy = L;
@@ -344,18 +326,6 @@
     });
 
     let windy_movingPoint = null;
-
-    function windy_map_movePoint(point) {
-        console.log(point);
-        // windy_movingPoint.setLatLng(windy_map_handler_layer.latLng(point['latitude'], point['longitude']));
-        // var zoomLevel = windy_map_handler.getZoom();
-        // // console.log(zoomLevel);
-        // if((zoomLevel-10)>0)
-        // {
-        //     windy_movingPoint.setRadius(300/(zoomLevel-10));
-        // }
-        // windy_map_handler.setView(point);
-    }
 
     //for canvas_speed_elevation_forFilterRoutes
     func_label_solo_route_SpeedElevation();
@@ -943,7 +913,6 @@
                   },
                 },
                 colors: ['#77B6EA', '#545454', '#7CFC00', '#b84644', '#4576b5'],
-                // colors: ['#545454', '#7CFC00','#b84644', '#4576b5'],
                 dataLabels: {
                     enabled: false
                 },
@@ -951,7 +920,7 @@
                     curve: 'straight'
                 },
                 title: {
-                    text: '速度.海拔.地面海拔的對比圖',
+                    text: '速度.海拔的對比圖',
                     align: 'left'
                 },
                 grid: {
@@ -987,10 +956,10 @@
                     name: '地面海拔(km)',
                     data: normalized_elevations,
                 }
-                console.log(chart);
-                chart.opts.series.push(make_data);
+                // console.log(chart);
+                chart_canvas_speed_elevation_forFilterRoutes.opts.series.push(make_data);
                 // chart.opts.colors.push();
-                chart.update();
+                chart_canvas_speed_elevation_forFilterRoutes.update();
             }
 
             function draw_elevationFromEarth(elevations) {
@@ -1010,7 +979,7 @@
                 myChart_RoutePlot.update();
             }
 
-            // makeYData_earthElevation();
+            makeYData_earthElevation();
 
             function makeYData_earthElevation() {
                 var result = [];
@@ -1024,6 +993,7 @@
                 }
 
                 const url = 'https://api.open-elevation.com/api/v1/lookup?';
+                // const url = 'https://api.opentopodata.org/v1/srtm30m?';
                 var oReq = new XMLHttpRequest();
 
                 function reqListener() {
@@ -1048,6 +1018,7 @@
                 oReq.setRequestHeader("Accept", "application/json");
                 oReq.setRequestHeader("Content-Type", "application/json");
                 oReq.send(JSON.stringify({ "locations": dataToSend_json }));
+                console.log(dataToSend_json);
             }
 
         }
@@ -1116,7 +1087,7 @@
               console.log(cur_route[0],cur_route[cur_route.length - 1],baselineDistance,realDistance,realDistance_turf);
               var routeEff = baselineDistance / realDistance_turf;
             //   var routeEff = baselineDistance / realDistance;
-              routes_effs.push(routeEff.toFixed(4));
+              routes_effs.push(routeEff.toFixed(3));
           }
 
           var data_x = [];

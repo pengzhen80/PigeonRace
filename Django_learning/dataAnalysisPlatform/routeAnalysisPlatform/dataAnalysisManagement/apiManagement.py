@@ -25,6 +25,23 @@ class DBManagement ():
         self.routes = {}
         self.routes_summarydata = {}
         self.modules ={}
+        self.gpsIdringId = self.readfile_gpsIdringId()
+
+    def readfile_gpsIdringId(self):
+        dataList = []
+        with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+
+            for row in spamreader:
+                cell = {}
+                # print(', '.join(row))
+                # print(type(row),len(row))
+                rowList = row[0].split(',')
+                cell['gpsId'] = rowList[0]
+                cell['ringId'] = rowList[1]
+                # print(cell)
+                dataList.append(cell)
+        return dataList
 
     def logIn(self, username, password):
         # Init
@@ -154,21 +171,21 @@ class DBManagement ():
         return res
 
     def api_readModule(self, activity_id):
-        dataList = []
-        with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        # dataList = []
+        # with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
+        #     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
 
-            for row in spamreader:
-                cell = {}
-                # print(', '.join(row))
-                # print(type(row),len(row))
-                rowList = row[0].split(',')
-                cell['gpsId'] = rowList[0]
-                cell['ringId'] = rowList[1]
-                # print(cell)
-                dataList.append(cell)
+        #     for row in spamreader:
+        #         cell = {}
+        #         # print(', '.join(row))
+        #         # print(type(row),len(row))
+        #         rowList = row[0].split(',')
+        #         cell['gpsId'] = rowList[0]
+        #         cell['ringId'] = rowList[1]
+        #         # print(cell)
+        #         dataList.append(cell)
 
-        for data in dataList:
+        for data in self.gpsIdringId:
             # print(data)
             url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule'
 
@@ -195,6 +212,7 @@ class DBManagement ():
         route_key = activity_id+module_id+trainRecord_id
         route_data = []
         
+        api_locations = []
         for i in range(len(fixed_list)):
             # print(fixed_list[i])
             if(fixed_list[i]!='No-Fixed'):
@@ -207,7 +225,21 @@ class DBManagement ():
                 cell['heading']= headings[i]
                 cell['time']= times[i]
                 route_data.append(cell)
+
+                # api_locations.append({"latitude":latitudes[i],"longitude":longitudes[i]})
         # print(len(route_data))
+
+        # url = 'https://api.open-elevation.com/api/v1/lookup?'
+        # myobj = {
+        #         "locations":api_locations
+        # }
+        # x = requests.post(url, data=json.dumps(myobj))
+        # print(type(x))
+        # print(x.text)
+        # res = x.json()
+        # res = json.loads(res)
+        # print(res)
+
         self.routes[route_key] = route_data
         # print('route_key',route_key)
     
