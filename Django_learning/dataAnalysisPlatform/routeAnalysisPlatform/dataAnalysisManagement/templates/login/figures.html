@@ -240,12 +240,20 @@
   <dialog id="dialog_routeSimilarity">
     <form method="dialog">
         <p style="font-size:30px"><label>路徑相似度:</label>
-        <p><label>論文中計算所有點到參考路線的距離，計算平均距離，平均距離越小，相似度越高；</label>
+        <p><label>路徑相似度是爲了比較兩條路徑的相似程度，比較方式是：按照兩條路徑之間的距離進行比較；距離越小，相似度越高，距離越大，相似度越低；</label>
+        </p>
+        <p><label>那摩，兩條路徑的距離如何計算呢？因爲路徑不是平行的直線，所以無法直接使用線與線的距離計算，而是使用點到線的距離進行計算。</label>
+        </p>
+        <p><label>比如計算路徑A到路徑B的距離，以A爲參考路徑，B爲爲計算路徑，B是由n個路徑點組成的，計算每個路徑點到A的距離，取這些距離的集合or平均值。</label>
         </p>
         <p><label>用法：輔佐路徑效率，判斷鴿子是否對熟悉了某個定點飛行的路線；</label>
         </p>
         <p style="font-size:24px;font-weight:bold"><label>公式：相似度 = {D點到參考路徑}；</label>
         </p>
+        <p><label>箱圖和quatile做法說明:</label>
+            <p><label>上下的黑線表示最大和最小值；
+                箱子：按照從小到大的方式排列成有序的list，然後Q1是指位置在25%的數值，median是指中位數，Q3是位置在75%的值；藍色表示Q1～median，綠色表示median～Q3。</label>
+            </p>
         <div>
             <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
         </div>
@@ -433,7 +441,7 @@
           var route = response[routeId];
           for(var j=0;j<route.length;j++)
           {
-            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString();
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString('zh-TW',{hour12: false});
           }
           routes_origin.push(route);
           var summary = response[routeId+'pigeonNumber'];
@@ -598,8 +606,13 @@
         var routeEfficiency = straightdistance/real_distance;
         console.log('routeEfficiency',routeEfficiency);
 
+        // console.log(filted_route[0]['time']);
+        // var start_time = new Date(filted_route[0]['time'].replace('上午','').replace('下午',''));
+        // var end_time = new Date(filted_route[filted_route.length-1]['time'].replace('上午','').replace('下午',''));
         var start_time = new Date(filted_route[0]['time']);
         var end_time = new Date(filted_route[filted_route.length-1]['time']);
+        
+        console.log(start_time,end_time);
         var elapsed = (end_time.getTime() - start_time.getTime())/1000;
         
         var speed = real_distance/(elapsed/60);
@@ -626,10 +639,10 @@
         ///set source data
         const demo_singleRoute = test_demo_data[0];
         console.log(demo_singleRoute.length);
-        for(var i=0;i<demo_singleRoute.length;i++)
-        {
-            console.log('time',demo_singleRoute[i]['time']);
-        }
+        // for(var i=0;i<demo_singleRoute.length;i++)
+        // {
+        //     console.log('time',demo_singleRoute[i]['time']);
+        // }
 
         function showInMap(path,pigeonNumber,release_time,filtered_route =false) {
 
@@ -1328,7 +1341,7 @@
                 // console.log(cur_route[j]);
                 //distance to baseline
                 var distanceToLine = turf.pointToLineDistance(pt, baseLine, {units: 'kilometers'});
-                console.log(j,cur_route[j],distanceToLine);
+                // console.log(j,cur_route[j],distanceToLine);
                 distance_point_toBaseLine.push(distanceToLine.toFixed(3));
             }
             distance_point_toBaseLine_multi.push(distance_point_toBaseLine);
@@ -1360,7 +1373,7 @@
                 },
                 colors: ['#008FFB', '#FEB019'],
                 title: {
-                    text: '平均路徑距離(km)',
+                    text: '路徑相似度(km)',
                     align: 'middle'
                 },
                 tooltip: {
@@ -1401,7 +1414,7 @@
             console.log(options.series[0].data);
 
             // var line_data = {type: 'line',data: median_list};
-            // options.series.push(line_data);
+            // options.series[0].data.push(line_data);
 
             var canvas_multiRoutes_routeSimilarity = document.getElementById('canvas_multiRoutes_routeSimilarity');
             var chart = new ApexCharts(canvas_multiRoutes_routeSimilarity, options);
