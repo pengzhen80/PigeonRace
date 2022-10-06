@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <!-- Include 2d map tools -->
-  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script> -->
-  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+    crossorigin=""></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script> -->
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <style>
@@ -79,10 +79,10 @@
         height: 40%;
     }
 
-    #windy {
+    /* #windy {
         width: 100%;
         height: 400px;
-    }
+    } */
 
   </style>
 </head>
@@ -100,8 +100,9 @@
             <th>放飛時間</th>
             <th>實際飛行距離(m)</th>
             <!-- <th>時間</th> -->
-            <th>速度(m/min)</th>
+            <th>實際飛行速度(m/min)</th>
             <th>直線距離(m)</th>
+            <th>直線分速(m/min)</th>
             <th>路徑效率</th>
             <th>是否裁減</th>
         </tr>
@@ -114,17 +115,18 @@
   <button id="button_showFigures_FilteredRoutes" class="button" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
   <br>
   </br>
-  <button id="button_windy_showPath" class="button" title="點擊查看軌跡">顯示路徑</button>
+  <!-- <button id="button_windy_showPath" class="button" title="點擊查看軌跡">顯示路徑</button>
   <br>
-  </br>
-  <div id="windy"></div>
-  <br>
-  </br>
+  </br> -->
+  <!-- <div id="windy"></div> -->
   <div id ='solo_route_SpeedElevation' class = 'myDiv_plots' >
     <label id="label_solo_route_SpeedElevation" class="label_plots">裁減：點擊圖表進行裁減</label>
     <br></br>
     <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
   </div>
+  <div id="map_showroutes" class="myDiv_map"></div>
+  <br>
+  </br>
   <div id ='routeEff_Polyline_plot' class = 'myDiv_plots' >
     <label id="label_routeEff_Polyline_plot" class="label_plots">路徑效率折線圖</label>
     <br></br>
@@ -267,12 +269,12 @@
     console.log(routeId_list);
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
-    // let map_handler = L.map('Map_showPaths', { preferCanvas: true }).setView([0, 0], 8);
+    let map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
 
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         maxZoom: 20,
-    //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    // }).addTo(map_handler);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map_handler);
 
     //for windy
     function getRandomColor() {
@@ -287,43 +289,44 @@
     let lineObjects_in_windy = [];
     let windy_map_handler = null;
     let windy_map_handler_layer = null;
-    let map_handler = null;
-    let map_layer_windy = null;
+    // let map_handler = null;
+    // let map_layer_windy = null;
+    let map_layer_windy = L;
     let func_point_showRoutesInMap = null;
     
-    const options_windy_init = {
-                // Required: API key
-                key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
+    // const options_windy_init = {
+    //             // Required: API key
+    //             key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
 
-                // Put additional console output
-                verbose: true,
+    //             // Put additional console output
+    //             verbose: true,
 
-                // Optional: Initial state of the map
-                lat: 0,
-                lon: 0,
-                zoom: 10,
-    };
+    //             // Optional: Initial state of the map
+    //             lat: 0,
+    //             lon: 0,
+    //             zoom: 10,
+    // };
 
-            // Initialize Windy API
-    windyInit(options_windy_init, windyAPI => {
-                // windyAPI is ready, and contain 'map', 'store',
-                // 'picker' and other usefull stuff
+    //         // Initialize Windy API
+    // windyInit(options_windy_init, windyAPI => {
+    //             // windyAPI is ready, and contain 'map', 'store',
+    //             // 'picker' and other usefull stuff
 
-                const { map } = windyAPI;
-                // .map is instance of Leaflet map
-                // map.setView(path_normalize_list[0][0],10);
-                map_handler = map;
+    //             const { map } = windyAPI;
+    //             // .map is instance of Leaflet map
+    //             // map.setView(path_normalize_list[0][0],10);
+    //             map_handler = map;
 
-        L.popup()
-            .setLatLng([0,0])
-            // .setContent('begin')
-            .openOn(map);
+    //     L.popup()
+    //         .setLatLng([0,0])
+    //         // .setContent('begin')
+    //         .openOn(map);
                 
-        map_layer_windy = L;
+    //     map_layer_windy = L;
 
-        // windy_movingPoint = windy_map_handler_layer.circle(path_normalize_list[0][0], { radius: 1600 }).addTo(windy_map_handler);
+    //     // windy_movingPoint = windy_map_handler_layer.circle(path_normalize_list[0][0], { radius: 1600 }).addTo(windy_map_handler);
 
-    });
+    // });
 
     let windy_movingPoint = null;
 
@@ -416,7 +419,7 @@
           routes_origin.push(route);
           var summary = response[routeId+'pigeonNumber'];
           console.log('summary',summary);
-          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance']};
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance'],'straightspeed':summary['straightspeed']};
           cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
           pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
         //   console.log(pigeonNumbers_releaseTime);
@@ -510,11 +513,14 @@
                 row_data_5.innerHTML = pigeonNumGps['straightdistance'].toFixed(3);
                 row_data_5.style.textAlign = "center";
                 var row_data_6 = document.createElement('td');
-                row_data_6.innerHTML = pigeonNumGps['routeEfficiency'].toFixed(3);
+                row_data_6.innerHTML = pigeonNumGps['straightspeed'].toFixed(3);
                 row_data_6.style.textAlign = "center";
                 var row_data_7 = document.createElement('td');
-                row_data_7.innerHTML = '未';
+                row_data_7.innerHTML = pigeonNumGps['routeEfficiency'].toFixed(3);
                 row_data_7.style.textAlign = "center";
+                var row_data_8 = document.createElement('td');
+                row_data_8.innerHTML = '未';
+                row_data_8.style.textAlign = "center";
 
                 row.appendChild(row_data_0);
                 row.appendChild(row_data_1);
@@ -524,6 +530,7 @@
                 row.appendChild(row_data_5);
                 row.appendChild(row_data_6);
                 row.appendChild(row_data_7);
+                row.appendChild(row_data_8);
 
                 function func_cb_row()
                 {
@@ -576,9 +583,6 @@
         var routeEfficiency = straightdistance/real_distance;
         console.log('routeEfficiency',routeEfficiency);
 
-        // console.log(filted_route[0]['time']);
-        // var start_time = new Date(filted_route[0]['time'].replace('上午','').replace('下午',''));
-        // var end_time = new Date(filted_route[filted_route.length-1]['time'].replace('上午','').replace('下午',''));
         var start_time = new Date(filted_route[0]['time']);
         var end_time = new Date(filted_route[filted_route.length-1]['time']);
         
@@ -588,17 +592,21 @@
         var speed = real_distance/(elapsed/60);
         console.log('speed',speed);
 
+        var straightspeed = straightdistance/(elapsed/60);
+
         var rows = document.getElementById("table_pigeonNumber_body").rows;
         console.log(rows);
         var td_realditance = rows[routeIndex].getElementsByTagName("td")[2];
         var td_speed = rows[routeIndex].getElementsByTagName("td")[3];
         var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[4];
-        var td_routeEfficiency = rows[routeIndex].getElementsByTagName("td")[5];
-        var td_filter = rows[routeIndex].getElementsByTagName("td")[6];
+        var td_straightspeed = rows[routeIndex].getElementsByTagName("td")[5];
+        var td_routeEfficiency = rows[routeIndex].getElementsByTagName("td")[6];
+        var td_filter = rows[routeIndex].getElementsByTagName("td")[7];
             
         td_realditance.innerHTML = real_distance.toFixed(3);
         td_speed.innerHTML = speed.toFixed(3);
         td_straightdistance.innerHTML = straightdistance.toFixed(3);
+        td_straightspeed.innerHTML = straightspeed.toFixed(3);
         td_routeEfficiency.innerHTML = routeEfficiency.toFixed(3);
         td_filter.innerHTML = '是';
     }
@@ -655,12 +663,12 @@
             }
         }
 
-        var button_showPaths = document.getElementById('button_windy_showPath');
-        button_showPaths.addEventListener('click',function(){
-            showInMap_multi_init(test_demo_data);
-        });
+        // var button_showPaths = document.getElementById('button_windy_showPath');
+        // button_showPaths.addEventListener('click',function(){
+        //     showInMap_multi_init(test_demo_data);
+        // });
 
-        // showInMap_multi_init(test_demo_data);
+        showInMap_multi_init(test_demo_data);
         function showInMap_multi_init(paths) {
 
             var path_normalize_list = [];
@@ -721,7 +729,7 @@
                 return polyline_origin;
             }
 
-            windy_movingPoint = map_layer_windy.circle([0, 0], { radius: 1600 ,color:'white'}).addTo(map_handler);
+            windy_movingPoint = map_layer_windy.circle([0, 0], { radius: 1600 ,color:'blue'}).addTo(map_handler);
         }
 
         function showInMap_movepoint(point) {
@@ -979,7 +987,7 @@
                 myChart_RoutePlot.update();
             }
 
-            makeYData_earthElevation();
+            // makeYData_earthElevation();
 
             function makeYData_earthElevation() {
                 var result = [];
@@ -1104,42 +1112,104 @@
           }
           console.log(make_data);
 
+          var realspeed_list = [];
+          for(var i=0;i<test_demo_data.length;i++)
+          {
+            var speed = make_realspeed(test_demo_data[i]);
+            realspeed_list.push(speed.toFixed(3));
+          }
+          console.log('realspeed_list',realspeed_list);
+          function make_realspeed(filted_route)
+          {
+                var real_distance = 0;
+                for(var i=0;i<filted_route.length;i++)
+                {
+                    real_distance+=parseFloat(filted_route[i]['distance']);
+                }
+                console.log('real_distance',real_distance);
+
+                // var startPoint = [filted_route[0]['longitude'],filted_route[0]['latitude']];
+                // var endPoint = [filted_route[filted_route.length-1]['longitude'],filted_route[filted_route.length-1]['latitude']];
+                // var from = turf.point(startPoint);
+                // var to = turf.point(endPoint);
+                // var options = {units: 'kilometers'};
+                // var straightdistance = turf.distance(from, to, options)*1000;
+
+                // var routeEfficiency = straightdistance/real_distance;
+                // console.log('routeEfficiency',routeEfficiency);
+
+                var start_time = new Date(filted_route[0]['time']);
+                var end_time = new Date(filted_route[filted_route.length-1]['time']);
+                
+                // console.log(start_time,end_time);
+                var elapsed = (end_time.getTime() - start_time.getTime())/1000;
+                
+                var speed = real_distance/(elapsed/60);
+                // console.log('speed',speed);
+                return speed;
+
+                // var straightspeed = straightdistance/(elapsed/60);
+          }
+
           draw_line_routeEffs();
 
           function draw_line_routeEffs() {
               var options = {
                   series: [{
                       name: "路徑效率",
+                      type: 'column',
                       data: routes_effs
                     // data:make_data
-                  }],
+                  },
+                  {
+                    name: '實際分速',
+                    type: 'line',
+                    data:  realspeed_list
+                  }
+                ],
                   chart: {
-                      height: 350,
+                      height: 400,
                       type: 'line',
                       zoom: {
                           enabled: false
                       }
                   },
+                //   dataLabels: {
+                //       enabled: false
+                //   },
                   dataLabels: {
-                      enabled: false
+                    enabled: true,
+                    enabledOnSeries: [1]
                   },
+                  labels: data_x,
                   stroke: {
-                      curve: 'straight'
+                      width: [0, 4]
                   },
-                  title: {
-                      text: '路徑效率process圖:路徑效率/放飛時間',
-                      align: 'middle'
-                  },
-                  grid: {
-                      row: {
-                          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                          opacity: 0.5
-                      },
-                  },
+                //   title: {
+                //       text: '路徑效率process圖:路徑效率/放飛時間',
+                //       align: 'middle'
+                //   },
+                //   grid: {
+                //       row: {
+                //           colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                //           opacity: 0.5
+                //       },
+                //   },
                   xaxis: {
                     type: 'category',
-                    categories: data_x,
-                  }
+                    // categories: data_x,
+                  },
+                  yaxis: [{
+                    title: {
+                        text: '路徑效率',
+                    },
+                    
+                    }, {
+                    opposite: true,
+                    title: {
+                        text: '實際分速(m/min)'
+                    }
+                }]
               };
 
             var canvas_routeEff_Polyline_plot = document.getElementById('canvas_routeEff_Polyline_plot');
