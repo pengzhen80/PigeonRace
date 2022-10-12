@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-12T03:36:31.368Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="MgIpTu6M93DL0760vbOs" version="20.4.0" type="github" pages="14">
+<mxfile host="app.diagrams.net" modified="2022-10-12T03:43:01.545Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="FWYZWUv6-R8iob56pOs-" version="20.4.0" type="github" pages="14">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
     <mxGraphModel dx="2175" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -4317,23 +4317,137 @@
             <mxPoint x="440" y="380" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gHTkgdfNSK68o8NcfA_k-20" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="500" y="120" width="110" height="110" as="geometry" />
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-20" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=36;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="490" y="100" width="130" height="275" as="geometry" />
         </mxCell>
         <mxCell id="gHTkgdfNSK68o8NcfA_k-21" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-20">
-          <mxGeometry width="110" height="55" as="geometry" />
+          <mxGeometry width="130" height="55" as="geometry" />
         </mxCell>
         <mxCell id="gHTkgdfNSK68o8NcfA_k-22" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;指標&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-21">
-          <mxGeometry width="110" height="55" as="geometry">
-            <mxRectangle width="110" height="55" as="alternateBounds" />
+          <mxGeometry width="130" height="55" as="geometry">
+            <mxRectangle width="130" height="55" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="gHTkgdfNSK68o8NcfA_k-23" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-20">
-          <mxGeometry y="55" width="110" height="55" as="geometry" />
+          <mxGeometry y="55" width="130" height="55" as="geometry" />
         </mxCell>
         <mxCell id="gHTkgdfNSK68o8NcfA_k-24" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;路徑效率&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-23">
-          <mxGeometry width="110" height="55" as="geometry">
-            <mxRectangle width="110" height="55" as="alternateBounds" />
+          <mxGeometry width="130" height="55" as="geometry">
+            <mxRectangle width="130" height="55" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-46" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-20">
+          <mxGeometry y="110" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-47" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;路徑相似度&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-46">
+          <mxGeometry width="130" height="55" as="geometry">
+            <mxRectangle width="130" height="55" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-48" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-20">
+          <mxGeometry y="165" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-49" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;相對距離&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-48">
+          <mxGeometry width="130" height="55" as="geometry">
+            <mxRectangle width="130" height="55" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-50" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-20">
+          <mxGeometry y="220" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-51" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;領航者&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=36;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-50">
+          <mxGeometry width="130" height="55" as="geometry">
+            <mxRectangle width="130" height="55" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-25" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;&lt;b&gt;模型：訓練和比賽&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="760" y="40" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-27" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="720" y="100" width="680" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-28" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-27">
+          <mxGeometry width="680" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-29" value="模型" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-28">
+          <mxGeometry width="175" height="53" as="geometry">
+            <mxRectangle width="175" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-30" value="指標" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-28">
+          <mxGeometry x="175" width="245" height="53" as="geometry">
+            <mxRectangle width="245" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-40" value="描述" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-28">
+          <mxGeometry x="420" width="260" height="53" as="geometry">
+            <mxRectangle width="260" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-31" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-27">
+          <mxGeometry y="53" width="680" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-32" value="建立路徑" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-31">
+          <mxGeometry width="175" height="52" as="geometry">
+            <mxRectangle width="175" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-33" value="相似度，路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-31">
+          <mxGeometry x="175" width="245" height="52" as="geometry">
+            <mxRectangle width="245" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-41" value="單飛10～12次" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-31">
+          <mxGeometry x="420" width="260" height="52" as="geometry">
+            <mxRectangle width="260" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-34" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-27">
+          <mxGeometry y="105" width="680" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-35" value="提升導航上限" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-34">
+          <mxGeometry width="175" height="53" as="geometry">
+            <mxRectangle width="175" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-36" value="路徑效率，相對距離" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-34">
+          <mxGeometry x="175" width="245" height="53" as="geometry">
+            <mxRectangle width="245" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-42" value="對飛切換parter" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-34">
+          <mxGeometry x="420" width="260" height="53" as="geometry">
+            <mxRectangle width="260" height="53" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-37" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-27">
+          <mxGeometry y="158" width="680" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-38" value="團體飛行" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-37">
+          <mxGeometry width="175" height="52" as="geometry">
+            <mxRectangle width="175" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-39" value="團體飛行領航者" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-37">
+          <mxGeometry x="175" width="245" height="52" as="geometry">
+            <mxRectangle width="245" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-43" value="判斷分團，判斷團領導" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="gHTkgdfNSK68o8NcfA_k-37">
+          <mxGeometry x="420" width="260" height="52" as="geometry">
+            <mxRectangle width="260" height="52" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-44" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="gHTkgdfNSK68o8NcfA_k-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="440" as="sourcePoint" />
+            <mxPoint x="480" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gHTkgdfNSK68o8NcfA_k-45" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="180" as="sourcePoint" />
+            <mxPoint x="710" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
