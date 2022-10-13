@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-12T05:09:25.990Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="-lFwBW-lKMWokviPm6-q" version="20.4.0" type="github" pages="14">
+<mxfile host="app.diagrams.net" modified="2022-10-13T02:43:19.120Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="srAP_jXCBD4l9gTSCIqZ" version="20.4.0" type="github" pages="15">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
-    <mxGraphModel dx="2175" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2415" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -4461,6 +4461,178 @@
         </mxCell>
         <mxCell id="gHTkgdfNSK68o8NcfA_k-63" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;&lt;b&gt;鴿子能力模型&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="290" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="c5RBP5fpOP4IABdQXwnV" name="api_flow">
+    <mxGraphModel dx="1588" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-1" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="1613" height="1064" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry width="1613" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-34" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;step&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-2">
+          <mxGeometry width="140" height="70" as="geometry">
+            <mxRectangle width="140" height="70" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-3" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;api&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-2">
+          <mxGeometry x="140" width="620" height="70" as="geometry">
+            <mxRectangle width="620" height="70" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-4" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;params&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-2">
+          <mxGeometry x="760" width="450" height="70" as="geometry">
+            <mxRectangle width="450" height="70" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-5" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;res&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-2">
+          <mxGeometry x="1210" width="403" height="70" as="geometry">
+            <mxRectangle width="403" height="70" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="70" width="1613" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-35" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;1&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-6">
+          <mxGeometry width="140" height="99" as="geometry">
+            <mxRectangle width="140" height="99" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-7" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&#39;http://skyleader3.yuansan.com/api/SkyLeader/Login&#39;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-6">
+          <mxGeometry x="140" width="620" height="99" as="geometry">
+            <mxRectangle width="620" height="99" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-8" value="&lt;div style=&quot;background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;{&lt;/font&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;account&quot;&lt;/span&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;,&lt;/font&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;font color=&quot;#d4d4d4&quot;&gt;}&lt;/font&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-6">
+          <mxGeometry x="760" width="450" height="99" as="geometry">
+            <mxRectangle width="450" height="99" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-9" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;mxid&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-6">
+          <mxGeometry x="1210" width="403" height="99" as="geometry">
+            <mxRectangle width="403" height="99" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="169" width="1613" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-36" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;2&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-10">
+          <mxGeometry width="140" height="83" as="geometry">
+            <mxRectangle width="140" height="83" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-11" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&#39;http://skyleader3.yuansan.com/api/SkyLeader/readActivityId&#39;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-10">
+          <mxGeometry x="140" width="620" height="83" as="geometry">
+            <mxRectangle width="620" height="83" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-12" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div&gt;{&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;mxid&quot;&lt;/span&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-10">
+          <mxGeometry x="760" width="450" height="83" as="geometry">
+            <mxRectangle width="450" height="83" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-13" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;list : activity&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-10">
+          <mxGeometry x="1210" width="403" height="83" as="geometry">
+            <mxRectangle width="403" height="83" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-14" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="252" width="1613" height="203" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-37" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;3&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-14">
+          <mxGeometry width="140" height="203" as="geometry">
+            <mxRectangle width="140" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-15" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;http://skyleader3.yuansan.com/api/SkyLeader/readActivity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-14">
+          <mxGeometry x="140" width="620" height="203" as="geometry">
+            <mxRectangle width="620" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-16" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div&gt;{&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;activity_id&quot;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;mxid&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;activity_name&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;release_date&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;release_time&quot;&lt;/span&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-14">
+          <mxGeometry x="760" width="450" height="203" as="geometry">
+            <mxRectangle width="450" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-17" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;true&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-14">
+          <mxGeometry x="1210" width="403" height="203" as="geometry">
+            <mxRectangle width="403" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-22" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="455" width="1613" height="203" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-38" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;4&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-22">
+          <mxGeometry width="140" height="203" as="geometry">
+            <mxRectangle width="140" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-23" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&#39;http://skyleader3.yuansan.com/api/SkyLeader/readTrainRecord&#39;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-22">
+          <mxGeometry x="140" width="620" height="203" as="geometry">
+            <mxRectangle width="620" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-24" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div&gt;{&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;mxid&quot;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;activity_id&quot;&lt;/span&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-22">
+          <mxGeometry x="760" width="450" height="203" as="geometry">
+            <mxRectangle width="450" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-25" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;list : trainrecord.&lt;br&gt;&lt;br&gt;moduleid in trainrecord.&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-22">
+          <mxGeometry x="1210" width="403" height="203" as="geometry">
+            <mxRectangle width="403" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-30" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="658" width="1613" height="203" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-39" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;5&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-30">
+          <mxGeometry width="140" height="203" as="geometry">
+            <mxRectangle width="140" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-31" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&#39;http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule&#39;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-30">
+          <mxGeometry x="140" width="620" height="203" as="geometry">
+            <mxRectangle width="620" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-32" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div&gt;{&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;activity_id&quot;,&lt;/span&gt;&lt;/div&gt;&lt;div&gt;                &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;mxid&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;                &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;moduleid&quot;&lt;/span&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-30">
+          <mxGeometry x="760" width="450" height="203" as="geometry">
+            <mxRectangle width="450" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-33" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;laserid is gps_id&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-30">
+          <mxGeometry x="1210" width="403" height="203" as="geometry">
+            <mxRectangle width="403" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-26" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-1">
+          <mxGeometry y="861" width="1613" height="203" as="geometry" />
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-40" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;5&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-26">
+          <mxGeometry width="140" height="203" as="geometry">
+            <mxRectangle width="140" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-27" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;&#39;http://skyleader3.yuansan.com/api/SkyLeader/readCloudLocusText&#39;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-26">
+          <mxGeometry x="140" width="620" height="203" as="geometry">
+            <mxRectangle width="620" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-28" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div&gt;{&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;&quot;trainrecordid&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div&gt;            &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;activity_id&quot;&lt;/span&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-26">
+          <mxGeometry x="760" width="450" height="203" as="geometry">
+            <mxRectangle width="450" height="203" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uskiE5sXW9TfeLoCOUI5-29" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;rawdata&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="uskiE5sXW9TfeLoCOUI5-26">
+          <mxGeometry x="1210" width="403" height="203" as="geometry">
+            <mxRectangle width="403" height="203" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
