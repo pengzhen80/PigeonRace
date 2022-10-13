@@ -20,7 +20,6 @@ import pytz
 class DBManagement ():
     def __init__(self):
         self.mxid = ''
-        # self.activitys = [{"activity_id":"","activity_name":"","release_date":"","release_time":""}]
         self.activities = []
         self.routes = {}
         self.routes_summarydata = {}
@@ -34,12 +33,9 @@ class DBManagement ():
 
             for row in spamreader:
                 cell = {}
-                # print(', '.join(row))
-                # print(type(row),len(row))
                 rowList = row[0].split(',')
                 cell['gpsId'] = rowList[0]
                 cell['ringId'] = rowList[1]
-                # print(cell)
                 dataList.append(cell)
         return dataList
 
@@ -50,27 +46,15 @@ class DBManagement ():
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
 
         myobj = {"account": username, "password": password}
-        # myobj = {"account": "mx01","password": "80443914"}
 
         x = requests.post(url, data=myobj)
-        # res = json.loads(x.text)
-        # print(type(res),res)
         res = x.json()
-        # print(res,type(res))
         res = json.loads(res)
-        # print(res,type(res),res['mxid'])
         status = res['status']
-        # print(status)
         if (status == 'ok'):
             self.mxid = res['mxid']
-            # print(self.mxid)
             self.api_getActivitityID()
         return res
-        # result = res['results']
-        # if(result == False):
-        #     print("insert failed")
-        #     return False
-        # return True
 
     def api_getActivitityID(self):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
@@ -81,36 +65,31 @@ class DBManagement ():
                  }
 
         x = requests.post(url, data=myobj)
-        # res = json.loads(x.text)
-        # print(type(res),res)
         res = x.json()
-        # print(res,type(res))
         res = json.loads(res)
-        # print(res,type(res))
-        # self.activitys.append(res)
-        # self.activities = self.activities+res
-        # print(self.activities)
         for activity in res:
             if(self.api_getActivitity(activity['activity_id'], self.mxid, activity['activity_name'],activity['release_date'], activity['release_time'])):          
                 self.activities = self.activities + [activity]
-                self.api_readModule(activity['activity_id'])
+                # self.api_readModule(activity['activity_id'])
+                self.api_readTrainRecord(activity['activity_id'])
         return res
 
-    def api_readTrainRecord(self, activity_id, module_id):
+    def api_readTrainRecord(self, activity_id):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readTrainRecord'
 
         myobj = {
             "mxid": self.mxid,
-            "moduleid": module_id,
+            # "moduleid": module_id,
             "activity_id": activity_id,
         }
 
         x = requests.post(url, data=myobj)
         res = x.json()
-        # print(res,type(res))
         res = json.loads(res)
         for trainRecord in res:
+            module_id = trainRecord['moduleid']
             self.data_routes_summaryData_add(activity_id,module_id,trainRecord['trainrecordid'],trainRecord)
+            print(trainRecord)
             # print(trainRecord['trainrecordid'])
             self.api_readCloudLocusText(
                 activity_id, module_id, trainRecord['trainrecordid'])
@@ -130,7 +109,6 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        # print('activity:', res)
 
         return res
 
@@ -138,7 +116,7 @@ class DBManagement ():
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudLocusText'
 
         myobj = {
-            "moduleid": module_id,
+            # "moduleid": module_id,
             "trainrecordid": trainRecord_id,
             "activity_id": activity_id
         }
@@ -146,7 +124,6 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
-        # print('routes', res)
 
         def normalize_data(data):
             data = data[1:]
@@ -155,9 +132,6 @@ class DBManagement ():
             return data_list
 
         for route in res:
-            print(route.keys())
-            # print(route['updatetimestamp'])
-            # print(route['utc'])
             fixed_list = normalize_data(route['fix']);
             latitude_list = normalize_data(route['latitude'])
             longitude_list = normalize_data(route['longitude'])
@@ -170,43 +144,20 @@ class DBManagement ():
             self.data_routes_addRoute(fixed_list,activity_id,module_id,trainRecord_id,latitude_list,longitude_list,elevation_list,distance_list,speed_list,heading_list,time_list)
         return res
 
-    def api_readModule(self, activity_id):
-        # dataList = []
-        # with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
-        #     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    def api_readModule(self, activity_id,module_id):      
+        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule'
 
-        #     for row in spamreader:
-        #         cell = {}
-        #         # print(', '.join(row))
-        #         # print(type(row),len(row))
-        #         rowList = row[0].split(',')
-        #         cell['gpsId'] = rowList[0]
-        #         cell['ringId'] = rowList[1]
-        #         # print(cell)
-        #         dataList.append(cell)
-
-        for data in self.gpsIdringId:
-            # print(data)
-            url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule'
-
-            myobj = {
+        myobj = {
                 "activity_id": activity_id,
                 "mxid": self.mxid,
-                "ringid": data['ringId'],
-                "laserid": data['gpsId']
-            }
+                "moduleid":module_id,
+        }
 
-            x = requests.post(url, data=myobj)
-            res = x.json()
-            res = json.loads(res)
-            # print('module:', res)
-            for module in res:
-                # print('module_id',module['modlueid'])
-                # print(module)
-                self.modules[module['moduleid']] = module
-                # print('module_id:', module['moduleid'])
-                self.api_readTrainRecord(activity_id, module['moduleid'])
-        return
+        x = requests.post(url, data=myobj)
+        res = x.json()
+        res = json.loads(res)
+        # print(res)
+        return res[0]['laserid']
 
     def data_routes_addRoute(self,fixed_list,activity_id,module_id,trainRecord_id,latitudes,longitudes,elevations,distances,speeds,headings,times):
         route_key = activity_id+module_id+trainRecord_id
@@ -226,26 +177,12 @@ class DBManagement ():
                 cell['time']= times[i]
                 route_data.append(cell)
 
-                # api_locations.append({"latitude":latitudes[i],"longitude":longitudes[i]})
-        # print(len(route_data))
-
-        # url = 'https://api.open-elevation.com/api/v1/lookup?'
-        # myobj = {
-        #         "locations":api_locations
-        # }
-        # x = requests.post(url, data=json.dumps(myobj))
-        # print(type(x))
-        # print(x.text)
-        # res = x.json()
-        # res = json.loads(res)
-        # print(res)
-
         self.routes[route_key] = route_data
         # print('route_key',route_key)
     
     def data_routes_summaryData_add(self,activity_id,module_id,trainrecord_id,data):
         normalized_data = data
-        normalized_data['gps_id'] = self.modules[module_id]['laserid']
+        normalized_data['gps_id'] = self.api_readModule(activity_id,module_id)
         self.routes_summarydata[activity_id+module_id+trainrecord_id] = normalized_data
 
     def read_routes_summaryData(self,activity_id):
