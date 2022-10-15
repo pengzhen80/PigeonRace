@@ -999,12 +999,6 @@
 
                     dataToSend_json.push({ "latitude":  parseFloat(lat) , "longitude": parseFloat(lon) });
                 }
-                // var sample_data = [[10,10],[20,20]];
-                // for (var i_earthEle = 0; i_earthEle < sample_data.length; i_earthEle++) {
-                //     var lat = sample_data[i_earthEle][0];
-                //     var lon = sample_data[i_earthEle][1];
-                //     dataToSend_json.push({ "latitude": lat, "longitude": lon });
-                // }
 
                 const url = 'https://api.open-elevation.com/api/v1/lookup?';
                 var oReq = new XMLHttpRequest();
