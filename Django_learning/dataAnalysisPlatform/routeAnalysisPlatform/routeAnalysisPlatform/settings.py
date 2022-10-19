@@ -127,3 +127,15 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/0", # 指定redis://IP/第幾個DB
+        "OPTIONS": {
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+        },
+        'KEY_PREFIX': 'Cache'
+    }
+}
