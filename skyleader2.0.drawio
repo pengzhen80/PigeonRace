@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-19T07:08:41.086Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="TAFnliacqFMnJONI5izS" version="20.4.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-19T07:09:30.940Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="gRAnsk7RvK_O4Egu6ZzA" version="20.4.1" type="github">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="第 1 页">
     <mxGraphModel dx="1588" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -110,7 +110,7 @@
             <mxPoint x="440" y="590" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-31" value="腳環設定頁面-地圖繪製軌跡：從本地資料庫拉取軌跡資料" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="23Z4OvW_dukLF1XysgEK-31" value="製作地圖繪製軌跡的html：從本地資料庫拉取軌跡資料" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="970" y="750" width="370" height="60" as="geometry" />
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-32" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="23Z4OvW_dukLF1XysgEK-29" target="23Z4OvW_dukLF1XysgEK-31">
@@ -123,7 +123,7 @@
           <mxGeometry x="70" y="510" width="410" height="30" as="geometry" />
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-35" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="60" y="960" width="1340" height="230" as="geometry" />
+          <mxGeometry x="60" y="960" width="1340" height="110" as="geometry" />
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-36" value="Mainwindow:" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="70" y="960" width="390" height="30" as="geometry" />
@@ -138,6 +138,12 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="670" y="1010" as="sourcePoint" />
             <mxPoint x="700" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23Z4OvW_dukLF1XysgEK-40" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="23Z4OvW_dukLF1XysgEK-31" target="23Z4OvW_dukLF1XysgEK-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="650" y="1010" as="sourcePoint" />
+            <mxPoint x="700" y="960" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
