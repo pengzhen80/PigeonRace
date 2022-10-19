@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-19T06:42:40.714Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="hCFwFlWPYXKHmO9m89V4" version="20.4.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-19T06:42:53.417Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="L8b4j7qlVQ5ZXjd_fzVz" version="20.4.1" type="github">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="第 1 页">
     <mxGraphModel dx="1588" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -14,7 +14,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-6" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="350" y="120" width="490" height="300" as="geometry" />
+          <mxGeometry x="350" y="120" width="490" height="240" as="geometry" />
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-6">
           <mxGeometry width="490" height="60" as="geometry" />
@@ -55,21 +55,8 @@
             <mxRectangle width="245" height="60" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-16" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-6">
-          <mxGeometry y="180" width="490" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-17" value="把軌跡存儲到本地" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-16">
-          <mxGeometry width="245" height="60" as="geometry">
-            <mxRectangle width="245" height="60" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-18" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-16">
-          <mxGeometry x="245" width="245" height="60" as="geometry">
-            <mxRectangle width="245" height="60" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-19" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-6">
-          <mxGeometry y="240" width="490" height="60" as="geometry" />
+          <mxGeometry y="180" width="490" height="60" as="geometry" />
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-20" value="自動在地圖上繪製軌跡" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="23Z4OvW_dukLF1XysgEK-19">
           <mxGeometry width="245" height="60" as="geometry">
