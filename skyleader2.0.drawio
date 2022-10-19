@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-19T07:15:56.266Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="hwF2ppr2VLg2OZM82V36" version="20.4.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-10-19T07:16:22.335Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="DUfEs9udxyvKE2AUvNhL" version="20.4.1" type="github">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="第 1 页">
     <mxGraphModel dx="1588" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -134,10 +134,10 @@
         <mxCell id="23Z4OvW_dukLF1XysgEK-37" value="更新腳環設定頁面的UI" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="414" y="970" width="256" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-38" value="啓動線程-把軌跡上傳到server：從本地db讀取資料進行上傳" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="23Z4OvW_dukLF1XysgEK-38" value="把軌跡上傳到server：從本地db讀取資料進行上傳" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="360" y="1300" width="640" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="23Z4OvW_dukLF1XysgEK-39" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="23Z4OvW_dukLF1XysgEK-38">
+        <mxCell id="23Z4OvW_dukLF1XysgEK-39" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="23Z4OvW_dukLF1XysgEK-43">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="670" y="1010" as="sourcePoint" />
             <mxPoint x="700" y="980" as="targetPoint" />
@@ -151,6 +151,15 @@
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-42" value="upload thread:&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="70" y="1240" width="310" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="23Z4OvW_dukLF1XysgEK-43" value="啓動線程" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="830" y="970" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="23Z4OvW_dukLF1XysgEK-44" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="23Z4OvW_dukLF1XysgEK-43" target="23Z4OvW_dukLF1XysgEK-38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="650" y="1070" as="sourcePoint" />
+            <mxPoint x="700" y="1020" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
