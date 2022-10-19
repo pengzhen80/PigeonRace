@@ -1110,10 +1110,12 @@
           console.log(make_data);
 
           var realspeed_list = [];
+          var straightspeed_list =[];
           for(var i=0;i<test_demo_data.length;i++)
           {
             var speed = make_realspeed(test_demo_data[i]);
             realspeed_list.push(speed.toFixed(3));
+            straightspeed_list.push((make_straightspeed(test_demo_data[i])).toFixed(3));
           }
           console.log('realspeed_list',realspeed_list);
           function make_realspeed(filted_route)
@@ -1148,6 +1150,33 @@
                 // var straightspeed = straightdistance/(elapsed/60);
           }
 
+          function make_straightspeed(filted_route)
+          {
+                // var real_distance = 0;
+                // for(var i=0;i<filted_route.length;i++)
+                // {
+                //     real_distance+=parseFloat(filted_route[i]['distance']);
+                // }
+                // console.log('real_distance',real_distance);
+
+                var startPoint = [filted_route[0]['longitude'],filted_route[0]['latitude']];
+                var endPoint = [filted_route[filted_route.length-1]['longitude'],filted_route[filted_route.length-1]['latitude']];
+                var from = turf.point(startPoint);
+                var to = turf.point(endPoint);
+                var options = {units: 'kilometers'};
+                var straightdistance = turf.distance(from, to, options)*1000;
+
+                var start_time = new Date(filted_route[0]['time']);
+                var end_time = new Date(filted_route[filted_route.length-1]['time']);
+                
+                // console.log(start_time,end_time);
+                var elapsed = (end_time.getTime() - start_time.getTime())/1000;
+
+                var straightspeed = straightdistance/(elapsed/60);
+                return straightspeed;
+          }
+
+
           draw_line_routeEffs();
 
           function draw_line_routeEffs() {
@@ -1162,6 +1191,11 @@
                     name: '實際分速',
                     type: 'line',
                     data:  realspeed_list
+                  },
+                  {
+                    name: '直線分速',
+                    type: 'line',
+                    data:  straightspeed_list
                   }
                 ],
                   chart: {
@@ -1176,11 +1210,11 @@
                 //   },
                   dataLabels: {
                     enabled: true,
-                    enabledOnSeries: [1]
+                    enabledOnSeries: [1,2]
                   },
                   labels: data_x,
                   stroke: {
-                      width: [0, 4]
+                      width: [0, 4,4]
                   },
                 //   title: {
                 //       text: '路徑效率process圖:路徑效率/放飛時間',
@@ -1204,7 +1238,7 @@
                     }, {
                     opposite: true,
                     title: {
-                        text: '實際分速(m/min)'
+                        text: '實際分速(m/min),直線分速(m/min)'
                     }
                 }]
               };
