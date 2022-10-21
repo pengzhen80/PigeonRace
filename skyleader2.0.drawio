@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-21T04:10:22.576Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="5wFDLHSOU6py_Z59RFIY" version="20.4.1" type="github" pages="7">
+<mxfile host="app.diagrams.net" modified="2022-10-21T05:30:36.260Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="yODci8sBTnsAyB11bzgZ" version="20.4.1" type="github" pages="7">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖">
     <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -173,7 +173,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="65IPqOiSn74CmNBEhT-u" name="app流程圖">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -292,7 +292,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="0dSRXwHjVdmTbuvbA1Jc" name="app系統設計圖">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -381,7 +381,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="4RI-3DcAnRxPliDI4yJv" name="app功能設計">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -526,6 +526,12 @@
           <mxGeometry x="464" width="376" height="40" as="geometry">
             <mxRectangle width="376" height="40" as="alternateBounds" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="SEwzpn1pTBsXFsASOHxT-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="1000" width="930" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="SEwzpn1pTBsXFsASOHxT-2" value="軌跡分享：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="1010" width="280" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
