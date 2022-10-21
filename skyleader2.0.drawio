@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-21T03:49:43.347Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="7SW205_khge-M-DbRaMe" version="20.4.1" type="github" pages="7">
+<mxfile host="app.diagrams.net" modified="2022-10-21T04:10:22.576Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="5wFDLHSOU6py_Z59RFIY" version="20.4.1" type="github" pages="7">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖">
     <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -447,51 +447,84 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-16" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-150" y="620" width="730" height="310" as="geometry" />
+          <mxGeometry x="-150" y="620" width="930" height="310" as="geometry" />
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-17" value="登陸後同步：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="-140" y="630" width="300" height="30" as="geometry" />
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-18" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-70" y="715" width="480" height="115" as="geometry" />
+          <mxGeometry x="-110" y="715" width="840" height="155" as="geometry" />
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-19" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-18">
-          <mxGeometry width="480" height="35" as="geometry" />
+          <mxGeometry width="840" height="35" as="geometry" />
         </mxCell>
-        <mxCell id="NxFomMBqMpVyAQ66yfqe-20" value="步驟" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-19">
-          <mxGeometry width="90" height="35" as="geometry">
-            <mxRectangle width="90" height="35" as="alternateBounds" />
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-20" value="step" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-19">
+          <mxGeometry width="87" height="35" as="geometry">
+            <mxRectangle width="87" height="35" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="NxFomMBqMpVyAQ66yfqe-21" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-19">
-          <mxGeometry x="90" width="390" height="35" as="geometry">
-            <mxRectangle width="390" height="35" as="alternateBounds" />
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-21" value="function" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-19">
+          <mxGeometry x="87" width="377" height="35" as="geometry">
+            <mxRectangle width="377" height="35" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-28" value="detail" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-19">
+          <mxGeometry x="464" width="376" height="35" as="geometry">
+            <mxRectangle width="376" height="35" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-22" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-18">
-          <mxGeometry y="35" width="480" height="40" as="geometry" />
+          <mxGeometry y="35" width="840" height="40" as="geometry" />
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-23" value="1" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-22">
-          <mxGeometry width="90" height="40" as="geometry">
-            <mxRectangle width="90" height="40" as="alternateBounds" />
+          <mxGeometry width="87" height="40" as="geometry">
+            <mxRectangle width="87" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-24" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;initUploadDownloadProgress()&lt;span style=&quot;color: #569cd6;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-22">
-          <mxGeometry x="90" width="390" height="40" as="geometry">
-            <mxRectangle width="390" height="40" as="alternateBounds" />
+          <mxGeometry x="87" width="377" height="40" as="geometry">
+            <mxRectangle width="377" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-29" value="init ui&#39;s object" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-22">
+          <mxGeometry x="464" width="376" height="40" as="geometry">
+            <mxRectangle width="376" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-25" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-18">
-          <mxGeometry y="75" width="480" height="40" as="geometry" />
+          <mxGeometry y="75" width="840" height="40" as="geometry" />
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-26" value="2" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-25">
-          <mxGeometry width="90" height="40" as="geometry">
-            <mxRectangle width="90" height="40" as="alternateBounds" />
+          <mxGeometry width="87" height="40" as="geometry">
+            <mxRectangle width="87" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="NxFomMBqMpVyAQ66yfqe-27" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;initSyncParams&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-25">
-          <mxGeometry x="90" width="390" height="40" as="geometry">
-            <mxRectangle width="390" height="40" as="alternateBounds" />
+          <mxGeometry x="87" width="377" height="40" as="geometry">
+            <mxRectangle width="377" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-30" value="upload data to server" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-25">
+          <mxGeometry x="464" width="376" height="40" as="geometry">
+            <mxRectangle width="376" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-31" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-18">
+          <mxGeometry y="115" width="840" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-32" value="3" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-31">
+          <mxGeometry width="87" height="40" as="geometry">
+            <mxRectangle width="87" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-33" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;setUploadDownloadProgress&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-31">
+          <mxGeometry x="87" width="377" height="40" as="geometry">
+            <mxRectangle width="377" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NxFomMBqMpVyAQ66yfqe-34" value="update ui&#39;s object" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="NxFomMBqMpVyAQ66yfqe-31">
+          <mxGeometry x="464" width="376" height="40" as="geometry">
+            <mxRectangle width="376" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
       </root>
