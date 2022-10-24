@@ -1,5 +1,370 @@
-<mxfile host="app.diagrams.net" modified="2022-10-24T07:04:11.891Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="__odlf5sfYT1dxAy5Fk9" version="20.4.1" type="github" pages="8">
-  <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖">
+<mxfile host="app.diagrams.net" modified="2022-10-24T07:55:04.882Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="2vqvOeKJZpXzwSfUaQdb" version="20.4.1" type="github" pages="9">
+  <diagram id="DJ6nCnAoo6vdC1hf0z2o" name="流程圖-設定放飛時間">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2JB88QoQ8c66Acas0oVj-1" value="設定放飛時間：&lt;span style=&quot;color: rgb(220, 220, 170); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px;&quot;&gt;setFlyingDate&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="120" width="460" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-2" value="設定啓動時間：&lt;span style=&quot;color: rgb(220, 220, 170); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px;&quot;&gt;onSetFlyingTime&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="250" width="480" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-3" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.487;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="2JB88QoQ8c66Acas0oVj-1" target="2JB88QoQ8c66Acas0oVj-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="540" as="sourcePoint" />
+            <mxPoint x="440" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-4" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;時間是否是未來時間&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="70" y="380" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-9" value="" style="endArrow=classic;html=1;rounded=0;fontSize=18;exitX=0.485;exitY=1.033;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="2JB88QoQ8c66Acas0oVj-2" target="2JB88QoQ8c66Acas0oVj-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="510" as="sourcePoint" />
+            <mxPoint x="440" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-10" value="" style="endArrow=classic;html=1;rounded=0;fontSize=18;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2JB88QoQ8c66Acas0oVj-4" target="2JB88QoQ8c66Acas0oVj-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="510" as="sourcePoint" />
+            <mxPoint x="470" y="585" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-12" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;拒絕設定&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="430" y="425" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-13" value="否" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="330" y="420" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="2JB88QoQ8c66Acas0oVj-4" target="2JB88QoQ8c66Acas0oVj-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="490" as="sourcePoint" />
+            <mxPoint x="170" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-15" value="開啓設定線程：&lt;span style=&quot;color: rgb(78, 201, 176); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px;&quot;&gt;SetFlyingTimeThread&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="610" width="500" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="2JB88QoQ8c66Acas0oVj-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="600" as="sourcePoint" />
+            <mxPoint x="180" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-18" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="730" width="2040" height="782" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-19" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-20" value="類型" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-19">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-21" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-19">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-22" value="代碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-19">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-23" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="46" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-24" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-23">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-25" value="運營商密碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-23">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-26" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;setOperatorPW&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;66666666FF123456&#39;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-23">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-27" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="92" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-28" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-27">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-29" value="用戶密碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-27">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-30" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;setUserPW&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;88888888FF123456&#39;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-27">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-31" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="138" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-32" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-31">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-33" value="串口是否連接" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-31">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-34" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;openSerialPort&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;portInputSTR&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-31">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-39" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="184" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-40" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-39">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-41" value="是否解鎖腳環" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-39">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-42" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getModuleFirmwareVer&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;loopCheckNum&lt;/span&gt;=&lt;span style=&quot;color: #b5cea8;&quot;&gt;5&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-39">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-35" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="230" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-36" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-35">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-37" value="模組ID" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-35">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-38" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div style=&quot;line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getRingID&lt;/span&gt;()&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-35">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="276" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-44" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-43">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-45" value="檢查ringID是否是99" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-43">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-46" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;[:&lt;span style=&quot;color: #b5cea8;&quot;&gt;2&lt;/span&gt;] == &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;99&#39;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-43">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-47" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="322" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-48" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-47">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-49" value="檢查腳環綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-47">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-50" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;checkModuleFromServer&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;checkType&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;multicheck&#39;&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-47">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-51" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="368" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-52" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-51">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-53" value="未綁定，插入資料庫和server" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-51">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-54" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;insertModule2ServerAndLocal&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;firmwareVersion&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;firmwareVersionResponse&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-51">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-55" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="414" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-56" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-55">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-57" value="單筆同步檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-55">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-58" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;syncOneTrackData&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-55">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-59" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="460" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-60" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-59">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-61" value="是否有設過時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-59">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-62" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;checkTrainRecordExist&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)[&lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;]&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-59">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-63" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="506" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-64" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-63">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-65" value="trainRecordId" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-63">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-66" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;queryTrainRecordIDByCreateTime&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)[&lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;]&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-63">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-67" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="552" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-68" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-67">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-69" value="檢查放飛時間是否爲過去時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-67">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-70" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;queryTrainRecordSettingTimeByCreateTime&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)[&lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;]&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-67">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-71" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="598" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-72" value="設定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-71">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-73" value="設定記錄模式" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-71">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-74" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;setPeriodicMode&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;periodicMode&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-71">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-75" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="644" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-76" value="刪除" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-75">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-77" value="刪除資料" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-75">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-78" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;eraseModuleData&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;loopCheckNum&lt;/span&gt;=&lt;span style=&quot;color: #b5cea8;&quot;&gt;3&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-75">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-79" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="690" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-80" value="開啓" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-79">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-81" value="開啓模組記錄" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-79">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-82" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;div style=&quot;line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;startLocusLogger&lt;/span&gt;()&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-79">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-83" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-18">
+          <mxGeometry y="736" width="2040" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-84" value="設定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-83">
+          <mxGeometry width="145" height="46" as="geometry">
+            <mxRectangle width="145" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-85" value="設定啓動時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-83">
+          <mxGeometry x="145" width="476" height="46" as="geometry">
+            <mxRectangle width="476" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2JB88QoQ8c66Acas0oVj-86" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;setDepartureTime&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;formatDtTimeInSec&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-83">
+          <mxGeometry x="621" width="1419" height="46" as="geometry">
+            <mxRectangle width="1419" height="46" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖-讀取軌跡">
     <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
