@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-10-24T06:55:54.715Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="BVneXpJ2yl0_Wc-ak7-3" version="20.4.1" type="github" pages="8">
+<mxfile host="app.diagrams.net" modified="2022-10-24T06:57:53.468Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="5Zc2mLuq_U-Pp578hZlY" version="20.4.1" type="github" pages="8">
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖">
     <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -381,7 +381,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="4RI-3DcAnRxPliDI4yJv" name="app功能設計">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -527,17 +527,11 @@
             <mxRectangle width="376" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="SEwzpn1pTBsXFsASOHxT-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-150" y="1000" width="930" height="360" as="geometry" />
-        </mxCell>
-        <mxCell id="SEwzpn1pTBsXFsASOHxT-2" value="軌跡分享：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="-130" y="1010" width="280" height="30" as="geometry" />
-        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="EXOJSNJlZSJ5VPqObQFz" name="app代碼目錄">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
