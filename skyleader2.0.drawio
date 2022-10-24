@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-10-24T07:56:42.090Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="hNvEd06uuLF4P-PJ6ae0" version="20.4.1" type="github" pages="10">
+<mxfile host="app.diagrams.net" modified="2022-10-24T08:39:42.188Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="AB_Dd8nzZXC-lYEmprzj" version="20.4.1" type="github" pages="10">
   <diagram id="DJ6nCnAoo6vdC1hf0z2o" name="流程圖-設定放飛時間">
-    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -189,7 +189,7 @@
             <mxRectangle width="145" height="46" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="2JB88QoQ8c66Acas0oVj-49" value="檢查腳環綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-47">
+        <mxCell id="2JB88QoQ8c66Acas0oVj-49" value="檢查模組綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="2JB88QoQ8c66Acas0oVj-47">
           <mxGeometry x="145" width="476" height="46" as="geometry">
             <mxRectangle width="476" height="46" as="alternateBounds" />
           </mxGeometry>
@@ -365,7 +365,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="ptNaspWl4-tR2S-4j4RG" name="流程圖-讀取軌跡">
-    <mxGraphModel dx="3055" dy="1072" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -464,6 +464,621 @@
         </mxCell>
         <mxCell id="23Z4OvW_dukLF1XysgEK-45" value="PC軌跡讀取後的流程：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="-20" y="450" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-1" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="510" width="1860" height="1715" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-3" value="類型" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-2">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-4" value="名稱" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-2">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-5" value="代碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-2">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="48" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-7" value="開啓" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-6">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-8" value="開啓模組" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-6">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-9" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;openSerialPort&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;portInputSTR&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-6">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="95" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-11" value="解鎖" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-10">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-12" value="根據韌體版本，解鎖" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-10">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-13" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getModuleFirmwareVer&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;loopCheckNum&lt;/span&gt;=&lt;span style=&quot;color: #b5cea8;&quot;&gt;5&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-10">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-14" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="143" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-15" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-14">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-16" value="獲取模組id" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-14">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-17" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getRingID&lt;/span&gt;()&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-14">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-18" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="190" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-19" value="關閉" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-18">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-20" value="關閉模組記錄" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-18">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-21" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;stopLocusLogger&lt;/span&gt;()&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-18">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-22" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="238" width="1860" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-23" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-22">
+          <mxGeometry width="170" height="42" as="geometry">
+            <mxRectangle width="170" height="42" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-24" value="檢查ringID是否是99" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-22">
+          <mxGeometry x="170" width="350" height="42" as="geometry">
+            <mxRectangle width="350" height="42" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-25" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;[:&lt;span style=&quot;color: #b5cea8;&quot;&gt;2&lt;/span&gt;] == &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;99&#39;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-22">
+          <mxGeometry x="520" width="1340" height="42" as="geometry">
+            <mxRectangle width="1340" height="42" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-26" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="280" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-27" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-26">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-28" value="檢查模組綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-26">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-29" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;checkModuleFromServer&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;checkType&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;multicheck&#39;&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-26">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-30" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="328" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-31" value="綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-30">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-32" value="未綁定時，進行綁定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-30">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-33" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;insertModule2ServerAndLocal&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;firmwareVersion&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;firmwareVersionResponse&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-30">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-34" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="375" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-35" value="同步" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-34">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-36" value="單筆同步檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-34">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-37" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;syncOneTrackData&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-34">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-38" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="423" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-39" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-38">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-40" value="取的運作模式" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-38">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-41" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getPeriodicModeStatus&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;loopCheckNum&lt;/span&gt;=&lt;span style=&quot;color: #b5cea8;&quot;&gt;5&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-38">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-42" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="470" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-43" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-42">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-44" value="檢查是否設定放飛時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-42">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-45" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;checkTrainRecordExist&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;mxID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_mxID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)[&lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;]&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-42">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-46" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="518" width="1860" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-47" value="設定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-46">
+          <mxGeometry width="170" height="72" as="geometry">
+            <mxRectangle width="170" height="72" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-48" value="沒有設定的話，進行設定" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-46">
+          <mxGeometry x="170" width="350" height="72" as="geometry">
+            <mxRectangle width="350" height="72" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-49" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;settingTime&lt;/span&gt; = &lt;span style=&quot;color: #4ec9b0;&quot;&gt;int&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_currentUtc&lt;/span&gt;) - &lt;span style=&quot;color: #b5cea8;&quot;&gt;10；&amp;nbsp; &amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: rgb(156, 220, 254);&quot;&gt;self&lt;/span&gt;&lt;span style=&quot;&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color: rgb(156, 220, 254);&quot;&gt;dbAPI&lt;/span&gt;&lt;span style=&quot;&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color: rgb(220, 220, 170);&quot;&gt;insertTrainRecord&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-46">
+          <mxGeometry x="520" width="1340" height="72" as="geometry">
+            <mxRectangle width="1340" height="72" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-50" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="590" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-51" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-50">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-52" value="檢查放飛時間是否爲過去" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-50">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-53" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_currentUtc&lt;/span&gt; - &lt;span style=&quot;color: #9cdcfe;&quot;&gt;settingTime&lt;/span&gt;) &amp;gt; &lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-50">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-54" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="638" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-55" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-54">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-56" value="取得軌跡長度" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-54">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-57" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getLocusLength&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;loopCheckNum&lt;/span&gt;=&lt;span style=&quot;color: #b5cea8;&quot;&gt;3&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-54">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-58" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="685" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-59" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-58">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-60" value="長度是否爲0，如果爲0" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-58">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-61" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;updateTrainRecordByCreateTimeIsZero&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-58">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-62" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="733" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-63" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-62">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-64" value="檢查生產商" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-62">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-65" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleProductor&lt;/span&gt; == &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;A8&#39;&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-62">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-66" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="780" width="1860" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-67" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-66">
+          <mxGeometry width="170" height="80" as="geometry">
+            <mxRectangle width="170" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-68" value="取得軌跡資料" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-66">
+          <mxGeometry x="170" width="350" height="80" as="geometry">
+            <mxRectangle width="350" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-69" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;getLocus&lt;/span&gt;()&lt;br&gt;&lt;div style=&quot;line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;dumpBlockLocus&lt;/span&gt;(&lt;span style=&quot;color: #b5cea8;&quot;&gt;0&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;blockLength&lt;/span&gt;-&lt;span style=&quot;color: #b5cea8;&quot;&gt;1&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-66">
+          <mxGeometry x="520" width="1340" height="80" as="geometry">
+            <mxRectangle width="1340" height="80" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-70" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="860" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-71" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-70">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-72" value="軌跡rawdata讀取" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-70">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-73" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;skyGlobal&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;dumpPartialLocus&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;start&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;startPoint&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;end&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;endPoint&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-70">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-74" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="907" width="1860" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-75" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-74">
+          <mxGeometry width="170" height="48" as="geometry">
+            <mxRectangle width="170" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-76" value="軌跡數據：rawList，gisList" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-74">
+          <mxGeometry x="170" width="350" height="48" as="geometry">
+            <mxRectangle width="350" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-77" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #4ec9b0;&quot;&gt;PMTKLOX&lt;/span&gt;()&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-74">
+          <mxGeometry x="520" width="1340" height="48" as="geometry">
+            <mxRectangle width="1340" height="48" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-78" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="955" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-79" value="文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-78">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-80" value="把軌跡rawList存入文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-78">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hsiwq_xmrueqxDFFctSp-81" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;fw&lt;/span&gt;=&lt;span style=&quot;color: #dcdcaa;&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;/Raw/&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;_&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;.txt&quot;&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;format&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_rootFolder&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;formatTime&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;ringIdSTR&lt;/span&gt;), &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;w&#39;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-78">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-5" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1002" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-6" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-5">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-7" value="把rawlist整理爲表格" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-5">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-8" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;blockListStr&lt;/span&gt; = &lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;,&quot;&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;join&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;rawList&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-5">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-1" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1049" width="1860" height="71" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-2" value="插入" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-1">
+          <mxGeometry width="170" height="71" as="geometry">
+            <mxRectangle width="170" height="71" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-3" value="把表格插入資料庫" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-1">
+          <mxGeometry x="170" width="350" height="71" as="geometry">
+            <mxRectangle width="350" height="71" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-4" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;insertLocusRaw&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;rawID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;locusRawId&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;trainRecordID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;trainRecordID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;rawLocus&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;blockListStr&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-1">
+          <mxGeometry x="520" width="1340" height="71" as="geometry">
+            <mxRectangle width="1340" height="71" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-9" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1120" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-10" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-9">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-11" value="把gisList進行整理" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-9">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-12" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;proprocessLocusLIST&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;gisLIST&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-9">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-13" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1167" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-14" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-13">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-15" value="取的fixed數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-13">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-16" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;fixedTotalNum&lt;/span&gt; = &lt;span style=&quot;color: #9cdcfe;&quot;&gt;fix2dNum&lt;/span&gt; + &lt;span style=&quot;color: #9cdcfe;&quot;&gt;fix3dNum&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-13">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-17" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1214" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-18" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-17">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-19" value="計算：點id，時間，速度，距離" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-17">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-20" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #c586c0;&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color: #9cdcfe;&quot;&gt;i&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;locusItem&lt;/span&gt; &lt;span style=&quot;color: #c586c0;&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #4ec9b0;&quot;&gt;enumerate&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;gisLIST&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-17">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-21" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1261" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-22" value="插入" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-21">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-23" value="插入資料庫" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-21">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-24" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;insertMultiLocusText&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-21">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-25" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1308" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-26" value="檢查" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-25">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-27" value="檢查fixed的數量&amp;lt;=1,刪除" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-25">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-28" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;updateTrainRecordByCreateTimeIsZero&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-25">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1355" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-30" value="數據" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-29">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-31" value="計算：實際距離，實際速度" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-29">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-32" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;queryLocusTextRealDistanceByFix&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;trainRecordID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;trainRecordID&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;moduleID&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-29">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-33" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1402" width="1860" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-34" value="更新" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-33">
+          <mxGeometry width="170" height="78" as="geometry">
+            <mxRectangle width="170" height="78" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-35" value="沒有設定，更新設定時間爲軌跡起始時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-33">
+          <mxGeometry x="170" width="350" height="78" as="geometry">
+            <mxRectangle width="350" height="78" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-36" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;updateTrainRecordSettingTime&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-33">
+          <mxGeometry x="520" width="1340" height="78" as="geometry">
+            <mxRectangle width="1340" height="78" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-37" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1480" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-38" value="更新" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-37">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-39" value="更新創建時間" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-37">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-40" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;self&lt;/span&gt;.&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbAPI&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;updateTrainRecordByCreateTimeIsZero&lt;/span&gt;&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-37">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-41" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1527" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-42" value="文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-41">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-43" value="生成data.js文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-41">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-44" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #4ec9b0;&quot;&gt;TrainLocusMap&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;dbPath&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_dbPath&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;lang&lt;/span&gt;=&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_langShowSTR&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-41">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-45" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1574" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-46" value="文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-45">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-47" value="生成googlemap的html文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-45">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-48" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #dcdcaa;&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;/Html/trackGoogleMap.html&#39;&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;format&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_rootFolder&lt;/span&gt;), &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;w&#39;&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;encoding&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-45">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-61" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1621" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-62" value="文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-61">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-63" value="生成amap的html文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-61">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-64" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #dcdcaa;&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;/Html/trackAMap.html&#39;&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;format&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_rootFolder&lt;/span&gt;), &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;w&#39;&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;encoding&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-61">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-57" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="Hsiwq_xmrueqxDFFctSp-1">
+          <mxGeometry y="1668" width="1860" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-58" value="文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-57">
+          <mxGeometry width="170" height="47" as="geometry">
+            <mxRectangle width="170" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-59" value="生成mmap的html文件" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-57">
+          <mxGeometry x="170" width="350" height="47" as="geometry">
+            <mxRectangle width="350" height="47" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N8nyKSEbeWuwC_TwH9xV-60" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; font-size: 22px; line-height: 30px;&quot;&gt;&lt;span style=&quot;color: #dcdcaa;&quot;&gt;open&lt;/span&gt;(&lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;/Html/trackMMap.html&#39;&lt;/span&gt;.&lt;span style=&quot;color: #dcdcaa;&quot;&gt;format&lt;/span&gt;(&lt;span style=&quot;color: #9cdcfe;&quot;&gt;G_rootFolder&lt;/span&gt;), &lt;span style=&quot;color: #ce9178;&quot;&gt;&#39;w&#39;&lt;/span&gt;, &lt;span style=&quot;color: #9cdcfe;&quot;&gt;encoding&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;)&lt;/div&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="N8nyKSEbeWuwC_TwH9xV-57">
+          <mxGeometry x="520" width="1340" height="47" as="geometry">
+            <mxRectangle width="1340" height="47" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
