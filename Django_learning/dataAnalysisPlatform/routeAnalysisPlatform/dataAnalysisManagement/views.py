@@ -37,6 +37,9 @@ def login(request):
             # print(context['activities'])
     # print(context['activities'] )
             return render(request, 'login/index.html', context=context)
+        else:
+            context['status'] = 'failed'
+            return render(request, 'login.html', context=context)
 
 # def view_loged(request):
 #     return render(request, 'login/index.html', context={})

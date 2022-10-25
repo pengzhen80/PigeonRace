@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
     <!-- Design by foolishdeveloper.com -->
@@ -8,8 +9,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/loading.css' %}" />
     <!--Stylesheet-->
     <style media="screen">
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            background-color: #3c4359;
+        }
         *,
         *:before,
         *:after {
@@ -18,9 +30,9 @@
             box-sizing: border-box;
         }
 
-        body {
+        /* body {
             background-color: #080710;
-        }
+        } */
 
         .background {
             width: 430px;
@@ -152,7 +164,7 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form action="login" method="post">
+    <form action="login" method="post" id="form_login">
         {% csrf_token %}
         <label for="username">用戶名</label>
         <input type="text" placeholder="Email or Phone" id="username" name="username">
@@ -161,9 +173,41 @@
         <input type="password" placeholder="Password" id="password" name="password">
 
         <!-- <button id="logIn">登 陸</button> -->
-        <input type="submit" value="登 陸">
+        <input type="submit" value="登 陸" onclick="return foo();">
     </form>
+    <div class="content" id="loading_planet">
+        <div class="planet">
+           <div class="ring"></div>
+              <div class="cover-ring"></div>
+           <div class="spots">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+     
+           </div>
+        </div>
+        <p>loading</p>
+     </div>
     <script>
+        function foo() {
+            var div_login = document.getElementById('form_login');
+            div_login.style.display = 'none'; 
+            var div_loading = document.getElementById('loading_planet');
+            div_loading.style.display = 'flex'; 
+            
+            // alert("Submit button clicked!");
+            return true;
+        }
+        let login_status = '{{ status|safe }}';
+        console.log(login_status);
+        if(login_status == 'failed')
+        {
+            alert('account or password error');
+        }
     </script>
 </body>
 

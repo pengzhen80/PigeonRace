@@ -24,7 +24,7 @@ class DBManagement ():
         self.routes = {}
         self.routes_summarydata = {}
         self.modules ={}
-        self.gpsIdringId = self.readfile_gpsIdringId()
+        # self.gpsIdringId = self.readfile_gpsIdringId()
 
     def readfile_gpsIdringId(self):
         dataList = []

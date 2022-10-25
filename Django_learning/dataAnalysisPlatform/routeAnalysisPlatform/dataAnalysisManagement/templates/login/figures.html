@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{% load static %}
 <head>
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
@@ -15,7 +15,18 @@
   <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script> -->
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link rel="stylesheet" href="{% static 'css/loading.css' %}" />
   <style>
+     body {
+        /* margin: 0; */
+        /* padding: 0; */
+        /* display: none; */
+        /* align-items: center; */
+        justify-content: center; 
+        height: 100vh;
+        width: 100%;
+        background-color:'white';
+    }
     .button {
             background-color: #FFED86;
             border: none;
@@ -78,6 +89,9 @@
         width:100%;
         height: 40%;
     }
+    .myDiv_figurePage{
+        display: none;
+    } 
 
     /* #windy {
         width: 100%;
@@ -92,6 +106,7 @@
   <!-- <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
   </br> -->
+  <div id ='figures_page' class = 'myDiv_figurePage' >
   <table id="table_pigeonNumber">
     <thead>
         <tr>
@@ -142,8 +157,26 @@
     <br></br>
     <div id="canvas_multiRoutes_routeSimilarity" class="myDiv_chart"></div>
   </div>
-  <div id="Map_showPaths_routeSimilarity"></div>
-  <div id="div_smallMap_routeSimilarity_threeroutes"></div>
+  </div>
+  <div class="content" id="loading_planet">
+    <div class="planet">
+       <div class="ring"></div>
+          <div class="cover-ring"></div>
+       <div class="spots">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+ 
+       </div>
+    </div>
+    <p>loading</p>
+  </div>
+  <!-- <div id="Map_showPaths_routeSimilarity"></div>
+  <div id="div_smallMap_routeSimilarity_threeroutes"></div> -->
   <!-- <div id="canvas_speed_elevation_forFilterRoutes"></div> -->
   <dialog id="dialog_routefilter">
     <form method="dialog">
@@ -259,7 +292,19 @@
         </div>
     </form>
   </dialog>
+
   <script>
+    ui_loading_start();
+    function ui_loading_start()
+    {
+        var div_loading = document.getElementById('loading_planet');
+        div_loading.style.display = 'flex'; 
+        div_loading.style.left ='50%';
+        div_loading.style.top ='50%';
+        div_loading.style.marginTop="-150px";
+        div_loading.style.marginLeft="-150px";
+    }
+
     let routeIds = '{{ routeIds|safe }}';
     let routeId_list = routeIds.split(',');
     let map_pigeonNumberReleaseTime_routeIndex = [];
@@ -269,12 +314,22 @@
     console.log(routeId_list);
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
-    let map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
+    // let map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    }).addTo(map_handler);
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //         maxZoom: 20,
+    //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    // }).addTo(map_handler);
+    let map_handler = null;
+    
+    function map_init()
+    {
+        map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }).addTo(map_handler);
+    }
 
     //for windy
     function getRandomColor() {
@@ -293,40 +348,6 @@
     // let map_layer_windy = null;
     let map_layer_windy = L;
     let func_point_showRoutesInMap = null;
-    
-    // const options_windy_init = {
-    //             // Required: API key
-    //             key: 'SpQ9lG1cm8zd0VFmrgk1FBYRMWd4F8Gk', // REPLACE WITH YOUR KEY !!!
-
-    //             // Put additional console output
-    //             verbose: true,
-
-    //             // Optional: Initial state of the map
-    //             lat: 0,
-    //             lon: 0,
-    //             zoom: 10,
-    // };
-
-    //         // Initialize Windy API
-    // windyInit(options_windy_init, windyAPI => {
-    //             // windyAPI is ready, and contain 'map', 'store',
-    //             // 'picker' and other usefull stuff
-
-    //             const { map } = windyAPI;
-    //             // .map is instance of Leaflet map
-    //             // map.setView(path_normalize_list[0][0],10);
-    //             map_handler = map;
-
-    //     L.popup()
-    //         .setLatLng([0,0])
-    //         // .setContent('begin')
-    //         .openOn(map);
-                
-    //     map_layer_windy = L;
-
-    //     // windy_movingPoint = windy_map_handler_layer.circle(path_normalize_list[0][0], { radius: 1600 }).addTo(windy_map_handler);
-
-    // });
 
     let windy_movingPoint = null;
 
@@ -406,6 +427,16 @@
       function reqListener() {
         // console.log(typeof (this.responseText), typeof (this.response));
         // console.log(this.responseText)
+        function ui_loading_end()
+        {
+            var div_loading = document.getElementById('loading_planet');
+            div_loading.style.display = 'none'; 
+        }
+        function ui_figuresPage_show()
+        {
+            var div = document.getElementById('figures_page');
+            div.style.display = 'inline'; 
+        }
 
         var response = JSON.parse(this.responseText);
         for(var i=0;i<routeId_list.length;i++)
@@ -428,6 +459,9 @@
           console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
           map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
         }
+        ui_loading_end();
+        ui_figuresPage_show();
+        map_init();
         tracks_showInTable(pigeonNumbers_releaseTime)
         show_figures(routes_origin);
 
