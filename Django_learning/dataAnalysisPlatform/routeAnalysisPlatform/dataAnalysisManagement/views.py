@@ -8,8 +8,8 @@ from .apiManagement import DBManagement
 
 dbManager = DBManagement()
 
-from .redis_client import Redis_Client
-redis_client = Redis_Client()
+# from .redis_client import Redis_Client
+# redis_client = Redis_Client()
 # Create your views here.
 
 
