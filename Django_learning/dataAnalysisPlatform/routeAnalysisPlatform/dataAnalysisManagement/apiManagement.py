@@ -87,6 +87,9 @@ class DBManagement ():
         res = x.json()
         res = json.loads(res)
         for trainRecord in res:
+            ###delete unreaded record
+            if trainRecord['fix_3d'] == 0:
+                continue
             module_id = trainRecord['moduleid']
             self.data_routes_summaryData_add(activity_id,module_id,trainRecord['trainrecordid'],trainRecord)
             print(trainRecord)
