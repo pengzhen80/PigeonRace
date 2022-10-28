@@ -10,6 +10,13 @@ dbManager = DBManagement()
 
 # from .redis_client import Redis_Client
 # redis_client = Redis_Client()
+
+from .localDBManagement import LocalDBManagement
+localdbManager = LocalDBManagement()
+localdbManager.table_createTable()
+# localdbManager.update_trainRecord_filtered('20221027', 1, 10,'20221027T14:29:00')
+localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
+localdbManager.test_selectUsers()
 # Create your views here.
 
 
