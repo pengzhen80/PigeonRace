@@ -16,9 +16,29 @@ class LocalDBManagement():
             from pysqlcipher3 import dbapi2 as sqlcipher
 
         key = '$doveDatabase$'
+        self.conn = sqlcipher.connect("doveDatabase.db",check_same_thread=False)
+        # self.conn = sqlcipher.connect("doveDatabase.db")
+        self.c = self.conn.cursor()
+        self.c.execute("PRAGMA key='{}'".format(key))
+        self.conn.commit()
+
+    def connect_again(self):
+        # ===== 取得使用者系統類型 =====
+        plf = platform.uname()
+        OS = plf.system # Linux or Windows or Mac
+        MACHINE = plf.machine # x86_64
+
+        if OS == 'Windows':
+            import sqlite3 as sqlcipher
+        elif OS == 'Linux' or OS == 'Darwin':
+            from pysqlcipher3 import dbapi2 as sqlcipher
+
+        key = '$doveDatabase$'
+        # self.conn = sqlcipher.connect("doveDatabase.db",check_same_thread=False)
         self.conn = sqlcipher.connect("doveDatabase.db")
         self.c = self.conn.cursor()
         self.c.execute("PRAGMA key='{}'".format(key))
+        self.conn.commit()
 
 # Create table
     def table_createTable(self):
@@ -45,33 +65,50 @@ class LocalDBManagement():
                     note                 TEXT,
                     FOREIGN KEY(mxID)             REFERENCES User(mxID));""")
 
-        self.c.execute("""CREATE TABLE IF NOT EXISTS TrainRecord_filters
+        self.c.execute("""CREATE TABLE IF NOT EXISTS TrainRecord_filters_summary
                     (trainRecordId               VARCHAR  PRIMARY KEY  NOT NULL,
                     startIndex                 VARCHAR  NOT NULL,
                     endIndex             VARCHAR,
-                    updateTime               VARCHAR);""")
+                    updateTime               VARCHAR,
+                    realDistance               REAL,
+                    realSpeed                  REAL,
+                    straightDistance           REAL,
+                    straightSpeed              REAL,
+                    routeEfficiency            REAL
+                    );""")
 
         # Create Index
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserIdx1        ON User(accName)""")
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserLogIdx1     ON UserLog(logTime, mxID)""")
+        self.conn.commit()
 
-    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime):
-        data = (trainRecordId,startIndex,endIndex,updateTime)
-        res_select = self.c.execute("""SELECT * from TrainRecord_filters WHERE trainRecordId = ?""",(trainRecordId,))
+    def search_filteredStateByRecordId(self,trainRecordId):
+        res_select = self.c.execute("""SELECT * from TrainRecord_filters_summary WHERE trainRecordId = ?""",(trainRecordId,))
+        self.conn.commit()
+        return res_select.fetchone()
+
+    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency):
+        # if(self.c.connection)
+
+        data = (trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency)
+        res_select = self.c.execute("""SELECT * from TrainRecord_filters_summary WHERE trainRecordId = ?""",(trainRecordId,))
         if(res_select.fetchone()==None):
-            self.c.execute("""INSERT INTO TrainRecord_filters VALUES
-                (?,?,?,?)""",data)
+            self.c.execute("""INSERT INTO TrainRecord_filters_summary VALUES
+                (?,?,?,?,?,?,?,?,?)""",data)
+            self.conn.commit()
         else:
-            data = (startIndex,endIndex,updateTime,trainRecordId)
-            self.c.execute("""UPDATE TrainRecord_filters
+            data = (startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,trainRecordId)
+            self.c.execute("""UPDATE TrainRecord_filters_summary
                 SET startIndex=?, endIndex=?, updateTime=?
                 WHERE trainRecordId=?""",data)
+            self.conn.commit()
 
 
     def test_selectUsers(self):
         # self.c.execute("""INSERT INTO TrainRecord_filters VALUES
         #         ('20221027', 1, 10,'20221027T14:29:00')""")
-        res = self.c.execute("""SELECT * from TrainRecord_filters""")
+        res = self.c.execute("""SELECT * from TrainRecord_filters_summary""")
+        self.conn.commit()
         print(res.fetchall())
         # print(res.fetchone()==None)
         # if(res == None):
@@ -89,8 +126,8 @@ class LocalDBManagement():
 
 # c.execute("""PRAGMA synchronous=OFF""")
 
-        self.conn.commit()
-        self.conn.close()
+        # self.conn.commit()
+        # self.conn.close()
 
 if __name__ == '__main__':
     localdbManager = LocalDBManagement()

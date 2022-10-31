@@ -15,7 +15,7 @@ from .localDBManagement import LocalDBManagement
 localdbManager = LocalDBManagement()
 localdbManager.table_createTable()
 # localdbManager.update_trainRecord_filtered('20221027', 1, 10,'20221027T14:29:00')
-localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
+# localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
 localdbManager.test_selectUsers()
 # Create your views here.
 
@@ -92,6 +92,26 @@ def tracksData(request):
         for routeId in routeId_list:
             context[routeId] = dbManager.read_routes_by_routeId(routeId)
             context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
+            # print(context[routeId+'pigeonNumber'])
+            context[routeId+'filter'] = localdbManager.search_filteredStateByRecordId(routeId)
+
+    # print(context)
+    return JsonResponse(context)
+
+def localDB_updateFilteredRoute(request):
+    context={}
+    if request.method == 'POST':
+        # print(type(request.body))
+        # print(request.body.decode("utf-8"))
+        routeIds = request.body.decode("utf-8")
+        print(routeIds)
+        filteredRoute = json.loads(routeIds)
+        print(filteredRoute['trainRecordId'])
+        localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'])
+        # routeId_list = routeIds.split(',')
+        # for routeId in routeId_list:
+        #     context[routeId] = dbManager.read_routes_by_routeId(routeId)
+        #     context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
             # print(context[routeId+'pigeonNumber'])
     # print(context)
     return JsonResponse(context)
