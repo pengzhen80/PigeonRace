@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 import json
 
 from .apiManagement import DBManagement
-
 dbManager = DBManagement()
 
 # from .redis_client import Redis_Client
@@ -19,6 +18,9 @@ localdbManager.table_createTable()
 localdbManager.test_selectUsers()
 # Create your views here.
 
+from .hotTopicsManagement import HotTopicsManagement
+hotTopicsManager = HotTopicsManagement()
+
 
 def index(request):
     """View function for home page of site."""
@@ -30,7 +32,6 @@ def index(request):
 def login(request):
     context = {'status': '', 'activities': ''}
     # print('method',request.method)
-    # print(request)
     if request.method == 'POST':
         print('login')
         data = request.POST
@@ -40,17 +41,25 @@ def login(request):
         res = dbManager.logIn(username, password)
         if (res['status'] == 'ok'):
             context['status'] = 'ok'
-            context['activities'] = json.dumps(dbManager.getActivities())
-            # print(context['activities'])
-    # print(context['activities'] )
-            return render(request, 'login/index.html', context=context)
+            # context['activities'] = json.dumps(dbManager.getActivities())
+            # return render(request, 'login/index.html', context=context)
+            # print(dbManager.getAllRouteSummaryData())
+            rankStraightSpeed,rankRouteEfficiency = hotTopicsManager.init_routeSummary(dbManager.getAllRouteSummaryData(),localdbManager.search_allFilteredRecords())
+            print(len(rankStraightSpeed),len(rankRouteEfficiency))
+            return render(request, 'login/home.html', context={'rankRouteEfficiency':json.dumps(rankRouteEfficiency),'rankStraightSpeed':json.dumps(rankStraightSpeed)})
         else:
             context['status'] = 'failed'
             return render(request, 'login.html', context=context)
+    
+    return render(request, 'login/home.html', context=context)
 
 # def view_loged(request):
 #     return render(request, 'login/index.html', context={})
-
+def activity(request):
+    context = {'status': '', 'activities': ''}
+    context['status'] = 'ok'
+    context['activities'] = json.dumps(dbManager.getActivities())
+    return render(request, 'login/activity.html', context=context)
 
 def view_tracks(request, activityIds):
     context = {

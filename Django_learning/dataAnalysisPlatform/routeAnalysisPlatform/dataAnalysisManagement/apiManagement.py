@@ -206,6 +206,8 @@ class DBManagement ():
     def getActivities(self):
         return self.activities
 
+    def getAllRouteSummaryData(self):
+        return self.routes_summarydata
     # def getTrainRecordBy
 
 

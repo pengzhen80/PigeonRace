@@ -65,6 +65,19 @@ class LocalDBManagement():
                     note                 TEXT,
                     FOREIGN KEY(mxID)             REFERENCES User(mxID));""")
 
+        self.c.execute("""CREATE TABLE IF NOT EXISTS Dove_flights
+                    (doveID               VARCHAR  PRIMARY KEY  NOT NULL,
+                    mxID                 VARCHAR  NOT NULL,
+                    
+                    realDistance       TEXT,
+                    realSpeed          TEXT,
+                    straightDistance     TEXT,
+                    averageStraightSpeed   TEXT,
+                    routeEfficiency      TEXT,
+                    time                TEXT,
+                    FOREIGN KEY(mxID)             REFERENCES User(mxID));""")
+
+
         self.c.execute("""CREATE TABLE IF NOT EXISTS TrainRecord_filters_summary
                     (trainRecordId               VARCHAR  PRIMARY KEY  NOT NULL,
                     startIndex                 VARCHAR  NOT NULL,
@@ -86,6 +99,11 @@ class LocalDBManagement():
         res_select = self.c.execute("""SELECT * from TrainRecord_filters_summary WHERE trainRecordId = ?""",(trainRecordId,))
         self.conn.commit()
         return res_select.fetchone()
+
+    def search_allFilteredRecords(self):
+        res = self.c.execute("""SELECT * from TrainRecord_filters_summary""")
+        self.conn.commit()
+        return res.fetchall()
 
     def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency):
         # if(self.c.connection)
