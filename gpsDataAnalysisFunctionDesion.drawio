@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-01T03:37:49.839Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="tlng0ZYXExnmlfvR_OYD" version="20.5.1" type="github" pages="18">
+<mxfile host="app.diagrams.net" modified="2022-11-01T03:41:31.666Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="si7pCKRpY2EORwzuT7Yi" version="20.5.1" type="github" pages="18">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
     <mxGraphModel dx="1588" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2897,7 +2897,7 @@
           <mxGeometry x="70" y="-70" width="3140" height="1440" as="geometry" />
         </mxCell>
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="129" y="830" width="471" height="510" as="geometry" />
+          <mxGeometry x="129" y="830" width="1361" height="510" as="geometry" />
         </mxCell>
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="140" y="1030" width="450" height="280" as="geometry" />
@@ -3240,11 +3240,42 @@
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-11" value="焦點鴿：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="165" y="1030" width="145" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-1" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="569" y="880" width="676" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-1">
+          <mxGeometry width="676" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-3" value="公環號碼" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-2">
+          <mxGeometry width="135" height="40" as="geometry">
+            <mxRectangle width="135" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-4" value="飛行總距離" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-2">
+          <mxGeometry x="135" width="136" height="40" as="geometry">
+            <mxRectangle width="136" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-5" value="實際速度" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-2">
+          <mxGeometry x="271" width="135" height="40" as="geometry">
+            <mxRectangle width="135" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-6" value="直線分速" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-2">
+          <mxGeometry x="406" width="135" height="40" as="geometry">
+            <mxRectangle width="135" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IJYIXFGvHvqz8MxHY9zL-7" value="路徑效率" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontSize=24;" vertex="1" parent="IJYIXFGvHvqz8MxHY9zL-2">
+          <mxGeometry x="541" width="135" height="40" as="geometry">
+            <mxRectangle width="135" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="FRPkfmtKA-4SzH20euoj" name="數據分析平台-UI">
-    <mxGraphModel dx="3055" dy="1133" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2415" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
