@@ -30,9 +30,12 @@ class HotTopicsManagement:
                 continue
             averageRealSpeed = totalRealDistance/totalTime
             averageStraightSpeed = totalStraightDistance/totalTime
-            averageRouteEfficiency = totalStraightDistance/totalRealDistance
-            list_pigeonNumber_summaryData.append({'pigeonNumber':key,'totalRealDistance':totalRealDistance,'averageRealSpeed':averageRealSpeed,'totalStraightDistance':totalStraightDistance,'averageStraightSpeed':averageStraightSpeed,'averageRouteEfficiency':averageRouteEfficiency})
-        return self.rankingBoard(list_pigeonNumber_summaryData)
+            totalRouteEfficiency = totalStraightDistance/totalRealDistance
+            list_pigeonNumber_summaryData.append({'pigeonNumber':key,'totalRealDistance':totalRealDistance,'averageRealSpeed':averageRealSpeed,'totalStraightDistance':totalStraightDistance,'averageStraightSpeed':averageStraightSpeed,'totalRouteEfficiency':totalRouteEfficiency})
+        
+        rankStraightSpeed,rankRouteEfficiency = self.rankingBoard(list_pigeonNumber_summaryData)
+        pigeon_toTrain = self.pigeon_specialPigeons(list_pigeonNumber_summaryData)
+        return rankStraightSpeed,rankRouteEfficiency,pigeon_toTrain
         
     def rankingBoard(self,track_summary):
         rank_straightSpeed = copy.deepcopy(track_summary)
@@ -48,13 +51,25 @@ class HotTopicsManagement:
         
         for i in range(len(rank_routeEfficiency)):
             for j in range(i+1,len(rank_routeEfficiency)):
-                if rank_routeEfficiency[i]['averageRouteEfficiency']<rank_routeEfficiency[j]['averageRouteEfficiency']:
+                if rank_routeEfficiency[i]['totalRouteEfficiency']<rank_routeEfficiency[j]['totalRouteEfficiency']:
                     tmp = copy.deepcopy(rank_routeEfficiency[i])
                     rank_routeEfficiency[i] = copy.deepcopy(rank_routeEfficiency[j])
                     rank_routeEfficiency[j] = tmp
         
         # print(rank_straightSpeed,rank_routeEfficiency)
         return rank_straightSpeed,rank_routeEfficiency
+
+    def pigeon_specialPigeons(self,track_summary):
+        pigeon_toTrain =  track_summary[0]['pigeonNumber']
+        fastSpeed = track_summary[0]['averageRealSpeed']
+        for i in range(1,len(track_summary)):
+                if fastSpeed<track_summary[i]['averageRealSpeed']:
+                    fastSpeed = track_summary[i]['averageRealSpeed']
+                    pigeon_toTrain = track_summary[i]['pigeonNumber']
+
+        return pigeon_toTrain
+
+
 
 if __name__ == '__main__':
     hotTopicsManager = HotTopicsManagement()

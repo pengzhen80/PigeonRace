@@ -552,11 +552,11 @@
                                 console.log('remove polyline');
                                 map_handler.addLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
                                 // windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                {
-                                    map_handler.addLayer(markers[i_marker]);
-                                }
+                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
+                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
+                                // {
+                                //     map_handler.addLayer(markers[i_marker]);
+                                // }
                             }
                         }
                     }
@@ -572,11 +572,11 @@
                                 console.log('remove polyline');
                                 map_handler.removeLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
                                 // windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                {
-                                    map_handler.removeLayer(markers[i_marker]);
-                                }
+                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
+                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
+                                // {
+                                //     map_handler.removeLayer(markers[i_marker]);
+                                // }
                             }
                         }
                     }
@@ -801,13 +801,13 @@
                 color_list_routes.push(color);
                 // var lineObject = drawPath(path_normalize_list[i],'red','3');
                 var lineObject = drawPath(path_normalize_list[i],color,'3');
-                var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
+                // var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
                 var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
                 console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
                 console.log(pigeonNumber_releaseTime['pigeonNumber']);
                 lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':lineObject});
                 console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);
-                markersObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':markers})
+                // markersObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':markers})
             }
             
             function drawPath(pathLine_origin,color,weight) {

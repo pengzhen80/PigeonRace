@@ -44,14 +44,15 @@ def login(request):
             # context['activities'] = json.dumps(dbManager.getActivities())
             # return render(request, 'login/index.html', context=context)
             # print(dbManager.getAllRouteSummaryData())
-            rankStraightSpeed,rankRouteEfficiency = hotTopicsManager.init_routeSummary(dbManager.getAllRouteSummaryData(),localdbManager.search_allFilteredRecords())
-            print(len(rankStraightSpeed),len(rankRouteEfficiency))
-            return render(request, 'login/home.html', context={'rankRouteEfficiency':json.dumps(rankRouteEfficiency),'rankStraightSpeed':json.dumps(rankStraightSpeed)})
+            rankStraightSpeed,rankRouteEfficiency,pigeonToTrain = hotTopicsManager.init_routeSummary(dbManager.getAllRouteSummaryData(),localdbManager.search_allFilteredRecords())
+            # print(rankStraightSpeed)
+            return render(request, 'login/home.html', context={'rankRouteEfficiency':json.dumps(rankRouteEfficiency),'rankStraightSpeed':json.dumps(rankStraightSpeed),'pigeonToTrain':pigeonToTrain})
         else:
             context['status'] = 'failed'
             return render(request, 'login.html', context=context)
-    
-    return render(request, 'login/home.html', context=context)
+    rankStraightSpeed,rankRouteEfficiency,pigeonToTrain = hotTopicsManager.init_routeSummary(dbManager.getAllRouteSummaryData(),localdbManager.search_allFilteredRecords())
+    return render(request, 'login/home.html', context={'rankRouteEfficiency':json.dumps(rankRouteEfficiency),'rankStraightSpeed':json.dumps(rankStraightSpeed),'pigeonToTrain':pigeonToTrain})
+
 
 # def view_loged(request):
 #     return render(request, 'login/index.html', context={})
@@ -60,6 +61,21 @@ def activity(request):
     context['status'] = 'ok'
     context['activities'] = json.dumps(dbManager.getActivities())
     return render(request, 'login/activity.html', context=context)
+
+def pigeon(request,pigeonNumber):
+    ##1 search all trainRecordId in apimanagement by pigeonNumber
+    ##2 search filtered trainRecord in localDB by trainRecordIds
+    ##3 send to pigeon page
+    trainRecordId_list = dbManager.getRouteSummaryData_by_recordname(pigeonNumber)
+    print(trainRecordId_list)
+    localFilteredRecords = []
+
+    for trainRecordId in trainRecordId_list:
+        localdata = localdbManager.search_filteredStateByRecordId(trainRecordId)
+        if localdata:
+            localFilteredRecords.append(localdata)
+    print(localFilteredRecords)
+    return render(request, 'login/pigeon.html', context={'pigeonNumber':pigeonNumber,'localFilteredRecords':json.dumps(localFilteredRecords)})
 
 def view_tracks(request, activityIds):
     context = {

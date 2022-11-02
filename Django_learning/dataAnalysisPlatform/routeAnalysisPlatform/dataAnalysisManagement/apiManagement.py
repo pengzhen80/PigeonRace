@@ -188,6 +188,14 @@ class DBManagement ():
         normalized_data['gps_id'] = self.api_readModule(activity_id,module_id)
         self.routes_summarydata[activity_id+module_id+trainrecord_id] = normalized_data
 
+    def getRouteSummaryData_by_recordname(self,pigeonNumber):
+        result = []
+        keys = self.routes_summarydata.keys()
+        for key in keys:
+            if self.routes_summarydata[key]['recordname'] == pigeonNumber:
+                result.append(key)
+        return result
+
     def read_routes_summaryData(self,activity_id):
         keys = self.routes_summarydata.keys()
         results = []
