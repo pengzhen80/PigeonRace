@@ -87,12 +87,39 @@ class LocalDBManagement():
                     realSpeed                  REAL,
                     straightDistance           REAL,
                     straightSpeed              REAL,
-                    routeEfficiency            REAL
+                    routeEfficiency            REAL,
+                    settingTime                VARCHAR 
                     );""")
 
         # Create Index
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserIdx1        ON User(accName)""")
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserLogIdx1     ON UserLog(logTime, mxID)""")
+        self.conn.commit()
+
+    def alter_table_newColumn(self,tableName,columnName,columeType):
+        # data = (tableName,columnName,columeType)
+        new_column  = "ALTER TABLE "+tableName+" ADD COLUMN "+ columnName+" "+columeType
+        self.c.execute(new_column)
+        self.conn.commit()
+    
+    def alter_table_dropColumn(self,tableName,columnName):
+        # data = (tableName,columnName,columeType)
+        drop_column  = "ALTER TABLE "+tableName+" DROP COLUMN "+ columnName
+        self.c.execute(drop_column)
+
+    def update_table_newColumn_newValue(self,tableName,trainRecordId,coloumnName,data):
+        data = data.replace('T',' ')
+        # data = data.replace(':','-')
+        # update_column  = "UPDATE "+tableName+" SET "+ coloumnName + " = " +data +" WHERE trainRecordId = ?"
+        # print(update_column)
+        # self.c.execute(update_column,(trainRecordId,))
+        # self.conn.commit()
+
+        params = (data,trainRecordId)
+        # self.c.execute("""UPDATE TrainRecord_filters_summary
+        #         SET startIndex=?, endIndex=?, updateTime=?
+        #         WHERE trainRecordId=?""",data)
+        self.c.execute("""UPDATE TrainRecord_filters_summary SET settingTime = ? WHERE trainRecordId = ?""",params)
         self.conn.commit()
 
     def search_filteredStateByRecordId(self,trainRecordId):
@@ -105,19 +132,19 @@ class LocalDBManagement():
         self.conn.commit()
         return res.fetchall()
 
-    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency):
+    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime):
         # if(self.c.connection)
-
-        data = (trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency)
+        settingTime = settingTime.replace('T',' ')
+        data = (trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime)
         res_select = self.c.execute("""SELECT * from TrainRecord_filters_summary WHERE trainRecordId = ?""",(trainRecordId,))
         if(res_select.fetchone()==None):
             self.c.execute("""INSERT INTO TrainRecord_filters_summary VALUES
-                (?,?,?,?,?,?,?,?,?)""",data)
+                (?,?,?,?,?,?,?,?,?,?)""",data)
             self.conn.commit()
         else:
-            data = (startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,trainRecordId)
+            data = (startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime,trainRecordId)
             self.c.execute("""UPDATE TrainRecord_filters_summary
-                SET startIndex=?, endIndex=?, updateTime=?
+                SET startIndex=?, endIndex=?, updateTime=? ,realDistance = ? , realSpeed = ? , straightDistance =?,straightSpeed=?,routeEfficiency=?,settingTime=?
                 WHERE trainRecordId=?""",data)
             self.conn.commit()
 

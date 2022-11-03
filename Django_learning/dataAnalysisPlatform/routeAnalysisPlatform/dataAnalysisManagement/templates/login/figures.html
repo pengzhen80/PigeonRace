@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <!-- Include 2d map tools -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
@@ -339,10 +339,15 @@
 		// 		maxZoom: 24,
 		// 		type: "hybrid",
 		// });
+        // var terrainMutant = L.gridLayer.googleMutant({
+		// 		maxZoom: 24,
+		// 		type: "terrain",
+		// });
         // L.control.layers(
 		// 			{
-        //              openstreet:tile_openstreet,
+        //             //  openstreet:tile_openstreet,
 		// 				Hybrid: hybridMutant,
+        //                 Terrain: terrainMutant,
 		// 			},
 		// 			{
 		// 				collapsed: false,
@@ -693,6 +698,7 @@
 
         var rows = document.getElementById("table_pigeonNumber_body").rows;
         console.log(rows);
+        var td_settingtime = rows[routeIndex].getElementsByTagName("td")[1];
         var td_realditance = rows[routeIndex].getElementsByTagName("td")[2];
         var td_speed = rows[routeIndex].getElementsByTagName("td")[3];
         var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[4];
@@ -712,6 +718,7 @@
         valuesForLocalDB_filteredRouteSummary['straightDistance'] = straightdistance.toFixed(3);
         valuesForLocalDB_filteredRouteSummary['straightSpeed'] = straightspeed.toFixed(3);
         valuesForLocalDB_filteredRouteSummary['routeEfficiency'] = routeEfficiency.toFixed(3);
+        valuesForLocalDB_filteredRouteSummary['settingTime'] = td_settingtime.innerHTML;
 
         return valuesForLocalDB_filteredRouteSummary;
     }
@@ -941,7 +948,7 @@
               }
             }
           }
-          send_filteredRoute(realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency)
+          send_filteredRoute(realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime)
           {
             function reqListener() {
                 var response = JSON.parse(this.responseText);
@@ -958,6 +965,7 @@
             make_send['straightDistance'] = straightDistance;
             make_send['straightSpeed'] = straightSpeed;
             make_send['routeEfficiency'] = routeEfficiency;
+            make_send['settingTime'] = settingTime;
 
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
@@ -1095,7 +1103,7 @@
                                 label_filter.innerHTML = '裁減：點擊圖表進行裁減';
 
                                 var valuesForLocalDB = table_pigeonNumber_body_updateByFilteredRoute(cur_routeIndex,filtered_route);
-                                route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency']);
+                                route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency'],valuesForLocalDB['settingTime']);
                              }
                             } catch (e) {
                                 console.log(e); // Error: hi

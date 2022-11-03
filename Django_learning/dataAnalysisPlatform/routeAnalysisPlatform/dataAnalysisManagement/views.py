@@ -13,6 +13,8 @@ dbManager = DBManagement()
 from .localDBManagement import LocalDBManagement
 localdbManager = LocalDBManagement()
 localdbManager.table_createTable()
+# localdbManager.alter_table_dropColumn('TrainRecord_filters_summary','settingTime')
+# localdbManager.alter_table_newColumn('TrainRecord_filters_summary','settingTime','DATETIME')
 # localdbManager.update_trainRecord_filtered('20221027', 1, 10,'20221027T14:29:00')
 # localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
 localdbManager.test_selectUsers()
@@ -67,11 +69,13 @@ def pigeon(request,pigeonNumber):
     ##2 search filtered trainRecord in localDB by trainRecordIds
     ##3 send to pigeon page
     trainRecordId_list = dbManager.getRouteSummaryData_by_recordname(pigeonNumber)
-    print(trainRecordId_list)
+    # print(trainRecordId_list)
     localFilteredRecords = []
 
     for trainRecordId in trainRecordId_list:
-        localdata = localdbManager.search_filteredStateByRecordId(trainRecordId)
+        # localdbManager.update_table_newColumn_newValue('TrainRecord_filters_summary',trainRecordId[0],'settingTime',trainRecordId[1])
+        localdata = localdbManager.search_filteredStateByRecordId(trainRecordId[0])
+        print(localdata)
         if localdata:
             localFilteredRecords.append(localdata)
     print(localFilteredRecords)
@@ -132,7 +136,7 @@ def localDB_updateFilteredRoute(request):
         print(routeIds)
         filteredRoute = json.loads(routeIds)
         print(filteredRoute['trainRecordId'])
-        localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'])
+        localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'],filteredRoute['settingTime'])
         # routeId_list = routeIds.split(',')
         # for routeId in routeId_list:
         #     context[routeId] = dbManager.read_routes_by_routeId(routeId)
