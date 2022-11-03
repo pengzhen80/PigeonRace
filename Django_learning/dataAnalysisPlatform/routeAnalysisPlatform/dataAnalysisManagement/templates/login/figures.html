@@ -18,6 +18,8 @@
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <link rel="stylesheet" href="{% static 'css/loading.css' %}" />
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <style>
      body {
         /* margin: 0; */
@@ -29,7 +31,11 @@
         width: 100%;
         background-color:'white';
     }
-    .button {
+    /* buttonInMap{
+        z-index: 10000;
+        position: absolute;
+    } */
+    /* .button {
             background-color: #FFED86;
             border: none;
             color: black;
@@ -43,13 +49,11 @@
     }
 
     .button:hover{
-    /* border: 1px solid #888; */
     background-color: #ddd;
-    }
+    } */
 
-    table {
+    /* table {
         border-collapse: collapse;
-        /* width: 20%; */
         cursor: pointer;
     }
 
@@ -61,7 +65,7 @@
 
     tr:hover {
         background-color: coral;
-    }
+    } */
 
     .label_plots {
         display: block;
@@ -109,8 +113,8 @@
   <br>
   </br> -->
   <div id ='figures_page' class = 'myDiv_figurePage' >
-  <table id="table_pigeonNumber">
-    <thead>
+  <table id="table_pigeonNumber" class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
             <th></th>
             <th>公環號碼</th>
@@ -129,7 +133,7 @@
   </table>
   <!-- <br>
   </br> -->
-  <button id="button_showFigures_FilteredRoutes" class="button" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
+  <button id="button_showFigures_FilteredRoutes" class= class="btn btn-primary" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
   <br>
   </br>
   <!-- <button id="button_windy_showPath" class="button" title="點擊查看軌跡">顯示路徑</button>
@@ -141,7 +145,9 @@
     <br></br>
     <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
   </div>
-  <div id="map_showroutes" class="myDiv_map"></div>
+  <div id="map_showroutes" class="myDiv_map">
+    <!-- <button type="button" class="btn btn-light">Light</button> -->
+  </div>
   <br>
   </br>
   <div id ='routeEff_Polyline_plot' class = 'myDiv_plots' >
@@ -319,41 +325,57 @@
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
     let markersObjects_in_Map_showPaths =[];
-    // let map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
-
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         maxZoom: 20,
-    //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    // }).addTo(map_handler);
     let map_handler = null;
     
     function map_init()
     {
         map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
-        var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 20,
-                // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        }).addTo(map_handler);
+        // var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //         maxZoom: 20,
+        //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        // }).addTo(map_handler);
+        var roadMutant = L.gridLayer
+				.googleMutant({
+					maxZoom: 24,
+					type: "roadmap",
+				})
+				.addTo(map_handler);
 
-        // var hybridMutant = L.gridLayer.googleMutant({
-		// 		maxZoom: 24,
-		// 		type: "hybrid",
-		// });
-        // var terrainMutant = L.gridLayer.googleMutant({
-		// 		maxZoom: 24,
-		// 		type: "terrain",
-		// });
-        // L.control.layers(
-		// 			{
-        //             //  openstreet:tile_openstreet,
-		// 				Hybrid: hybridMutant,
-        //                 Terrain: terrainMutant,
-		// 			},
-		// 			{
-		// 				collapsed: false,
-		// 			}
-		// )
-		// .addTo(map_handler);
+			var terrainMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "terrain",
+			});
+
+			var hybridMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "hybrid",
+			});
+
+			var grid = L.gridLayer({
+				// attribution: "Debug tilecoord grid",
+			});
+
+            // var markers = L.layerGroup(markersObjects_in_Map_showPaths);
+            // var overlayMaps = {
+            //     "Markers": markers
+            // };
+
+			L.control
+				.layers(
+					{
+						Roadmap: roadMutant,
+						Terrain: terrainMutant,
+						Hybrid: hybridMutant,
+					},
+					{
+						// "markers": markers,
+                        // grid,
+					},
+					{
+						collapsed: false,
+					}
+				)
+				.addTo(map_handler);
     }
 
     //for windy
@@ -556,12 +578,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.addLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
-                                // windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                // {
-                                //     map_handler.addLayer(markers[i_marker]);
-                                // }
+                                windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -576,12 +593,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.removeLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
-                                // windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                // {
-                                //     map_handler.removeLayer(markers[i_marker]);
-                                // }
+                                windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -807,14 +819,17 @@
                 var color  = getRandomColor();
                 color_list_routes.push(color);
                 // var lineObject = drawPath(path_normalize_list[i],'red','3');
-                var lineObject = drawPath(path_normalize_list[i],color,'3');
-                // var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
+                var  lineObject= drawPath(path_normalize_list[i],color,'3');
+                var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
                 var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
-                console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
-                console.log(pigeonNumber_releaseTime['pigeonNumber']);
-                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':lineObject});
-                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);
-                // markersObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':markers})
+                // console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
+                // console.log(pigeonNumber_releaseTime['pigeonNumber']);
+                var line_group = L.layerGroup(markers)
+                    .addLayer(lineObject)
+                    .addTo(map_handler);
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':line_group});
+                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);                
+                // markersObjects_in_Map_showPaths.concat(markers);
             }
             
             function drawPath(pathLine_origin,color,weight) {
@@ -824,9 +839,9 @@
                 // console.log(typeof (pathLine_origin_normalized));
                 // console.log(pathLine_origin_normalized);
 
-                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
-                // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
-                // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+                // var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight });
+                
                 return polyline_origin;
             }
 
@@ -845,7 +860,7 @@
                     +"<br>"+"heading : "+heading.toString()
                     +"<br>"+"elevation : "+elevation.toString();
                     console.log(text);
-                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).addTo(map_handler).bindPopup(text));
+                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).bindPopup(text));
                 }
                 return Markers;
             }
