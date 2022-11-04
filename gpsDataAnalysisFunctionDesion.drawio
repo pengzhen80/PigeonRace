@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-04T01:15:56.464Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="Dvoq2Nq0zkYukCdviygX" version="20.5.1" type="github" pages="18">
+<mxfile host="app.diagrams.net" modified="2022-11-04T01:25:16.369Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="sObbcBNPmD6-rz2riNEX" version="20.5.1" type="github" pages="18">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
     <mxGraphModel dx="1588" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3275,12 +3275,15 @@
     </mxGraphModel>
   </diagram>
   <diagram id="FRPkfmtKA-4SzH20euoj" name="數據分析平台-UI">
-    <mxGraphModel dx="2415" dy="739" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2228" dy="2302" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="gfYxUdWuObNMt6XmjAFn-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="70" y="130" width="960" height="340" as="geometry" />
+        </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-2" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" parent="1" vertex="1">
-          <mxGeometry x="100" y="370" width="960" height="130" as="geometry" />
+          <mxGeometry x="70" y="-30" width="960" height="130" as="geometry" />
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="XI76xfZJAWxSpDtaMS1M-2" vertex="1">
           <mxGeometry width="960" height="43" as="geometry" />
@@ -3397,31 +3400,28 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-15" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;地圖&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="250" y="100" width="810" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="XI76xfZJAWxSpDtaMS1M-16" value="繪製路徑" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="100" y="180" width="120" height="60" as="geometry" />
+          <mxGeometry x="65" y="500" width="970" height="220" as="geometry" />
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="110" y="820" as="sourcePoint" />
-            <mxPoint x="860" y="820" as="targetPoint" />
+            <mxPoint x="450" y="450" as="sourcePoint" />
+            <mxPoint x="990" y="450" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="110" y="820" as="sourcePoint" />
-            <mxPoint x="110" y="600" as="targetPoint" />
+            <mxPoint x="450" y="450" as="sourcePoint" />
+            <mxPoint x="450" y="230" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-19" value="速度，海拔分佈圖" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="270" y="600" width="346" height="30" as="geometry" />
+          <mxGeometry x="610" y="230" width="346" height="30" as="geometry" />
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-20" value="點擊“速度，海拔”圖進行裁減" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="-260" y="540" width="230" height="250" as="geometry" />
+          <mxGeometry x="80" y="170" width="230" height="250" as="geometry" />
         </mxCell>
         <mxCell id="XI76xfZJAWxSpDtaMS1M-21" value="開始裁減/裁減中" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="100" y="520" width="270" height="60" as="geometry" />
+          <mxGeometry x="440" y="150" width="270" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
