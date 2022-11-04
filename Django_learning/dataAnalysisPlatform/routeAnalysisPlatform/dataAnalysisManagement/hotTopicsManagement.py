@@ -60,6 +60,8 @@ class HotTopicsManagement:
         return rank_straightSpeed,rank_routeEfficiency
 
     def pigeon_specialPigeons(self,track_summary):
+        if(len(track_summary)<1):
+            return None
         pigeon_toTrain =  track_summary[0]['pigeonNumber']
         fastSpeed = track_summary[0]['averageRealSpeed']
         for i in range(1,len(track_summary)):

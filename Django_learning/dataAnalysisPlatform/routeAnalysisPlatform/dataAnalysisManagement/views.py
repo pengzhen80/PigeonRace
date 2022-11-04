@@ -14,9 +14,10 @@ from .localDBManagement import LocalDBManagement
 localdbManager = LocalDBManagement()
 localdbManager.table_createTable()
 # localdbManager.alter_table_dropColumn('TrainRecord_filters_summary','settingTime')
-# localdbManager.alter_table_newColumn('TrainRecord_filters_summary','settingTime','DATETIME')
+# localdbManager.alter_table_newColumn('Dove','age','REAL')
 # localdbManager.update_trainRecord_filtered('20221027', 1, 10,'20221027T14:29:00')
 # localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
+# localdbManager.update_Dove(doveID='1',mxID='1',doveName='1',RFID=None,URing=None,photo=None,eye=None,sex="male",age=5,bodyLength=30,wingLength=20,weight=400,color='gray',breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
 localdbManager.test_selectUsers()
 # Create your views here.
 
@@ -64,6 +65,28 @@ def activity(request):
     context['activities'] = json.dumps(dbManager.getActivities())
     return render(request, 'login/activity.html', context=context)
 
+def pigeonManagement(request):
+    context={}
+    if request.method == 'POST':
+        # print(type(request.body))
+        # print(request.body.decode("utf-8"))
+        pigeonData = request.body.decode("utf-8")
+        # print(pigeonData)
+        pigeonData = json.loads(pigeonData)
+        option = pigeonData['option']
+        print(pigeonData['option'])
+        if(option == 'create'):
+            doveName = pigeonData['doveName']
+            sex = pigeonData['sex']
+            age = pigeonData['age']
+            weight = pigeonData['weight']
+            bodyLength = pigeonData['bodyLength']
+            wingLength = pigeonData['wingLength']
+            print(doveName,sex,age,weight,bodyLength,wingLength)
+            localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
+        return JsonResponse(context)
+    return render(request, 'login/pigeon_management.html', context={})
+
 def pigeon(request,pigeonNumber):
     ##1 search all trainRecordId in apimanagement by pigeonNumber
     ##2 search filtered trainRecord in localDB by trainRecordIds
@@ -79,7 +102,7 @@ def pigeon(request,pigeonNumber):
         if localdata:
             localFilteredRecords.append(localdata)
     print(localFilteredRecords)
-    return render(request, 'login/pigeon.html', context={'pigeonNumber':pigeonNumber,'localFilteredRecords':json.dumps(localFilteredRecords)})
+    return render(request, 'login/pigeon_pigeonNumber.html', context={'pigeonNumber':pigeonNumber,'localFilteredRecords':json.dumps(localFilteredRecords)})
 
 def view_tracks(request, activityIds):
     context = {
@@ -136,11 +159,5 @@ def localDB_updateFilteredRoute(request):
         print(routeIds)
         filteredRoute = json.loads(routeIds)
         print(filteredRoute['trainRecordId'])
-        localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'],filteredRoute['settingTime'])
-        # routeId_list = routeIds.split(',')
-        # for routeId in routeId_list:
-        #     context[routeId] = dbManager.read_routes_by_routeId(routeId)
-        #     context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
-            # print(context[routeId+'pigeonNumber'])
-    # print(context)
+        # localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'],filteredRoute['settingTime'])
     return JsonResponse(context)

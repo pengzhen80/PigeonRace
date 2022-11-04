@@ -53,7 +53,7 @@ class DBManagement ():
         status = res['status']
         if (status == 'ok'):
             self.mxid = res['mxid']
-            self.api_getActivitityID()
+            # self.api_getActivitityID()
         return res
 
     def api_getActivitityID(self):
@@ -218,6 +218,8 @@ class DBManagement ():
         return self.routes_summarydata
     # def getTrainRecordBy
 
+    def getMxid(self):
+        return self.mxid
 
 if __name__ == '__main__':
     dbManager = DBManagement()
