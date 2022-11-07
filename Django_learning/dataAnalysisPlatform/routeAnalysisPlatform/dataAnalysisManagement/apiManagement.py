@@ -53,7 +53,7 @@ class DBManagement ():
         status = res['status']
         if (status == 'ok'):
             self.mxid = res['mxid']
-            # self.api_getActivitityID()
+            self.api_getActivitityID()
         return res
 
     def api_getActivitityID(self):

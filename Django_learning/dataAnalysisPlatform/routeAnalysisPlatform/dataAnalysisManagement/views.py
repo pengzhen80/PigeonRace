@@ -106,49 +106,69 @@ def pigeon(request,pigeonNumber):
 
 def view_tracks(request, activityIds):
     context = {
-        'activityIds': activityIds
+        'activityIds': activityIds,
+        'trackSummarys':[]
     }
-
-    # activityId_list = activityIds.split(',')
-    # for activityId in activityId_list:
-    #     dbManager.api_readModule(activityId)
-
+    
+    activityId_list = activityIds.split(',')
+    for activityId in activityId_list:
+        context['trackSummarys'].extend(dbManager.read_routes_summaryData(activityId))
+    print(context['trackSummarys'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
     return render(request, 'login/tracks.html', context=context)
 
 
-def tracksSummary(request):
-    context={}
-    if request.method == 'POST':
-        # print(type(request.body))
-        # print(request.body.decode("utf-8"))
-        activityIds = request.body.decode("utf-8")
-        activityId_list = activityIds.split(',')
-        for activityId in activityId_list:
-            context[activityId] = dbManager.read_routes_summaryData(activityId)
+# def tracksSummary(request):
+#     context={}
+#     if request.method == 'POST':
+#         # print(type(request.body))
+#         # print(request.body.decode("utf-8"))
+#         activityIds = request.body.decode("utf-8")
+#         activityId_list = activityIds.split(',')
+#         for activityId in activityId_list:
+#             context[activityId] = dbManager.read_routes_summaryData(activityId)
 
-    return JsonResponse(context)
+#     return JsonResponse(context)
 
+# def showFigures(request,routeIds):
+#     context = {
+#         'routeIds': routeIds
+#     }
+#     return render(request, 'login/figures.html', context=context)
 def showFigures(request,routeIds):
     context = {
-        'routeIds': routeIds
+        'routeIds': routeIds,
+        'trackDatas':[],
+        'trackSummarys':[],
+        'trackFiltered':[]
     }
+    # routeIds = request.body.decode("utf-8")
+    routeId_list = routeIds.split(',')
+    for routeId in routeId_list:
+        context['trackDatas'].append({routeId:dbManager.read_routes_by_routeId(routeId)})
+        context['trackSummarys'].append({routeId:dbManager.read_routes_summaryData_byId(routeId)})
+        context['trackFiltered'].append({routeId:localdbManager.search_filteredStateByRecordId(routeId)})
+    context['trackDatas'] = json.dumps(context['trackDatas'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
+    context['trackFiltered'] = json.dumps(context['trackFiltered'])
+    print(context['trackSummarys'])
     return render(request, 'login/figures.html', context=context)
 
-def tracksData(request):
-    context={}
-    if request.method == 'POST':
-        # print(type(request.body))
-        # print(request.body.decode("utf-8"))
-        routeIds = request.body.decode("utf-8")
-        routeId_list = routeIds.split(',')
-        for routeId in routeId_list:
-            context[routeId] = dbManager.read_routes_by_routeId(routeId)
-            context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
-            # print(context[routeId+'pigeonNumber'])
-            context[routeId+'filter'] = localdbManager.search_filteredStateByRecordId(routeId)
+# def tracksData(request):
+#     context={}
+#     if request.method == 'POST':
+#         # print(type(request.body))
+#         # print(request.body.decode("utf-8"))
+#         routeIds = request.body.decode("utf-8")
+#         routeId_list = routeIds.split(',')
+#         for routeId in routeId_list:
+#             context[routeId] = dbManager.read_routes_by_routeId(routeId)
+#             context[routeId+'pigeonNumber'] = dbManager.read_routes_summaryData_byId(routeId)
+#             # print(context[routeId+'pigeonNumber'])
+#             context[routeId+'filter'] = localdbManager.search_filteredStateByRecordId(routeId)
 
-    # print(context)
-    return JsonResponse(context)
+#     # print(context)
+#     return JsonResponse(context)
 
 def localDB_updateFilteredRoute(request):
     context={}

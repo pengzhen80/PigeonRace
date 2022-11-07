@@ -112,7 +112,8 @@
   <!-- <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
   </br> -->
-  <div id ='figures_page' class = 'myDiv_figurePage' >
+  <!-- <div id ='figures_page' class = 'myDiv_figurePage' > -->
+  <div id ='figures_page'>
   <table id="table_pigeonNumber" class="table table-striped table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -302,7 +303,7 @@
   </dialog>
 
   <script>
-    ui_loading_start();
+    // ui_loading_start();
     function ui_loading_start()
     {
         var div_loading = document.getElementById('loading_planet');
@@ -313,8 +314,40 @@
         div_loading.style.marginLeft="-150px";
     }
 
+    //parse context to origin data
     let routeIds = '{{ routeIds|safe }}';
     let routeId_list = routeIds.split(',');
+    let trackDatas = '{{ trackDatas|safe }}';
+    let normalized_trackDatas = JSON.parse(trackDatas);
+    // console.log(trackDatas,normalized_trackDatas);
+    let normalized_trackDatas_dict = {};
+    for(var i=0;i<normalized_trackDatas.length;i++)
+    {
+        var keys = Object.keys(normalized_trackDatas[i]);
+        console.log(keys[0],normalized_trackDatas[i][keys[0]]);
+        normalized_trackDatas_dict[keys[0]] = normalized_trackDatas[i][keys[0]];
+    }
+    let trackSummarys = '{{ trackSummarys|safe }}';
+    let normalized_trackSummarys = JSON.parse(trackSummarys);
+    let normalized_trackSummarys_dict = {};
+    for(var i=0;i<normalized_trackSummarys.length;i++)
+    {
+        var keys = Object.keys(normalized_trackSummarys[i]);
+        // console.log(keys[0],normalized_trackSummarys[i][keys[0]]);
+        normalized_trackSummarys_dict[keys[0]] = normalized_trackSummarys[i][keys[0]];
+    }
+    console.log(normalized_trackSummarys,normalized_trackSummarys_dict);
+    let trackFiltered = '{{ trackFiltered|safe }}';
+    normalized_trackFiltered = JSON.parse(trackFiltered);
+    let normalized_trackFiltered_dict = {};
+    for(var i=0;i<normalized_trackFiltered.length;i++)
+    {
+        var keys = Object.keys(normalized_trackFiltered[i]);
+        // console.log(keys[0],normalized_trackFiltered[i][keys[0]]);
+        normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
+    }
+    // console.log(normalized_trackFiltered);
+    //store origin data by dicts
     let map_pigeonNumberReleaseTime_routeIndex = [];
     let map_routeIndex_pigeonNumberReleaseTime = {};
     let map_routeIndex_routeId = {};
@@ -322,6 +355,50 @@
     let pigeonNumbers_releaseTime = [];
     let routes_origin = [];
     console.log(routeId_list);
+    func_covertOriginDataToDicts();
+    function func_covertOriginDataToDicts() {
+        for(var i=0;i<routeId_list.length;i++)
+        {
+          routeId = routeId_list[i];
+          var route = normalized_trackDatas_dict[routeId];
+          console.log(typeof(route));
+          for(var j=0;j<route.length;j++)
+          {
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString('zh-TW',{hour12: false});
+          }
+          routes_origin.push(route);
+          var summary = normalized_trackSummarys_dict[routeId];
+          console.log('summary',summary);
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance'],'straightspeed':summary['straightspeed']};
+          cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
+          //parse filter
+          var route_filter = normalized_trackFiltered_dict[routeId];
+          console.log(route_filter);
+          if(route_filter)
+          {
+            LocalDB_InitData_routeFiltered.push({'routeIndex':routes_origin.length-1,'startIndex':route_filter[1],'endIndex':route_filter[2]});
+            cur_pigeonNumber_releaseTime['filter'] = true;
+            cur_pigeonNumber_releaseTime['real_distance']= route_filter[4];
+            cur_pigeonNumber_releaseTime['speed']= route_filter[5];
+            cur_pigeonNumber_releaseTime['straightdistance']= route_filter[6];
+            cur_pigeonNumber_releaseTime['straightspeed']= route_filter[7];
+            cur_pigeonNumber_releaseTime['routeEfficiency']= route_filter[8];
+            console.log(cur_pigeonNumber_releaseTime);
+          }
+          else
+          {
+            cur_pigeonNumber_releaseTime['filter'] = false;
+          }
+          pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
+        //   console.log(pigeonNumbers_releaseTime);
+
+          map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
+          console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
+          map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
+          map_routeIndex_routeId[routes_origin.length-1] = routeId;
+        }
+      }
+
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
     let markersObjects_in_Map_showPaths =[];
@@ -469,7 +546,7 @@
     }
 
 
-    request_askRoutesData()
+    // request_askRoutesData()
     function request_askRoutesData() {
       function reqListener() {
         // console.log(typeof (this.responseText), typeof (this.response));
@@ -551,6 +628,26 @@
       oReq.send(routeId_list.toString());
     }
 
+    //init page
+    init_page();
+    function init_page()
+    {
+        // function ui_loading_end()
+        // {
+        //     var div_loading = document.getElementById('loading_planet');
+        //     div_loading.style.display = 'none'; 
+        // }
+        // function ui_figuresPage_show()
+        // {
+        //     var div = document.getElementById('figures_page');
+        //     div.style.display = 'inline'; 
+        // }
+        // ui_loading_end();
+        // ui_figuresPage_show();
+        map_init();
+        tracks_showInTable(pigeonNumbers_releaseTime);
+        show_figures(routes_origin);
+    }
     function tracks_showInTable(pigeonReleaseTime_list) {
             let table_pigeonNumber_body = document.getElementById('table_pigeonNumber_body');
             for (var i = 0; i < pigeonReleaseTime_list.length; i++) {
@@ -859,7 +956,7 @@
                     +"<br>"+"speed : "+speed.toString()
                     +"<br>"+"heading : "+heading.toString()
                     +"<br>"+"elevation : "+elevation.toString();
-                    console.log(text);
+                    // console.log(text);
                     Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).bindPopup(text));
                 }
                 return Markers;

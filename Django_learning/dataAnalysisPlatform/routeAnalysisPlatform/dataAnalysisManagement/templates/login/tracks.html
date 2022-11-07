@@ -6,37 +6,16 @@
     <!-- <meta charset="utf-8"> -->
     <title>軌跡頁面</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="{% static 'css/table.css' %}" />
+    <!-- <link rel="stylesheet" href="{% static 'css/table.css' %}" /> -->
     <!-- css for header -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/templatemo-space-dynamic.css' %}">
+    <!-- for table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <style>
-         body {
-            /* margin: 0; */
-            /* padding: 0; */
-            /* display: flex; */
-            /* align-items: center; */
-            justify-content: center;
-            height: 100vh; 
-            width: 100%;
-            background-color: #3c4359;
-        }
-
-        .input {
-            background-color: white;
-            border: none;
-            color: black;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            position: relative;
-        }
-
-
-        .button {
+       .button {
             background-color: #FFED86;
             border: none;
             color: black;
@@ -58,11 +37,14 @@
         .myDiv_table {
             /* border: 1px outset black; */
             /* background-color: lightblue;     */
-            text-align: center;
+            /* text-align: center; */
             width:100%;
             height: 400px;
             top : 100px;
             position: relative;
+        }
+        .table_select{
+            max-width: 150px;
         }
     </style>
 </head>
@@ -93,13 +75,27 @@
 </header>
 <body>
     <div id="tap_table_activity" class = 'myDiv_table'>
-    <button id="btn_trackPage_showPlot" class="button">查看特徵圖</button>
-    <br><br>
-    <table id="table_trackPage_tracks">
+    <div class="d-flex justify-content-between">
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="check_box_select_all" onclick="func_cb_check_box_select_all()">
+                <label class="form-check-label" for="flexCheckDefault">select all</label>
+            </div>
+            <div>
+                <select class="form-select table_select" aria-label="Default select example" >
+                    <option selected>選項</option>
+                    <option value="1">單鴿分析</option>
+                    <option value="2">裁減</option>
+                    <!-- <option value="3">Three</option> -->
+                </select>
+            </div>
+     </div>
+    <br>
+    <table id="table_trackPage_tracks" class = 'table table-striped table-bordered table-hover display'>
         <thead title="點擊按照公環號碼排序">
             <tr>
-                <th></th>
-                <th onclick="sortTable()">公環號碼</th>
+                <th>勾選</th>
+                <!-- <th onclick="sortTable()">公環號碼</th> -->
+                <th>公環號碼</th>
                 <th>gps腳環號碼</th>
                 <th>飛行時間</th>
                 <th>點數</th>
@@ -118,20 +114,44 @@
             </tr> -->
         </tbody>
     </table>
+    <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav> -->
     </div>
-    <!-- <script type="module" src="{% static 'js/activity.js' %}"></script> -->
     <script>
         let activityIds = '{{ activityIds|safe }}';
         let activityId_list = activityIds.split(',');
         console.log(activityId_list);
+
+        let trackSummarys = '{{ trackSummarys|safe }}';
+        normalized_trackSummarys = JSON.parse(trackSummarys);
+        // let trackSummarys_list = trackSummarys.split(',');
+        console.log(normalized_trackSummarys);
         //when add a track to table, push the trackID=activityId+moduleId+trainRecordId
         let list_trackId = []; 
         let dict_pigeonNumReleaseTime_to_trackId = {};
-        // let activities = '{{ activities|safe }}';
-        // console.log('status:', status);
-        // let normalized_activities = JSON.parse(activities)
-        // console.log('activities:', typeof (normalized_activities), normalized_activities.length);
-        request_askTracksSummaryData()
+        make_dict_pigeonNumReleaseTime_to_trackId();
+        function make_dict_pigeonNumReleaseTime_to_trackId()
+        {
+            for(var i=0;i<normalized_trackSummarys.length;i++)
+            {
+                dict_pigeonNumReleaseTime_to_trackId[normalized_trackSummarys[i]['recordname']+normalized_trackSummarys[i]['settingtime']] = normalized_trackSummarys[i]['activity_id']+normalized_trackSummarys[i]['moduleid']+normalized_trackSummarys[i]['trainrecordid'];
+            }
+        }
+
+        tracks_showInTable(normalized_trackSummarys);
+        
+        // request_askTracksSummaryData()
         function request_askTracksSummaryData() {
             // for (var i = 0; i < activityId_list.length; i++) {
                 
@@ -158,9 +178,7 @@
                         tracks_showInTable([tracks_list[i][j]]);
                     }
                 }
-                
-                // var pathName = decodeURI(response['pathname']);
-                // var polygon = response['polygon'];
+
             }
 
             var oReq = new XMLHttpRequest();
@@ -186,10 +204,12 @@
             //     <th>實際速度</th>
             function func_table_track_addData(param_track) {
                 var row = document.createElement('tr');
-                var row_data_0 = document.createElement("INPUT");
-                row_data_0.setAttribute("type", "checkbox");
-                // row_data_0.style.position = 'absolute';
-                // row_data_0.style.top = '30%';
+                var row_data_0 = document.createElement('td');
+                var tmp_checkbox = document.createElement("INPUT");
+                tmp_checkbox.setAttribute("type", "checkbox");
+                row_data_0.appendChild(tmp_checkbox);
+                // var row_data_0 = document.createElement("td");
+                // row_data_0.innerHTML = param_track['recordname'];
                 var row_data_1 = document.createElement('td');
                 row_data_1.innerHTML = param_track['recordname'];
                 // row_data_1.style.textAlign = "center";
@@ -232,8 +252,8 @@
             for (var i = 0; i < rows.length; i++) {
                 console.log(rows[i]);
                 var checkbox = rows[i].getElementsByTagName("input")[0];
-                var pigeonNumber = rows[i].getElementsByTagName("td")[0].innerHTML;
-                var releaseTime = rows[i].getElementsByTagName("td")[2].innerHTML;
+                var pigeonNumber = rows[i].getElementsByTagName("td")[1].innerHTML;
+                var releaseTime = rows[i].getElementsByTagName("td")[3].innerHTML;
                 // console.log(checkbox);
                 console.log(checkbox.checked);
                 if (checkbox.checked == true) {
@@ -243,7 +263,11 @@
             }
             console.log(index_checked);
             console.log(pigeonNumber_releaseTime);
-
+            if(pigeonNumber_releaseTime.length == 0)
+            {
+                alert('please choose a record');
+                return;
+            }
             // var list_trackId_checked_list = [];
             // for (i = 0; i < index_checked.length; i++) {
             //     list_trackId_checked_list.push(list_trackId[index_checked[i]]);
@@ -252,12 +276,13 @@
             for (i = 0; i < pigeonNumber_releaseTime.length; i++) {
                 list_trackId_checked_list.push(dict_pigeonNumReleaseTime_to_trackId[pigeonNumber_releaseTime[i]]);
             }
+            console.log(list_trackId_checked_list);
 
             window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
             // window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString(),name='showFigures');
         }
-        let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
-        btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
+        // let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
+        // btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
 
         function sortTable() {
             var table, rows, switching, i, x, y, shouldSwitch;
@@ -293,6 +318,50 @@
                 switching = true;
                 }
             }
+        }
+
+        $(document).ready(function(){
+            $('#table_trackPage_tracks').dataTable();
+        });
+
+        //for table selected action
+        $('select').on(
+        { "focus": function() {
+            //console.log('clicked!', this, this.value);
+            this.selectedIndex = 0;
+            }
+        , "change": function() {
+            choice = $(this).val();
+            console.log('changed!', this, choice);
+            // this.blur();
+            // setTimeout(function() { alert('Chose '+ choice); }, 0);
+            if(choice == 1)
+            {
+                func_cb_btn_trackPage_showPlot();
+            }    
+        } 
+        });
+
+        function func_cb_check_box_select_all() {
+            var checkBox_all = document.getElementById("check_box_select_all");
+            if(checkBox_all.checked == true)
+            {
+                var rows = document.getElementById("table_trackPage_tracks_body").rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var checkbox = rows[i].getElementsByTagName("input")[0];
+                    checkbox.checked = true;
+                }
+            }
+            else
+            {
+                var rows = document.getElementById("table_trackPage_tracks_body").rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var checkbox = rows[i].getElementsByTagName("input")[0];
+                    checkbox.checked = false;
+                }
+            }
+            
+           
         }
     </script>
 </body>
