@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 
 import platform
+import datetime
+import hashlib
 
 class LocalDBManagement():
     def __init__(self):
@@ -50,6 +52,8 @@ class LocalDBManagement():
                     URing                VARCHAR,
                     photo                BLOB,
                     eye                  BLOB,
+                    sex                  VARCHAR,
+                    age                  REAL,   
                     bodyLength           REAL,
                     wingLength           REAL,
                     weight               REAL,
@@ -87,12 +91,30 @@ class LocalDBManagement():
                     realSpeed                  REAL,
                     straightDistance           REAL,
                     straightSpeed              REAL,
-                    routeEfficiency            REAL
+                    routeEfficiency            REAL,
+                    settingTime                VARCHAR 
                     );""")
 
         # Create Index
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserIdx1        ON User(accName)""")
         # self.c.execute("""CREATE INDEX IF NOT EXISTS UserLogIdx1     ON UserLog(logTime, mxID)""")
+        self.conn.commit()
+
+    def alter_table_newColumn(self,tableName,columnName,columeType):
+        # data = (tableName,columnName,columeType)
+        new_column  = "ALTER TABLE "+tableName+" ADD COLUMN "+ columnName+" "+columeType
+        self.c.execute(new_column)
+        self.conn.commit()
+    
+    def alter_table_dropColumn(self,tableName,columnName):
+        # data = (tableName,columnName,columeType)
+        drop_column  = "ALTER TABLE "+tableName+" DROP COLUMN "+ columnName
+        self.c.execute(drop_column)
+
+    def update_tableTrainRecord_filters_summary_newColumn_settingTime(self,trainRecordId,data):
+        data = data.replace('T',' ')
+        params = (data,trainRecordId)
+        self.c.execute("""UPDATE TrainRecord_filters_summary SET settingTime = ? WHERE trainRecordId = ?""",params)
         self.conn.commit()
 
     def search_filteredStateByRecordId(self,trainRecordId):
@@ -105,27 +127,49 @@ class LocalDBManagement():
         self.conn.commit()
         return res.fetchall()
 
-    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency):
+    def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime):
         # if(self.c.connection)
-
-        data = (trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency)
+        settingTime = settingTime.replace('T',' ')
+        data = (trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime)
         res_select = self.c.execute("""SELECT * from TrainRecord_filters_summary WHERE trainRecordId = ?""",(trainRecordId,))
         if(res_select.fetchone()==None):
             self.c.execute("""INSERT INTO TrainRecord_filters_summary VALUES
-                (?,?,?,?,?,?,?,?,?)""",data)
+                (?,?,?,?,?,?,?,?,?,?)""",data)
             self.conn.commit()
         else:
-            data = (startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,trainRecordId)
+            data = (startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime,trainRecordId)
             self.c.execute("""UPDATE TrainRecord_filters_summary
-                SET startIndex=?, endIndex=?, updateTime=?
+                SET startIndex=?, endIndex=?, updateTime=? ,realDistance = ? , realSpeed = ? , straightDistance =?,straightSpeed=?,routeEfficiency=?,settingTime=?
                 WHERE trainRecordId=?""",data)
+            self.conn.commit()
+
+    def create_Dove(self,doveID,mxID,doveName,RFID,URing,photo,eye,sex,age,bodyLength,wingLength,weight,color,breed,desc,father,mother,fatherFather,fatherMother,motherFather,motherMother,note):
+        # if(self.c.connection)
+        if doveID == None:
+            now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+            doveIdRaw = "{}{}".format(doveName, now)
+            doveID = hashlib.md5(doveIdRaw.encode()).hexdigest()
+            pass
+    
+        data = (doveID,mxID,doveName,RFID,URing,photo,eye,sex,age,bodyLength,wingLength,weight,color,breed,desc,father,mother,fatherFather,fatherMother,motherFather,motherMother,note)
+        res_select = self.c.execute("""SELECT * from Dove WHERE doveID = ?""",(doveID,))
+        if(res_select.fetchone()==None):
+            self.c.execute("""INSERT INTO Dove VALUES
+                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",data)
+            self.conn.commit()
+        else:
+            data = (sex,age,bodyLength,wingLength,weight,doveName)
+            self.c.execute("""UPDATE Dove
+                SET sex=?, age=?, bodyLength=? ,wingLength = ? , weight = ?
+                WHERE doveName=?""",data)
             self.conn.commit()
 
 
     def test_selectUsers(self):
         # self.c.execute("""INSERT INTO TrainRecord_filters VALUES
         #         ('20221027', 1, 10,'20221027T14:29:00')""")
-        res = self.c.execute("""SELECT * from TrainRecord_filters_summary""")
+        # res = self.c.execute("""SELECT * from TrainRecord_filters_summary""")
+        res = self.c.execute("""SELECT * from Dove""")
         self.conn.commit()
         print(res.fetchall())
         # print(res.fetchone()==None)
@@ -134,6 +178,8 @@ class LocalDBManagement():
         #         ('20221027', 1, 10,'20221027T14:29:00')""")
         #     res = self.c.execute("""SELECT * from TrainRecord_filters""")
         #     print(res.fetchone())
+    
+    # def test_
 # Create View
 # c.execute("""CREATE VIEW Topic_StraihtSpeed_View AS
 #              SELECT *

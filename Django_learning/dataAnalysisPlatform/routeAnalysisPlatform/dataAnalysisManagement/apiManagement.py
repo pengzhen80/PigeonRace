@@ -193,7 +193,7 @@ class DBManagement ():
         keys = self.routes_summarydata.keys()
         for key in keys:
             if self.routes_summarydata[key]['recordname'] == pigeonNumber:
-                result.append(key)
+                result.append([key,self.routes_summarydata[key]['settingtime']])
         return result
 
     def read_routes_summaryData(self,activity_id):
@@ -218,6 +218,8 @@ class DBManagement ():
         return self.routes_summarydata
     # def getTrainRecordBy
 
+    def getMxid(self):
+        return self.mxid
 
 if __name__ == '__main__':
     dbManager = DBManagement()

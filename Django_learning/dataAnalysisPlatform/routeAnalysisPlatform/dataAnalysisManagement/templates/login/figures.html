@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <!-- Include 2d map tools -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
@@ -18,6 +18,8 @@
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <link rel="stylesheet" href="{% static 'css/loading.css' %}" />
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <style>
      body {
         /* margin: 0; */
@@ -29,7 +31,11 @@
         width: 100%;
         background-color:'white';
     }
-    .button {
+    /* buttonInMap{
+        z-index: 10000;
+        position: absolute;
+    } */
+    /* .button {
             background-color: #FFED86;
             border: none;
             color: black;
@@ -43,13 +49,11 @@
     }
 
     .button:hover{
-    /* border: 1px solid #888; */
     background-color: #ddd;
-    }
+    } */
 
-    table {
+    /* table {
         border-collapse: collapse;
-        /* width: 20%; */
         cursor: pointer;
     }
 
@@ -61,7 +65,7 @@
 
     tr:hover {
         background-color: coral;
-    }
+    } */
 
     .label_plots {
         display: block;
@@ -108,9 +112,10 @@
   <!-- <div id="Map_showPaths" class="myDiv_map"></div>
   <br>
   </br> -->
-  <div id ='figures_page' class = 'myDiv_figurePage' >
-  <table id="table_pigeonNumber">
-    <thead>
+  <!-- <div id ='figures_page' class = 'myDiv_figurePage' > -->
+  <div id ='figures_page'>
+  <table id="table_pigeonNumber" class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
             <th></th>
             <th>公環號碼</th>
@@ -129,7 +134,7 @@
   </table>
   <!-- <br>
   </br> -->
-  <button id="button_showFigures_FilteredRoutes" class="button" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
+  <button id="button_showFigures_FilteredRoutes" class= class="btn btn-primary" title="裁減完後，點擊顯示特徵圖">顯示特徵圖</button>
   <br>
   </br>
   <!-- <button id="button_windy_showPath" class="button" title="點擊查看軌跡">顯示路徑</button>
@@ -141,7 +146,9 @@
     <br></br>
     <div id="canvas_speed_elevation_forFilterRoutes" class="myDiv_chart"></div>
   </div>
-  <div id="map_showroutes" class="myDiv_map"></div>
+  <div id="map_showroutes" class="myDiv_map">
+    <!-- <button type="button" class="btn btn-light">Light</button> -->
+  </div>
   <br>
   </br>
   <div id ='routeEff_Polyline_plot' class = 'myDiv_plots' >
@@ -296,7 +303,7 @@
   </dialog>
 
   <script>
-    ui_loading_start();
+    // ui_loading_start();
     function ui_loading_start()
     {
         var div_loading = document.getElementById('loading_planet');
@@ -307,8 +314,40 @@
         div_loading.style.marginLeft="-150px";
     }
 
+    //parse context to origin data
     let routeIds = '{{ routeIds|safe }}';
     let routeId_list = routeIds.split(',');
+    let trackDatas = '{{ trackDatas|safe }}';
+    let normalized_trackDatas = JSON.parse(trackDatas);
+    // console.log(trackDatas,normalized_trackDatas);
+    let normalized_trackDatas_dict = {};
+    for(var i=0;i<normalized_trackDatas.length;i++)
+    {
+        var keys = Object.keys(normalized_trackDatas[i]);
+        console.log(keys[0],normalized_trackDatas[i][keys[0]]);
+        normalized_trackDatas_dict[keys[0]] = normalized_trackDatas[i][keys[0]];
+    }
+    let trackSummarys = '{{ trackSummarys|safe }}';
+    let normalized_trackSummarys = JSON.parse(trackSummarys);
+    let normalized_trackSummarys_dict = {};
+    for(var i=0;i<normalized_trackSummarys.length;i++)
+    {
+        var keys = Object.keys(normalized_trackSummarys[i]);
+        // console.log(keys[0],normalized_trackSummarys[i][keys[0]]);
+        normalized_trackSummarys_dict[keys[0]] = normalized_trackSummarys[i][keys[0]];
+    }
+    console.log(normalized_trackSummarys,normalized_trackSummarys_dict);
+    let trackFiltered = '{{ trackFiltered|safe }}';
+    normalized_trackFiltered = JSON.parse(trackFiltered);
+    let normalized_trackFiltered_dict = {};
+    for(var i=0;i<normalized_trackFiltered.length;i++)
+    {
+        var keys = Object.keys(normalized_trackFiltered[i]);
+        // console.log(keys[0],normalized_trackFiltered[i][keys[0]]);
+        normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
+    }
+    // console.log(normalized_trackFiltered);
+    //store origin data by dicts
     let map_pigeonNumberReleaseTime_routeIndex = [];
     let map_routeIndex_pigeonNumberReleaseTime = {};
     let map_routeIndex_routeId = {};
@@ -316,39 +355,104 @@
     let pigeonNumbers_releaseTime = [];
     let routes_origin = [];
     console.log(routeId_list);
+    func_covertOriginDataToDicts();
+    function func_covertOriginDataToDicts() {
+        for(var i=0;i<routeId_list.length;i++)
+        {
+          routeId = routeId_list[i];
+          var route = normalized_trackDatas_dict[routeId];
+          console.log(typeof(route));
+          for(var j=0;j<route.length;j++)
+          {
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString('zh-TW',{hour12: false});
+          }
+          routes_origin.push(route);
+          var summary = normalized_trackSummarys_dict[routeId];
+          console.log('summary',summary);
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance'],'straightspeed':summary['straightspeed']};
+          cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
+          //parse filter
+          var route_filter = normalized_trackFiltered_dict[routeId];
+          console.log(route_filter);
+          if(route_filter)
+          {
+            LocalDB_InitData_routeFiltered.push({'routeIndex':routes_origin.length-1,'startIndex':route_filter[1],'endIndex':route_filter[2]});
+            cur_pigeonNumber_releaseTime['filter'] = true;
+            cur_pigeonNumber_releaseTime['real_distance']= route_filter[4];
+            cur_pigeonNumber_releaseTime['speed']= route_filter[5];
+            cur_pigeonNumber_releaseTime['straightdistance']= route_filter[6];
+            cur_pigeonNumber_releaseTime['straightspeed']= route_filter[7];
+            cur_pigeonNumber_releaseTime['routeEfficiency']= route_filter[8];
+            console.log(cur_pigeonNumber_releaseTime);
+          }
+          else
+          {
+            cur_pigeonNumber_releaseTime['filter'] = false;
+          }
+          pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
+        //   console.log(pigeonNumbers_releaseTime);
+
+          map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
+          console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
+          map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
+          map_routeIndex_routeId[routes_origin.length-1] = routeId;
+        }
+      }
+
     //for Map_showPaths
     let lineObjects_in_Map_showPaths = [];
     let markersObjects_in_Map_showPaths =[];
-    // let map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
-
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         maxZoom: 20,
-    //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-    // }).addTo(map_handler);
     let map_handler = null;
     
     function map_init()
     {
         map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
-        var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 20,
-                // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        }).addTo(map_handler);
+        // var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //         maxZoom: 20,
+        //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        // }).addTo(map_handler);
+        var roadMutant = L.gridLayer
+				.googleMutant({
+					maxZoom: 24,
+					type: "roadmap",
+				})
+				.addTo(map_handler);
 
-        // var hybridMutant = L.gridLayer.googleMutant({
-		// 		maxZoom: 24,
-		// 		type: "hybrid",
-		// });
-        // L.control.layers(
-		// 			{
-        //              openstreet:tile_openstreet,
-		// 				Hybrid: hybridMutant,
-		// 			},
-		// 			{
-		// 				collapsed: false,
-		// 			}
-		// )
-		// .addTo(map_handler);
+			var terrainMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "terrain",
+			});
+
+			var hybridMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "hybrid",
+			});
+
+			var grid = L.gridLayer({
+				// attribution: "Debug tilecoord grid",
+			});
+
+            // var markers = L.layerGroup(markersObjects_in_Map_showPaths);
+            // var overlayMaps = {
+            //     "Markers": markers
+            // };
+
+			L.control
+				.layers(
+					{
+						Roadmap: roadMutant,
+						Terrain: terrainMutant,
+						Hybrid: hybridMutant,
+					},
+					{
+						// "markers": markers,
+                        // grid,
+					},
+					{
+						collapsed: false,
+					}
+				)
+				.addTo(map_handler);
     }
 
     //for windy
@@ -442,7 +546,7 @@
     }
 
 
-    request_askRoutesData()
+    // request_askRoutesData()
     function request_askRoutesData() {
       function reqListener() {
         // console.log(typeof (this.responseText), typeof (this.response));
@@ -524,6 +628,26 @@
       oReq.send(routeId_list.toString());
     }
 
+    //init page
+    init_page();
+    function init_page()
+    {
+        // function ui_loading_end()
+        // {
+        //     var div_loading = document.getElementById('loading_planet');
+        //     div_loading.style.display = 'none'; 
+        // }
+        // function ui_figuresPage_show()
+        // {
+        //     var div = document.getElementById('figures_page');
+        //     div.style.display = 'inline'; 
+        // }
+        // ui_loading_end();
+        // ui_figuresPage_show();
+        map_init();
+        tracks_showInTable(pigeonNumbers_releaseTime);
+        show_figures(routes_origin);
+    }
     function tracks_showInTable(pigeonReleaseTime_list) {
             let table_pigeonNumber_body = document.getElementById('table_pigeonNumber_body');
             for (var i = 0; i < pigeonReleaseTime_list.length; i++) {
@@ -551,12 +675,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.addLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
-                                // windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                // {
-                                //     map_handler.addLayer(markers[i_marker]);
-                                // }
+                                windy_map_handler.addLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -571,12 +690,7 @@
                             {
                                 console.log('remove polyline');
                                 map_handler.removeLayer(lineObjects_in_Map_showPaths[i_lineObject]['object']);
-                                // windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
-                                // var markers = markersObjects_in_Map_showPaths[i_lineObject]['object'];
-                                // for(var i_marker=0;i_marker<markers.length;i_marker++)
-                                // {
-                                //     map_handler.removeLayer(markers[i_marker]);
-                                // }
+                                windy_map_handler.removeLayer(lineObjects_in_windy[i_lineObject]['object']);
                             }
                         }
                     }
@@ -693,6 +807,7 @@
 
         var rows = document.getElementById("table_pigeonNumber_body").rows;
         console.log(rows);
+        var td_settingtime = rows[routeIndex].getElementsByTagName("td")[1];
         var td_realditance = rows[routeIndex].getElementsByTagName("td")[2];
         var td_speed = rows[routeIndex].getElementsByTagName("td")[3];
         var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[4];
@@ -712,6 +827,7 @@
         valuesForLocalDB_filteredRouteSummary['straightDistance'] = straightdistance.toFixed(3);
         valuesForLocalDB_filteredRouteSummary['straightSpeed'] = straightspeed.toFixed(3);
         valuesForLocalDB_filteredRouteSummary['routeEfficiency'] = routeEfficiency.toFixed(3);
+        valuesForLocalDB_filteredRouteSummary['settingTime'] = td_settingtime.innerHTML;
 
         return valuesForLocalDB_filteredRouteSummary;
     }
@@ -800,14 +916,17 @@
                 var color  = getRandomColor();
                 color_list_routes.push(color);
                 // var lineObject = drawPath(path_normalize_list[i],'red','3');
-                var lineObject = drawPath(path_normalize_list[i],color,'3');
-                // var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
+                var  lineObject= drawPath(path_normalize_list[i],color,'3');
+                var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
                 var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
-                console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
-                console.log(pigeonNumber_releaseTime['pigeonNumber']);
-                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':lineObject});
-                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);
-                // markersObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':markers})
+                // console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
+                // console.log(pigeonNumber_releaseTime['pigeonNumber']);
+                var line_group = L.layerGroup(markers)
+                    .addLayer(lineObject)
+                    .addTo(map_handler);
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':line_group});
+                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);                
+                // markersObjects_in_Map_showPaths.concat(markers);
             }
             
             function drawPath(pathLine_origin,color,weight) {
@@ -817,9 +936,9 @@
                 // console.log(typeof (pathLine_origin_normalized));
                 // console.log(pathLine_origin_normalized);
 
-                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
-                // var polyline_filtered = L.polyline(pathLine_filter_normalized, { color: 'yellow' }).addTo(map_handler);
-                // var polygon = L.polygon(pathPolygon_normalized).addTo(map_handler);
+                // var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight });
+                
                 return polyline_origin;
             }
 
@@ -837,8 +956,8 @@
                     +"<br>"+"speed : "+speed.toString()
                     +"<br>"+"heading : "+heading.toString()
                     +"<br>"+"elevation : "+elevation.toString();
-                    console.log(text);
-                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).addTo(map_handler).bindPopup(text));
+                    // console.log(text);
+                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).bindPopup(text));
                 }
                 return Markers;
             }
@@ -941,7 +1060,7 @@
               }
             }
           }
-          send_filteredRoute(realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency)
+          send_filteredRoute(realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime)
           {
             function reqListener() {
                 var response = JSON.parse(this.responseText);
@@ -958,6 +1077,7 @@
             make_send['straightDistance'] = straightDistance;
             make_send['straightSpeed'] = straightSpeed;
             make_send['routeEfficiency'] = routeEfficiency;
+            make_send['settingTime'] = settingTime;
 
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
@@ -1095,7 +1215,7 @@
                                 label_filter.innerHTML = '裁減：點擊圖表進行裁減';
 
                                 var valuesForLocalDB = table_pigeonNumber_body_updateByFilteredRoute(cur_routeIndex,filtered_route);
-                                route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency']);
+                                route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency'],valuesForLocalDB['settingTime']);
                              }
                             } catch (e) {
                                 console.log(e); // Error: hi
