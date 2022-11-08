@@ -4,6 +4,7 @@
 import platform
 import datetime
 import hashlib
+# import sqlite3 as sqlcipher
 
 class LocalDBManagement():
     def __init__(self):
@@ -19,6 +20,7 @@ class LocalDBManagement():
 
         key = '$doveDatabase$'
         self.conn = sqlcipher.connect("doveDatabase.db",check_same_thread=False)
+        # self.conn = sqlcipher.connect("doveDatabase",check_same_thread=False)
         # self.conn = sqlcipher.connect("doveDatabase.db")
         self.c = self.conn.cursor()
         self.c.execute("PRAGMA key='{}'".format(key))
@@ -36,8 +38,9 @@ class LocalDBManagement():
             from pysqlcipher3 import dbapi2 as sqlcipher
 
         key = '$doveDatabase$'
-        # self.conn = sqlcipher.connect("doveDatabase.db",check_same_thread=False)
-        self.conn = sqlcipher.connect("doveDatabase.db")
+        self.conn = sqlcipher.connect("doveDatabase.db",check_same_thread=False)
+        # self.conn = sqlcipher.connect("doveDatabase.db")
+        # self.conn = sqlcipher.connect("doveDatabase")
         self.c = self.conn.cursor()
         self.c.execute("PRAGMA key='{}'".format(key))
         self.conn.commit()
@@ -126,6 +129,11 @@ class LocalDBManagement():
         res = self.c.execute("""SELECT * from TrainRecord_filters_summary""")
         self.conn.commit()
         return res.fetchall()
+    
+    def search_allPigeons(self):
+        res = self.c.execute("""SELECT * from Dove""")
+        self.conn.commit()
+        return res.fetchall()
 
     def update_trainRecord_filtered(self,trainRecordId,startIndex,endIndex,updateTime,realDistance,realSpeed,straightDistance,straightSpeed,routeEfficiency,settingTime):
         # if(self.c.connection)
@@ -164,6 +172,12 @@ class LocalDBManagement():
                 WHERE doveName=?""",data)
             self.conn.commit()
 
+    def delete_DoveByDoveId(self,doveID):
+        if(doveID == None):
+            return
+        res_delete = self.c.execute("""DELETE FROM Dove WHERE doveID = ?""",(doveID,))
+        print(res_delete.fetchone())
+        
 
     def test_selectUsers(self):
         # self.c.execute("""INSERT INTO TrainRecord_filters VALUES

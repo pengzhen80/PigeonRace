@@ -75,6 +75,26 @@ def pigeonManagement(request):
         pigeonData = json.loads(pigeonData)
         option = pigeonData['option']
         print(pigeonData['option'])
+        if(option == 'delete'):
+            doveID_list = pigeonData['doveID']
+            print(doveID_list)
+            for doveID in doveID_list:
+                localdbManager.delete_DoveByDoveId(doveID=doveID)
+        return JsonResponse(context)
+    pigeons = localdbManager.search_allPigeons()
+    pigeons =json.dumps(pigeons)
+    return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons})
+
+def pigeonCreate(request):
+    context={}
+    if request.method == 'POST':
+        # print(type(request.body))
+        # print(request.body.decode("utf-8"))
+        pigeonData = request.body.decode("utf-8")
+        # print(pigeonData)
+        pigeonData = json.loads(pigeonData)
+        option = pigeonData['option']
+        print(pigeonData['option'])
         if(option == 'create'):
             doveName = pigeonData['doveName']
             sex = pigeonData['sex']
@@ -85,15 +105,17 @@ def pigeonManagement(request):
             print(doveName,sex,age,weight,bodyLength,wingLength)
             localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
         return JsonResponse(context)
-    return render(request, 'login/pigeon_management.html', context={})
+    return render(request, 'login/pigeon_create.html', context=context)
 
 def pigeon(request,pigeonNumber):
     ##1 search all trainRecordId in apimanagement by pigeonNumber
     ##2 search filtered trainRecord in localDB by trainRecordIds
-    ##3 send to pigeon page
+    ##3 if in filtered trainRecord then get all trainRecord raw data by apimanagement
+    ##34 send filtered trainRecord and trainRecord raw data to pigeon page
     trainRecordId_list = dbManager.getRouteSummaryData_by_recordname(pigeonNumber)
     # print(trainRecordId_list)
     localFilteredRecords = []
+    trainRecordRawData = []
 
     for trainRecordId in trainRecordId_list:
         # localdbManager.update_table_newColumn_newValue('TrainRecord_filters_summary',trainRecordId[0],'settingTime',trainRecordId[1])
@@ -101,8 +123,10 @@ def pigeon(request,pigeonNumber):
         print(localdata)
         if localdata:
             localFilteredRecords.append(localdata)
+            trainRecordRawData.append({trainRecordId[0]:dbManager.read_routes_by_routeId(trainRecordId[0])})
     print(localFilteredRecords)
-    return render(request, 'login/pigeon_pigeonNumber.html', context={'pigeonNumber':pigeonNumber,'localFilteredRecords':json.dumps(localFilteredRecords)})
+    trainRecordRawData = json.dumps(trainRecordRawData)
+    return render(request, 'login/pigeon_pigeonNumber.html', context={'pigeonNumber':pigeonNumber,'localFilteredRecords':json.dumps(localFilteredRecords),'trainRecordRawData':trainRecordRawData})
 
 def view_tracks(request, activityIds):
     context = {

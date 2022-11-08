@@ -26,6 +26,24 @@
             top : 100px;
             position: relative;
         }
+        .myPersonInterduction_container{
+            background-color: white;
+            top : 100px;
+            position: relative;
+            /* height: 400px; */
+        }
+        .myPersonInterduction_image
+        {
+            max-width:50%;
+            max-height:100%;
+        }
+        .button_newPigeon
+        {
+            left :10%;
+            top : 100px;
+            width: 80%;
+            position: relative;
+        }
     </style>
 </head>
 <header class="header-area header-sticky wow slideInDown animated background-header" data-wow-duration="0.75s"
@@ -57,7 +75,47 @@
 </header>
 
 <body>
-    <div class="container myDiv_pigeonImformationCollect">
+    <div class="d-flex justify-content-between button_newPigeon">
+        <div>
+            <button id='button_newPigeon' type="button" class="btn btn-primary " onclick="func_cb_button_newPigeon()">新建鴿子</button>
+        </div>
+        <div>
+            <button id='button_deletePigeon' type="button" class="btn btn-danger " onclick="func_cb_button_deletePigeon()">刪除鴿子</button>
+        </div>
+    </div>
+    <br>
+    <!-- <br> -->
+    <div class="container myPersonInterduction_container border">
+        <div class="row">
+            <div class="col-1"> 
+                <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="col-3"> 
+                <img id='showPigeonImage' src="{% static 'images/652206.png' %}" class="myPersonInterduction_image">
+            </div>
+            <div class="col-8" id = 'pigeonInfors'> 
+                <ul class="list-group text-center">
+                    <li class="list-group-item">公環號碼:</li>
+                    <li class="list-group-item">性別:</li>
+                    <li class="list-group-item">鴿齡:</li>
+                    <li class="list-group-item">重量:</li>
+                    <li class="list-group-item">身長:</li>
+                    <li class="list-group-item">翅膀長度:</li>
+                  </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+        </div>
+    </div>
+    <div class="container myDiv_pigeonImformationCollect" hidden>
         <div class="row">
             <div class="col-sm"> upload image
                 <div class="input-group mb-3">
@@ -69,7 +127,7 @@
                         <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
                     </div>
                 </div>
-                <img id='showPigeonImage' src="..." class="img-fluid" alt="Responsive image">
+                <img id='showPigeonImage' class="img-fluid" alt="Responsive image">
                 <br></br>
                 <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
             </div>
@@ -128,6 +186,65 @@
             }
         };
 
+        let pigeons = '{{ pigeons|safe }}';
+        let normalized_pigeons = JSON.parse(pigeons);
+        console.log(normalized_pigeons);
+
+        if(normalized_pigeons.length>0)
+        {   showPigeonInfors(normalized_pigeons[0]);
+            for(var i=1;i<normalized_pigeons.length;i++)
+            {
+                copy_pigeonImformationDiv(normalized_pigeons[i]);
+            }
+        }
+
+    
+        function func_cb_button_newPigeon()
+        {
+            window.open('pigeonCreate');
+        }
+
+        function func_cb_button_deletePigeon()
+        {
+            var pigeonToDelete = [];
+            var div_list = document.getElementsByClassName('myPersonInterduction_container');
+            // console.log(div_list.length);
+            for(var i=0;i<div_list.length;)
+            {
+                // console.log(div_list[i]);
+                var checkBoxList = div_list[i].getElementsByTagName('input');
+                // console.log(checkBoxList.length);
+                var checkBox = checkBoxList[0];
+                if(checkBox.checked == true)
+                {
+                    pigeonToDelete.push(checkBox.value);
+                    div_list[i].remove();
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            if(pigeonToDelete.length>0)
+            {
+                function reqListener() {
+                    var response = JSON.parse(this.responseText);
+                    console.log(response);
+                }
+
+                var make_send = {};
+                make_send['option'] = 'delete';
+                make_send['doveID'] = pigeonToDelete;
+
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("post", 'pigeon');
+                oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+                oReq.send(JSON.stringify(make_send));
+            }
+        }
+
         //when choose a image file , showing the image 
         var showImageFile = function(event) {
             var image = document.getElementById('showPigeonImage');
@@ -180,5 +297,47 @@
         }
         button_createPigeon.addEventListener('click',func_cb_button_createPigeon);
 
+        function showPigeonInfors(pigeonInfos)
+        {
+            var div = document.getElementById('pigeonInfors');
+            var li_list = div.getElementsByTagName('li');
+            // <li class="list-group-item">公環號碼:</li>
+            //         <li class="list-group-item">性別:</li>
+            //         <li class="list-group-item">鴿齡:</li>
+            //         <li class="list-group-item">重量:</li>
+            //         <li class="list-group-item">身長:</li>
+            //         <li class="list-group-item">翅膀長度:</li>
+            // console.log(li_list);
+            li_list[0].innerHTML = "公環號碼:"+pigeonInfos[2];
+            li_list[1].innerHTML = "性別:"+pigeonInfos[7];
+            li_list[2].innerHTML = "鴿齡:"+pigeonInfos[8];
+            li_list[3].innerHTML = "重量:"+pigeonInfos[11];
+            li_list[4].innerHTML = "身長:"+pigeonInfos[9];
+            li_list[5].innerHTML = "翅膀長度:"+pigeonInfos[10];
+
+            var container = document.getElementsByClassName('myPersonInterduction_container');
+            var checkboxList = container[0].getElementsByTagName('input');
+            // console.log(checkBoxList[0])
+            checkboxList[0].value = pigeonInfos[0];
+        }
+
+        // copy_pigeonImformationDiv(pigeonInfos);
+        function copy_pigeonImformationDiv(pigeonInfos)
+        {
+            var newPersonInterduction_container = document.createElement('div');
+            var $myPersonInterduction_container = $('.myPersonInterduction_container').clone();
+            $(newPersonInterduction_container).html($myPersonInterduction_container);
+            var li_list = newPersonInterduction_container.getElementsByTagName('li');
+            li_list[0].innerHTML = "公環號碼:"+pigeonInfos[2];
+            li_list[1].innerHTML = "性別:"+pigeonInfos[7];
+            li_list[2].innerHTML = "鴿齡:"+pigeonInfos[8];
+            li_list[3].innerHTML = "重量:"+pigeonInfos[11];
+            li_list[4].innerHTML = "身長:"+pigeonInfos[9];
+            li_list[5].innerHTML = "翅膀長度:"+pigeonInfos[10];
+
+            var checkboxList = newPersonInterduction_container.getElementsByTagName('input');
+            checkboxList[0].value = pigeonInfos[0];
+            document.body.appendChild(newPersonInterduction_container);
+        };
     </script>
 </body>
