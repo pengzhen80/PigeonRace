@@ -19,6 +19,8 @@ localdbManager.table_createTable()
 # localdbManager.update_trainRecord_filtered('20221028', 1, 10,'20221027T14:29:00')
 # localdbManager.update_Dove(doveID='1',mxID='1',doveName='1',RFID=None,URing=None,photo=None,eye=None,sex="male",age=5,bodyLength=30,wingLength=20,weight=400,color='gray',breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
 localdbManager.test_selectUsers()
+localdbManager.desc_table('Dove')
+# localdbManager.drop_Dove()
 # Create your views here.
 
 from .hotTopicsManagement import HotTopicsManagement
@@ -80,7 +82,13 @@ def pigeonManagement(request):
             print(doveID_list)
             for doveID in doveID_list:
                 localdbManager.delete_DoveByDoveId(doveID=doveID)
+        # if(option == 'update'):
+        #     doveID = pigeonData['doveID']
+        #     print(doveID)
+        #     pigeonData = localdbManager.search_PigeonByDoveID(doveID=doveID)
+        #     context['pigeonData'] = pigeonData
         return JsonResponse(context)
+    
     pigeons = localdbManager.search_allPigeons()
     pigeons =json.dumps(pigeons)
     return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons})
@@ -96,6 +104,7 @@ def pigeonCreate(request):
         option = pigeonData['option']
         print(pigeonData['option'])
         if(option == 'create'):
+            print(pigeonData['image'])
             doveName = pigeonData['doveName']
             sex = pigeonData['sex']
             age = pigeonData['age']
@@ -103,9 +112,36 @@ def pigeonCreate(request):
             bodyLength = pigeonData['bodyLength']
             wingLength = pigeonData['wingLength']
             print(doveName,sex,age,weight,bodyLength,wingLength)
-            localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
+            # localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
         return JsonResponse(context)
-    return render(request, 'login/pigeon_create.html', context=context)
+    return render(request, 'login/pigeon_create.html', context={'option':'create'})
+def pigeonUpdate(request,doveID):
+    context={}
+    if request.method == 'POST':
+        # print(type(request.body))
+        # print(request.body.decode("utf-8"))
+        pigeonData = request.body.decode("utf-8")
+        # print(pigeonData)
+        pigeonData = json.loads(pigeonData)
+        option = pigeonData['option']
+        print(option)
+        if(option == 'update'):
+            doveID = doveID
+            doveName = pigeonData['doveName']
+            sex = pigeonData['sex']
+            age = pigeonData['age']
+            weight = pigeonData['weight']
+            bodyLength = pigeonData['bodyLength']
+            wingLength = pigeonData['wingLength']
+            print(doveName,sex,age,weight,bodyLength,wingLength)
+            localdbManager.update_Dove_by_doveID(doveID=doveID,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
+        return JsonResponse(context)
+    pigeonData = localdbManager.search_PigeonByDoveID(doveID=doveID)
+    print(pigeonData)
+    context['pigeonData'] = json.dumps(pigeonData)
+    print(context)
+    return render(request, 'login/pigeon_update.html', context=context)
+    
 
 def pigeon(request,pigeonNumber):
     ##1 search all trainRecordId in apimanagement by pigeonNumber

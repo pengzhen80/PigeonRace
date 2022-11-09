@@ -114,6 +114,18 @@ class LocalDBManagement():
         drop_column  = "ALTER TABLE "+tableName+" DROP COLUMN "+ columnName
         self.c.execute(drop_column)
 
+    def desc_table(self,tableName):
+        # data = (tableName,columnName,columeType)
+        desc_table  = "desc "+tableName
+        res = self.c.execute('''pragma table_info('Dove')''')
+        self.conn.commit()
+        print(res.fetchall())
+    
+    def drop_Dove(self):
+        res = self.c.execute('''DROP TABLE Dove ''')
+        self.conn.commit()
+        print(res.fetchall())
+
     def update_tableTrainRecord_filters_summary_newColumn_settingTime(self,trainRecordId,data):
         data = data.replace('T',' ')
         params = (data,trainRecordId)
@@ -151,6 +163,24 @@ class LocalDBManagement():
                 WHERE trainRecordId=?""",data)
             self.conn.commit()
 
+    def update_Dove_by_doveID(self,doveID,mxID,doveName,RFID,URing,photo,eye,sex,age,bodyLength,wingLength,weight,color,breed,desc,father,mother,fatherFather,fatherMother,motherFather,motherMother,note):
+        # if(self.c.connection)
+        if doveID == None:
+            return
+        # data = (mxID,doveName,RFID,URing,photo,eye,sex,age,bodyLength,wingLength,weight,color,breed,desc,father,mother,fatherFather,fatherMother,motherFather,motherMother,note,doveID)
+        # print(type(doveName),type(sex),type(age),type(bodyLength),type(wingLength),type(weight))
+        # print(data)
+        # self.c.execute("""UPDATE Dove
+        #         SET mxID=?,doveName=?,RFID=?,URing=?,photo=?,eye=?,sex=?,age=?,bodyLength=?,wingLength=?,weight=?,color=?,breed=?,desc=?,father=?,mother=?,fatherFather=?,fatherMother=?,motherFather=?,motherMother=?,note=?
+        #         WHERE doveID=?""",data)
+        # print(self.search_PigeonByDoveID(doveID))
+        data = (doveName,sex,age,bodyLength,wingLength,weight,doveID)
+        self.c.execute("""UPDATE Dove
+                SET doveName=?,sex=?, age=?, bodyLength=? ,wingLength = ? , weight = ?
+                WHERE doveID=?""",data)
+        self.conn.commit()
+        # print(self.search_PigeonByDoveID(doveID))
+
     def create_Dove(self,doveID,mxID,doveName,RFID,URing,photo,eye,sex,age,bodyLength,wingLength,weight,color,breed,desc,father,mother,fatherFather,fatherMother,motherFather,motherMother,note):
         # if(self.c.connection)
         if doveID == None:
@@ -177,7 +207,11 @@ class LocalDBManagement():
             return
         res_delete = self.c.execute("""DELETE FROM Dove WHERE doveID = ?""",(doveID,))
         print(res_delete.fetchone())
-        
+    
+    def search_PigeonByDoveID(self,doveID):
+        res = self.c.execute("""SELECT * from Dove WHERE doveID = ?""",(doveID,))
+        self.conn.commit()
+        return res.fetchone()
 
     def test_selectUsers(self):
         # self.c.execute("""INSERT INTO TrainRecord_filters VALUES

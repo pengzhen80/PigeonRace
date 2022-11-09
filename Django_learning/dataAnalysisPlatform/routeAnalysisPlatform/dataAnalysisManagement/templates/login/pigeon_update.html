@@ -78,7 +78,7 @@
                     <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
                 </div>
             </div>
-            <img id='showPigeonImage' class="img-fluid" alt="Responsive image">
+            <img id='showPigeonImage' src="{% static 'images/652206.png' %}" class="img-fluid" alt="Responsive image">
             <br></br>
             <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
         </div>
@@ -125,54 +125,52 @@
                 <input type="text" class="form-control" placeholder="翅膀長度" aria-label="翅膀長度"
                     aria-describedby="basic-addon1" id="pigeon_create_wingLength">
             </div>
-            <button id='button_createPigeon' type="button" class="btn btn-primary">創建鴿子</button>
+            <button id='button_createPigeon' type="button" class="btn btn-primary" onclick="update_pigeonInfo()">更新鴿子</button>
         </div>
     </div>
 </div>
 <script>
-        //when choose a image file , showing the image 
-        let pigeonImage;
-        var showImageFile = function(event) {
-                var image = document.getElementById('showPigeonImage');
-                image.src = URL.createObjectURL(event.target.files[0]);
-                console.log(event.target.files[0]);
-                pigeonImage = event.target.files[0];
-        };
 
-            //create pigeon
-        let button_createPigeon = document.getElementById('button_createPigeon');
-        function func_cb_button_createPigeon()
-        {
-            // var formData = new FormData();
-            // formData.append("photo", pigeonImage);
-            // fetch('/upload/image', {method: "POST", body: formData});
-            var image = pigeonImage;
-            var pigeonNumber = document.getElementById('pigeon_create_pigeonNumber').value;
-            var pigeonSex = document.getElementById('pigeon_create_sex').value;
-            var pigeonAge = document.getElementById('pigeon_create_age').value;
-            var pigeonWeight = document.getElementById('pigeon_create_weight').value;
-            var pigeonBodyLength = document.getElementById('pigeon_create_bodyLength').value;
-            var pigeonWingLength = document.getElementById('pigeon_create_wingLength').value;
+    let pigeonData = '{{ pigeonData|safe }}';
+    let normalize_pigeonData = JSON.parse(pigeonData)
+    console.log(normalize_pigeonData);
 
-            // doveName             VARCHAR,
-            //         RFID                 VARCHAR,
-            //         URing                VARCHAR,
-            //         photo                BLOB,
-            //         eye                  BLOB,
-            //         bodyLength           REAL,
-            //         wingLength           REAL,
-            //         weight               REAL,
+    show_pigeonInfo(normalize_pigeonData);
+    function show_pigeonInfo(pigeonInfos)
+    {
+        // var image = document.getElementById('showPigeonImage').src;
+        var pigeonNumber = document.getElementById('pigeon_create_pigeonNumber');
+        var pigeonSex = document.getElementById('pigeon_create_sex');
+        var pigeonAge = document.getElementById('pigeon_create_age');
+        var pigeonWeight = document.getElementById('pigeon_create_weight');
+        var pigeonBodyLength = document.getElementById('pigeon_create_bodyLength');
+        var pigeonWingLength = document.getElementById('pigeon_create_wingLength');
+        pigeonNumber.value = pigeonInfos[2];
+        pigeonSex.value = pigeonInfos[7];
+        pigeonAge.value = pigeonInfos[8];
+        pigeonWeight.value = pigeonInfos[11];
+        pigeonBodyLength.value = pigeonInfos[9];
+        pigeonWingLength.value = pigeonInfos[10];
+    }
 
-            // var pigeon_create = {'option':'create','doveName':pigeonNumber,'sex':pigeonSex,'age':pigeonAge,'weight':pigeonWeight,'bodyLength':pigeonBodyLength,'wingLength':pigeonWingLength};
-
-            function reqListener() {
+    function update_pigeonInfo()
+    {
+        var pigeonInfos  = normalize_pigeonData;
+        var pigeonNumber = document.getElementById('pigeon_create_pigeonNumber').value;
+        var pigeonSex = document.getElementById('pigeon_create_sex').value;
+        var pigeonAge = document.getElementById('pigeon_create_age').value;
+        var pigeonWeight = document.getElementById('pigeon_create_weight').value;
+        var pigeonBodyLength = document.getElementById('pigeon_create_bodyLength').value;
+        var pigeonWingLength = document.getElementById('pigeon_create_wingLength').value;
+        function reqListener() {
                 var response = JSON.parse(this.responseText);
                 console.log(response);
-            }
+        }
 
+        if((pigeonNumber!=pigeonInfos[2])||(pigeonSex!=pigeonInfos[7])||(pigeonAge!=pigeonInfos[8])||(pigeonWeight!=pigeonInfos[11])||(pigeonBodyLength!=pigeonInfos[9])||(pigeonWingLength != pigeonInfos[10]))
+        {
             var make_send = {};
-            make_send['option'] = 'create';
-            make_send['image'] = pigeonImage
+            make_send['option'] = 'update';
             make_send['doveName'] = pigeonNumber;
             make_send['sex'] = pigeonSex;
             make_send['age'] = pigeonAge;
@@ -180,15 +178,23 @@
             make_send['bodyLength'] = pigeonBodyLength;
             make_send['wingLength'] = pigeonWingLength;
             console.log(make_send);
+
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("post", 'pigeonCreate');
+            oReq.open("post", pigeonInfos[0]);
             oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
-            // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
             oReq.send(JSON.stringify(make_send));
         }
-        button_createPigeon.addEventListener('click',func_cb_button_createPigeon);
+        else
+        {
+            alert('no changes to update');
+        }
+    }
 
-    
+    var showImageFile = function(event) {
+                var image = document.getElementById('showPigeonImage');
+                image.src = URL.createObjectURL(event.target.files[0]);
+    };
 </script>
 </body>

@@ -53,7 +53,7 @@ class DBManagement ():
         status = res['status']
         if (status == 'ok'):
             self.mxid = res['mxid']
-            self.api_getActivitityID()
+            # self.api_getActivitityID()
         return res
 
     def api_getActivitityID(self):
@@ -92,7 +92,7 @@ class DBManagement ():
                 continue
             module_id = trainRecord['moduleid']
             self.data_routes_summaryData_add(activity_id,module_id,trainRecord['trainrecordid'],trainRecord)
-            print(trainRecord)
+            # print(trainRecord)
             # print(trainRecord['trainrecordid'])
             self.api_readCloudLocusText(
                 activity_id, module_id, trainRecord['trainrecordid'])
