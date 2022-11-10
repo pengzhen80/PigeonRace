@@ -66,7 +66,7 @@
     </div>
 </header> -->
 <body>
-<div class="container myDiv_pigeonImformationCollect">
+<div class="container myDiv_pigeonImformationCollect" hidden>
     <div class="row">
         <div class="col-sm"> upload image
             <div class="input-group mb-3">
@@ -78,64 +78,82 @@
                     <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
                 </div>
             </div>
-            <img id='showPigeonImage' src="{% static 'images/652206.png' %}" class="img-fluid" alt="Responsive image">
+            {% if pigeon.photo %}
+                <img src={{ pigeon.photo.url }} class="img-fluid rounded-start" alt="..." id='showPigeonImage'>
+            
+            {% endif %}
             <br></br>
             <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
         </div>
         <div class="col-sm"> input imformation
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">公環號碼</span>
+                    <span class="input-group-text">公環號碼:</span>
                 </div>
-                <input type="text" class="form-control" placeholder="公環號碼" aria-label="公環號碼"
+                <input type="text" class="form-control" placeholder=公環號碼 value={{pigeon.doveName}} aria-label="公環號碼"
                     aria-describedby="basic-addon1"  id="pigeon_create_pigeonNumber">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" >性別</span>
                 </div>
-                <input type="text" class="form-control" placeholder="性別" aria-label="性別"
+                <input type="text" class="form-control" placeholder=性別 value={{pigeon.sex}} aria-label="性別"
                     aria-describedby="basic-addon1" id="pigeon_create_sex">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" >鴿齡</span>
                 </div>
-                <input type="text" class="form-control" placeholder="鴿齡" aria-label="鴿齡"
-                    aria-describedby="basic-addon1" id="pigeon_create_age">
+                <input type="text" class="form-control" placeholder=鴿齡 aria-label="鴿齡"
+                    aria-describedby="basic-addon1" id="pigeon_create_age" value={{pigeon.age}}>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" >重量</span>
                 </div>
                 <input type="text" class="form-control" placeholder="重量" aria-label="重量"
-                    aria-describedby="basic-addon1" id="pigeon_create_weight">
+                    aria-describedby="basic-addon1" id="pigeon_create_weight" value={{pigeon.weight}}>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">身長</span>
                 </div>
                 <input type="text" class="form-control" placeholder="身長" aria-label="身長"
-                    aria-describedby="basic-addon1" id="pigeon_create_bodyLength">
+                    aria-describedby="basic-addon1" id="pigeon_create_bodyLength" value={{pigeon.bodyLength}}>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" >翅膀長度</span>
                 </div>
                 <input type="text" class="form-control" placeholder="翅膀長度" aria-label="翅膀長度"
-                    aria-describedby="basic-addon1" id="pigeon_create_wingLength">
+                    aria-describedby="basic-addon1" id="pigeon_create_wingLength" value={{pigeon.wingLength}}>
             </div>
             <button id='button_createPigeon' type="button" class="btn btn-primary" onclick="update_pigeonInfo()">更新鴿子</button>
         </div>
     </div>
 </div>
+<center>
+    <div class="container"> update imformation
+            {%if submitted %}
+                    update pigeon successfully!!!
+            {% else %}
+                <form action="" method=POST enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" value="update pigeon" class="btn btn-secondary">
+                </form>
+            {% endif %}
+        <!-- <img id='showPigeonImage' class="img-fluid" alt="Responsive image"> -->
+        <br></br>
+        <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
+    </div>
+</center>
 <script>
 
-    let pigeonData = '{{ pigeonData|safe }}';
-    let normalize_pigeonData = JSON.parse(pigeonData)
-    console.log(normalize_pigeonData);
+    // let pigeon = '{{ pigeon|safe }}';
+    // console.log(pigeon,pigeon.wingLength);
 
-    show_pigeonInfo(normalize_pigeonData);
+    // show_pigeonInfo(normalize_pigeonData);
     function show_pigeonInfo(pigeonInfos)
     {
         // var image = document.getElementById('showPigeonImage').src;
@@ -167,7 +185,8 @@
                 console.log(response);
         }
 
-        if((pigeonNumber!=pigeonInfos[2])||(pigeonSex!=pigeonInfos[7])||(pigeonAge!=pigeonInfos[8])||(pigeonWeight!=pigeonInfos[11])||(pigeonBodyLength!=pigeonInfos[9])||(pigeonWingLength != pigeonInfos[10]))
+        // if((pigeonNumber!=pigeonInfos[2])||(pigeonSex!=pigeonInfos[7])||(pigeonAge!=pigeonInfos[8])||(pigeonWeight!=pigeonInfos[11])||(pigeonBodyLength!=pigeonInfos[9])||(pigeonWingLength != pigeonInfos[10]))
+        if(true)
         {
             var make_send = {};
             make_send['option'] = 'update';

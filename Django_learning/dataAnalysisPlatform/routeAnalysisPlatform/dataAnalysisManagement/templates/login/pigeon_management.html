@@ -88,7 +88,7 @@
     </div>
     <br>
     <!-- <br> -->
-    <div class="container myPersonInterduction_container border">
+    <div class="container myPersonInterduction_container border" hidden>
         <div class="row">
             <div class="col-1"> 
                 <input class="form-check-input" type="checkbox">
@@ -121,90 +121,49 @@
             </div>
         </div>
     </div>
-    <div class="container myDiv_pigeonImformationCollect" hidden>
-        <div class="row">
-            <div class="col-sm"> upload image
-                <div class="input-group mb-3">
-                    <!-- <div class="input-group-prepend">
-                        <span class="input-group-text">Upload</span>
-                    </div> -->
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="pigeonImageUploader" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="showImageFile(event)">
-                        <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-                    </div>
-                </div>
-                <img id='showPigeonImage' class="img-fluid" alt="Responsive image">
-                <br></br>
-                <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
+    <div class="container myDiv_pigeonImformationCollect">
+    {% for pigeon in pigeons%}
+    <center>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if pigeon.photo %}
+                <img src={{ pigeon.photo.url }} class="img-fluid rounded-start" alt="...">
+            {% endif %}
+        </div>
+          <div class="col-md-8">
+            <div class="card-body">
+            <a href='pigeonUpdate/{{pigeon.doveID}}' class="card-link"><h5 class="card-title">{{pigeon.doveName}}</h5></a>
+              <ul class="list-group text-center">
+                <li class="list-group-item">性別:{{pigeon.sex}}</li>
+                <li class="list-group-item">鴿齡:{{pigeon.age}}</li>
+                <li class="list-group-item">重量:{{pigeon.weight}}</li>
+                <li class="list-group-item">身長:{{pigeon.bodyLength}}</li>
+                <li class="list-group-item">翅膀長度:{{pigeon.wingLength}}</li>
+              </ul>
             </div>
-            <div class="col-sm"> input imformation
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">公環號碼</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="公環號碼" aria-label="公環號碼"
-                        aria-describedby="basic-addon1"  id="pigeon_create_pigeonNumber">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" >性別</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="性別" aria-label="性別"
-                        aria-describedby="basic-addon1" id="pigeon_create_sex">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" >鴿齡</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="鴿齡" aria-label="鴿齡"
-                        aria-describedby="basic-addon1" id="pigeon_create_age">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" >重量</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="重量" aria-label="重量"
-                        aria-describedby="basic-addon1" id="pigeon_create_weight">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">身長</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="身長" aria-label="身長"
-                        aria-describedby="basic-addon1" id="pigeon_create_bodyLength">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" >翅膀長度</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="翅膀長度" aria-label="翅膀長度"
-                        aria-describedby="basic-addon1" id="pigeon_create_wingLength">
-                </div>
-                <button id='button_createPigeon' type="button" class="btn btn-primary">創建鴿子</button>
-            </div>
+          </div>
         </div>
     </div>
+    </center>
+    <br>
+    {% endfor %}
+    </div>
     <script>
-        class pigeonInformationManagement
-        {
-            constructor() { 
-                this.pigeons  = [];
-            }
-        };
-
-        let pigeons = '{{ pigeons|safe }}';
-        let normalized_pigeons = JSON.parse(pigeons);
-        console.log(normalized_pigeons);
+        // let pigeons = '{{ pigeons|safe }}';
+        // let normalized_pigeons = JSON.parse(pigeons);
+        // console.log(normalized_pigeons);
+        var normalized_pigeons = [];
 
         if(normalized_pigeons.length>0)
         {   
             var total_pigeonNumber = (document.getElementById('total_pigeonNumber')).getElementsByTagName('span');
             total_pigeonNumber[0].innerHTML = normalized_pigeons.length;
             
-            showPigeonInfors(normalized_pigeons[0]);
+            // showPigeonInfors(normalized_pigeons[0]);
             for(var i=1;i<normalized_pigeons.length;i++)
             {
-                copy_pigeonImformationDiv(normalized_pigeons[i]);
+                // copy_pigeonImformationDiv(normalized_pigeons[i]);
             }
         }
 
@@ -261,23 +220,6 @@
             if(element.value.length>0)
             {
                 window.open('pigeonUpdate/'+element.value);
-                // function reqListener() {
-                //     var response = JSON.parse(this.responseText);
-                //     console.log(response);
-                //     var pigeonData = response['pigeonData'];
-                //     window.open()
-                // }
-
-                // var make_send = {};
-                // make_send['option'] = 'update';
-                // make_send['doveID'] = element.value;
-
-                // var oReq = new XMLHttpRequest();
-                // oReq.addEventListener("load", reqListener);
-                // oReq.open("post", 'pigeon');
-                // oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
-                // // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
-                // oReq.send(JSON.stringify(make_send));
             }
         }
 
@@ -298,17 +240,6 @@
             var pigeonWeight = document.getElementById('pigeon_create_weight').value;
             var pigeonBodyLength = document.getElementById('pigeon_create_bodyLength').value;
             var pigeonWingLength = document.getElementById('pigeon_create_wingLength').value;
-
-            // doveName             VARCHAR,
-            //         RFID                 VARCHAR,
-            //         URing                VARCHAR,
-            //         photo                BLOB,
-            //         eye                  BLOB,
-            //         bodyLength           REAL,
-            //         wingLength           REAL,
-            //         weight               REAL,
-
-            // var pigeon_create = {'option':'create','doveName':pigeonNumber,'sex':pigeonSex,'age':pigeonAge,'weight':pigeonWeight,'bodyLength':pigeonBodyLength,'wingLength':pigeonWingLength};
 
             function reqListener() {
                 var response = JSON.parse(this.responseText);

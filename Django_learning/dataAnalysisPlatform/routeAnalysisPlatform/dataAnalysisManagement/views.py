@@ -3,6 +3,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import redirect
 import json
+from django.core.files.base import ContentFile
+from  django.core.files.images import ImageFile
+from .models import Pigeon
+from .forms import PigeonForm
+from django.http import HttpResponseRedirect
+import datetime
+import hashlib
 
 from .apiManagement import DBManagement
 dbManager = DBManagement()
@@ -67,13 +74,26 @@ def activity(request):
     context['activities'] = json.dumps(dbManager.getActivities())
     return render(request, 'login/activity.html', context=context)
 
+# def pigeonManagement(request):
+#     context={}
+#     if request.method == 'POST':
+#         pigeonData = request.body.decode("utf-8")
+#         pigeonData = json.loads(pigeonData)
+#         option = pigeonData['option']
+#         print(pigeonData['option'])
+#         if(option == 'delete'):
+#             doveID_list = pigeonData['doveID']
+#             print(doveID_list)
+#             for doveID in doveID_list:
+#                 localdbManager.delete_DoveByDoveId(doveID=doveID)
+#         return JsonResponse(context)
+#     pigeons = localdbManager.search_allPigeons()
+#     pigeons =json.dumps(pigeons)
+#     return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons})
 def pigeonManagement(request):
     context={}
     if request.method == 'POST':
-        # print(type(request.body))
-        # print(request.body.decode("utf-8"))
         pigeonData = request.body.decode("utf-8")
-        # print(pigeonData)
         pigeonData = json.loads(pigeonData)
         option = pigeonData['option']
         print(pigeonData['option'])
@@ -82,67 +102,99 @@ def pigeonManagement(request):
             print(doveID_list)
             for doveID in doveID_list:
                 localdbManager.delete_DoveByDoveId(doveID=doveID)
-        # if(option == 'update'):
-        #     doveID = pigeonData['doveID']
-        #     print(doveID)
-        #     pigeonData = localdbManager.search_PigeonByDoveID(doveID=doveID)
-        #     context['pigeonData'] = pigeonData
         return JsonResponse(context)
-    
-    pigeons = localdbManager.search_allPigeons()
-    pigeons =json.dumps(pigeons)
+    pigeons = Pigeon.objects.all()
+    # pigeon_invalid = Pigeon.objects.get(pk='')
+    # pigeon_invalid.delete()
+    # pigeons =json.dumps(pigeons)
     return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons})
 
 def pigeonCreate(request):
-    context={}
+    # context={}
+    submitted = False
+    print(request.method)
     if request.method == 'POST':
-        # print(type(request.body))
-        # print(request.body.decode("utf-8"))
-        pigeonData = request.body.decode("utf-8")
-        # print(pigeonData)
-        pigeonData = json.loads(pigeonData)
-        option = pigeonData['option']
-        print(pigeonData['option'])
-        if(option == 'create'):
-            print(pigeonData['image'])
-            doveName = pigeonData['doveName']
-            sex = pigeonData['sex']
-            age = pigeonData['age']
-            weight = pigeonData['weight']
-            bodyLength = pigeonData['bodyLength']
-            wingLength = pigeonData['wingLength']
-            print(doveName,sex,age,weight,bodyLength,wingLength)
-            # localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
-        return JsonResponse(context)
-    return render(request, 'login/pigeon_create.html', context={'option':'create'})
-def pigeonUpdate(request,doveID):
-    context={}
-    if request.method == 'POST':
-        # print(type(request.body))
-        # print(request.body.decode("utf-8"))
-        pigeonData = request.body.decode("utf-8")
-        # print(pigeonData)
-        pigeonData = json.loads(pigeonData)
-        option = pigeonData['option']
-        print(option)
-        if(option == 'update'):
-            doveID = doveID
-            doveName = pigeonData['doveName']
-            sex = pigeonData['sex']
-            age = pigeonData['age']
-            weight = pigeonData['weight']
-            bodyLength = pigeonData['bodyLength']
-            wingLength = pigeonData['wingLength']
-            print(doveName,sex,age,weight,bodyLength,wingLength)
-            localdbManager.update_Dove_by_doveID(doveID=doveID,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
-        return JsonResponse(context)
-    pigeonData = localdbManager.search_PigeonByDoveID(doveID=doveID)
-    print(pigeonData)
-    context['pigeonData'] = json.dumps(pigeonData)
-    print(context)
-    return render(request, 'login/pigeon_update.html', context=context)
-    
+        form = PigeonForm(request.POST,request.FILES)
+        print(form.is_valid())
+        if form.is_valid():
+            now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+            doveIdRaw = "{}{}".format(form['doveName'], now)
+            doveID = hashlib.md5(doveIdRaw.encode()).hexdigest()
+            new_model = form.save(commit=False)
+            new_model.doveID = doveID
+            new_model.mxId = dbManager.getMxid()
+            new_model.save()
+            return HttpResponseRedirect('/login/pigeonCreate?submitted=True')
+    else:
+        form = PigeonForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'login/pigeon_create.html', context={'option':'create','form':form,'submitted':submitted})
 
+    # if request.method == 'POST':
+    #     # print(type(request.body))
+    #     # print(request.body.decode("utf-8"))
+    #     pigeonData = request.body.decode("utf-8")
+    #     # print(pigeonData)
+    #     pigeonData = json.loads(pigeonData)
+    #     option = pigeonData['option']
+    #     print(pigeonData['option'])
+    #     # print(pigeonData)
+    #     if(option == 'create'):
+    #         file_content = ContentFile(bytearray(pigeonData['image_content']),'test.png')
+    #         file_content.content_type = pigeonData['image_type']
+
+    #         print(type(pigeonData['image_content']),type(file_content))
+    #         # print(pigeonData['image_content'])
+    #         print(pigeonData['image_type'])
+    #         doveName = pigeonData['doveName']
+    #         sex = pigeonData['sex']
+    #         age = pigeonData['age']
+    #         weight = pigeonData['weight']
+    #         bodyLength = pigeonData['bodyLength']
+    #         wingLength = pigeonData['wingLength']
+    #         print(doveName,sex,age,weight,bodyLength,wingLength)
+    #         # localdbManager.create_Dove(doveID=None,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
+    #     return JsonResponse(context)
+    # return render(request, 'login/pigeon_create.html', context={'option':'create','form':form})
+
+# def pigeonUpdate(request,doveID):
+#     context={}
+#     if request.method == 'POST':
+#         # print(type(request.body))
+#         # print(request.body.decode("utf-8"))
+#         pigeonData = request.body.decode("utf-8")
+#         # print(pigeonData)
+#         pigeonData = json.loads(pigeonData)
+#         option = pigeonData['option']
+#         print(option)
+#         if(option == 'update'):
+#             doveID = doveID
+#             doveName = pigeonData['doveName']
+#             sex = pigeonData['sex']
+#             age = pigeonData['age']
+#             weight = pigeonData['weight']
+#             bodyLength = pigeonData['bodyLength']
+#             wingLength = pigeonData['wingLength']
+#             print(doveName,sex,age,weight,bodyLength,wingLength)
+#             localdbManager.update_Dove_by_doveID(doveID=doveID,mxID=dbManager.getMxid(),doveName=doveName,RFID=None,URing=None,photo=None,eye=None,sex=sex,age=age,bodyLength=bodyLength,wingLength=wingLength,weight=weight,color=None,breed=None,desc=None,father=None,mother=None,fatherFather=None,fatherMother=None,motherFather=None,motherMother=None,note=None)
+#         return JsonResponse(context)
+#     pigeonData = localdbManager.search_PigeonByDoveID(doveID=doveID)
+#     print(pigeonData)
+#     context['pigeonData'] = json.dumps(pigeonData)
+#     print(context)
+#     return render(request, 'login/pigeon_update.html', context=context)
+
+def pigeonUpdate(request,doveID):
+    pigeon = Pigeon.objects.get(pk=doveID)
+    submitted = False
+    # print(pigeon)
+    form = PigeonForm(request.POST or None,instance=pigeon)    
+    if form.is_valid():  
+        form.save()
+        return redirect('pigeonManagement')
+    return render(request, 'login/pigeon_update.html', context={'form':form,'pigeon':pigeon})
+     
 def pigeon(request,pigeonNumber):
     ##1 search all trainRecordId in apimanagement by pigeonNumber
     ##2 search filtered trainRecord in localDB by trainRecordIds

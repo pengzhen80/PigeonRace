@@ -66,23 +66,23 @@
     </div>
 </header> -->
 <body>
-<div class="container myDiv_pigeonImformationCollect">
-    <div class="row">
-        <div class="col-sm"> upload image
-            <div class="input-group mb-3">
-                <!-- <div class="input-group-prepend">
-                    <span class="input-group-text">Upload</span>
-                </div> -->
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="pigeonImageUploader" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" onchange="showImageFile(event)">
-                    <!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-                </div>
-            </div>
-            <img id='showPigeonImage' class="img-fluid" alt="Responsive image">
+    <center>
+        <div class="container"> input imformation
+                {%if submitted %}
+                        create pigeon successfully!!!
+                {% else %}
+                    <form action="" method=POST enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input type="submit" value="create pigeon" class="btn btn-secondary">
+                    </form>
+                {% endif %}
+            <!-- <img id='showPigeonImage' class="img-fluid" alt="Responsive image"> -->
             <br></br>
             <!-- <button id='button_uploadPigeonImage' type="button" class="btn btn-primary">上傳</button> -->
         </div>
-        <div class="col-sm"> input imformation
+    </center>
+        <div  hidden> input imformation
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">公環號碼</span>
@@ -127,18 +127,34 @@
             </div>
             <button id='button_createPigeon' type="button" class="btn btn-primary">創建鴿子</button>
         </div>
-    </div>
-</div>
+
 <script>
         //when choose a image file , showing the image 
-        let pigeonImage;
+        let pigeonImage_arrayBuffer;
         var showImageFile = function(event) {
                 var image = document.getElementById('showPigeonImage');
                 image.src = URL.createObjectURL(event.target.files[0]);
                 console.log(event.target.files[0]);
-                pigeonImage = event.target.files[0];
+                // pigeonImage = event.target.files[0];
+                make_image_arrayBuffer(event.target.files[0]);
         };
+        
+        async function make_image_arrayBuffer(file)
+        {
+            pigeonImage_arrayBuffer = await getArrayBuffer(file);
+            console.log('arrayBuffer', pigeonImage_arrayBuffer);
+        }
 
+        function getArrayBuffer(file) {
+            return new Promise((resolve, reject) => {
+                // STEP 3: 轉成 ArrayBuffer, i.e., reader.result
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                resolve(reader.result);
+                });
+                reader.readAsArrayBuffer(file);
+            })
+        }
             //create pigeon
         let button_createPigeon = document.getElementById('button_createPigeon');
         function func_cb_button_createPigeon()
@@ -146,7 +162,7 @@
             // var formData = new FormData();
             // formData.append("photo", pigeonImage);
             // fetch('/upload/image', {method: "POST", body: formData});
-            var image = pigeonImage;
+            // var image = pigeonImage;
             var pigeonNumber = document.getElementById('pigeon_create_pigeonNumber').value;
             var pigeonSex = document.getElementById('pigeon_create_sex').value;
             var pigeonAge = document.getElementById('pigeon_create_age').value;
@@ -168,11 +184,15 @@
             function reqListener() {
                 var response = JSON.parse(this.responseText);
                 console.log(response);
-            }
+            }  
+
+            var image_content = Array.from(new Uint8Array(pigeonImage_arrayBuffer));
+            console.log(image_content);
 
             var make_send = {};
             make_send['option'] = 'create';
-            make_send['image'] = pigeonImage
+            make_send['image_type'] = 'png';
+            make_send['image_content'] =  image_content;
             make_send['doveName'] = pigeonNumber;
             make_send['sex'] = pigeonSex;
             make_send['age'] = pigeonAge;
