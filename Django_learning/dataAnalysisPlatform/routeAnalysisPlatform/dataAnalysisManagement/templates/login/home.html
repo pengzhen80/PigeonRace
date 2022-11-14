@@ -118,7 +118,8 @@
                 // row_data_0.style.position = 'absolute';
                 // row_data_0.style.top = '30%';
                 var row_data_1 = document.createElement('td');
-                row_data_1.innerHTML = pigeonNumber;
+                // var href = 'login/pigeon/'+pigeonNumber;
+                row_data_1.innerHTML = '<a class="text-decoration-none">'+pigeonNumber+"</a>";
                 // row_data_1.style.textAlign = "center";
                 var row_data_2 = document.createElement('td');
                 row_data_2.innerHTML = totalRealDistance.toFixed(3);
@@ -145,8 +146,8 @@
                 function func_cb_row()
                 {
                     console.log('click');
-                    var pigeonNumber = row_data_1.innerHTML;
-                    console.log(pigeonNumber); 
+                    // var pigeonNumber = row_data_1.innerHTML;
+                    // console.log(pigeonNumber); 
                     window.open('login/pigeon/'+pigeonNumber);
                 }
                 row.addEventListener('click',func_cb_row);

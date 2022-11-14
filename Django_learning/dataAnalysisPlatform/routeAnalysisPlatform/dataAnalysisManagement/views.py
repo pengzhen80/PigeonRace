@@ -104,10 +104,8 @@ def pigeonManagement(request):
                 localdbManager.delete_DoveByDoveId(doveID=doveID)
         return JsonResponse(context)
     pigeons = Pigeon.objects.all()
-    # pigeon_invalid = Pigeon.objects.get(pk='')
-    # pigeon_invalid.delete()
-    # pigeons =json.dumps(pigeons)
-    return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons})
+    number = len(pigeons)
+    return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons,'number':number})
 
 def pigeonCreate(request):
     # context={}
@@ -291,5 +289,5 @@ def localDB_updateFilteredRoute(request):
         print(routeIds)
         filteredRoute = json.loads(routeIds)
         print(filteredRoute['trainRecordId'])
-        # localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'],filteredRoute['settingTime'])
+        localdbManager.update_trainRecord_filtered(filteredRoute['trainRecordId'],filteredRoute['startIndex'],filteredRoute['endIndex'],filteredRoute['updateTime'],filteredRoute['realDistance'],filteredRoute['realSpeed'],filteredRoute['straightDistance'],filteredRoute['straightSpeed'],filteredRoute['routeEfficiency'],filteredRoute['settingTime'])
     return JsonResponse(context)

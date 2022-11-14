@@ -80,7 +80,7 @@
             <button id='button_newPigeon' type="button" class="btn btn-primary " onclick="func_cb_button_newPigeon()">新建鴿子</button>
         </div>
         <div>
-            <h5 id = 'total_pigeonNumber'>鴿子總數 <span class="label label-default">0</span></h5>
+            <h5 id = 'total_pigeonNumber'>鴿子總數 <span class="label label-default">{{number}}</span></h5>
         </div>
         <div>
             <button id='button_deletePigeon' type="button" class="btn btn-danger " onclick="func_cb_button_deletePigeon()">刪除鴿子</button>
@@ -150,22 +150,23 @@
     {% endfor %}
     </div>
     <script>
-        // let pigeons = '{{ pigeons|safe }}';
+        let pigeons = '{{ pigeons|safe }}';
+        // console.log(pigeons);
         // let normalized_pigeons = JSON.parse(pigeons);
         // console.log(normalized_pigeons);
-        var normalized_pigeons = [];
+        // var normalized_pigeons = [];
 
-        if(normalized_pigeons.length>0)
-        {   
-            var total_pigeonNumber = (document.getElementById('total_pigeonNumber')).getElementsByTagName('span');
-            total_pigeonNumber[0].innerHTML = normalized_pigeons.length;
+        // if(normalized_pigeons.length>0)
+        // {   
+        //     var total_pigeonNumber = (document.getElementById('total_pigeonNumber')).getElementsByTagName('span');
+        //     total_pigeonNumber[0].innerHTML = normalized_pigeons.length;
             
-            // showPigeonInfors(normalized_pigeons[0]);
-            for(var i=1;i<normalized_pigeons.length;i++)
-            {
-                // copy_pigeonImformationDiv(normalized_pigeons[i]);
-            }
-        }
+        //     // showPigeonInfors(normalized_pigeons[0]);
+        //     for(var i=1;i<normalized_pigeons.length;i++)
+        //     {
+        //         // copy_pigeonImformationDiv(normalized_pigeons[i]);
+        //     }
+        // }
 
     
         function func_cb_button_newPigeon()
@@ -198,7 +199,7 @@
             {
                 function reqListener() {
                     var response = JSON.parse(this.responseText);
-                    console.log(response);
+                    // console.log(response);
                 }
 
                 var make_send = {};
@@ -229,52 +230,10 @@
             image.src = URL.createObjectURL(event.target.files[0]);
         };
 
-        //create pigeon
-        let button_createPigeon = document.getElementById('button_createPigeon');
-        function func_cb_button_createPigeon()
-        {
-            var image = document.getElementById('showPigeonImage').src;
-            var pigeonNumber = document.getElementById('pigeon_create_pigeonNumber').value;
-            var pigeonSex = document.getElementById('pigeon_create_sex').value;
-            var pigeonAge = document.getElementById('pigeon_create_age').value;
-            var pigeonWeight = document.getElementById('pigeon_create_weight').value;
-            var pigeonBodyLength = document.getElementById('pigeon_create_bodyLength').value;
-            var pigeonWingLength = document.getElementById('pigeon_create_wingLength').value;
-
-            function reqListener() {
-                var response = JSON.parse(this.responseText);
-                console.log(response);
-            }
-
-            var make_send = {};
-            make_send['option'] = 'create';
-            make_send['doveName'] = pigeonNumber;
-            make_send['sex'] = pigeonSex;
-            make_send['age'] = pigeonAge;
-            make_send['weight'] = pigeonWeight;
-            make_send['bodyLength'] = pigeonBodyLength;
-            make_send['wingLength'] = pigeonWingLength;
-
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", reqListener);
-            oReq.open("post", 'pigeon');
-            oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
-            // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
-            oReq.send(JSON.stringify(make_send));
-        }
-        button_createPigeon.addEventListener('click',func_cb_button_createPigeon);
-
         function showPigeonInfors(pigeonInfos)
         {
             var div = document.getElementById('pigeonInfors');
             var li_list = div.getElementsByTagName('li');
-            // <li class="list-group-item">公環號碼:</li>
-            //         <li class="list-group-item">性別:</li>
-            //         <li class="list-group-item">鴿齡:</li>
-            //         <li class="list-group-item">重量:</li>
-            //         <li class="list-group-item">身長:</li>
-            //         <li class="list-group-item">翅膀長度:</li>
-            // console.log(li_list);
             li_list[0].innerHTML = "公環號碼:"+pigeonInfos[2];
             li_list[1].innerHTML = "性別:"+pigeonInfos[7];
             li_list[2].innerHTML = "鴿齡:"+pigeonInfos[8];
@@ -310,7 +269,7 @@
             checkboxList[0].value = pigeonInfos[0];
             var button = newPersonInterduction_container.getElementsByTagName('button');
             button[0].value = pigeonInfos[0];
-            console.log(button[0],button[0].value);
+            // console.log(button[0],button[0].value);
             document.body.appendChild(newPersonInterduction_container);
         };
     </script>
