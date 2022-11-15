@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <!-- <meta charset="utf-8"> -->
+    <title>軌跡頁面</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="{% static 'css/table.css' %}" /> -->
+    <!-- css for header -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-space-dynamic.css' %}">
+    <!-- for table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <style>
+       .button {
+            background-color: #FFED86;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
+            /* height: 10%; */
+        }
+
+        .button:hover{
+            cursor: pointer;
+        }
+        th:hover{
+            cursor: pointer;
+        }
+        .myDiv_table {
+            /* border: 1px outset black; */
+            /* background-color: lightblue;     */
+            /* text-align: center; */
+            width:100%;
+            height: 400px;
+            top : 100px;
+            position: relative;
+        }
+        .table_select{
+            max-width: 150px;
+        }
+    </style>
+</head>
+<header class="header-area header-sticky wow slideInDown animated background-header" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="../../login" class="logo">
+              <h4>Sky<span>Leader</span></h4>
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="../../login"  class="active">Home</a></li>
+              <li class="scroll-to-section"><a href="../activity" class="">Activity</a></li>
+              <li class="scroll-to-section"><a href="#pigeon" class="">Pigeon</a></li>
+            </ul>        
+            <!-- <a class="menu-trigger">
+                <span>Menu</span>
+            </a> -->
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+</header>
+<body>
+    <div class="container">
+    <div id="tap_table_activity" class = 'myDiv_table'>
+    <div class="d-flex justify-content-between">
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="check_box_select_all" onclick="func_cb_check_box_select_all()">
+                <label class="form-check-label" for="flexCheckDefault">select all</label>
+            </div>
+            <div>
+                <select class="form-select table_select" aria-label="Default select example" >
+                    <option selected>選項</option>
+                    <!-- <option value="1">單鴿分析</option> -->
+                    <option value="1">裁減</option>
+                    <!-- <option value="3">Three</option> -->
+                </select>
+            </div>
+     </div>
+    <br>
+    <table id="table_trackPage_tracks" class = 'table table-striped table-bordered table-hover display'>
+        <thead title="點擊按照公環號碼排序">
+            <tr>
+                <th>勾選</th>
+                <!-- <th onclick="sortTable()">公環號碼</th> -->
+                <th>公環號碼</th>
+                <th>gps腳環號碼</th>
+                <th>飛行時間</th>
+                <th>點數</th>
+                <th>直線距離</th>
+                <th>直線速度</th>
+                <th>總距離</th>
+                <th>實際速度</th>
+            </tr>
+        </thead>
+        <tbody id="table_trackPage_tracks_body">
+            <!-- <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+
+            </tr> -->
+        </tbody>
+    </table>
+    <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav> -->
+    </div>
+    </div>
+    <script>
+        let activityIds = '{{ activityIds|safe }}';
+        let activityId_list = activityIds.split(',');
+        console.log(activityId_list);
+
+        let trackSummarys = '{{ trackSummarys|safe }}';
+        normalized_trackSummarys = JSON.parse(trackSummarys);
+        // let trackSummarys_list = trackSummarys.split(',');
+        console.log(normalized_trackSummarys);
+        //when add a track to table, push the trackID=activityId+moduleId+trainRecordId
+        let list_trackId = []; 
+        let dict_pigeonNumReleaseTime_to_trackId = {};
+        make_dict_pigeonNumReleaseTime_to_trackId();
+        function make_dict_pigeonNumReleaseTime_to_trackId()
+        {
+            for(var i=0;i<normalized_trackSummarys.length;i++)
+            {
+                dict_pigeonNumReleaseTime_to_trackId[normalized_trackSummarys[i]['recordname']+normalized_trackSummarys[i]['settingtime']] = normalized_trackSummarys[i]['activity_id']+normalized_trackSummarys[i]['moduleid']+normalized_trackSummarys[i]['trainrecordid'];
+            }
+        }
+
+        tracks_showInTable(normalized_trackSummarys);
+        
+        // request_askTracksSummaryData()
+        function request_askTracksSummaryData() {
+            // for (var i = 0; i < activityId_list.length; i++) {
+                
+            // }
+
+            function reqListener() {
+                // console.log(typeof (this.responseText), typeof (this.response));
+                // console.log(this.responseText)
+
+                var response = JSON.parse(this.responseText);
+                // console.log(Object.values(response));
+                var tracks_list= Object.values(response)
+
+                for(var i=0;i<tracks_list.length;i++)
+                {
+                    for(var j=0;j<tracks_list[i].length;j++)
+                    {
+                        console.log(tracks_list[i][j]);
+                        var activity_id = tracks_list[i][j]['activity_id'];
+                        var module_id = tracks_list[i][j]['moduleid'];
+                        var trainRecord_id = tracks_list[i][j]['trainrecordid'];
+                        list_trackId.push(activity_id+module_id+trainRecord_id);
+                        dict_pigeonNumReleaseTime_to_trackId[tracks_list[i][j]['recordname']+tracks_list[i][j]['settingtime']] = activity_id+module_id+trainRecord_id;
+                        tracks_showInTable([tracks_list[i][j]]);
+                    }
+                }
+
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("post", 'activityIds/askTracksSummary');
+            oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+            // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+            oReq.send(activityId_list.toString());
+        }
+
+        function tracks_showInTable(param_tracks) {
+            let table_trackPage_tracks_body = document.getElementById('table_trackPage_tracks_body');
+            for (var i = 0; i < param_tracks.length; i++) {
+                func_table_track_addData(param_tracks[i]);
+            }
+            // <th>公環號碼</th>
+            //     <th>gps腳環號碼</th>
+            //     <th>飛行時間</th>
+            //     <th>點數</th>
+            //     <th>直線距離</th>
+            //     <th>直線速度</th>
+            //     <th>總距離</th>
+            //     <th>實際速度</th>
+            function func_table_track_addData(param_track) {
+                var row = document.createElement('tr');
+                var row_data_0 = document.createElement('td');
+                var tmp_checkbox = document.createElement("INPUT");
+                tmp_checkbox.setAttribute("type", "checkbox");
+                row_data_0.appendChild(tmp_checkbox);
+                // var row_data_0 = document.createElement("td");
+                // row_data_0.innerHTML = param_track['recordname'];
+                var row_data_1 = document.createElement('td');
+                row_data_1.innerHTML = param_track['recordname'];
+                // row_data_1.style.textAlign = "center";
+                var row_data_2 = document.createElement('td');
+                row_data_2.innerHTML = param_track['gps_id'];
+                // row_data_2.style.textAlign = "center";
+                var row_data_3 = document.createElement('td');
+                row_data_3.innerHTML = param_track['settingtime'];
+                var row_data_4 = document.createElement('td');
+                row_data_4.innerHTML = param_track['fix_3d'];
+                var row_data_5 = document.createElement('td');
+                row_data_5.innerHTML = parseFloat(param_track['straightdistance']).toFixed(2).toString();
+                var row_data_6 = document.createElement('td');
+                row_data_6.innerHTML = parseFloat(param_track['straightspeed']).toFixed(2).toString();
+                var row_data_7 = document.createElement('td');
+                row_data_7.innerHTML = parseFloat(param_track['realdistance']).toFixed(2).toString();
+                var row_data_8 = document.createElement('td');
+                row_data_8.innerHTML = parseFloat(param_track['realspeed']).toFixed(2).toString();
+                // row_data_3.style.textAlign = "center";
+
+                row.appendChild(row_data_0);
+                row.appendChild(row_data_1);
+                row.appendChild(row_data_2);
+                row.appendChild(row_data_3);
+                row.appendChild(row_data_4);
+                row.appendChild(row_data_5);
+                row.appendChild(row_data_6);
+                row.appendChild(row_data_7);
+                row.appendChild(row_data_8);
+                table_trackPage_tracks_body.appendChild(row);
+            }
+        }
+
+        function func_cb_btn_trackPage_showPlot() {
+            //get selected index of table
+            var index_checked = [];
+            var pigeonNumber_releaseTime = [];
+            var rows = document.getElementById("table_trackPage_tracks_body").rows;
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                console.log(rows[i]);
+                var checkbox = rows[i].getElementsByTagName("input")[0];
+                var pigeonNumber = rows[i].getElementsByTagName("td")[1].innerHTML;
+                var releaseTime = rows[i].getElementsByTagName("td")[3].innerHTML;
+                // console.log(checkbox);
+                console.log(checkbox.checked);
+                if (checkbox.checked == true) {
+                    index_checked.push(i);
+                    pigeonNumber_releaseTime.push(pigeonNumber+releaseTime);
+                }
+            }
+            console.log(index_checked);
+            console.log(pigeonNumber_releaseTime);
+            if(pigeonNumber_releaseTime.length == 0)
+            {
+                alert('please choose a record');
+                return;
+            }
+            // var list_trackId_checked_list = [];
+            // for (i = 0; i < index_checked.length; i++) {
+            //     list_trackId_checked_list.push(list_trackId[index_checked[i]]);
+            // }
+            var list_trackId_checked_list = [];
+            for (i = 0; i < pigeonNumber_releaseTime.length; i++) {
+                list_trackId_checked_list.push(dict_pigeonNumReleaseTime_to_trackId[pigeonNumber_releaseTime[i]]);
+            }
+            console.log(list_trackId_checked_list);
+
+            window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
+            // window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString(),name='showFigures');
+        }
+        // let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
+        // btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
+
+        function sortTable() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            // table = document.getElementById("table_trackPage_tracks_body");
+            table = document.getElementById("table_trackPage_tracks");
+            switching = true;
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[0];
+                y = rows[i + 1].getElementsByTagName("TD")[0];
+                //check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+                }
+                if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                }
+            }
+        }
+
+        $(document).ready(function(){
+            $('#table_trackPage_tracks').dataTable();
+        });
+
+        //for table selected action
+        $('select').on(
+        { "focus": function() {
+            //console.log('clicked!', this, this.value);
+            this.selectedIndex = 0;
+            }
+        , "change": function() {
+            choice = $(this).val();
+            console.log('changed!', this, choice);
+            // this.blur();
+            // setTimeout(function() { alert('Chose '+ choice); }, 0);
+            if(choice == 1)
+            {
+                func_cb_btn_trackPage_showPlot();
+            }    
+        } 
+        });
+
+        function func_cb_check_box_select_all() {
+            var checkBox_all = document.getElementById("check_box_select_all");
+            if(checkBox_all.checked == true)
+            {
+                var rows = document.getElementById("table_trackPage_tracks_body").rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var checkbox = rows[i].getElementsByTagName("input")[0];
+                    checkbox.checked = true;
+                }
+            }
+            else
+            {
+                var rows = document.getElementById("table_trackPage_tracks_body").rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var checkbox = rows[i].getElementsByTagName("input")[0];
+                    checkbox.checked = false;
+                }
+            }
+            
+           
+        }
+    </script>
+</body>

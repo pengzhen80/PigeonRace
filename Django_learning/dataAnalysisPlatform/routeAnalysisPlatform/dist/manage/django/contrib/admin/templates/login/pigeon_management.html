@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <!-- <meta charset="utf-8"> -->
+    <title>鴿子管理</title>
+    <!-- for header -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="{% static 'css/table.css' %}" /> -->
+    <!-- css for header -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-space-dynamic.css' %}">
+    <!-- for ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .myDiv_chart {
+            width: 100%;
+            height: 40%;
+        }
+        .myDiv_pigeonImformationCollect {
+            /* text-align: center; */
+            width:100%;
+            height: 400px;
+            top : 100px;
+            position: relative;
+        }
+        .myPersonInterduction_container{
+            background-color: white;
+            top : 100px;
+            position: relative;
+            /* height: 400px; */
+        }
+        .myPersonInterduction_image
+        {
+            max-width:50%;
+            max-height:100%;
+        }
+        .button_newPigeon
+        {
+            left :10%;
+            top : 100px;
+            width: 80%;
+            position: relative;
+        }
+    </style>
+</head>
+<header class="header-area header-sticky wow slideInDown animated background-header" data-wow-duration="0.75s"
+    data-wow-delay="0s"
+    style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="../login" class="logo">
+                        <h4>Sky<span>Leader</span></h4>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="../login" class="">Home</a></li>
+                        <li class="scroll-to-section"><a href="activity" class="">Activity</a></li>
+                        <li class="scroll-to-section"><a href="#pigeon" class="active">Pigeon</a></li>
+                    </ul>
+                    <!-- <a class="menu-trigger">
+                <span>Menu</span>
+            </a> -->
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div class="d-flex justify-content-between button_newPigeon">
+        <div>
+            <button id='button_newPigeon' type="button" class="btn btn-primary " onclick="func_cb_button_newPigeon()">新建鴿子</button>
+        </div>
+        <div>
+            <h5 id = 'total_pigeonNumber'>鴿子總數 <span class="label label-default">{{number}}</span></h5>
+        </div>
+        <div>
+            <button id='button_deletePigeon' type="button" class="btn btn-danger " onclick="func_cb_button_deletePigeon()">刪除鴿子</button>
+        </div>
+    </div>
+    <br>
+    <!-- <br> -->
+    <div class="container myPersonInterduction_container border" hidden>
+        <div class="row">
+            <div class="col-1"> 
+                <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="col-3"> 
+                <img id='showPigeonImage' src="{% static 'images/652206.png' %}" class="myPersonInterduction_image">
+            </div>
+            <div class="col-7" id = 'pigeonInfors'> 
+                <ul class="list-group text-center">
+                    <li class="list-group-item">公環號碼:</li>
+                    <li class="list-group-item">性別:</li>
+                    <li class="list-group-item">鴿齡:</li>
+                    <li class="list-group-item">重量:</li>
+                    <li class="list-group-item">身長:</li>
+                    <li class="list-group-item">翅膀長度:</li>
+                  </ul>
+            </div>
+            <div class="col-1"> 
+                <button type="button" class="btn btn-info" onclick="func_cb_button_updatePigeon(this)" id="button_updatePigeon">修改</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+            <div class="col"> 
+            </div>
+        </div>
+    </div>
+    <div class="container myDiv_pigeonImformationCollect">
+    {% for pigeon in pigeons%}
+    <center>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if pigeon.photo %}
+                <img src={{ pigeon.photo.url }} class="img-fluid rounded-start" alt="...">
+            {% endif %}
+        </div>
+          <div class="col-md-8">
+            <div class="card-body">
+            <a href='pigeonUpdate/{{pigeon.doveID}}' class="card-link"><h5 class="card-title">{{pigeon.doveName}}</h5></a>
+              <ul class="list-group text-center">
+                <li class="list-group-item">性別:{{pigeon.sex}}</li>
+                <li class="list-group-item">鴿齡:{{pigeon.age}}</li>
+                <li class="list-group-item">重量:{{pigeon.weight}}</li>
+                <li class="list-group-item">身長:{{pigeon.bodyLength}}</li>
+                <li class="list-group-item">翅膀長度:{{pigeon.wingLength}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    </center>
+    <br>
+    {% endfor %}
+    </div>
+    <script>
+        let pigeons = '{{ pigeons|safe }}';
+        // console.log(pigeons);
+        // let normalized_pigeons = JSON.parse(pigeons);
+        // console.log(normalized_pigeons);
+        // var normalized_pigeons = [];
+
+        // if(normalized_pigeons.length>0)
+        // {   
+        //     var total_pigeonNumber = (document.getElementById('total_pigeonNumber')).getElementsByTagName('span');
+        //     total_pigeonNumber[0].innerHTML = normalized_pigeons.length;
+            
+        //     // showPigeonInfors(normalized_pigeons[0]);
+        //     for(var i=1;i<normalized_pigeons.length;i++)
+        //     {
+        //         // copy_pigeonImformationDiv(normalized_pigeons[i]);
+        //     }
+        // }
+
+    
+        function func_cb_button_newPigeon()
+        {
+            window.open('pigeonCreate');
+        }
+
+        function func_cb_button_deletePigeon()
+        {
+            var pigeonToDelete = [];
+            var div_list = document.getElementsByClassName('myPersonInterduction_container');
+            // console.log(div_list.length);
+            for(var i=0;i<div_list.length;)
+            {
+                // console.log(div_list[i]);
+                var checkBoxList = div_list[i].getElementsByTagName('input');
+                // console.log(checkBoxList.length);
+                var checkBox = checkBoxList[0];
+                if(checkBox.checked == true)
+                {
+                    pigeonToDelete.push(checkBox.value);
+                    div_list[i].remove();
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            if(pigeonToDelete.length>0)
+            {
+                function reqListener() {
+                    var response = JSON.parse(this.responseText);
+                    // console.log(response);
+                }
+
+                var make_send = {};
+                make_send['option'] = 'delete';
+                make_send['doveID'] = pigeonToDelete;
+
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", reqListener);
+                oReq.open("post", 'pigeon');
+                oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+                // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+                oReq.send(JSON.stringify(make_send));
+            }
+        }
+
+        function func_cb_button_updatePigeon(element)
+        {
+            // console.log(element.value);
+            if(element.value.length>0)
+            {
+                window.open('pigeonUpdate/'+element.value);
+            }
+        }
+
+        //when choose a image file , showing the image 
+        var showImageFile = function(event) {
+            var image = document.getElementById('showPigeonImage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        function showPigeonInfors(pigeonInfos)
+        {
+            var div = document.getElementById('pigeonInfors');
+            var li_list = div.getElementsByTagName('li');
+            li_list[0].innerHTML = "公環號碼:"+pigeonInfos[2];
+            li_list[1].innerHTML = "性別:"+pigeonInfos[7];
+            li_list[2].innerHTML = "鴿齡:"+pigeonInfos[8];
+            li_list[3].innerHTML = "重量:"+pigeonInfos[11];
+            li_list[4].innerHTML = "身長:"+pigeonInfos[9];
+            li_list[5].innerHTML = "翅膀長度:"+pigeonInfos[10];
+
+            var container = document.getElementsByClassName('myPersonInterduction_container');
+            var checkboxList = container[0].getElementsByTagName('input');
+            // console.log(checkBoxList[0])
+            checkboxList[0].value = pigeonInfos[0];
+
+            var button = document.getElementById('button_updatePigeon');
+            button.value = pigeonInfos[0];
+        }
+
+        // copy_pigeonImformationDiv(pigeonInfos);
+        function copy_pigeonImformationDiv(pigeonInfos)
+        {
+            var newPersonInterduction_container = document.createElement('div');
+            var $myPersonInterduction_container = $('.myPersonInterduction_container').clone();
+            // console.log($myPersonInterduction_container,typeof($myPersonInterduction_container),($myPersonInterduction_container).length);
+            $(newPersonInterduction_container).html(($myPersonInterduction_container)[0]);
+            var li_list = newPersonInterduction_container.getElementsByTagName('li');
+            li_list[0].innerHTML = "公環號碼:"+pigeonInfos[2];
+            li_list[1].innerHTML = "性別:"+pigeonInfos[7];
+            li_list[2].innerHTML = "鴿齡:"+pigeonInfos[8];
+            li_list[3].innerHTML = "重量:"+pigeonInfos[11];
+            li_list[4].innerHTML = "身長:"+pigeonInfos[9];
+            li_list[5].innerHTML = "翅膀長度:"+pigeonInfos[10];
+
+            var checkboxList = newPersonInterduction_container.getElementsByTagName('input');
+            checkboxList[0].value = pigeonInfos[0];
+            var button = newPersonInterduction_container.getElementsByTagName('button');
+            button[0].value = pigeonInfos[0];
+            // console.log(button[0],button[0].value);
+            document.body.appendChild(newPersonInterduction_container);
+        };
+    </script>
+</body>

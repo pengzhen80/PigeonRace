@@ -21,8 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1&w69-@_4l$ucpmc2#0o3j)ily#jqq9hdxrq@v+j7w$)p$sj4j'
+SECRET_KEY = '576D597133743677397A24432646294A404E635266556A586E32723475377821'
 
+# SECRET_KEY = os.environ['CURRENT_SECRET_KEY']
+# SECRET_KEY_FALLBACKS = [
+#         os.environ['OLD_SECRET_KEY'],
+#     ]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dataAnalysisManagement.apps.DataanalysismanagementConfig',
+    # 'dbbackup',  # django-dbbackup
 ]
 
 MIDDLEWARE = [
@@ -82,6 +87,8 @@ DATABASES = {
     }
 }
 
+# DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+# DBBACKUP_STORAGE_OPTIONS = {'location': 'backup/dbs/'}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -117,6 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_ROOT = "/home/pengzhen/Documents/source/pengzhen_git/PigeonRace/Django_learning/dataAnalysisPlatform/static/"
+
 STATIC_URL = 'static/'
 # MEDIA_ROOT = '/media/'
 MEDIA_ROOT = 'media/'
@@ -125,7 +134,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 PROJECT_DIR = os.path.dirname(__file__)
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
+    BASE_DIR / "static",
+    # os.path.join(PROJECT_DIR, 'static'),
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -143,3 +153,4 @@ CACHES = {
         'KEY_PREFIX': 'Cache'
     }
 }
+
