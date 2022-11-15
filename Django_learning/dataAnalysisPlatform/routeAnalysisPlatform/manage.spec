@@ -9,7 +9,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[],
-        hiddenimports=[
+     hiddenimports=[
         'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

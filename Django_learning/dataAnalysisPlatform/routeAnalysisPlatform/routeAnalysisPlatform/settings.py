@@ -28,7 +28,7 @@ SECRET_KEY = '576D597133743677397A24432646294A404E635266556A586E32723475377821'
 #         os.environ['OLD_SECRET_KEY'],
 #     ]
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,20 +123,18 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_ROOT = "/home/pengzhen/Documents/source/pengzhen_git/PigeonRace/Django_learning/dataAnalysisPlatform/static/"
-
-STATIC_URL = 'static/'
 # MEDIA_ROOT = '/media/'
 MEDIA_ROOT = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 PROJECT_DIR = os.path.dirname(__file__)
+
+STATIC_URL = 'static/'
 STATICFILES_DIRS = (
-    BASE_DIR / "static",
-    # os.path.join(PROJECT_DIR, 'static'),
+    os.path.join(BASE_DIR, "static/"),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -154,3 +152,6 @@ CACHES = {
     }
 }
 
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
