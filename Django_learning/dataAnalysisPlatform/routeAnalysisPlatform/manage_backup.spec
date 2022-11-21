@@ -10,7 +10,8 @@ a = Analysis(
     binaries=[],
     datas=[],
     hiddenimports=[
-        'django.contrib.admin',
+    'whitenoise.runserver_nostatic',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -23,7 +24,9 @@ a = Analysis(
     'django_redis.cache.RedisCache',
     'django_redis.cache',
     'django_redis.client',
-    'dataAnalysisManagement.urls'
+    'dataAnalysisManagement.urls',
+    'whitenoise.middleware',
+    'whitenoise.storage',
     ],
     hookspath=[],
     hooksconfig={},
