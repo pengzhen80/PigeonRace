@@ -3,6 +3,40 @@ class HotTopicsManagement:
     def __init__(self):
         pass
     
+    # def init_routeSummary(self,routeSummarys,localFilteredRecords):
+    #     keys = routeSummarys.keys()
+    #     dict_pigeonNumber_recordId = {}
+    #     for key in keys:
+    #         pigeonNumber = routeSummarys[key]['recordname']
+    #         if pigeonNumber in dict_pigeonNumber_recordId.keys():
+    #             dict_pigeonNumber_recordId[pigeonNumber].append(key)
+    #         else:
+    #             dict_pigeonNumber_recordId[pigeonNumber] = [key]
+        
+    #     ### pigeonNumber,totalRealDistance,averageRealSpeed,totalStraightDistance,averageStraightSpeed,averageRouteEfficiency
+    #     print(localFilteredRecords)
+    #     list_pigeonNumber_summaryData =  []
+    #     keys = dict_pigeonNumber_recordId.keys()
+    #     for key in keys:
+    #         totalRealDistance = 0
+    #         totalStraightDistance = 0
+    #         totalTime  = 0
+    #         for record in localFilteredRecords:
+    #             if(record[0] in dict_pigeonNumber_recordId[key]):
+    #                 totalRealDistance += record[4]
+    #                 totalStraightDistance += record[6]
+    #                 totalTime += record[4]/record[5]
+    #         if(totalTime == 0):
+    #             continue
+    #         averageRealSpeed = totalRealDistance/totalTime
+    #         averageStraightSpeed = totalStraightDistance/totalTime
+    #         totalRouteEfficiency = totalStraightDistance/totalRealDistance
+    #         list_pigeonNumber_summaryData.append({'pigeonNumber':key,'totalRealDistance':totalRealDistance,'averageRealSpeed':averageRealSpeed,'totalStraightDistance':totalStraightDistance,'averageStraightSpeed':averageStraightSpeed,'totalRouteEfficiency':totalRouteEfficiency})
+        
+    #     rankStraightSpeed,rankRouteEfficiency = self.rankingBoard(list_pigeonNumber_summaryData)
+    #     pigeon_toTrain = self.pigeon_specialPigeons(list_pigeonNumber_summaryData)
+    #     return rankStraightSpeed,rankRouteEfficiency,pigeon_toTrain
+
     def init_routeSummary(self,routeSummarys,localFilteredRecords):
         keys = routeSummarys.keys()
         dict_pigeonNumber_recordId = {}
@@ -23,9 +57,9 @@ class HotTopicsManagement:
             totalTime  = 0
             for record in localFilteredRecords:
                 if(record[0] in dict_pigeonNumber_recordId[key]):
-                    totalRealDistance += record[4]
-                    totalStraightDistance += record[6]
-                    totalTime += record[4]/record[5]
+                    totalRealDistance += float(record[4])
+                    totalStraightDistance += float(record[6])
+                    totalTime += float(record[4])/float(record[5])
             if(totalTime == 0):
                 continue
             averageRealSpeed = totalRealDistance/totalTime

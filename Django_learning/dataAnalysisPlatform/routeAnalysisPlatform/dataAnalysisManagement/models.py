@@ -32,3 +32,18 @@ class Pigeon(models.Model):
     
     class Meta:
         ordering = []
+
+class TrainRecord_filters_summary(models.Model):
+    trainRecordId = models.CharField(max_length=100,null=False,primary_key=True)
+    startIndex =models.CharField(max_length=100,null=False)  
+    endIndex   =models.CharField(max_length=100,null=True)  
+    updateTime =models.CharField(max_length=100,null=False)                
+    realDistance  = models.CharField(max_length=100,null=False)         
+    realSpeed     = models.CharField(max_length=100,null=False)         
+    straightDistance  = models.CharField(max_length=100,null=False)       
+    straightSpeed     = models.CharField(max_length=100,null=False)       
+    routeEfficiency   = models.CharField(max_length=100,null=False)       
+    settingTime       = models.CharField(max_length=100,null=False)       
+    
+    class Meta:
+        ordering = []
