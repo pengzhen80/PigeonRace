@@ -15,6 +15,8 @@ import csv
 from datetime import datetime, tzinfo
 from dateutil import tz
 import pytz
+import _thread
+import threading
 
 
 class DBManagement ():
@@ -41,6 +43,10 @@ class DBManagement ():
 
     def logIn(self, username, password):
         # Init
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        print("start ask api : Current Time =", current_time)
+
         self.mxid = ''
         self.activities = []
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
@@ -51,9 +57,13 @@ class DBManagement ():
         res = x.json()
         res = json.loads(res)
         status = res['status']
+
         if (status == 'ok'):
             self.mxid = res['mxid']
             self.api_getActivitityID()
+
+        current_time = datetime.now().strftime("%H:%M:%S")
+        print("finish ask api : Current Time =", current_time)
         return res
 
     def api_getActivitityID(self):
@@ -67,11 +77,20 @@ class DBManagement ():
         x = requests.post(url, data=myobj)
         res = x.json()
         res = json.loads(res)
+        arr_thread = []
         for activity in res:
             if(self.api_getActivitity(activity['activity_id'], self.mxid, activity['activity_name'],activity['release_date'], activity['release_time'])):          
                 self.activities = self.activities + [activity]
                 # self.api_readModule(activity['activity_id'])
-                self.api_readTrainRecord(activity['activity_id'])
+                # self.api_readTrainRecord(activity['activity_id'])
+                arr_thread.append(threading.Thread(target=self.api_readTrainRecord,args=(activity['activity_id'],)))
+
+        for tmp_thread in arr_thread:
+            tmp_thread.start()
+        
+        for tmp_thread in arr_thread:
+            tmp_thread.join() 
+
         return res
 
     def api_readTrainRecord(self, activity_id):

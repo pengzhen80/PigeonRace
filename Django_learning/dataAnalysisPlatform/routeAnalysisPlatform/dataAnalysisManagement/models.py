@@ -1,6 +1,4 @@
 from django.db import models
-
-
 # Create your models here.
 class User(models.Model):
     mxID = models.CharField(max_length=100,null=True,blank=True)
@@ -14,6 +12,7 @@ class Pigeon(models.Model):
     RFID = models.CharField(max_length=100,null=True,blank=True)
     URing = models.CharField(max_length=100,null=True,blank=True)
     photo=models.ImageField(null=True,blank=True,upload_to='images/')
+    # photo = FilerImageField(null=True, blank=True,related_name="pigeonPhotos",on_delete=models.CASCADE)
     eye = models.ImageField(null=True,blank=True,upload_to='images/')
     sex = models.CharField(max_length=100,null=True,blank=True)
     age = models.CharField(max_length=100,null=True,blank=True)
@@ -31,3 +30,20 @@ class Pigeon(models.Model):
     motherMother = models.CharField(max_length=100,null=True,blank=True)
     note = models.CharField(max_length=100,null=True,blank=True)
     
+    class Meta:
+        ordering = []
+
+class TrainRecord_filters_summary(models.Model):
+    trainRecordId = models.CharField(max_length=100,null=False,primary_key=True)
+    startIndex =models.CharField(max_length=100,null=False)  
+    endIndex   =models.CharField(max_length=100,null=True)  
+    updateTime =models.CharField(max_length=100,null=False)                
+    realDistance  = models.CharField(max_length=100,null=False)         
+    realSpeed     = models.CharField(max_length=100,null=False)         
+    straightDistance  = models.CharField(max_length=100,null=False)       
+    straightSpeed     = models.CharField(max_length=100,null=False)       
+    routeEfficiency   = models.CharField(max_length=100,null=False)       
+    settingTime       = models.CharField(max_length=100,null=False)       
+    
+    class Meta:
+        ordering = []

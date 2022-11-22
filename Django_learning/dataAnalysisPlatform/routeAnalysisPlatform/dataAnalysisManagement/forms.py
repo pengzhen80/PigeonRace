@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Pigeon
+from .models import Pigeon,TrainRecord_filters_summary
 
 class PigeonForm(ModelForm):
     class Meta:
@@ -26,4 +26,28 @@ class PigeonForm(ModelForm):
             "bodyLength":forms.TextInput(attrs={'class':'form-control','placeholder':'bodyLength'}),
             "wingLength":forms.TextInput(attrs={'class':'form-control','placeholder':'wingLength'}),
             "weight":forms.TextInput(attrs={'class':'form-control','placeholder':'weight'}),
+        }   
+
+
+class TrainRecord_filters_summaryForm(ModelForm):
+    class Meta:
+        model = TrainRecord_filters_summary
+        #  fields = "__all__"
+        fields = ('startIndex','endIndex','updateTime','realDistance','realSpeed','straightDistance','straightSpeed','routeEfficiency','settingTime')
+
+        labels={
+            "realDistance":"",
+            "realSpeed":"",
+            "straightDistance":"",
+            "straightSpeed":"",
+            "routeEfficiency":"",
+            "settingTime":'',
+        }
+        widgets={
+            "realDistance":forms.TextInput(attrs={'class':'form-control','placeholder':'realDistance'}),
+            "realSpeed":forms.TextInput(attrs={'class':'form-control','placeholder':'realSpeed'}),
+            "straightDistance":forms.TextInput(attrs={'class':'form-control','placeholder':'straightDistance'}),
+            "straightSpeed":forms.TextInput(attrs={'class':'form-control','placeholder':'straightSpeed'}),
+            "routeEfficiency":forms.TextInput(attrs={'class':'form-control','placeholder':'routeEfficiency'}),
+            "settingTime":forms.TextInput(attrs={'class':'form-control','placeholder':'settingTime'}),
         }

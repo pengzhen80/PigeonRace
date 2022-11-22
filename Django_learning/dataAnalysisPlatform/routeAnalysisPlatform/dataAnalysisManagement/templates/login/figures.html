@@ -290,7 +290,7 @@
         // console.log(keys[0],normalized_trackFiltered[i][keys[0]]);
         normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
     }
-    // console.log(normalized_trackFiltered);
+    console.log('normalized_trackFiltered:',normalized_trackFiltered);
     //store origin data by dicts
     let map_pigeonNumberReleaseTime_routeIndex = [];
     let map_routeIndex_pigeonNumberReleaseTime = {};
@@ -300,6 +300,7 @@
     let routes_origin = [];
     console.log(routeId_list);
     func_covertOriginDataToDicts();
+    console.log('pigeonNumbers_releaseTime:',pigeonNumbers_releaseTime);
     function func_covertOriginDataToDicts() {
         for(var i=0;i<routeId_list.length;i++)
         {
@@ -320,6 +321,8 @@
           console.log(route_filter);
           if(route_filter)
           {
+            console.log('route_filter ',route_filter.length,route_filter);
+            route_filter = route_filter[0];
             LocalDB_InitData_routeFiltered.push({'routeIndex':routes_origin.length-1,'startIndex':route_filter[1],'endIndex':route_filter[2]});
             cur_pigeonNumber_releaseTime['filter'] = true;
             cur_pigeonNumber_releaseTime['real_distance']= route_filter[4];
@@ -334,7 +337,6 @@
             cur_pigeonNumber_releaseTime['filter'] = false;
           }
           pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
-        //   console.log(pigeonNumbers_releaseTime);
 
           map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
           console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
@@ -740,19 +742,19 @@
                 row_data_2.innerHTML = pigeonNumGps['release_time'];
                 row_data_2.style.textAlign = "center";
                 var row_data_3 = document.createElement('td');
-                row_data_3.innerHTML = pigeonNumGps['real_distance'].toFixed(3);
+                row_data_3.innerHTML = parseFloat(pigeonNumGps['real_distance']).toFixed(3);
                 row_data_3.style.textAlign = "center";
                 var row_data_4 = document.createElement('td');
-                row_data_4.innerHTML = pigeonNumGps['speed'].toFixed(3);
+                row_data_4.innerHTML = parseFloat(pigeonNumGps['speed']).toFixed(3);
                 row_data_4.style.textAlign = "center";
                 var row_data_5 = document.createElement('td');
-                row_data_5.innerHTML = pigeonNumGps['straightdistance'].toFixed(3);
+                row_data_5.innerHTML = parseFloat(pigeonNumGps['straightdistance']).toFixed(3);
                 row_data_5.style.textAlign = "center";
                 var row_data_6 = document.createElement('td');
-                row_data_6.innerHTML = pigeonNumGps['straightspeed'].toFixed(3);
+                row_data_6.innerHTML = parseFloat(pigeonNumGps['straightspeed']).toFixed(3);
                 row_data_6.style.textAlign = "center";
                 var row_data_7 = document.createElement('td');
-                row_data_7.innerHTML = pigeonNumGps['routeEfficiency'].toFixed(3);
+                row_data_7.innerHTML = parseFloat(pigeonNumGps['routeEfficiency']).toFixed(3);
                 row_data_7.style.textAlign = "center";
                 var row_data_8 = document.createElement('td');
                 if(pigeonNumGps['filter'])
@@ -853,13 +855,13 @@
 
         var rows = document.getElementById("table_pigeonNumber_body").rows;
         console.log(rows);
-        var td_settingtime = rows[routeIndex].getElementsByTagName("td")[1];
-        var td_realditance = rows[routeIndex].getElementsByTagName("td")[2];
-        var td_speed = rows[routeIndex].getElementsByTagName("td")[3];
-        var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[4];
-        var td_straightspeed = rows[routeIndex].getElementsByTagName("td")[5];
-        var td_routeEfficiency = rows[routeIndex].getElementsByTagName("td")[6];
-        var td_filter = rows[routeIndex].getElementsByTagName("td")[7];
+        var td_settingtime = rows[routeIndex].getElementsByTagName("td")[2];
+        var td_realditance = rows[routeIndex].getElementsByTagName("td")[3];
+        var td_speed = rows[routeIndex].getElementsByTagName("td")[4];
+        var td_straightdistance = rows[routeIndex].getElementsByTagName("td")[5];
+        var td_straightspeed = rows[routeIndex].getElementsByTagName("td")[6];
+        var td_routeEfficiency = rows[routeIndex].getElementsByTagName("td")[7];
+        var td_filter = rows[routeIndex].getElementsByTagName("td")[8];
             
         td_realditance.innerHTML = real_distance.toFixed(3);
         td_speed.innerHTML = speed.toFixed(3);
@@ -994,7 +996,7 @@
                 {
                     var cur_time = new Date(route[i]['time']);
                     var elapsed = start_time.getTime() - cur_time.getTime();
-                    console.log(elapsed);
+                    // console.log(elapsed);
                     if(elapsed<32000 && elapsed>-32000)
                     {
                         startIndex = i;
@@ -1193,7 +1195,7 @@
                       mouseMove: function (event, chartContext, config) {
                           try {
                                 // console.log(demo_singleRoute[config['dataPointIndex']]);
-                                showInMap_movepoint(demo_singleRoute[config['dataPointIndex']]);
+                                showInMap_movepoint( routes_origin[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);
                           } catch (e) {
                               console.log(e); // Error: hi
                           }
@@ -1202,7 +1204,7 @@
                       // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
                         try {
                               var index = config['dataPointIndex'];
-                              func_filterCard_setPositon(demo_singleRoute[index]['time']);
+                              func_filterCard_setPositon(routes_origin[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][index]['time']);
                             } catch (e) {
                                 console.log(e); // Error: hi
                             }
@@ -1315,245 +1317,245 @@
                 oReq.send(JSON.stringify({ "locations": dataToSend_json }));
             }
     }
-    function show_figures(test_demo_data)
-    {
-        console.log(test_demo_data.length);
-        ///set source data
-        const demo_singleRoute = test_demo_data[0];
-        console.log(demo_singleRoute.length);
-        //show figures 
-        let button_showFigures_FilteredRoutes = document.getElementById('button_showFigures_FilteredRoutes');
-        function func_cb_button_showFigures_FilteredRoutes()
-        {
-            //show figures by filtered routes
-            var pigeonNumbers =[];
-            var release_time_list = [];
-            var filtered_route_list =[];
-            for (const [routeIndex, filtered_route] of Object.entries(route_filter_handler.filtered_routes)) {
-                var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['pigeonNumber'];
-                var ReleaseTime = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['release_time'];
+    // function show_figures(test_demo_data)
+    // {
+    //     console.log(test_demo_data.length);
+    //     ///set source data
+    //     const demo_singleRoute = test_demo_data[0];
+    //     console.log(demo_singleRoute.length);
+    //     //show figures 
+    //     let button_showFigures_FilteredRoutes = document.getElementById('button_showFigures_FilteredRoutes');
+    //     function func_cb_button_showFigures_FilteredRoutes()
+    //     {
+    //         //show figures by filtered routes
+    //         var pigeonNumbers =[];
+    //         var release_time_list = [];
+    //         var filtered_route_list =[];
+    //         for (const [routeIndex, filtered_route] of Object.entries(route_filter_handler.filtered_routes)) {
+    //             var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['pigeonNumber'];
+    //             var ReleaseTime = map_routeIndex_pigeonNumberReleaseTime[routeIndex]['release_time'];
 
-                pigeonNumbers.push(pigeonNumber);
-                release_time_list.push(ReleaseTime);
-                filtered_route_list.push(filtered_route);
-            }
-            //todo:show in figures
-            show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,filtered_route_list);
-            // show_figures_byFilteredRoutes_distancefrombeeline_realtime_boxplot(pigeonNumbers,release_time_list,filtered_route_list);
-            show_figures_byFilteredRoutes_multiRoutes_routeSimilarity(pigeonNumbers,release_time_list,filtered_route_list);
-        }
-        button_showFigures_FilteredRoutes.addEventListener('click',func_cb_button_showFigures_FilteredRoutes);
+    //             pigeonNumbers.push(pigeonNumber);
+    //             release_time_list.push(ReleaseTime);
+    //             filtered_route_list.push(filtered_route);
+    //         }
+    //         //todo:show in figures
+    //         show_figures_byFilteredRoutes_soloPigeon_routeEffProcess(pigeonNumbers,release_time_list,filtered_route_list);
+    //         // show_figures_byFilteredRoutes_distancefrombeeline_realtime_boxplot(pigeonNumbers,release_time_list,filtered_route_list);
+    //         show_figures_byFilteredRoutes_multiRoutes_routeSimilarity(pigeonNumbers,release_time_list,filtered_route_list);
+    //     }
+    //     button_showFigures_FilteredRoutes.addEventListener('click',func_cb_button_showFigures_FilteredRoutes);
 
-        func_solo_route_SpeedElevation(test_demo_data[0]);
-        ///functions for solo route's figures analysis
-        function func_solo_route_SpeedElevation(demo_singleRoute) {
-            var data_normalized = []
+    //     func_solo_route_SpeedElevation(test_demo_data[0]);
+    //     ///functions for solo route's figures analysis
+    //     function func_solo_route_SpeedElevation(demo_singleRoute) {
+    //         var data_normalized = []
 
-            for (var i = 0; i < demo_singleRoute.length; i++) {
-                data_normalized.push([demo_singleRoute[i]['latitude'], demo_singleRoute[i]['longitude']]);
-            }
+    //         for (var i = 0; i < demo_singleRoute.length; i++) {
+    //             data_normalized.push([demo_singleRoute[i]['latitude'], demo_singleRoute[i]['longitude']]);
+    //         }
 
-            function makeYData_elevation() {
-                var result = []
-                for (var i = 0; i < demo_singleRoute.length; i++) {
-                    result.push(demo_singleRoute[i]['elevation'] / 1000)
-                }
-                return result;
-            }
-            var dataY_elevation = makeYData_elevation();
-            //draw in plot
+    //         function makeYData_elevation() {
+    //             var result = []
+    //             for (var i = 0; i < demo_singleRoute.length; i++) {
+    //                 result.push(demo_singleRoute[i]['elevation'] / 1000)
+    //             }
+    //             return result;
+    //         }
+    //         var dataY_elevation = makeYData_elevation();
+    //         //draw in plot
 
-            function makeYData_speed() {
-                var result = []
-                for (var i = 0; i < demo_singleRoute.length; i++) {
-                    result.push(demo_singleRoute[i]['speed'] * 60 / 1000);
-                }
-                return result;
-            }
-            var dataY_speed = makeYData_speed();
+    //         function makeYData_speed() {
+    //             var result = []
+    //             for (var i = 0; i < demo_singleRoute.length; i++) {
+    //                 result.push(demo_singleRoute[i]['speed'] * 60 / 1000);
+    //             }
+    //             return result;
+    //         }
+    //         var dataY_speed = makeYData_speed();
 
-            function makeYData_elevation() {
-                var result = []
-                for (var i = 0; i < demo_singleRoute.length; i++) {
-                    result.push(demo_singleRoute[i]['elevation'] / 1000)
-                }
-                return result;
-            }
-            var dataY_elevation = makeYData_elevation();
+    //         function makeYData_elevation() {
+    //             var result = []
+    //             for (var i = 0; i < demo_singleRoute.length; i++) {
+    //                 result.push(demo_singleRoute[i]['elevation'] / 1000)
+    //             }
+    //             return result;
+    //         }
+    //         var dataY_elevation = makeYData_elevation();
 
-            var data_x = [];
-            for (var i = 0; i < demo_singleRoute.length; i++) {
-                data_x.push(demo_singleRoute[i]['time']);
-            }
-            // console.log(data_x);
+    //         var data_x = [];
+    //         for (var i = 0; i < demo_singleRoute.length; i++) {
+    //             data_x.push(demo_singleRoute[i]['time']);
+    //         }
+    //         // console.log(data_x);
 
-            //set options
-            var options = {
-                series: [
-                    {
-                        name: '速度(km/min)',
-                        data: dataY_speed,
-                    },
-                    {
-                        name: '海拔(km)',
-                        data: dataY_elevation,
-                    },
-                ],
-                chart: {
-                    height: 350,
-                    type: 'line',
-                    zoom: {
-                        enabled: false
-                    },
-                    events: {
-                      mouseMove: function (event, chartContext, config) {
-                          try {
-                              showInMap_movepoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);
-                            //   windy_map_movePoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);  
-                          } catch (e) {
-                              console.log(e); // Error: hi
-                          }
-                      },
-                      click: function(event, chartContext, config) {
-                      // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-                        try {
-                              if(route_filter_handler.getStatus_filter() == false)
-                              {
-                                console.log(config['dataPointIndex']);
-                                if(route_filter_handler.start_filter(chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex, config['dataPointIndex']))
-                                {
-                                    var label_filter = document.getElementById('label_solo_route_SpeedElevation');
-                                    label_filter.innerHTML = '裁減中，請點擊右側終點以完成裁減';
-                                }
-                              }
-                              else
-                              {
-                                var filtered_route =  route_filter_handler.endFilter_GetFilteredRoutes(config['dataPointIndex']);
-                                var cur_routeIndex = chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex;
-                                var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['pigeonNumber'];
-                                var release_time = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['release_time'];
-                                // showInMap(filtered_route,pigeonNumber,release_time,true);
+    //         //set options
+    //         var options = {
+    //             series: [
+    //                 {
+    //                     name: '速度(km/min)',
+    //                     data: dataY_speed,
+    //                 },
+    //                 {
+    //                     name: '海拔(km)',
+    //                     data: dataY_elevation,
+    //                 },
+    //             ],
+    //             chart: {
+    //                 height: 350,
+    //                 type: 'line',
+    //                 zoom: {
+    //                     enabled: false
+    //                 },
+    //                 events: {
+    //                   mouseMove: function (event, chartContext, config) {
+    //                       try {
+    //                           showInMap_movepoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);
+    //                         //   windy_map_movePoint(test_demo_data[chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex][config['dataPointIndex']]);  
+    //                       } catch (e) {
+    //                           console.log(e); // Error: hi
+    //                       }
+    //                   },
+    //                   click: function(event, chartContext, config) {
+    //                   // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+    //                     try {
+    //                           if(route_filter_handler.getStatus_filter() == false)
+    //                           {
+    //                             console.log(config['dataPointIndex']);
+    //                             if(route_filter_handler.start_filter(chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex, config['dataPointIndex']))
+    //                             {
+    //                                 var label_filter = document.getElementById('label_solo_route_SpeedElevation');
+    //                                 label_filter.innerHTML = '裁減中，請點擊右側終點以完成裁減';
+    //                             }
+    //                           }
+    //                           else
+    //                           {
+    //                             var filtered_route =  route_filter_handler.endFilter_GetFilteredRoutes(config['dataPointIndex']);
+    //                             var cur_routeIndex = chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex;
+    //                             var pigeonNumber = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['pigeonNumber'];
+    //                             var release_time = map_routeIndex_pigeonNumberReleaseTime[cur_routeIndex]['release_time'];
+    //                             // showInMap(filtered_route,pigeonNumber,release_time,true);
  
-                                var label_filter = document.getElementById('label_solo_route_SpeedElevation');
-                                label_filter.innerHTML = '裁減：點擊圖表進行裁減';
+    //                             var label_filter = document.getElementById('label_solo_route_SpeedElevation');
+    //                             label_filter.innerHTML = '裁減：點擊圖表進行裁減';
 
-                                var valuesForLocalDB = table_pigeonNumber_body_updateByFilteredRoute(cur_routeIndex,filtered_route);
-                                route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency'],valuesForLocalDB['settingTime']);
-                             }
-                            } catch (e) {
-                                console.log(e); // Error: hi
-                            }
-                    }
-                  },
-                },
-                colors: ['#77B6EA', '#545454', '#7CFC00', '#b84644', '#4576b5'],
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'straight'
-                },
-                title: {
-                    text: '速度.海拔的對比圖',
-                    align: 'left'
-                },
-                grid: {
-                    row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                    },
-                },
-                legend: {
-                    position: 'top',
-                    horizontalAlign: 'right',
-                    floating: true,
-                    offsetY: -25,
-                    offsetX: -5
-                },
-                xaxis: {
-                    type: 'category',
-                    categories: data_x,
-                }
-            };
+    //                             var valuesForLocalDB = table_pigeonNumber_body_updateByFilteredRoute(cur_routeIndex,filtered_route);
+    //                             route_filter_handler.send_filteredRoute(valuesForLocalDB['realDistance'],valuesForLocalDB['realSpeed'],valuesForLocalDB['straightDistance'],valuesForLocalDB['straightSpeed'],valuesForLocalDB['routeEfficiency'],valuesForLocalDB['settingTime']);
+    //                          }
+    //                         } catch (e) {
+    //                             console.log(e); // Error: hi
+    //                         }
+    //                 }
+    //               },
+    //             },
+    //             colors: ['#77B6EA', '#545454', '#7CFC00', '#b84644', '#4576b5'],
+    //             dataLabels: {
+    //                 enabled: false
+    //             },
+    //             stroke: {
+    //                 curve: 'straight'
+    //             },
+    //             title: {
+    //                 text: '速度.海拔的對比圖',
+    //                 align: 'left'
+    //             },
+    //             grid: {
+    //                 row: {
+    //                     colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+    //                     opacity: 0.5
+    //                 },
+    //             },
+    //             legend: {
+    //                 position: 'top',
+    //                 horizontalAlign: 'right',
+    //                 floating: true,
+    //                 offsetY: -25,
+    //                 offsetX: -5
+    //             },
+    //             xaxis: {
+    //                 type: 'category',
+    //                 categories: data_x,
+    //             }
+    //         };
 
-            chart_canvas_speed_elevation_forFilterRoutes = new ApexCharts(canvas_speed_elevation_forFilterRoutes, options);
-            chart_canvas_speed_elevation_forFilterRoutes.render();
-            chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = 0;
+    //         chart_canvas_speed_elevation_forFilterRoutes = new ApexCharts(canvas_speed_elevation_forFilterRoutes, options);
+    //         chart_canvas_speed_elevation_forFilterRoutes.render();
+    //         chart_canvas_speed_elevation_forFilterRoutes_curRouteIndex = 0;
 
 
-            function draw_earthElevation(elevations) {
-                var normalized_elevations = [];
-                for (var i = 0; i < elevations.length; i++) {
-                    normalized_elevations.push(elevations[i] / 1000);
-                }
-                var make_data = {
-                    name: '地面海拔(km)',
-                    data: normalized_elevations,
-                }
-                // console.log(chart);
-                chart_canvas_speed_elevation_forFilterRoutes.opts.series.push(make_data);
-                // chart.opts.colors.push();
-                chart_canvas_speed_elevation_forFilterRoutes.update();
-            }
+    //         function draw_earthElevation(elevations) {
+    //             var normalized_elevations = [];
+    //             for (var i = 0; i < elevations.length; i++) {
+    //                 normalized_elevations.push(elevations[i] / 1000);
+    //             }
+    //             var make_data = {
+    //                 name: '地面海拔(km)',
+    //                 data: normalized_elevations,
+    //             }
+    //             // console.log(chart);
+    //             chart_canvas_speed_elevation_forFilterRoutes.opts.series.push(make_data);
+    //             // chart.opts.colors.push();
+    //             chart_canvas_speed_elevation_forFilterRoutes.update();
+    //         }
 
-            function draw_elevationFromEarth(elevations) {
-                var normalized_elevations = [];
-                for (var i = 0; i < elevations.length; i++) {
-                    normalized_elevations.push(dataY_elevation[i] - elevations[i] / 1000);
-                }
-                var make_data = {
-                    type: 'line',
-                    label: '離地高度(km)',
-                    data: normalized_elevations,
-                    // backgroundColor: 'transparent',
-                    fill: false,
-                    borderColor: 'green',
-                }
-                myChart_RoutePlot.data.datasets.push(make_data);
-                myChart_RoutePlot.update();
-            }
+    //         function draw_elevationFromEarth(elevations) {
+    //             var normalized_elevations = [];
+    //             for (var i = 0; i < elevations.length; i++) {
+    //                 normalized_elevations.push(dataY_elevation[i] - elevations[i] / 1000);
+    //             }
+    //             var make_data = {
+    //                 type: 'line',
+    //                 label: '離地高度(km)',
+    //                 data: normalized_elevations,
+    //                 // backgroundColor: 'transparent',
+    //                 fill: false,
+    //                 borderColor: 'green',
+    //             }
+    //             myChart_RoutePlot.data.datasets.push(make_data);
+    //             myChart_RoutePlot.update();
+    //         }
 
-            makeYData_earthElevation();
+    //         makeYData_earthElevation();
 
-            function makeYData_earthElevation() {
-                var result = [];
-                var dataToSend = "";
-                var dataToSend_json = [];
-                for (var i_earthEle = 0; i_earthEle < data_normalized.length; i_earthEle++) {
-                    var lat = data_normalized[i_earthEle][0];
-                    var lon = data_normalized[i_earthEle][1];
+    //         function makeYData_earthElevation() {
+    //             var result = [];
+    //             var dataToSend = "";
+    //             var dataToSend_json = [];
+    //             for (var i_earthEle = 0; i_earthEle < data_normalized.length; i_earthEle++) {
+    //                 var lat = data_normalized[i_earthEle][0];
+    //                 var lon = data_normalized[i_earthEle][1];
 
-                    dataToSend_json.push({ "latitude":  parseFloat(lat) , "longitude": parseFloat(lon) });
-                }
+    //                 dataToSend_json.push({ "latitude":  parseFloat(lat) , "longitude": parseFloat(lon) });
+    //             }
 
-                const url = 'https://api.open-elevation.com/api/v1/lookup?';
-                var oReq = new XMLHttpRequest();
+    //             const url = 'https://api.open-elevation.com/api/v1/lookup?';
+    //             var oReq = new XMLHttpRequest();
 
-                function reqListener() {
-                    // console.log(typeof (this.responseText), typeof (this.response));
-                    // console.log(this);
+    //             function reqListener() {
+    //                 // console.log(typeof (this.responseText), typeof (this.response));
+    //                 // console.log(this);
 
-                    var response = JSON.parse(this.responseText);
-                    console.log(response.results);
-                    for (var i_res = 0; i_res < response.results.length; i_res++) {
-                        result.push(response.results[i_res]['elevation']);
-                    }
-                    console.log(result);
-                    //todo draw in chart
-                    draw_earthElevation(result);
-                    // draw_elevationFromEarth(result);
-                }
+    //                 var response = JSON.parse(this.responseText);
+    //                 console.log(response.results);
+    //                 for (var i_res = 0; i_res < response.results.length; i_res++) {
+    //                     result.push(response.results[i_res]['elevation']);
+    //                 }
+    //                 console.log(result);
+    //                 //todo draw in chart
+    //                 draw_earthElevation(result);
+    //                 // draw_elevationFromEarth(result);
+    //             }
 
-                oReq.addEventListener("load", reqListener);
-                oReq.open("post", url,true);
-                oReq.setRequestHeader("Accept", "application/json");
-                oReq.setRequestHeader("Content-Type", "application/json");
-                console.log(oReq);
-                oReq.send(JSON.stringify({ "locations": dataToSend_json }));
-            }
+    //             oReq.addEventListener("load", reqListener);
+    //             oReq.open("post", url,true);
+    //             oReq.setRequestHeader("Accept", "application/json");
+    //             oReq.setRequestHeader("Content-Type", "application/json");
+    //             console.log(oReq);
+    //             oReq.send(JSON.stringify({ "locations": dataToSend_json }));
+    //         }
 
-        }
-    }
+    //     }
+    // }
     
     function show_figures_byFilteredRoutes_distancefrombeeline_realtime_boxplot(pigeonNumbers,release_time_list,test_demo_data)
     {
