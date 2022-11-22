@@ -1495,10 +1495,7 @@ function showData(flightData) {
     var total_point_count = flightData.length;
     // update_loading(total_point_count);
 
-<<<<<<< HEAD:Cesium_learning/demo_tw_20220719.js
     //normalize flightData to near points 
-=======
->>>>>>> 16d523cbdc91a3d080a2ce7379fb1c3a3d66ba09:Cesium_learning/demo_tw_20220822.js
     // for (var i = 0; i < flightData.length; i++) {
     //     flightData[i] = flightData_singleNearPoints(flightData[i]);
     // }
