@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Leaflet debug page</title>
+
+		<!--  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!--  <link rel="stylesheet" href="../Leaflet/dist/leaflet.css" />
+		<script type="text/javascript" src="../Leaflet/dist/leaflet-src.js"></script>-->
+
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+			crossorigin=""
+		/>
+		<script
+			src="https://unpkg.com/leaflet@1.7.1/dist/leaflet-src.js"
+			integrity="sha512-I5Hd7FcJ9rZkH7uD01G3AjsuzFy3gqz7HIJvzFZGFt2mrCS4Piw9bYZvCgUE0aiJuiZFYIJIwpbNnDIM6ohTrg=="
+			crossorigin=""
+		></script>
+
+		<!-- 		<script type="text/javascript" src="dist/Leaflet.GoogleMutant.js"></script> -->
+		<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+		<style>
+			#map {
+				/*    margin: 32px; */
+				/*    width: auto; */
+				/*    overflow: visible; */
+				position: absolute;
+				left: 15em;
+				right: 0;
+				height: 100vh;
+			}
+			body {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map" class="map"></div>
+		<div style="position: absolute; width: 15em; top: 10px; z-index: 500">
+			GoogleMutant demo
+		</div>
+
+		<script type="text/javascript">
+			var mapopts = {
+				zoomSnap: 0.25,
+			};
+
+			var map = L.map("map", mapopts).setView([0, 0], 1);
+
+			var roadMutant = L.gridLayer
+				.googleMutant({
+					maxZoom: 24,
+					type: "roadmap",
+				})
+				.addTo(map);
+
+			var terrainMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "terrain",
+			});
+
+			var hybridMutant = L.gridLayer.googleMutant({
+				maxZoom: 24,
+				type: "hybrid",
+			});
+
+		
+
+			var grid = L.gridLayer({
+				// attribution: "Debug tilecoord grid",
+			});
+
+			
+
+			L.control
+				.layers(
+					{
+						Roadmap: roadMutant,
+						Terrain: terrainMutant,
+						Hybrid: hybridMutant,
+					},
+					{
+						// "Tilecoord grid": grid,
+                        // grid,
+					},
+					{
+						collapsed: false,
+					}
+				)
+				.addTo(map);
+		</script>
+	</body>
+</html>

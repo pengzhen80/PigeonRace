@@ -1,0 +1,10 @@
+from django.contrib.auth.models import Pigeon
+from django.db import models
+
+
+class UserProfile(models.Model):
+    doveID = models.Pigeon(editable=False)
+    pigeon = models.OneToOneField(Pigeon)
+    nickname = models.CharField(blank=True, max_length=30)
+
+from rest_framework import serializers

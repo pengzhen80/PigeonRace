@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{% static 'css/templatemo-space-dynamic.css' %}">
     <!-- for ApexCharts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- for turf -->
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
     <style>
         .myDiv_table {
             /* border: 1px outset black; */
@@ -63,33 +65,27 @@
     }
     </style>
 </head>
-<header class="header-area header-sticky wow slideInDown animated background-header" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
+<!-- <header class="header-area header-sticky wow slideInDown animated background-header" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
     <div class="container">
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
-            <!-- ***** Logo Start ***** -->
             <a href="../login" class="logo">
               <h4>Sky<span>Leader</span></h4>
             </a>
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li class="scroll-to-section"><a href="../../login"  class="active">Home</a></li>
               <li class="scroll-to-section"><a href="../activity" class="">Activity</a></li>
               <li class="scroll-to-section"><a href="#pigeon" class="">Pigeon</a></li>
             </ul>        
-            <!-- <a class="menu-trigger">
-                <span>Menu</span>
-            </a> -->
-            <!-- ***** Menu End ***** -->
           </nav>
         </div>
       </div>
     </div>
-</header>
+</header> -->
 <body>
     <div class="container">
+    <!-- <button class="btn btn-primary""> download </button>  -->
     <div id = 'div_trainRecord_table' class = 'myDiv_table'>
     <table id="table_trainRecord" class="table table-striped table-bordered table-hover"><h4>飛行歷程（已裁減）</h4>
         <!-- <caption><h4>平均直線分速排名</h4></caption>     -->
@@ -117,11 +113,11 @@
         <br></br>
         <div id="canvas_routeEff_Polyline_plot" class="myDiv_chart"></div>
       </div>
-      <!-- <div id ='multiRoutes_routeSimilarity' class = 'myDiv_plots' >
+      <div id ='multiRoutes_routeSimilarity' class = 'myDiv_plots' >
         <label id="label_multiRoutes_routeSimilarity" class="label_plots">路徑相似度</label>
         <br></br>
         <div id="canvas_multiRoutes_routeSimilarity" class="myDiv_chart"></div>
-      </div> -->
+      </div>
     </div>
     <dialog id="dialog_routeEfficiency">
         <form method="dialog">
@@ -144,13 +140,79 @@
             </div>
         </form>
     </dialog>
+    <dialog id="dialog_routeSimilarity">
+      <form method="dialog">
+          <p style="font-size:30px"><label>路徑相似度:</label>
+          <p><label>路徑相似度是爲了比較兩條路徑的相似程度，比較方式是：按照兩條路徑之間的距離進行比較；距離越小，相似度越高，距離越大，相似度越低；</label>
+          </p>
+          <p><label>那摩，兩條路徑的距離如何計算呢？因爲路徑不是平行的直線，所以無法直接使用線與線的距離計算，而是使用點到線的距離進行計算。</label>
+          </p>
+          <p><label>比如計算路徑A到路徑B的距離，以A爲參考路徑，B爲爲計算路徑，B是由n個路徑點組成的，計算每個路徑點到A的距離，取這些距離的集合or平均值。</label>
+          </p>
+          <p><label>用法：輔佐路徑效率，判斷鴿子是否對熟悉了某個定點飛行的路線；</label>
+          </p>
+          <p style="font-size:24px;font-weight:bold"><label>公式：相似度 = {D點到參考路徑}；</label>
+          </p>
+          <p><label>箱圖和quatile做法說明:</label>
+              <p><label>上下的黑線表示最大和最小值；</label> </p>
+              <p><label>箱子：按照從小到大的方式排列成有序的list，然後Q1是指位置在25%的數值，median是指中位數，Q3是位置在75%的值；藍色表示Q1～median，綠色表示median～Q3。</label>
+              </p>
+          <div>
+              <button id="confirmBtn_dialog_routeEfficiency_realtime" value="default" style="font-size:22px" class="anybutton"">確認</button>
+          </div>
+      </form>
+    </dialog>
     <script>
         let pigeonNumber = '{{ pigeonNumber|safe }}';
         let localFilteredRecords = '{{ localFilteredRecords|safe }}';
-        let normalized_localFilteredRecords = JSON.parse(localFilteredRecords)
+        let normalized_localFilteredRecords = JSON.parse(localFilteredRecords);
         console.log(normalized_localFilteredRecords);
+        let trainRecordRawData = '{{ trainRecordRawData|safe }}';
+        let normalized_trainRecordRawData = JSON.parse(trainRecordRawData);
+        console.log(normalized_trainRecordRawData);
+        let normalized_trackDatas_dict = {};
+        for(var i=0;i<normalized_trainRecordRawData.length;i++)
+        {
+            var keys = Object.keys(normalized_trainRecordRawData[i]);
+            console.log(keys[0],normalized_trainRecordRawData[i][keys[0]]);
+            normalized_trackDatas_dict[keys[0]] = normalized_trainRecordRawData[i][keys[0]];
+        }
+        console.log(normalized_trackDatas_dict);
+        let sorted_normalized_localFilteredRecords = sort_normalized_localFilteredRecords();
+        function sort_normalized_localFilteredRecords()
+        {
+            //convert settingTime str to Date
+            var date_toIndex = {};
+            var sorted_normalized_localFilteredRecords = normalized_localFilteredRecords;
+            for(var i=0;i<sorted_normalized_localFilteredRecords.length;i++)
+            {
+                var date_min = new Date(sorted_normalized_localFilteredRecords[i][9]);
+                var small_index= i;
+                for(var j=i+1;j<sorted_normalized_localFilteredRecords.length;j++)
+                {
+                    var date_cur = new Date(sorted_normalized_localFilteredRecords[j][9]);
+                    console.log('date_cur:',date_cur);
+                    if(compareDate(date_min,date_cur))
+                    {
+                        date_min = date_cur;
+                        var tmp = sorted_normalized_localFilteredRecords[i];
+                        sorted_normalized_localFilteredRecords[i] = sorted_normalized_localFilteredRecords[j];
+                        sorted_normalized_localFilteredRecords[j] = tmp;
+                    }
+                }
+            }
+            
 
-        rankStraightSpeed_showInTable(normalized_localFilteredRecords);
+            function compareDate(a, b) {
+                console.log(a,b,a>b);
+                return a>b;
+            }
+            
+            return sorted_normalized_localFilteredRecords;
+          }
+
+        // rankStraightSpeed_showInTable(normalized_localFilteredRecords);
+        rankStraightSpeed_showInTable(sorted_normalized_localFilteredRecords);
         function rankStraightSpeed_showInTable(dataList) {
             let table_trainRecord_body = document.getElementById('table_trainRecord_body');
             for (var i = 0; i < dataList.length; i++) {
@@ -166,17 +228,17 @@
                 row_data_1.innerHTML = settingTime;
                 // row_data_1.style.textAlign = "center";
                 var row_data_2 = document.createElement('td');
-                row_data_2.innerHTML = realDistance.toFixed(3);
+                row_data_2.innerHTML = parseFloat(realDistance).toFixed(3);
                 // row_data_2.style.textAlign = "center";
                 var row_data_3 = document.createElement('td');
-                row_data_3.innerHTML = realSpeed.toFixed(3);
+                row_data_3.innerHTML = parseFloat(realSpeed).toFixed(3);
                 // row_data_3.style.textAlign = "center";
                 var row_data_4 = document.createElement('td');
-                row_data_4.innerHTML = straightDistance.toFixed(3);
+                row_data_4.innerHTML = parseFloat(straightDistance).toFixed(3);
                 var row_data_5 = document.createElement('td');
-                row_data_5.innerHTML = straightSpeed.toFixed(3);
+                row_data_5.innerHTML = parseFloat(straightSpeed).toFixed(3);
                 var row_data_6 = document.createElement('td');
-                row_data_6.innerHTML = routeEfficiency.toFixed(3);
+                row_data_6.innerHTML = parseFloat(routeEfficiency).toFixed(3);
 
 
                 // row.appendChild(row_data_0);
@@ -212,35 +274,35 @@
               }
           });
         }
-        let sorted_normalized_localFilteredRecords = sort_normalized_localFilteredRecords();
-        function sort_normalized_localFilteredRecords()
-        {
-            //convert settingTime str to Date
-            var date_toIndex = {};
-            var sorted_normalized_localFilteredRecords = [];
-            for(var i=0;i<normalized_localFilteredRecords.length;i++)
-            {
-                var date_min = new Date(normalized_localFilteredRecords[i][9]);
-                var small_index= i;
-                for(var j=i+1;j<normalized_localFilteredRecords.length;j++)
-                {
-                    var date_cur = new Date(normalized_localFilteredRecords[j][9]);
-                    if(compareDate(date_min,date_cur))
-                    {
-                        date_min = date_cur;
-                        small_index = j;
-                    }
-                }
-                sorted_normalized_localFilteredRecords.push(normalized_localFilteredRecords[small_index]);
-            }
+        // let sorted_normalized_localFilteredRecords = sort_normalized_localFilteredRecords();
+        // function sort_normalized_localFilteredRecords()
+        // {
+        //     //convert settingTime str to Date
+        //     var date_toIndex = {};
+        //     var sorted_normalized_localFilteredRecords = [];
+        //     for(var i=0;i<normalized_localFilteredRecords.length;i++)
+        //     {
+        //         var date_min = new Date(normalized_localFilteredRecords[i][9]);
+        //         var small_index= i;
+        //         for(var j=i+1;j<normalized_localFilteredRecords.length;j++)
+        //         {
+        //             var date_cur = new Date(normalized_localFilteredRecords[j][9]);
+        //             if(compareDate(date_min,date_cur))
+        //             {
+        //                 date_min = date_cur;
+        //                 small_index = j;
+        //             }
+        //         }
+        //         sorted_normalized_localFilteredRecords.push(normalized_localFilteredRecords[small_index]);
+        //     }
             
 
-            function compareDate(a, b) {
-                return a>b;
-            }
+        //     function compareDate(a, b) {
+        //         return a>b;
+        //     }
             
-            return sorted_normalized_localFilteredRecords;
-        }
+        //     return sorted_normalized_localFilteredRecords;
+        //   }
         // draw_line_routeEffs();
         let routes_effs = [];
         let realspeed_list = [];
@@ -325,6 +387,186 @@
             var canvas_routeEff_Polyline_plot = document.getElementById('canvas_routeEff_Polyline_plot');
             var chart = new ApexCharts(canvas_routeEff_Polyline_plot, options);
             chart.render();
+      }
+
+      func_label_multiRoutes_routeSimilarity();
+      //draw a label for route accuracy
+      function func_label_multiRoutes_routeSimilarity() {
+
+        var label = document.getElementById('label_multiRoutes_routeSimilarity');
+        var dialog = document.getElementById('dialog_routeSimilarity');
+        label.addEventListener('click', () => {
+              if (typeof dialog.showModal === "function") {
+                  dialog.showModal();
+              } else {
+                  alert("Sorry, the <dialog> API is not supported by this browser.");
+              }
+          });
+      }
+      func_multiRoutes_routeSimilarity();
+      function func_multiRoutes_routeSimilarity() {    
+          var test_demo_data = [];
+          for(var i=0;i<sorted_normalized_localFilteredRecords.length;i++)
+          {
+            var trainRecordId = sorted_normalized_localFilteredRecords[i][0];
+            var startIndex =  parseInt(sorted_normalized_localFilteredRecords[i][1]);
+            var endIndex =  parseInt(sorted_normalized_localFilteredRecords[i][2]);
+            var rawData = normalized_trackDatas_dict[trainRecordId];
+            var filteredData = rawData.slice(startIndex,endIndex+1);
+            test_demo_data.push(filteredData);
+            console.log(trainRecordId,typeof(startIndex),startIndex,endIndex,filteredData.length,rawData.length,test_demo_data);
           }
+
+          var normalized_multiroutes = [];
+          for (var i = 0; i < test_demo_data.length; i++) {
+              var normalized_route = [];
+              for (var j = 0; j < test_demo_data[i].length; j++) {
+                  normalized_route.push([test_demo_data[i][j]['latitude'], test_demo_data[i][j]['longitude']]);
+              }
+              normalized_multiroutes.push(normalized_route);
+          }
+          console.log(normalized_multiroutes);
+
+          var distance_point_toBaseLine_multi = [];
+          for (var i = 0; i < normalized_multiroutes.length-1; i++) {
+            var base_route = normalized_multiroutes[i];
+            var cur_route = normalized_multiroutes[i+1];
+            var baseLine = turf.lineString(base_route);
+            // console.log(cur_route.join());
+            var distance_point_toBaseLine = [];
+            for (var j = 0; j < cur_route.length; j++) {
+                var pt = turf.point(cur_route[j]);
+                // console.log(cur_route[j]);
+                //distance to baseline
+                var distanceToLine = turf.pointToLineDistance(pt, baseLine, {units: 'kilometers'});
+                // console.log(j,cur_route[j],distanceToLine);
+                distance_point_toBaseLine.push(distanceToLine.toFixed(3));
+            }
+            distance_point_toBaseLine_multi.push(distance_point_toBaseLine);
+          }
+          console.log(distance_point_toBaseLine_multi);
+
+          function func_routeSimilarity_calculateByPointToNearByPoint()
+          {
+            var distance_point_toBaseLine_multi = [];
+            for (var i = 0; i < normalized_multiroutes.length-1; i++) {
+                var base_route = normalized_multiroutes[i];
+                var cur_route = normalized_multiroutes[i+1];
+                // var baseLine = turf.lineString(base_route);
+                // console.log(cur_route.join());
+                var distance_point_toBaseLine = [];
+                for (var j = 0; j < cur_route.length; j++) {
+                    var pt = turf.point(cur_route[j]);
+                    // console.log(cur_route[j]);
+                    //distance to baseline
+                    // var distanceToLine = turf.pointToLineDistance(pt, baseLine, {units: 'kilometers'});
+                    var distanceToLine = func_distance_pointToRoute(pt, base_route);
+                    // console.log(j,cur_route[j],distanceToLine);
+                    distance_point_toBaseLine.push(distanceToLine.toFixed(3));
+                }
+
+                function func_distance_pointToRoute(param_point,param_route)
+                {
+                    var min_distance = 0;
+                    var turf_point = turf.point(param_point);
+                    for(var i_r=0;i_r<param_route.length;i_r++)
+                    {
+                        var to_point = turf.point(param_route[i_r]);
+                        var dis =  turf.distance(turf_point, to_point, {units: 'kilometers'});
+                        if(dis<min_distance)
+                        {
+                            min_distance = dis;
+                        }
+                    }
+                    return min_distance;
+                }
+
+                distance_point_toBaseLine_multi.push(distance_point_toBaseLine);
+            }
+          }
+
+          let data_x = [];
+          make_plot_dataX();
+          function make_plot_dataX()
+          {
+              for(var i=0;i<sorted_normalized_localFilteredRecords.length-1;i++)
+              {
+                  data_x.push(sorted_normalized_localFilteredRecords[i][9]+'  vs  '+sorted_normalized_localFilteredRecords[i+1][9]);
+              }
+          }
+          // var data_x = [];
+          // for (var i = 0; i < pigeonNumbers.length-1; i++) {
+          //   //   console.log(pigeonNumbers[i],release_time_list[i]);
+          //     data_x.push(pigeonNumbers[i]+' '+release_time_list[i]+'   vs  '+pigeonNumbers[i+1]+' '+release_time_list[i+1]);
+          // }
+          // console.log(data_x);
+
+
+        func_draw_boxplot();
+
+        function func_draw_boxplot() {
+            //set options
+            var options = {
+                series: [{
+                    name: 'box',
+                    type: 'boxPlot',
+                    data: [
+                    ]
+                },],
+                chart: {
+                    type: 'boxPlot',
+                    height: 350,
+                },
+                colors: ['#008FFB', '#FEB019'],
+                title: {
+                    text: '路徑相似度(km)',
+                    align: 'middle'
+                },
+                tooltip: {
+                    shared: false,
+                    intersect: true
+                },
+                yaxis: {
+                    // min: 0,
+                    // max: 1000,
+                    type: 'numeric',
+                },
+                // xaxis: {
+                //     type: 'category',
+                //     categories: data_x,
+                // }
+            }; 
+
+            //sort distances
+            var distance_point_toBaseLine_multi_sorted = [];
+            for (var i = 0; i < distance_point_toBaseLine_multi.length; i++) {
+                distance_point_toBaseLine_multi_sorted.push(distance_point_toBaseLine_multi[i].sort(function (a, b) { return a - b }));
+            }
+            console.log(distance_point_toBaseLine_multi_sorted);
+
+            var median_list = [];
+            for (var i = 0; i < distance_point_toBaseLine_multi_sorted.length; i++) {
+                var data = distance_point_toBaseLine_multi_sorted[i];
+                var min = data[0];
+                var q1 = data[Math.floor(data.length / 4)];
+                var median = data[Math.floor(data.length / 2)];
+                median_list.push(median);
+                var q3 = data[Math.floor(data.length * 3 / 4)];
+                var max = data[data.length - 1];
+
+                // options.series[0].data.push({ 'x': i, 'y': [min, q1, median, q3, max] });
+                options.series[0].data.push({ 'x': data_x[i], 'y': [min, q1, median, q3, max] });
+            }
+            console.log(options.series[0].data);
+
+            // var line_data = {type: 'line',data: median_list};
+            // options.series[0].data.push(line_data);
+
+            var canvas_multiRoutes_routeSimilarity = document.getElementById('canvas_multiRoutes_routeSimilarity');
+            var chart = new ApexCharts(canvas_multiRoutes_routeSimilarity, options);
+
+            chart.render();
+        }
+      }
     </script>
 </body>
