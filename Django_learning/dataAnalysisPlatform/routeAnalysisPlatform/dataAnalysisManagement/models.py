@@ -44,6 +44,7 @@ class TrainRecord_filters_summary(models.Model):
     straightSpeed     = models.CharField(max_length=100,null=False)       
     routeEfficiency   = models.CharField(max_length=100,null=False)       
     settingTime       = models.CharField(max_length=100,null=False)       
-    
+
     class Meta:
         ordering = []
+     

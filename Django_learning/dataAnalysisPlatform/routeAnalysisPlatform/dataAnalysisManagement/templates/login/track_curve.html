@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <!-- Include 2d map tools -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script> -->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- for turf -->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+<head>
+<body>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Google maps & Bootstrap tutorial from <a href="http://bootstrapious.com">Bootstrapious.com</a></h1>
+
+                <p class="lead">This is a demo for our tutorial showing you how to add a custom styled Google maps into a Bootstrap page.</p>
+
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+                <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+                
+            </div>
+
+        </div> 
+
+    </div> 
+
+    <div id="map"></div>
+    <script>
+        //parse context to origin data
+        let routeIds = '{{ routeIds|safe }}';
+        let routeId_list = routeIds.split(',');
+        let trackDatas = '{{ trackDatas|safe }}';
+        let normalized_trackDatas = JSON.parse(trackDatas);
+        // console.log(trackDatas,normalized_trackDatas);
+        let normalized_trackDatas_dict = {};
+        for(var i=0;i<normalized_trackDatas.length;i++)
+        {
+            var keys = Object.keys(normalized_trackDatas[i]);
+            console.log(keys[0],normalized_trackDatas[i][keys[0]]);
+            normalized_trackDatas_dict[keys[0]] = normalized_trackDatas[i][keys[0]];
+        }
+        let trackSummarys = '{{ trackSummarys|safe }}';
+        let normalized_trackSummarys = JSON.parse(trackSummarys);
+        let normalized_trackSummarys_dict = {};
+        for(var i=0;i<normalized_trackSummarys.length;i++)
+        {
+            var keys = Object.keys(normalized_trackSummarys[i]);
+            // console.log(keys[0],normalized_trackSummarys[i][keys[0]]);
+            normalized_trackSummarys_dict[keys[0]] = normalized_trackSummarys[i][keys[0]];
+        }
+        console.log(normalized_trackSummarys,normalized_trackSummarys_dict);
+        let trackFiltered = '{{ trackFiltered|safe }}';
+        normalized_trackFiltered = JSON.parse(trackFiltered);
+        let normalized_trackFiltered_dict = {};
+        for(var i=0;i<normalized_trackFiltered.length;i++)
+        {
+            var keys = Object.keys(normalized_trackFiltered[i]);
+            // console.log(keys[0],normalized_trackFiltered[i][keys[0]]);
+            normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
+        }
+        console.log('normalized_trackFiltered:',normalized_trackFiltered);
+
+         //store origin data by dicts
+    let map_pigeonNumberReleaseTime_routeIndex = [];
+    let map_routeIndex_pigeonNumberReleaseTime = {};
+    let map_routeIndex_routeId = {};
+    let LocalDB_InitData_routeFiltered = [];
+    let pigeonNumbers_releaseTime = [];
+    let routes_origin = [];
+    console.log(routeId_list);
+    func_covertOriginDataToDicts();
+    console.log('pigeonNumbers_releaseTime:',pigeonNumbers_releaseTime);
+    function func_covertOriginDataToDicts() {
+        for(var i=0;i<routeId_list.length;i++)
+        {
+          routeId = routeId_list[i];
+          var route = normalized_trackDatas_dict[routeId];
+          console.log(typeof(route));
+          for(var j=0;j<route.length;j++)
+          {
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString('zh-TW',{hour12: false});
+          }
+          routes_origin.push(route);
+          var summary = normalized_trackSummarys_dict[routeId];
+          console.log('summary',summary);
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance'],'straightspeed':summary['straightspeed']};
+          cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
+          //parse filter
+          var route_filter = normalized_trackFiltered_dict[routeId];
+          console.log(route_filter);
+          if(route_filter)
+          {
+            console.log('route_filter ',route_filter.length,route_filter);
+            route_filter = route_filter[0];
+            LocalDB_InitData_routeFiltered.push({'routeIndex':routes_origin.length-1,'startIndex':route_filter[1],'endIndex':route_filter[2]});
+            cur_pigeonNumber_releaseTime['filter'] = true;
+            cur_pigeonNumber_releaseTime['real_distance']= route_filter[4];
+            cur_pigeonNumber_releaseTime['speed']= route_filter[5];
+            cur_pigeonNumber_releaseTime['straightdistance']= route_filter[6];
+            cur_pigeonNumber_releaseTime['straightspeed']= route_filter[7];
+            cur_pigeonNumber_releaseTime['routeEfficiency']= route_filter[8];
+            console.log(cur_pigeonNumber_releaseTime);
+          }
+          else
+          {
+            cur_pigeonNumber_releaseTime['filter'] = false;
+          }
+          pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
+
+          map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
+          console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
+          map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
+          map_routeIndex_routeId[routes_origin.length-1] = routeId;
+        }
+      }
+
+        //for Map_showPaths
+        let lineObjects_in_Map_showPaths = [];
+        let markersObjects_in_Map_showPaths =[];
+        let map_handler = null;
+        let markerForSpeedPlot = null;
+        
+        function map_init()
+        {
+            map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
+            // var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //         maxZoom: 20,
+            //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            // }).addTo(map_handler);
+            var roadMutant = L.gridLayer
+                    .googleMutant({
+                        maxZoom: 24,
+                        type: "roadmap",
+                    })
+                    .addTo(map_handler);
+
+                var terrainMutant = L.gridLayer.googleMutant({
+                    maxZoom: 24,
+                    type: "terrain",
+                });
+
+                var hybridMutant = L.gridLayer.googleMutant({
+                    maxZoom: 24,
+                    type: "hybrid",
+                });
+
+                var grid = L.gridLayer({
+                    // attribution: "Debug tilecoord grid",
+                });
+
+                L.control
+                    .layers(
+                        {
+                            Roadmap: roadMutant,
+                            Terrain: terrainMutant,
+                            Hybrid: hybridMutant,
+                        },
+                        {
+                            // "markers": markers,
+                            // grid,
+                        },
+                        {
+                            collapsed: false,
+                        }
+                    )
+                    .addTo(map_handler);
+        }
+        
+        //for windy
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    </script>
+</body>

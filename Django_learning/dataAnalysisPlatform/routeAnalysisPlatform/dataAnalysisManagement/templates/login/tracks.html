@@ -86,7 +86,8 @@
                     <option selected>選項</option>
                     <!-- <option value="1">單鴿分析</option> -->
                     <option value="1">裁減</option>
-                    <!-- <option value="3">Three</option> -->
+                    <option value="2">模擬曲線軌跡</option>
+                    <option value="3">檢查pair飛行</option>
                 </select>
             </div>
      </div>
@@ -283,6 +284,44 @@
             window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
             // window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString(),name='showFigures');
         }
+
+        function func_cb_btn_trackPage_makeCurveTracks() {
+            //get selected index of table
+            var index_checked = [];
+            var pigeonNumber_releaseTime = [];
+            var rows = document.getElementById("table_trackPage_tracks_body").rows;
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                console.log(rows[i]);
+                var checkbox = rows[i].getElementsByTagName("input")[0];
+                var pigeonNumber = rows[i].getElementsByTagName("td")[1].innerHTML;
+                var releaseTime = rows[i].getElementsByTagName("td")[3].innerHTML;
+                // console.log(checkbox);
+                console.log(checkbox.checked);
+                if (checkbox.checked == true) {
+                    index_checked.push(i);
+                    pigeonNumber_releaseTime.push(pigeonNumber+releaseTime);
+                }
+            }
+            console.log(index_checked);
+            console.log(pigeonNumber_releaseTime);
+            if(pigeonNumber_releaseTime.length == 0)
+            {
+                alert('please choose a record');
+                return;
+            }
+            // var list_trackId_checked_list = [];
+            // for (i = 0; i < index_checked.length; i++) {
+            //     list_trackId_checked_list.push(list_trackId[index_checked[i]]);
+            // }
+            var list_trackId_checked_list = [];
+            for (i = 0; i < pigeonNumber_releaseTime.length; i++) {
+                list_trackId_checked_list.push(dict_pigeonNumReleaseTime_to_trackId[pigeonNumber_releaseTime[i]]);
+            }
+            console.log(list_trackId_checked_list);
+            window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString());
+            // window.open('activityIds/TracksSummary/'+list_trackId_checked_list.toString(),name='showFigures');
+        }
         // let btn_trackPage_showPlot = document.getElementById('btn_trackPage_showPlot');
         // btn_trackPage_showPlot.addEventListener('click', func_cb_btn_trackPage_showPlot);
 
@@ -340,6 +379,14 @@
             if(choice == 1)
             {
                 func_cb_btn_trackPage_showPlot();
+            }
+            else if(choice == 2)
+            {
+                //todo
+            }
+            else if(choice == 3)
+            {
+                //todo
             }    
         } 
         });

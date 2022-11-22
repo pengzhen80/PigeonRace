@@ -1,0 +1,6 @@
+FROM python:3.10.6
+WORKDIR /webPlatform_api
+COPY . /webPlatform_api
+RUN pip install -r requirements.txt
+RUN python manage.py collectstatic --noinput
+CMD uwsgi --http=0.0.0.0:80 --module=backend.wsgi
