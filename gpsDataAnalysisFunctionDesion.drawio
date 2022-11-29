@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-29T05:53:06.358Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="qPwBzev8_FvGSvsSq8hT" version="20.6.0" type="github" pages="18">
+<mxfile host="app.diagrams.net" modified="2022-11-29T05:54:17.601Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="CkcJoOhoFU3gLjL0l-HS" version="20.6.0" type="github" pages="18">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
     <mxGraphModel dx="1588" dy="1969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2819,10 +2819,10 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="PB_c4YNV86qCeNjgOKBj-19" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="20" y="215" width="3140" height="2330" as="geometry" />
+          <mxGeometry x="30" y="-90" width="3130" height="2635" as="geometry" />
         </mxCell>
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="129" y="830" width="1161" height="510" as="geometry" />
+          <mxGeometry x="129" y="750" width="1161" height="590" as="geometry" />
         </mxCell>
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="140" y="1030" width="450" height="280" as="geometry" />
@@ -2831,7 +2831,7 @@
           <mxGeometry x="1490" y="755" width="1290" height="660" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="129" y="195" width="570" height="350" as="geometry" />
+          <mxGeometry x="129" y="130" width="570" height="415" as="geometry" />
         </mxCell>
         <mxCell id="49NSoTfHfpIgqYgSJjLL-13" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;活動頁面&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="329" y="150" width="240" height="30" as="geometry" />
@@ -3080,7 +3080,7 @@
         <mxCell id="xLSuHNiCwVs1ZYmcSV_T-16" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="1510" y="865" width="730" height="500" as="geometry" />
         </mxCell>
-        <mxCell id="xLSuHNiCwVs1ZYmcSV_T-17" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;單條路徑&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+        <mxCell id="xLSuHNiCwVs1ZYmcSV_T-17" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;單條路徑&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="1725" y="875" width="300" height="30" as="geometry" />
         </mxCell>
         <mxCell id="xLSuHNiCwVs1ZYmcSV_T-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
@@ -3122,8 +3122,8 @@
         <mxCell id="xLSuHNiCwVs1ZYmcSV_T-30" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;羣體飛行的領航者&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="2210" y="1225" width="500" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="iIVA0dO3bSTjwbROtVxZ-2" value="熱點：" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-          <mxGeometry x="129" y="830" width="200" height="30" as="geometry" />
+        <mxCell id="iIVA0dO3bSTjwbROtVxZ-2" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;熱點&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="627" y="780" width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="iIVA0dO3bSTjwbROtVxZ-5" value="報告：所有鴿子的整體報告" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" parent="1" vertex="1">
           <mxGeometry x="160" y="870" width="350" height="60" as="geometry" />
@@ -3273,8 +3273,8 @@
         <mxCell id="9G3Khqey6EEPeIQWEY1d-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=36;" vertex="1" parent="1">
           <mxGeometry x="129" y="1520" width="1201" height="730" as="geometry" />
         </mxCell>
-        <mxCell id="9G3Khqey6EEPeIQWEY1d-2" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;鴿子名簿：&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
-          <mxGeometry x="160" y="1530" width="190" height="30" as="geometry" />
+        <mxCell id="9G3Khqey6EEPeIQWEY1d-2" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;鴿子名簿&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="615.5" y="1550" width="254.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9G3Khqey6EEPeIQWEY1d-4" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="190" y="1670" width="1020" height="360" as="geometry" />
@@ -3564,7 +3564,7 @@
         <mxCell id="bTsDDDEyS5Cv-bM8qrEq-33" value="開始裁減/裁減中" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="2380" y="-490" width="270" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="bTsDDDEyS5Cv-bM8qrEq-34" value="裁減" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="bTsDDDEyS5Cv-bM8qrEq-34" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;裁減&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="2352" y="-720" width="310" height="30" as="geometry" />
         </mxCell>
         <mxCell id="bTsDDDEyS5Cv-bM8qrEq-35" value="" style="endArrow=classic;html=1;rounded=0;fontSize=24;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="49NSoTfHfpIgqYgSJjLL-31" target="bTsDDDEyS5Cv-bM8qrEq-1">
@@ -3579,7 +3579,7 @@
             <mxPoint x="2120" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="bTsDDDEyS5Cv-bM8qrEq-37" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;鴿子訓練歷程&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+        <mxCell id="bTsDDDEyS5Cv-bM8qrEq-37" value="&lt;font style=&quot;font-size: 48px;&quot;&gt;鴿子訓練歷程&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="1930" y="785" width="490" height="30" as="geometry" />
         </mxCell>
         <mxCell id="bTsDDDEyS5Cv-bM8qrEq-38" value="" style="endArrow=classic;html=1;rounded=0;fontSize=36;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="iIVA0dO3bSTjwbROtVxZ-1">
@@ -3587,6 +3587,9 @@
             <mxPoint x="2070" y="1080" as="sourcePoint" />
             <mxPoint x="1490" y="1070" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="bTsDDDEyS5Cv-bM8qrEq-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.453;entryY=0.044;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=48;" edge="1" parent="1" source="iIVA0dO3bSTjwbROtVxZ-2" target="iIVA0dO3bSTjwbROtVxZ-2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
