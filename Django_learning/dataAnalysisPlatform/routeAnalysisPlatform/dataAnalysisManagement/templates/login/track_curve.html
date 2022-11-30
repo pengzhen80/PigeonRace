@@ -21,29 +21,38 @@
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- for turf -->
   <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
+    <style>
+  
+    .myDiv_map {
+        border: 1px outset black;
+        background-color: lightblue;    
+        text-align: center;
+        width:80%;
+        height: 400px;
+    }
+    </style>
 <head>
 <body>
     <div class="container">
-
         <div class="row">
-
-            <div class="col-lg-8 col-lg-offset-2">
-
-                <h1>Google maps & Bootstrap tutorial from <a href="http://bootstrapious.com">Bootstrapious.com</a></h1>
-
-                <p class="lead">This is a demo for our tutorial showing you how to add a custom styled Google maps into a Bootstrap page.</p>
-
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-
-                <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-                
+            <div class="col-8"> 
+            <div id="map_showroutes" class="myDiv_map"></div>
             </div>
-
-        </div> 
-
-    </div> 
-
-    <div id="map"></div>
+            <div class="col-1 "> 
+            <div class="card justify-content-center" style="width: 24rem;">
+                <div class="card-body">
+                  <h5 class="card-title">curve</h5>
+                  <p class="card-text">click <b>curve</b> to curve tracks.</p>
+                  <p class="card-text">Takes a line and returns a curved version by applying a Bezier spline algorithm. </p>
+                </div>
+                <div class="card-body d-flex"> 
+                        <button class="btn btn-primary mx-auto" onclick="func_cb_makeCurveTrack()">curve </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <script>
         //parse context to origin data
         let routeIds = '{{ routeIds|safe }}';
@@ -78,8 +87,7 @@
             normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
         }
         console.log('normalized_trackFiltered:',normalized_trackFiltered);
-
-         //store origin data by dicts
+        
     let map_pigeonNumberReleaseTime_routeIndex = [];
     let map_routeIndex_pigeonNumberReleaseTime = {};
     let map_routeIndex_routeId = {};
@@ -118,7 +126,13 @@
             cur_pigeonNumber_releaseTime['straightdistance']= route_filter[6];
             cur_pigeonNumber_releaseTime['straightspeed']= route_filter[7];
             cur_pigeonNumber_releaseTime['routeEfficiency']= route_filter[8];
+            var startIndex = parseInt(route_filter[1]);
+            var endIndex = parseInt(route_filter[2]);
             console.log(cur_pigeonNumber_releaseTime);
+            var origin_route = routes_origin.pop();
+            var filtered_route = origin_route.slice(startIndex,endIndex);
+            routes_origin.push(filtered_route);
+            console.log('filter',origin_route.length,startIndex,endIndex,filtered_route);
           }
           else
           {
@@ -139,6 +153,7 @@
         let map_handler = null;
         let markerForSpeedPlot = null;
         
+        map_init();
         function map_init()
         {
             map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
@@ -194,6 +209,147 @@
             }
             return color;
         }
+
+    showInMap_multi_init(routes_origin);
+    function showInMap_multi_init(paths) {
+
+            var path_normalize_list = [];
+            for( var i=0;i<paths.length;i++)
+            {
+                var path = paths[i];
+                var path_normalize=[];
+                for (var j = 0; j < path.length; j++) {
+                    var cell = [];
+                    cell.push(parseFloat(path[j]['latitude']));
+                    cell.push(parseFloat(path[j]['longitude']));
+                    path_normalize.push(cell);
+                }
+                path_normalize_list.push(path_normalize);
+            }
+
+            console.log(path_normalize_list);
+
+            map_handler.setView(path_normalize_list[0][0], 10);
+
+            var color_list_routes = [];
+            for(var i=0;i<path_normalize_list.length;i++)
+            {
+                var color  = getRandomColor();
+                color_list_routes.push(color);
+                // var lineObject = drawPath(path_normalize_list[i],'red','3');
+                var  lineObject= drawPath(path_normalize_list[i],color,'3');
+                // var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
+                var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
+                // console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
+                // console.log(pigeonNumber_releaseTime['pigeonNumber']);
+                // var line_group = L.layerGroup(markers)
+                //     .addLayer(lineObject)
+                //     .addTo(map_handler);
+                var line_group = L.layerGroup()
+                    .addLayer(lineObject)
+                    .addTo(map_handler);
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':line_group});
+                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);                
+                // markersObjects_in_Map_showPaths.concat(markers);
+            }
+            
+            function drawPath(pathLine_origin,color,weight) {
+                console.log(typeof (pathLine_origin));
+                // console.log(pathLine_origin);
+                var pathLine_origin_normalized = pathLine_origin;
+                // console.log(typeof (pathLine_origin_normalized));
+                // console.log(pathLine_origin_normalized);
+
+                // var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight });
+                
+                return polyline_origin;
+            }
+
+            function drawMarkers(pathLine_origin,color,originDatas) {
+                var Markers = [];
+                for(var i=0;i<pathLine_origin.length;i++)
+                {
+                    // console.log(originDatas[i]);
+                    var time = originDatas[i]['time'];
+                    var speed = originDatas[i]['speed'];
+                    var heading = originDatas[i]['heading'];
+                    var elevation = originDatas[i]['elevation'];
+                    var text = "<br>"+"time : "+time.toString()
+                    +"<br>"+"speed : "+speed.toString()
+                    +"<br>"+"heading : "+heading.toString()
+                    +"<br>"+"elevation : "+elevation.toString();
+                    // console.log(text);
+                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).bindPopup(text).addTo(map_handler));
+                }
+                return Markers;
+            }
+    }
+
+    function func_cb_makeCurveTrack()
+    {
+        for(var i=0;i<routes_origin.length;i++)
+        {
+            makeRouteCurveByTurf(routes_origin[i],5);
+        }
+
+        function makeRouteCurveByTurf(path,accuracy)
+        {
+            var len_path = path.length;
+            var index_list = [];
+            for(var i=0;i<accuracy;i++)
+            {
+                index_list.push(Math.floor((len_path/accuracy)*i));
+            }
+            index_list.push(len_path);
+            console.log('index_list:',len_path,index_list);
+            var path_list = [];
+            for(var i=0;i<index_list.length-1;i++)
+            {
+                makeRouteCurveByTurf_single(path.slice(index_list[i],index_list[i+1]));
+            }
+            // var make_line = [];
+            // for(var i=0;i<path.length;i++)
+            // {
+            //     make_line.push([parseFloat(path[i]['longitude']),parseFloat(path[i]['latitude'])]);
+            // }
+            // var line_turf = turf.lineString(make_line);
+            // console.log(line_turf);
+            // var curved_lint_turf = turf.bezierSpline(line_turf);
+            // console.log(curved_lint_turf);
+            // var path_normalize = curved_lint_turf.geometry.coordinates;
+            // for(var i=0;i<path_normalize.length;i++)
+            // {
+            //     path_normalize[i] = [path_normalize[i][1],path_normalize[i][0]];
+            //     // console.log(path_normalize[i]);
+            // }
+            // console.log(path_normalize);
+            // L.polyline(path_normalize, { color: 'red'}).addTo(map_handler);
+            // return curved_lint_turf;
+        }
+
+        function makeRouteCurveByTurf_single(path)
+        {
+            var make_line = [];
+            for(var i=0;i<path.length;i++)
+            {
+                make_line.push([parseFloat(path[i]['longitude']),parseFloat(path[i]['latitude'])]);
+            }
+            var line_turf = turf.lineString(make_line);
+            // console.log(line_turf);
+            var curved_lint_turf = turf.bezierSpline(line_turf);
+            // console.log(curved_lint_turf);
+            var path_normalize = curved_lint_turf.geometry.coordinates;
+            for(var i=0;i<path_normalize.length;i++)
+            {
+                path_normalize[i] = [path_normalize[i][1],path_normalize[i][0]];
+                // console.log(path_normalize[i]);
+            }
+            // console.log(path_normalize);
+            L.polyline(path_normalize, { color: 'red'}).addTo(map_handler);
+            return curved_lint_turf;
+        }
+    }
 
     </script>
 </body>

@@ -178,7 +178,73 @@ def showFigures(request,routeIds):
         print(context['trackFiltered'])
         context['trackFiltered'] = json.dumps(context['trackFiltered'])
     # print(context['trackSummarys'])
-    return render(request, 'login/figures.html', context=context)
+    return render(request, 'login/track_filter.html', context=context)
+
+def trackSimulator(request,routeIds):
+    context = {
+        'routeIds': routeIds,
+        'trackDatas':[],
+        'trackSummarys':[],
+        'trackFiltered':[]
+    }
+    # routeIds = request.body.decode("utf-8")
+    routeId_list = routeIds.split(',')
+    for routeId in routeId_list:
+        context['trackDatas'].append({routeId:dbManager.read_routes_by_routeId(routeId)})
+        context['trackSummarys'].append({routeId:dbManager.read_routes_summaryData_byId(routeId)})
+        # context['trackFiltered'].append({routeId:localdbManager.search_filteredStateByRecordId(routeId)})
+        filteredTrack = TrainRecord_filters_summary.objects.filter(trainRecordId=routeId).values_list()
+        if(len(filteredTrack) == 0) :
+            pass
+        else:
+            print(len(filteredTrack))
+            print(filteredTrack[0])
+            print(filteredTrack[0][0])
+            context['trackFiltered'].append({routeId:list(filteredTrack)})
+
+        
+    context['trackDatas'] = json.dumps(context['trackDatas'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
+    if(len(context['trackFiltered'])==0):
+        pass
+    else:
+        print(context['trackFiltered'])
+        context['trackFiltered'] = json.dumps(context['trackFiltered'])
+    # print(context['trackSummarys'])
+    return render(request, 'login/track_simulator.html', context=context)
+
+def showRealtimeDistance(request,routeIds):
+    context = {
+        'routeIds': routeIds,
+        'trackDatas':[],
+        'trackSummarys':[],
+        'trackFiltered':[]
+    }
+    # routeIds = request.body.decode("utf-8")
+    routeId_list = routeIds.split(',')
+    for routeId in routeId_list:
+        context['trackDatas'].append({routeId:dbManager.read_routes_by_routeId(routeId)})
+        context['trackSummarys'].append({routeId:dbManager.read_routes_summaryData_byId(routeId)})
+        # context['trackFiltered'].append({routeId:localdbManager.search_filteredStateByRecordId(routeId)})
+        filteredTrack = TrainRecord_filters_summary.objects.filter(trainRecordId=routeId).values_list()
+        if(len(filteredTrack) == 0) :
+            pass
+        else:
+            print(len(filteredTrack))
+            print(filteredTrack[0])
+            print(filteredTrack[0][0])
+            context['trackFiltered'].append({routeId:list(filteredTrack)})
+
+        
+    context['trackDatas'] = json.dumps(context['trackDatas'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
+    if(len(context['trackFiltered'])==0):
+        pass
+    else:
+        print(context['trackFiltered'])
+        context['trackFiltered'] = json.dumps(context['trackFiltered'])
+    # print(context['trackSummarys'])
+    return render(request, 'login/track_pairfly.html', context=context)
 
 def localDB_updateFilteredRoute(request):
     context={}
