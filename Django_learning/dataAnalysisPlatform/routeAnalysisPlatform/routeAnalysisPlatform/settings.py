@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'mptt',
     ###for api
     'rest_framework',
-    'api.apps.ApiConfig',
     ###for cors
     'corsheaders',
 ]
@@ -99,6 +98,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'user',  #資料庫名稱
+#         'USER': 'postgres',  #資料庫帳號
+#         'PASSWORD': 'admin',  #資料庫密碼
+#         'HOST': 'localhost',  #Server(伺服器)位址
+#         'PORT': '8080',  #PostgreSQL Port號
+#     }
+# }
 
 # DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # DBBACKUP_STORAGE_OPTIONS = {'location': 'backup/dbs/'}
@@ -187,5 +196,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "https://sub.example.com",
     "http://localhost:8080",
-    "http://127.0.0.1:5500"
+    "http://127.0.0.1:5500",
+    "http://localhost:3000"
 ]

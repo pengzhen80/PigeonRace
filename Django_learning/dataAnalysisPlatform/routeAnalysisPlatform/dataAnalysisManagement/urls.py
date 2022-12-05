@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 from django.conf.urls import include
 # from django.views.generic import RedirectView
@@ -9,6 +9,7 @@ urlpatterns = [
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('api', views.PigeonView.as_view(), name='ApiPigeonView'),
     path('login', views.login, name='login'),
     path('login/activity', views.activity, name='activity'),
     path('login/pigeon', views.pigeonManagement, name='pigeonManagement'),

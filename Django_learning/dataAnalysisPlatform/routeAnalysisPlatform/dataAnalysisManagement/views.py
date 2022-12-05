@@ -77,6 +77,9 @@ def pigeonManagement(request):
                 print(doveID)
         return JsonResponse(context)
     pigeons = Pigeon.objects.all()
+    for pigeon in pigeons:
+        # pigeon.test_get_id()
+        print(pigeon.pk)
     number = len(pigeons)
     return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons,'number':number})
 
@@ -263,3 +266,27 @@ def localDB_updateFilteredRoute(request):
             print(TrainRecord_filters_summary.objects.filter(trainRecordId=filteredRoute['trainRecordId']).update(startIndex=filteredRoute['startIndex'],endIndex=filteredRoute['endIndex'],updateTime=filteredRoute['updateTime'],realDistance=filteredRoute['realDistance'],realSpeed=filteredRoute['realSpeed'],straightDistance=filteredRoute['straightDistance'],straightSpeed=filteredRoute['straightSpeed'],routeEfficiency=filteredRoute['routeEfficiency'],settingTime=filteredRoute['settingTime']))
     return JsonResponse(context)
    
+from django.db import transaction
+from rest_framework.generics import GenericAPIView
+from .serializers import PigeonSerializer 
+
+class PigeonView(GenericAPIView):
+    queryset = Pigeon.objects.all()
+    serializer_class = PigeonSerializer
+    def get(self, request, *args, **krgs):
+        pigeons = self.get_queryset()
+        serializer = self.serializer_class(pigeons, many=True)
+        data = serializer.data
+        return JsonResponse(data, safe=False)
+    def post(self, request, *args, **krgs):
+        data = request.data
+        try:
+            serializer = self.serializer_class(data=data)
+            serializer.is_valid(raise_exception=True)
+            with transaction.atomic():
+                serializer.save()
+            data = serializer.data
+        except Exception as e:
+            data = {'error': str(e)}
+        return JsonResponse(data)
+

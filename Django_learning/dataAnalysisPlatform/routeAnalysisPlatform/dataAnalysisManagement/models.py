@@ -5,14 +5,11 @@ class User(models.Model):
 
 class Pigeon(models.Model):
     doveID = models.CharField(max_length=100,null=False,primary_key=True)
-    # doveID = models.CharField(max_length=100,null=False)
-    # mxID = models.ForeignKey(User, on_delete=models.CASCADE)
     mxId = models.CharField(max_length=100,null=False)
     doveName = models.CharField(max_length=100,null=True,blank=True)
     RFID = models.CharField(max_length=100,null=True,blank=True)
     URing = models.CharField(max_length=100,null=True,blank=True)
     photo=models.ImageField(null=True,blank=True,upload_to='images/')
-    # photo = FilerImageField(null=True, blank=True,related_name="pigeonPhotos",on_delete=models.CASCADE)
     eye = models.ImageField(null=True,blank=True,upload_to='images/')
     sex = models.CharField(max_length=100,null=True,blank=True)
     age = models.CharField(max_length=100,null=True,blank=True)
@@ -29,6 +26,9 @@ class Pigeon(models.Model):
     motherFather = models.CharField(max_length=100,null=True,blank=True)
     motherMother = models.CharField(max_length=100,null=True,blank=True)
     note = models.CharField(max_length=100,null=True,blank=True)
+
+    def test_get_id(self):
+        return self.id
     
     class Meta:
         ordering = []
