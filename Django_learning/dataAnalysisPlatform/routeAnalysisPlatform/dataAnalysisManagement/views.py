@@ -289,4 +289,3 @@ class PigeonView(GenericAPIView):
         except Exception as e:
             data = {'error': str(e)}
         return JsonResponse(data)
-

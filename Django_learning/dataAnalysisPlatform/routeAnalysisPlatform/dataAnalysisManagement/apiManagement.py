@@ -60,7 +60,7 @@ class DBManagement ():
 
         if (status == 'ok'):
             self.mxid = res['mxid']
-            # self.api_getActivitityID()
+            self.api_getActivitityID()
 
         current_time = datetime.now().strftime("%H:%M:%S")
         print("finish ask api : Current Time =", current_time)

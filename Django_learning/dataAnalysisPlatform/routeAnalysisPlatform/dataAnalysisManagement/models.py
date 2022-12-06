@@ -1,7 +1,9 @@
 from django.db import models
 # Create your models here.
 class User(models.Model):
-    mxID = models.CharField(max_length=100,null=True,blank=True)
+    name = models.CharField(max_length=100,primary_key=True,null=False)
+    password = models.CharField(max_length=100,null=False)
+    mxID = models.CharField(max_length=100,null=False)
 
 class Pigeon(models.Model):
     doveID = models.CharField(max_length=100,null=False,primary_key=True)
