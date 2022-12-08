@@ -10,6 +10,7 @@ urlpatterns = [
 urlpatterns = [
     path('', views.index, name='index'),
     path('api', views.PigeonView.as_view(), name='ApiPigeonView'),
+    path('api_cloud/<str:option>', views.proxy_api_cloud, name='proxy_api_cloud'),
     path('login', views.login, name='login'),
     path('login/activity', views.activity, name='activity'),
     path('login/pigeon', views.pigeonManagement, name='pigeonManagement'),
