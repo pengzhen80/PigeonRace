@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-09T05:39:09.195Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="3c_hcALXmLQzvQsYpdK-" version="20.6.0" type="github" pages="16">
+<mxfile host="app.diagrams.net" modified="2022-12-09T05:39:38.357Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="nqBDLdUXlutwDb1-RbM1" version="20.6.0" type="github" pages="16">
   <diagram id="Wr5jitZPMpajhuJiReHx" name="routeEfficiency公式圖解">
     <mxGraphModel dx="1857" dy="2113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -563,6 +563,9 @@
         </mxCell>
         <mxCell id="pK9mMpQycTPc8KJyYXCp-35" value="直線分速 = 投影的SD/時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="2050" y="1610" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pK9mMpQycTPc8KJyYXCp-36" value="直線分速 = 切片距離/時間" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="2050" y="1665" width="290" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
