@@ -49,7 +49,7 @@ export default function SignIn() {
       console.log(res);
       if(res)
       {
-        if(res['status']=='ok')
+        if(res['status']==='ok')
         {
           routeToHome();
         }
