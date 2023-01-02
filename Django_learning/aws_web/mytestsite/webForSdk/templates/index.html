@@ -1,0 +1,69 @@
+<head>    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+            <div class="form-group">
+              <label  >title</label>
+              <input id="title" class="form-control" id="exampleFormControlInput1" placeholder="input title">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">content</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="func_cb_button_translate()">translate</button>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">content</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">content</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">content</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+    <div>
+    <script>
+        function func_cb_button_translate()
+        {
+            var title = document.getElementById('title');
+            var content = document.getElementsByTagName('textarea')[0];
+
+            console.log(title.value,content.value);
+            requestTranslate(title.value,content.value);
+
+        }
+
+        function requestTranslate(title,content) {
+            function reqListener() {
+                // console.log(typeof (this.responseText), typeof (this.response));
+                // console.log(this.responseText)
+
+                var response = JSON.parse(this.responseText);
+                // console.log(response);
+                // var datas= Object.values(response)
+                // console.log(datas);
+                showTextInTranslatedText(response['title'],response['content']);
+            }
+            var make_send = {};
+            make_send['title'] = title;
+            make_send['content'] = content;
+            console.log(make_send);
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("post", './askTranslate');
+            oReq.setRequestHeader("X-CSRFToken", '{{ csrf_token|safe }}');
+            // oReq.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");   
+            oReq.send(JSON.stringify(make_send));
+        }
+
+        function showTextInTranslatedText(title,content)
+        {
+            var contents = document.getElementsByTagName('textarea');
+            contents[1].value = content;
+        }
+    </script>
+</body>

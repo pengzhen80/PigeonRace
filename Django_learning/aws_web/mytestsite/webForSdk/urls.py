@@ -7,4 +7,5 @@ urlpatterns = [
 ]
 urlpatterns = [
     path('', views.index, name='index'),
+    path('askTranslate',views.tanslator,name='tanslator')
 ]
