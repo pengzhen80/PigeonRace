@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <!-- Include 2d map tools -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script> -->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- for turf -->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
+    <style>
+  
+    .myDiv_map {
+        border: 1px outset black;
+        background-color: lightblue;    
+        text-align: center;
+        width:80%;
+        height: 400px;
+    }
+    </style>
+<head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-8"> 
+            <div id="map_showroutes" class="myDiv_map"></div>
+            </div>
+            <div class="col-1 "> 
+            <div class="card justify-content-center" style="width: 24rem;">
+                <div class="card-body">
+                  <h5 class="card-title">curve</h5>
+                  <p class="card-text">click <b>curve</b> to curve tracks.</p>
+                  <p class="card-text">Takes a line and returns a curved version by applying a Bezier spline algorithm. </p>
+                </div>
+                <div class="card-body d-flex"> 
+                        <button class="btn btn-primary mx-auto" onclick="func_cb_makeCurveTrack()">curve </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        //parse context to origin data
+        let routeIds = '{{ routeIds|safe }}';
+        let routeId_list = routeIds.split(',');
+        let trackDatas = '{{ trackDatas|safe }}';
+        let normalized_trackDatas = JSON.parse(trackDatas);
+        // console.log(trackDatas,normalized_trackDatas);
+        let normalized_trackDatas_dict = {};
+        for(var i=0;i<normalized_trackDatas.length;i++)
+        {
+            var keys = Object.keys(normalized_trackDatas[i]);
+            console.log(keys[0],normalized_trackDatas[i][keys[0]]);
+            normalized_trackDatas_dict[keys[0]] = normalized_trackDatas[i][keys[0]];
+        }
+        let trackSummarys = '{{ trackSummarys|safe }}';
+        let normalized_trackSummarys = JSON.parse(trackSummarys);
+        let normalized_trackSummarys_dict = {};
+        for(var i=0;i<normalized_trackSummarys.length;i++)
+        {
+            var keys = Object.keys(normalized_trackSummarys[i]);
+            // console.log(keys[0],normalized_trackSummarys[i][keys[0]]);
+            normalized_trackSummarys_dict[keys[0]] = normalized_trackSummarys[i][keys[0]];
+        }
+        console.log(normalized_trackSummarys,normalized_trackSummarys_dict);
+        let trackFiltered = '{{ trackFiltered|safe }}';
+        normalized_trackFiltered = JSON.parse(trackFiltered);
+        let normalized_trackFiltered_dict = {};
+        for(var i=0;i<normalized_trackFiltered.length;i++)
+        {
+            var keys = Object.keys(normalized_trackFiltered[i]);
+            // console.log(keys[0],normalized_trackFiltered[i][keys[0]]);
+            normalized_trackFiltered_dict[keys[0]] = normalized_trackFiltered[i][keys[0]];
+        }
+        console.log('normalized_trackFiltered:',normalized_trackFiltered);
+        
+    let map_pigeonNumberReleaseTime_routeIndex = [];
+    let map_routeIndex_pigeonNumberReleaseTime = {};
+    let map_routeIndex_routeId = {};
+    let LocalDB_InitData_routeFiltered = [];
+    let pigeonNumbers_releaseTime = [];
+    let routes_origin = [];
+    console.log(routeId_list);
+    func_covertOriginDataToDicts();
+    console.log('pigeonNumbers_releaseTime:',pigeonNumbers_releaseTime);
+    function func_covertOriginDataToDicts() {
+        for(var i=0;i<routeId_list.length;i++)
+        {
+          routeId = routeId_list[i];
+          var route = normalized_trackDatas_dict[routeId];
+          console.log(typeof(route));
+          for(var j=0;j<route.length;j++)
+          {
+            route[j]['time'] = (new Date(route[j]['time']+' UTC')).toLocaleString('zh-TW',{hour12: false});
+          }
+          routes_origin.push(route);
+          var summary = normalized_trackSummarys_dict[routeId];
+          console.log('summary',summary);
+          var cur_pigeonNumber_releaseTime = {'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'real_distance':summary['realdistance'],'speed':summary['realspeed'],'straightdistance':summary['straightdistance'],'straightspeed':summary['straightspeed']};
+          cur_pigeonNumber_releaseTime['routeEfficiency'] = parseFloat(cur_pigeonNumber_releaseTime['straightdistance'])/parseFloat(cur_pigeonNumber_releaseTime['real_distance']);
+          //parse filter
+          var route_filter = normalized_trackFiltered_dict[routeId];
+          console.log(route_filter);
+          if(route_filter)
+          {
+            console.log('route_filter ',route_filter.length,route_filter);
+            route_filter = route_filter[0];
+            LocalDB_InitData_routeFiltered.push({'routeIndex':routes_origin.length-1,'startIndex':route_filter[1],'endIndex':route_filter[2]});
+            cur_pigeonNumber_releaseTime['filter'] = true;
+            cur_pigeonNumber_releaseTime['real_distance']= route_filter[4];
+            cur_pigeonNumber_releaseTime['speed']= route_filter[5];
+            cur_pigeonNumber_releaseTime['straightdistance']= route_filter[6];
+            cur_pigeonNumber_releaseTime['straightspeed']= route_filter[7];
+            cur_pigeonNumber_releaseTime['routeEfficiency']= route_filter[8];
+            var startIndex = parseInt(route_filter[1]);
+            var endIndex = parseInt(route_filter[2]);
+            console.log(cur_pigeonNumber_releaseTime);
+            var origin_route = routes_origin.pop();
+            var filtered_route = origin_route.slice(startIndex,endIndex);
+            routes_origin.push(filtered_route);
+            console.log('filter',origin_route.length,startIndex,endIndex,filtered_route);
+          }
+          else
+          {
+            cur_pigeonNumber_releaseTime['filter'] = false;
+          }
+          pigeonNumbers_releaseTime.push(cur_pigeonNumber_releaseTime);
+
+          map_pigeonNumberReleaseTime_routeIndex.push({'pigeonNumber':summary['recordname'],'release_time':summary['settingtime'],'index':routes_origin.length-1});
+          console.log('map_pigeonNumberReleaseTime_routeIndex',map_pigeonNumberReleaseTime_routeIndex);
+          map_routeIndex_pigeonNumberReleaseTime[routes_origin.length-1] = cur_pigeonNumber_releaseTime;
+          map_routeIndex_routeId[routes_origin.length-1] = routeId;
+        }
+      }
+
+        //for Map_showPaths
+        let lineObjects_in_Map_showPaths = [];
+        let markersObjects_in_Map_showPaths =[];
+        let map_handler = null;
+        let markerForSpeedPlot = null;
+        
+        map_init();
+        function map_init()
+        {
+            map_handler = L.map('map_showroutes', { preferCanvas: true }).setView([0, 0], 8);
+            // var tile_openstreet = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //         maxZoom: 20,
+            //         // attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            // }).addTo(map_handler);
+            var roadMutant = L.gridLayer
+                    .googleMutant({
+                        maxZoom: 24,
+                        type: "roadmap",
+                    })
+                    .addTo(map_handler);
+
+                var terrainMutant = L.gridLayer.googleMutant({
+                    maxZoom: 24,
+                    type: "terrain",
+                });
+
+                var hybridMutant = L.gridLayer.googleMutant({
+                    maxZoom: 24,
+                    type: "hybrid",
+                });
+
+                var grid = L.gridLayer({
+                    // attribution: "Debug tilecoord grid",
+                });
+
+                L.control
+                    .layers(
+                        {
+                            Roadmap: roadMutant,
+                            Terrain: terrainMutant,
+                            Hybrid: hybridMutant,
+                        },
+                        {
+                            // "markers": markers,
+                            // grid,
+                        },
+                        {
+                            collapsed: false,
+                        }
+                    )
+                    .addTo(map_handler);
+        }
+        
+        //for windy
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    showInMap_multi_init(routes_origin);
+    function showInMap_multi_init(paths) {
+
+            var path_normalize_list = [];
+            for( var i=0;i<paths.length;i++)
+            {
+                var path = paths[i];
+                var path_normalize=[];
+                for (var j = 0; j < path.length; j++) {
+                    var cell = [];
+                    cell.push(parseFloat(path[j]['latitude']));
+                    cell.push(parseFloat(path[j]['longitude']));
+                    path_normalize.push(cell);
+                }
+                path_normalize_list.push(path_normalize);
+            }
+
+            console.log(path_normalize_list);
+
+            map_handler.setView(path_normalize_list[0][0], 10);
+
+            var color_list_routes = [];
+            for(var i=0;i<path_normalize_list.length;i++)
+            {
+                var color  = getRandomColor();
+                color_list_routes.push(color);
+                // var lineObject = drawPath(path_normalize_list[i],'red','3');
+                var  lineObject= drawPath(path_normalize_list[i],color,'3');
+                // var markers = drawMarkers(path_normalize_list[i],color,paths[i]);
+                var pigeonNumber_releaseTime = map_routeIndex_pigeonNumberReleaseTime[i];
+                // console.log('pigeonNumber_releaseTime',pigeonNumber_releaseTime);
+                // console.log(pigeonNumber_releaseTime['pigeonNumber']);
+                // var line_group = L.layerGroup(markers)
+                //     .addLayer(lineObject)
+                //     .addTo(map_handler);
+                var line_group = L.layerGroup()
+                    .addLayer(lineObject)
+                    .addTo(map_handler);
+                lineObjects_in_Map_showPaths.push({'pigeonNumber':pigeonNumber_releaseTime['pigeonNumber'],'releaseTime':pigeonNumber_releaseTime['release_time'],'filtered':false,'object':line_group});
+                console.log('lineObjects_in_Map_showPaths',lineObjects_in_Map_showPaths);                
+                // markersObjects_in_Map_showPaths.concat(markers);
+            }
+            
+            function drawPath(pathLine_origin,color,weight) {
+                console.log(typeof (pathLine_origin));
+                // console.log(pathLine_origin);
+                var pathLine_origin_normalized = pathLine_origin;
+                // console.log(typeof (pathLine_origin_normalized));
+                // console.log(pathLine_origin_normalized);
+
+                // var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight }).addTo(map_handler);
+                var polyline_origin = L.polyline(pathLine_origin_normalized, { color: color, weight: weight });
+                
+                return polyline_origin;
+            }
+
+            function drawMarkers(pathLine_origin,color,originDatas) {
+                var Markers = [];
+                for(var i=0;i<pathLine_origin.length;i++)
+                {
+                    // console.log(originDatas[i]);
+                    var time = originDatas[i]['time'];
+                    var speed = originDatas[i]['speed'];
+                    var heading = originDatas[i]['heading'];
+                    var elevation = originDatas[i]['elevation'];
+                    var text = "<br>"+"time : "+time.toString()
+                    +"<br>"+"speed : "+speed.toString()
+                    +"<br>"+"heading : "+heading.toString()
+                    +"<br>"+"elevation : "+elevation.toString();
+                    // console.log(text);
+                    Markers.push(L.marker(pathLine_origin[i],{opacity:0.5}).bindPopup(text).addTo(map_handler));
+                }
+                return Markers;
+            }
+    }
+
+    function func_cb_makeCurveTrack()
+    {
+        for(var i=0;i<routes_origin.length;i++)
+        {
+            makeRouteCurveByTurf(routes_origin[i],5);
+        }
+
+        function makeRouteCurveByTurf(path,accuracy)
+        {
+            var len_path = path.length;
+            var index_list = [];
+            for(var i=0;i<accuracy;i++)
+            {
+                index_list.push(Math.floor((len_path/accuracy)*i));
+            }
+            index_list.push(len_path);
+            console.log('index_list:',len_path,index_list);
+            var path_list = [];
+            for(var i=0;i<index_list.length-1;i++)
+            {
+                makeRouteCurveByTurf_single(path.slice(index_list[i],index_list[i+1]));
+            }
+            // var make_line = [];
+            // for(var i=0;i<path.length;i++)
+            // {
+            //     make_line.push([parseFloat(path[i]['longitude']),parseFloat(path[i]['latitude'])]);
+            // }
+            // var line_turf = turf.lineString(make_line);
+            // console.log(line_turf);
+            // var curved_lint_turf = turf.bezierSpline(line_turf);
+            // console.log(curved_lint_turf);
+            // var path_normalize = curved_lint_turf.geometry.coordinates;
+            // for(var i=0;i<path_normalize.length;i++)
+            // {
+            //     path_normalize[i] = [path_normalize[i][1],path_normalize[i][0]];
+            //     // console.log(path_normalize[i]);
+            // }
+            // console.log(path_normalize);
+            // L.polyline(path_normalize, { color: 'red'}).addTo(map_handler);
+            // return curved_lint_turf;
+        }
+
+        function makeRouteCurveByTurf_single(path)
+        {
+            var make_line = [];
+            for(var i=0;i<path.length;i++)
+            {
+                make_line.push([parseFloat(path[i]['longitude']),parseFloat(path[i]['latitude'])]);
+            }
+            var line_turf = turf.lineString(make_line);
+            // console.log(line_turf);
+            var curved_lint_turf = turf.bezierSpline(line_turf);
+            // console.log(curved_lint_turf);
+            var path_normalize = curved_lint_turf.geometry.coordinates;
+            for(var i=0;i<path_normalize.length;i++)
+            {
+                path_normalize[i] = [path_normalize[i][1],path_normalize[i][0]];
+                // console.log(path_normalize[i]);
+            }
+            // console.log(path_normalize);
+            L.polyline(path_normalize, { color: 'red'}).addTo(map_handler);
+            return curved_lint_turf;
+        }
+    }
+
+    </script>
+</body>

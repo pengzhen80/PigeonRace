@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -40,9 +39,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dataAnalysisManagement.urls')),
     # path('api', include(router.urls)),
-    path('api', include('api.urls')),
+    # path('api', include('api.urls')),
     # path('api-auth/', include('rest_framework.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 # Use static() to add url mapping to serve static files during development (only)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -77,6 +77,9 @@ def pigeonManagement(request):
                 print(doveID)
         return JsonResponse(context)
     pigeons = Pigeon.objects.all()
+    for pigeon in pigeons:
+        # pigeon.test_get_id()
+        print(pigeon.pk)
     number = len(pigeons)
     return render(request, 'login/pigeon_management.html', context={'pigeons':pigeons,'number':number})
 
@@ -178,7 +181,73 @@ def showFigures(request,routeIds):
         print(context['trackFiltered'])
         context['trackFiltered'] = json.dumps(context['trackFiltered'])
     # print(context['trackSummarys'])
-    return render(request, 'login/figures.html', context=context)
+    return render(request, 'login/track_filter.html', context=context)
+
+def trackSimulator(request,routeIds):
+    context = {
+        'routeIds': routeIds,
+        'trackDatas':[],
+        'trackSummarys':[],
+        'trackFiltered':[]
+    }
+    # routeIds = request.body.decode("utf-8")
+    routeId_list = routeIds.split(',')
+    for routeId in routeId_list:
+        context['trackDatas'].append({routeId:dbManager.read_routes_by_routeId(routeId)})
+        context['trackSummarys'].append({routeId:dbManager.read_routes_summaryData_byId(routeId)})
+        # context['trackFiltered'].append({routeId:localdbManager.search_filteredStateByRecordId(routeId)})
+        filteredTrack = TrainRecord_filters_summary.objects.filter(trainRecordId=routeId).values_list()
+        if(len(filteredTrack) == 0) :
+            pass
+        else:
+            print(len(filteredTrack))
+            print(filteredTrack[0])
+            print(filteredTrack[0][0])
+            context['trackFiltered'].append({routeId:list(filteredTrack)})
+
+        
+    context['trackDatas'] = json.dumps(context['trackDatas'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
+    if(len(context['trackFiltered'])==0):
+        pass
+    else:
+        print(context['trackFiltered'])
+        context['trackFiltered'] = json.dumps(context['trackFiltered'])
+    # print(context['trackSummarys'])
+    return render(request, 'login/track_simulator.html', context=context)
+
+def showRealtimeDistance(request,routeIds):
+    context = {
+        'routeIds': routeIds,
+        'trackDatas':[],
+        'trackSummarys':[],
+        'trackFiltered':[]
+    }
+    # routeIds = request.body.decode("utf-8")
+    routeId_list = routeIds.split(',')
+    for routeId in routeId_list:
+        context['trackDatas'].append({routeId:dbManager.read_routes_by_routeId(routeId)})
+        context['trackSummarys'].append({routeId:dbManager.read_routes_summaryData_byId(routeId)})
+        # context['trackFiltered'].append({routeId:localdbManager.search_filteredStateByRecordId(routeId)})
+        filteredTrack = TrainRecord_filters_summary.objects.filter(trainRecordId=routeId).values_list()
+        if(len(filteredTrack) == 0) :
+            pass
+        else:
+            print(len(filteredTrack))
+            print(filteredTrack[0])
+            print(filteredTrack[0][0])
+            context['trackFiltered'].append({routeId:list(filteredTrack)})
+
+        
+    context['trackDatas'] = json.dumps(context['trackDatas'])
+    context['trackSummarys'] = json.dumps(context['trackSummarys'])
+    if(len(context['trackFiltered'])==0):
+        pass
+    else:
+        print(context['trackFiltered'])
+        context['trackFiltered'] = json.dumps(context['trackFiltered'])
+    # print(context['trackSummarys'])
+    return render(request, 'login/track_pairfly.html', context=context)
 
 def localDB_updateFilteredRoute(request):
     context={}
@@ -197,3 +266,26 @@ def localDB_updateFilteredRoute(request):
             print(TrainRecord_filters_summary.objects.filter(trainRecordId=filteredRoute['trainRecordId']).update(startIndex=filteredRoute['startIndex'],endIndex=filteredRoute['endIndex'],updateTime=filteredRoute['updateTime'],realDistance=filteredRoute['realDistance'],realSpeed=filteredRoute['realSpeed'],straightDistance=filteredRoute['straightDistance'],straightSpeed=filteredRoute['straightSpeed'],routeEfficiency=filteredRoute['routeEfficiency'],settingTime=filteredRoute['settingTime']))
     return JsonResponse(context)
    
+from django.db import transaction
+from rest_framework.generics import GenericAPIView
+from .serializers import PigeonSerializer 
+
+class PigeonView(GenericAPIView):
+    queryset = Pigeon.objects.all()
+    serializer_class = PigeonSerializer
+    def get(self, request, *args, **krgs):
+        pigeons = self.get_queryset()
+        serializer = self.serializer_class(pigeons, many=True)
+        data = serializer.data
+        return JsonResponse(data, safe=False)
+    def post(self, request, *args, **krgs):
+        data = request.data
+        try:
+            serializer = self.serializer_class(data=data)
+            serializer.is_valid(raise_exception=True)
+            with transaction.atomic():
+                serializer.save()
+            data = serializer.data
+        except Exception as e:
+            data = {'error': str(e)}
+        return JsonResponse(data)
