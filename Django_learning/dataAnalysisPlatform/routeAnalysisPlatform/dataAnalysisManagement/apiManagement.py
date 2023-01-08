@@ -65,6 +65,24 @@ class DBManagement ():
         current_time = datetime.now().strftime("%H:%M:%S")
         print("finish ask api : Current Time =", current_time)
         return res
+    
+    def proxy_logIn(self, username, password):
+        # Init
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        print("start ask api : Current Time =", current_time)
+
+        self.mxid = ''
+        self.activities = []
+        url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
+
+        myobj = {"account": username, "password": password}
+
+        x = requests.post(url, data=myobj)
+        res = x.json()
+        res = json.loads(res)
+        return res
+
 
     def api_getActivitityID(self):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
@@ -92,6 +110,38 @@ class DBManagement ():
             tmp_thread.join() 
 
         return res
+    
+    def proxy_askAcvitityID(self, mxid):
+        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
+
+        myobj = {"mxid": mxid,
+                 "release_date": "string",
+                 "release_time": "string"
+                 }
+
+        x = requests.post(url, data=myobj)
+        res = x.json()
+        res = json.loads(res)
+        print(res)
+        return res
+    
+    def proxy_askAcvitity(self, mxid,activity_id, activity_name,release_date,release_time):
+        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivity'
+
+        myobj = {
+            "activity_id": activity_id,
+            "mxid": mxid,
+            "activity_name": activity_name,
+            "release_date": release_date,
+            "release_time": release_time
+        }
+
+        x = requests.post(url, data=myobj)
+        res = x.json()
+        res = json.loads(res)
+
+        return res
+
 
     def api_readTrainRecord(self, activity_id):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readTrainRecord'

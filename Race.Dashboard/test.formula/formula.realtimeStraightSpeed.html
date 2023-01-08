@@ -1,0 +1,40 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Include 2d map tools -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmmRv2VeWRfVxb8EzPmAARDoKdlqFohg" async defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .myDiv_map {
+        border: 1px outset black;
+        background-color: lightblue;    
+        text-align: center;
+        width:100%;
+        height: 400px;
+    }
+    .myDiv_chart {
+        width:100%;
+        height: 40%;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label class="form-label" for="customFile">Default file input example</label>
+        <input type="file" class="form-control" id="customFile" accept=".gpx" />
+        <div id="map_showroutes" class="myDiv_map">
+            <!-- <button type="button" class="btn btn-light">Light</button> -->
+        </div>
+        <div id="chart_projection" class="myDiv_chart"></div>
+        <div id="chart_leftDistance" class="myDiv_chart"></div>
+    </div>
+    <script src="./formula.realtimeStraightSpeed.js" type="module">
+    </script>
+</body>
