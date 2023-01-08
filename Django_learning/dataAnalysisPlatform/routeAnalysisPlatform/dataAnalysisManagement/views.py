@@ -22,9 +22,8 @@ hotTopicsManager = HotTopicsManagement()
 
 def index(request):
     """View function for home page of site."""
-    # data = dbManager.logIn()
-    # context ={'result' : data}
-    return render(request, 'login.html', context={})
+    # return render(request, 'login.html', context={})
+    return render(request, 'index.html', context={})
 
 def login(request):
     context = {'status': '', 'activities': ''}
@@ -289,3 +288,20 @@ class PigeonView(GenericAPIView):
         except Exception as e:
             data = {'error': str(e)}
         return JsonResponse(data)
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def proxy_api_cloud(request,option):
+    if request.method == 'POST':
+        if option == 'Login':
+            params = request.body.decode("utf-8")
+            params = json.loads(params)
+            return JsonResponse(dbManager.proxy_logIn(params['account'],params['password']))
+        elif option == 'readActivityId':
+            params = request.body.decode("utf-8")
+            params = json.loads(params)
+            return JsonResponse(dbManager.proxy_askAcvitityID(params['mxid']),safe=False)
+        elif option == 'readActivity':
+            params = request.body.decode("utf-8")
+            params = json.loads(params)
+            return JsonResponse(dbManager.proxy_askAcvitity(params['mxid'],params['activity_id'],params['activity_name'],params['release_date'],params['release_time']),safe=False)
