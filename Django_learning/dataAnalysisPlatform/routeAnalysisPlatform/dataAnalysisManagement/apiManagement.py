@@ -18,28 +18,33 @@ import pytz
 import _thread
 import threading
 
-
 class DBManagement ():
+    """
+    A class to ask api of cloud.
+
+    ...
+
+    Attributes
+    ----------
+    mxid : str
+        id of user
+    activities : list
+    routes : dict
+    routes_summarydata : dict
+    modules :dict
+
+    Methods
+    -------
+    info(additional=""):
+        Prints the person's name and age.
+    """
+
     def __init__(self):
         self.mxid = ''
         self.activities = []
         self.routes = {}
         self.routes_summarydata = {}
         self.modules ={}
-        # self.gpsIdringId = self.readfile_gpsIdringId()
-
-    def readfile_gpsIdringId(self):
-        dataList = []
-        with open('csvfiles/gpsId_ringId_train.csv', newline='') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-
-            for row in spamreader:
-                cell = {}
-                rowList = row[0].split(',')
-                cell['gpsId'] = rowList[0]
-                cell['ringId'] = rowList[1]
-                dataList.append(cell)
-        return dataList
 
     def logIn(self, username, password):
         # Init
@@ -65,24 +70,6 @@ class DBManagement ():
         current_time = datetime.now().strftime("%H:%M:%S")
         print("finish ask api : Current Time =", current_time)
         return res
-    
-    def proxy_logIn(self, username, password):
-        # Init
-        now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")
-        print("start ask api : Current Time =", current_time)
-
-        self.mxid = ''
-        self.activities = []
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
-
-        myobj = {"account": username, "password": password}
-
-        x = requests.post(url, data=myobj)
-        res = x.json()
-        res = json.loads(res)
-        return res
-
 
     def api_getActivitityID(self):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
@@ -110,38 +97,6 @@ class DBManagement ():
             tmp_thread.join() 
 
         return res
-    
-    def proxy_askAcvitityID(self, mxid):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
-
-        myobj = {"mxid": mxid,
-                 "release_date": "string",
-                 "release_time": "string"
-                 }
-
-        x = requests.post(url, data=myobj)
-        res = x.json()
-        res = json.loads(res)
-        print(res)
-        return res
-    
-    def proxy_askAcvitity(self, mxid,activity_id, activity_name,release_date,release_time):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivity'
-
-        myobj = {
-            "activity_id": activity_id,
-            "mxid": mxid,
-            "activity_name": activity_name,
-            "release_date": release_date,
-            "release_time": release_time
-        }
-
-        x = requests.post(url, data=myobj)
-        res = x.json()
-        res = json.loads(res)
-
-        return res
-
 
     def api_readTrainRecord(self, activity_id):
         url = 'http://skyleader3.yuansan.com/api/SkyLeader/readTrainRecord'
