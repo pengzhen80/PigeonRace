@@ -59,7 +59,11 @@ class DBManagement ():
         myobj = {"account": username, "password": password}
 
         x = requests.post(url, data=myobj)
-        res = x.json()
+        # res = x.json()
+        print(x.status_code)
+        if x.status_code == 404:
+            return {"status":"failed"}
+
         res = json.loads(res)
         status = res['status']
 
