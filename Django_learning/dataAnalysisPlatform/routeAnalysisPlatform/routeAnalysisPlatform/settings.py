@@ -95,18 +95,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(BASE_DIR / 'db.sqlite3'),
+    },
+    'auth': {
+        'NAME': 'auth',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': 'localhost',  #Server(伺服器)位址
+        'PORT': '5432',  #PostgreSQL Port號
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'user',  #資料庫名稱
-#         'USER': 'postgres',  #資料庫帳號
-#         'PASSWORD': 'admin',  #資料庫密碼
-#         'HOST': 'localhost',  #Server(伺服器)位址
-#         'PORT': '8080',  #PostgreSQL Port號
-#     }
-# }
 
 # DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 # DBBACKUP_STORAGE_OPTIONS = {'location': 'backup/dbs/'}
