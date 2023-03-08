@@ -37,7 +37,7 @@ def login(request):
             username = 'pengzhen@minxincorp.com'
         if(password==''):
             password = 'minxin'
-        # print(username,password)
+        print(username,password)
         res = dbManager.logIn(username, password)
         if (res['status'] == 'ok'):
             context['status'] = 'ok'
