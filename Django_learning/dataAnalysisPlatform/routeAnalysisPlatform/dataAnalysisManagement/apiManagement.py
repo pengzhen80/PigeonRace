@@ -54,29 +54,33 @@ class DBManagement ():
 
         self.mxid = ''
         self.activities = []
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/Login'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/Login'
+        # url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/Login'
 
         myobj = {"account": username, "password": password}
 
         x = requests.post(url, data=myobj)
-        # res = x.json()
         print(x.status_code)
         if x.status_code == 404:
             return {"status":"failed"}
 
+        # print(x)
+        res = x.json()
+        print(res,type(res))
         res = json.loads(res)
+        print(res,type(res))
         status = res['status']
 
         if (status == 'ok'):
             self.mxid = res['mxid']
             self.api_getActivitityID()
 
-        current_time = datetime.now().strftime("%H:%M:%S")
-        print("finish ask api : Current Time =", current_time)
+        # current_time = datetime.now().strftime("%H:%M:%S")
+        # print("finish ask api : Current Time =", current_time)
         return res
 
     def api_getActivitityID(self):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivityId'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/readActivityId'
 
         myobj = {"mxid": self.mxid,
                  "release_date": "string",
@@ -103,7 +107,7 @@ class DBManagement ():
         return res
 
     def api_readTrainRecord(self, activity_id):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readTrainRecord'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/readTrainRecord'
 
         myobj = {
             "mxid": self.mxid,
@@ -127,7 +131,7 @@ class DBManagement ():
         return res
 
     def api_getActivitity(self, activity_id, mxid, activity_name, release_date, release_time):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readActivity'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/readActivity'
 
         myobj = {
             "activity_id": activity_id,
@@ -144,7 +148,7 @@ class DBManagement ():
         return res
 
     def api_readCloudLocusText(self, activity_id, module_id, trainRecord_id):
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudLocusText'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/readCloudLocusText'
 
         myobj = {
             # "moduleid": module_id,
@@ -176,7 +180,7 @@ class DBManagement ():
         return res
 
     def api_readModule(self, activity_id,module_id):      
-        url = 'http://skyleader3.yuansan.com/api/SkyLeader/readCloudModule'
+        url = 'https://skyleaderapi.yuansan.com/api/SkyLeader/readCloudModule'
 
         myobj = {
                 "activity_id": activity_id,
